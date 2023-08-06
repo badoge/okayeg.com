@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Twitch user | OkayegBOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="View all of a Twitch user's public info" />
+    <meta name="keywords" content="twitch, chat, bot, okayeg" />
+    <meta property="og:title" content="Twitch user | OkayegBOT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://okayeg.com/twitch/user" />
+    <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="View all of a Twitch user's public info" />
+
+    <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/pics/icon/favicon-16x16.png" />
+    <link rel="manifest" href="/pics/icon/site.webmanifest" />
+    <link rel="mask-icon" href="/pics/icon/safari-pinned-tab.svg" color="#1cb24b" />
+    <link rel="shortcut icon" href="/pics/icon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdce82" />
+    <meta name="msapplication-config" content="/pics/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/icons.css" />
+    <link rel="stylesheet" href="/css/okayeg.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand notranslate" href="#"><img src="/pics/okayeg.png" alt="Okayeg" style="height: 30px; width: 30px" class="d-inline-block align-top" />OkayegBOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/"><i class="material-icons notranslate">info</i>About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/commands.html"><i class="material-icons notranslate">smart_toy</i>Commands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stream.html"><i class="material-icons notranslate">live_tv</i>Stream</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/egdle/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">egg</i>Egdle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard.html"><i class="material-icons notranslate">leaderboard</i>Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stocks.html"><i class="material-icons notranslate">trending_up</i>Stocks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/market.html"><i class="material-icons notranslate">storefront</i>NFE market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">api</i>API</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile.html"><i class="material-icons notranslate">account_circle</i>Profile</a>
+            </li>
+            <div class="vr"></div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img id="twitchLogo" style="height: 1.2em" alt="twitch" src="/pics/twitch.png" /> Twitch data
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/twitch/">Twitch related pages:</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/stats.html"><i class="material-icons notranslate">query_stats</i>Donk stats</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes.html"><i class="material-icons notranslate">emoji_emotions</i>Channel emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes-global.html"><i class="material-icons notranslate">public</i>Global emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item active" aria-current="page" href="#"><i class="material-icons notranslate">person</i>User info</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/time.html"><i class="material-icons notranslate">history</i>VOD time</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/followlist.html"><i class="material-icons notranslate">groups</i>Follow list</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-4"></div>
+        <div class="col-xl-4">
+          <div class="card" style="margin-top: 10px">
+            <div class="card-body">
+              <h3>Lookup a Twitch user - WIP :)</h3>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="desc" />
+                <label for="username">Username</label>
+                <div id="desc" class="form-text">View any Twitch user's info</div>
+              </div>
+              <button style="margin-top: 10px" type="button" class="btn btn-success float-end" onclick="loadUserInfo()"><i class="material-icons notranslate">search</i>Lookup</button>
+              <div id="output"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-xl-4"></div>
+        <div class="col-xl-4" id="info" style="display: none">
+          <h1 class="display-3">
+            <span id="name">
+              <p class="placeholder-wave"><span class="placeholder col-3"></span>'s Info</p>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b>
+              User ID
+              <i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="An ID that identifies the user. Stays the same even after a username change."
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="userid">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Username<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The user's login name. Contains lowercase alphanumeric characters only."
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="login">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Display name<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The user's display name. May contain uppercase letters or spaces and Chinese, Japanese, or Korean characters."
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="displayname">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >User type<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The type of user. Possible values are: admin (Twitch administrator) | global_mod | staff (Twitch staff) | empty (Normal user)"
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="usertype">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Broadcaster type<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The type of broadcaster. Possible values are: affiliate (An affiliate broadcaster) | partner (A partner broadcaster) | empty (A normal broadcaster)"
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="broadcastertype">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Description<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The user's description of their channel."> help_outline </i>:
+            </b>
+            <span id="description">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Account age<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The time since the creation of the user's account">
+                help_outline </i
+              >:
+            </b>
+            <span id="accountage">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Profile picture<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The user's profile image."> help_outline </i>: </b>
+            <br />
+            <span class="text-center ratio ratio-1x1" id="profilepicture">
+              <span class="placeholder-wave"><span style="width: 100%; height: 100%" class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Offline image<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The user's offline image. Takes place of the video player while the channel is offline."
+              >
+                help_outline
+              </i>
+              :
+            </b>
+            <br />
+            <span class="text-center ratio ratio-16x9" id="offlineimage">
+              <span class="placeholder-wave"><span style="width: 100%; height: 100%" class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Channel status<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Is the channel live or offline."> help_outline </i>: </b>
+            <span id="channelstatus">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Uptime<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="How long has the channel been live."> help_outline </i>: </b>
+            <span id="uptime">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Category<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="What category the stream is in."> help_outline </i>: </b>
+            <span id="category">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Title<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The title of the stream."> help_outline </i>: </b>
+            <span id="title">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >View count<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The number of users watching the stream."> help_outline </i>:
+            </b>
+            <span id="viewcount">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Tags<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The tags that the user has applied to their channel.">
+                help_outline </i
+              >:
+            </b>
+            <span id="tags">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Language<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The language that the stream uses. "> help_outline </i>: </b>
+            <span id="language">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Mature only<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="If the stream is meant for mature audiences.">
+                help_outline </i
+              >:
+            </b>
+            <span id="matureonly">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Stream thumbnail<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="A screenshot from the last 5 minutes of the stream.">
+                help_outline
+              </i>
+              :
+            </b>
+            <br />
+            <span class="text-center ratio ratio-16x9" id="thumbnail">
+              <span class="placeholder-wave"><span style="width: 100%; height: 100%" class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Upcoming stream<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The next scheduled stream that the streamer has set up.">
+                help_outline </i
+              >:
+            </b>
+            <span id="upcomingstream">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Panel extensions<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Panel extensions appear under the stream.">
+                help_outline </i
+              >:
+            </b>
+            <span id="panelextensions">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Component extensions<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Component extensions are placed on video player and expand when the user interacts with them."
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="componentextensions">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+          <h1 class="display-6">
+            <b
+              >Overlay extensions<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Overlay extensions appear over the whole video player."
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="overlayextensions">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Teams<i
+                class="material-icons notranslate"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="The teams that the user joined. Users can join multiple teams but only 1 team can be displayed on the channel"
+              >
+                help_outline </i
+              >:
+            </b>
+            <span id="teams">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b
+              >Chat settings<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The chat settings has the user changed."> help_outline </i>:
+            </b>
+            <span id="chatsettings">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+
+          <h1 class="display-6">
+            <b>Chat color<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The chat color that the user picked."> help_outline </i>: </b>
+            <span id="chatcolor">
+              <span class="placeholder-wave"><span class="placeholder col-3"></span></span>
+            </span>
+          </h1>
+        </div>
+        <div class="col-xl-4"></div>
+      </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/okayeg.js"></script>
+
+    <script>
+      window.onload = function () {
+        loadUserInfo();
+        enableTooltips();
+      };
+      document.getElementById("username").onkeydown = function (event) {
+        if (event.key === "Enter") {
+          loadUserInfo();
+        }
+      };
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KLNTNP8BV4");
+    </script>
+  </body>
+</html>

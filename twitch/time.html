@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Twitch VOD time converter | OkayegBOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="A simple tool that helps you find a Twitch VOD timestamp from real time or from a clip of a different channel" />
+    <meta name="keywords" content="twitch, chat, bot, okayeg" />
+    <meta property="og:title" content="Twitch VOD time converter | OkayegBOT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://okayeg.com/twitch/time" />
+    <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="A simple tool that helps you find a Twitch VOD timestamp from real time or from a clip of a different channel" />
+
+    <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/pics/icon/favicon-16x16.png" />
+    <link rel="manifest" href="/pics/icon/site.webmanifest" />
+    <link rel="mask-icon" href="/pics/icon/safari-pinned-tab.svg" color="#1cb24b" />
+    <link rel="shortcut icon" href="/pics/icon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdce82" />
+    <meta name="msapplication-config" content="/pics/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/icons.css" />
+    <link rel="stylesheet" href="/css/okayeg.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand notranslate" href="#"><img src="/pics/okayeg.png" alt="Okayeg" style="height: 30px; width: 30px" class="d-inline-block align-top" />OkayegBOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/"><i class="material-icons notranslate">info</i>About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/commands.html"><i class="material-icons notranslate">smart_toy</i>Commands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stream.html"><i class="material-icons notranslate">live_tv</i>Stream</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/egdle/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">egg</i>Egdle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard.html"><i class="material-icons notranslate">leaderboard</i>Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stocks.html"><i class="material-icons notranslate">trending_up</i>Stocks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/market.html"><i class="material-icons notranslate">storefront</i>NFE market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">api</i>API</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile.html"><i class="material-icons notranslate">account_circle</i>Profile</a>
+            </li>
+            <div class="vr"></div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img id="twitchLogo" style="height: 1.2em" alt="twitch" src="/pics/twitch.png" /> Twitch data
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/twitch/">Twitch related pages:</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/stats.html"><i class="material-icons notranslate">query_stats</i>Donk stats</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes.html"><i class="material-icons notranslate">emoji_emotions</i>Channel emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes-global.html"><i class="material-icons notranslate">public</i>Global emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" aria-current="page" href="/twitch/user.html"><i class="material-icons notranslate">person</i>User info</a>
+                </li>
+                <li>
+                  <a class="dropdown-item active" aria-current="page" href="#"><i class="material-icons notranslate">history</i>VOD time</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/followlist.html"><i class="material-icons notranslate">groups</i>Follow list</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+          <div class="card" style="margin-top: 10px">
+            <div class="card-body">
+              <h3>Find VOD timestamp from real time</h3>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="channel" placeholder="channel" aria-describedby="channelDesc" />
+                <label for="channel">Channel</label>
+                <div id="channelDesc" class="form-text">The Twitch channel you want to watch</div>
+              </div>
+
+              <label class="form-label">Relative time</label>
+              <div class="input-group mb-3">
+                <label class="input-group-text">Find point in VOD that happened</label>
+                <input type="number" id="timeMinutes" placeholder="0" class="form-control" />
+                <label class="input-group-text">minutes</label>
+                <input type="number" id="timeHours" placeholder="0" class="form-control" />
+                <label class="input-group-text">hours</label>
+                <input type="number" id="timeDays" placeholder="0" class="form-control" />
+                <label class="input-group-text">days</label>
+                <label class="input-group-text">ago</label>
+              </div>
+
+              <label for="exactTime" class="form-label">Exact time</label>
+              <div class="input-group mb-3">
+                <label class="input-group-text">Find point in VOD that happened at</label>
+                <input type="datetime-local" class="form-control" id="exactTime" />
+              </div>
+
+              <button type="button" class="btn btn-success float-end" onclick="findTimestamp()"><i class="material-icons notranslate">search</i>Find timestamp</button>
+              <br />
+              <br />
+              <hr />
+              <h3>Find VOD timestamp from a clip from another channel</h3>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="channelClip" placeholder="channel" aria-describedby="channelClipDesc" />
+                <label for="channelClip">Channel</label>
+                <div id="channelClipDesc" class="form-text">The Twitch channel you want to watch</div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="clip" placeholder="clip" aria-describedby="clipDesc" />
+                <label for="clip">Clip link</label>
+                <div id="clipDesc" class="form-text">A clip from a separate channel that will be used to find the VOD timestamp for the channel you provided above</div>
+              </div>
+              <button type="button" class="btn btn-success float-end" onclick="findClipTimestamp()"><i class="material-icons notranslate">search</i>Find timestamp</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-8 text-center" id="output"></div>
+        <div class="col-xl-2"></div>
+      </div>
+    </div>
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/okayeg.js"></script>
+
+    <script>
+      document.getElementById("exactTime").oninput = function (event) {
+        let date = new Date(event.target.value);
+        let diff = Date.now() - date.getTime();
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        let minutes = Math.floor((diff / (1000 * 60)) % 60);
+        document.getElementById("timeMinutes").value = minutes;
+        document.getElementById("timeHours").value = hours;
+        document.getElementById("timeDays").value = days;
+      };
+
+      document.getElementById("timeMinutes").oninput = function (event) {
+        let minutes = document.getElementById("timeMinutes").value;
+        let hours = document.getElementById("timeHours").value;
+        let days = document.getElementById("timeDays").value;
+        let now = new Date();
+        let timeZoneOffset = now.getTimezoneOffset();
+        let timeZoneOffsetMs = timeZoneOffset * 60 * 1000;
+        let targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days, now.getHours() - hours, now.getMinutes() - minutes, now.getSeconds());
+        targetDate.setTime(targetDate.getTime() - timeZoneOffsetMs);
+        document.getElementById("exactTime").value = targetDate.toISOString().slice(0, 16);
+      };
+
+      document.getElementById("timeHours").oninput = function (event) {
+        let minutes = document.getElementById("timeMinutes").value;
+        let hours = document.getElementById("timeHours").value;
+        let days = document.getElementById("timeDays").value;
+        let now = new Date();
+        let timeZoneOffset = now.getTimezoneOffset();
+        let timeZoneOffsetMs = timeZoneOffset * 60 * 1000;
+        let targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days, now.getHours() - hours, now.getMinutes() - minutes, now.getSeconds());
+        targetDate.setTime(targetDate.getTime() - timeZoneOffsetMs);
+        document.getElementById("exactTime").value = targetDate.toISOString().slice(0, 16);
+      };
+
+      document.getElementById("timeDays").oninput = function (event) {
+        let minutes = document.getElementById("timeMinutes").value;
+        let hours = document.getElementById("timeHours").value;
+        let days = document.getElementById("timeDays").value;
+        let now = new Date();
+        let timeZoneOffset = now.getTimezoneOffset();
+        let timeZoneOffsetMs = timeZoneOffset * 60 * 1000;
+        let targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days, now.getHours() - hours, now.getMinutes() - minutes, now.getSeconds());
+        targetDate.setTime(targetDate.getTime() - timeZoneOffsetMs);
+        document.getElementById("exactTime").value = targetDate.toISOString().slice(0, 16);
+      };
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KLNTNP8BV4");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+stream
+
+# basic http server for pre-commit testing:
+/static-server.js

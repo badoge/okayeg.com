@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Donk stats | OkayegBOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="A collection of various stats about Twitch and its streamers and viewers" />
+    <meta name="keywords" content="twitch, stats, analytics, chat, bot, okayeg" />
+    <meta property="og:title" content="Donk stats | OkayegBOT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://okayeg.com/twitch/stats" />
+    <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="A collection of various stats about Twitch and its streamers and viewers" />
+
+    <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/pics/icon/favicon-16x16.png" />
+    <link rel="manifest" href="/pics/icon/site.webmanifest" />
+    <link rel="mask-icon" href="/pics/icon/safari-pinned-tab.svg" color="#1cb24b" />
+    <link rel="shortcut icon" href="/pics/icon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdce82" />
+    <meta name="msapplication-config" content="/pics/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/icons.css" />
+    <link rel="stylesheet" href="/css/okayeg.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand notranslate" href="#"><img src="/pics/okayeg.png" alt="Okayeg" style="height: 30px; width: 30px" class="d-inline-block align-top" />OkayegBOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/"><i class="material-icons notranslate">info</i>About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/commands.html"><i class="material-icons notranslate">smart_toy</i>Commands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stream.html"><i class="material-icons notranslate">live_tv</i>Stream</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/egdle/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">egg</i>Egdle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard.html"><i class="material-icons notranslate">leaderboard</i>Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stocks.html"><i class="material-icons notranslate">trending_up</i>Stocks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/market.html"><i class="material-icons notranslate">storefront</i>NFE market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">api</i>API</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile.html"><i class="material-icons notranslate">account_circle</i>Profile</a>
+            </li>
+            <div class="vr"></div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img id="twitchLogo" style="height: 1.2em" alt="twitch" src="/pics/twitch.png" /> Twitch data
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/twitch/">Twitch related pages:</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item active" aria-current="page" href="#"><i class="material-icons notranslate">query_stats</i>Donk stats</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes.html"><i class="material-icons notranslate">emoji_emotions</i>Channel emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes-global.html"><i class="material-icons notranslate">public</i>Global emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/user.html"><i class="material-icons notranslate">person</i>User info</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/time.html"><i class="material-icons notranslate">history</i>VOD time</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/followlist.html"><i class="material-icons notranslate">groups</i>Follow list</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="card m-2 p-0" style="width: 40rem">
+          <div class="card-header">General stats</div>
+          <div class="card-body">
+            🔴 Total live channels:
+            <span id="totalChannels">
+              <span class="placeholder-wave">
+                <span class="placeholder col-2"></span>
+              </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">groups</i> Total viewers:
+            <span id="totalViewers">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br /><br />
+            Partners:
+            <span id="partners">
+              <span class="placeholder-wave"> <span class="placeholder col-1"></span> </span>
+            </span>
+            <br />
+            Affiliates:
+            <span id="affiliates">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            Others:
+            <span id="others">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br /><br />
+            <i class="material-icons notranslate">18_up_rating</i> Channels marked as mature only:
+            <span id="mature">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">account_circle</i> Channels using default profile picture:
+            <span id="defaultpfp">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">subtitles_off</i> Channels with no description:
+            <span id="nodesc">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">subtitles_off</i> Streams with no title:
+            <span id="notitle">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">subtitles_off</i> Streams with no category:
+            <span id="nogame">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">redeem</i> Channels with drops enabled:
+            <span id="drops">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            <i class="material-icons notranslate">sports_esports</i> Total unique categories:
+            <span id="totalGames">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 30rem">
+          <div class="card-header">Number of channels at different viewer counts</div>
+          <div class="card-body">
+            <div class="container text-center p-0 m-0">
+              <div class="row">
+                <div class="col align-self-center">Viewer segment</div>
+                <div class="col align-self-start">Number of channels</div>
+              </div>
+              <hr />
+
+              <div class="row">
+                <div class="col align-self-center">>10,000 viewers:</div>
+                <div class="col align-self-start" id="tenthousand">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">2,000 → 10,000 viewers:</div>
+                <div class="col align-self-start" id="twothousand_tenthousand">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">1,000 → 2,000 viewers:</div>
+                <div class="col align-self-start" id="thousand_twothousand">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">500 → 1,000 viewers:</div>
+                <div class="col align-self-start" id="fivehundred_thousand">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">200 → 500 viewers:</div>
+                <div class="col align-self-start" id="twohundred_fivehundred">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">100 → 200viewers:</div>
+                <div class="col align-self-start" id="hundred_twohundred">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">10 → 100 viewers:</div>
+                <div class="col align-self-start" id="ten_hundred">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">5 → 10 viewers:</div>
+                <div class="col align-self-start" id="five_ten">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">1 → 5 viewers:</div>
+                <div class="col align-self-start" id="one_five">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">1 viewer:</div>
+                <div class="col align-self-start" id="one">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center">0 viewers:</div>
+                <div class="col align-self-start" id="zero">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+            </div>
+            Average viewcount:
+            <span id="avg_viewcount">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            Median viewcount:
+            <span id="median_viewcount">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+
+            Average uptime:
+            <span id="avg_uptime">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+
+            Median uptime:
+            <span id="median_uptime">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 40rem; max-height: 35rem; overflow: auto">
+          <div class="card-header"><i class="material-icons notranslate">language</i> <span id="langHeader">Top 10 languages</span></div>
+          <div class="card-body">
+            <div class="container text-center p-0 m-0" id="langDiv">
+              <div class="row">
+                <div class="col align-self-center">Language</div>
+                <div class="col align-self-start">Number of channels</div>
+                <div class="col align-self-start">Average view count</div>
+                <div class="col align-self-start">Highest view count</div>
+              </div>
+              <hr />
+
+              <div class="row">
+                <div class="col align-self-center" id="lang0">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang0_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang0_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang0_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col align-self-center" id="lang1">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang1_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang1_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang1_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang2">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang2_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang2_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang2_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang3">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang3_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang3_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang3_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang4">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang4_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang4_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang4_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang5">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang5_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang5_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang5_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang6">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang6_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang6_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang6_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang7">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang7_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang7_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang7_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang8">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang8_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang8_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang8_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="lang9">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang9_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang9_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="lang9_max">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+              <div style="text-align: center" id="load100Langs">
+                <a onclick="loadStats.load100Langs()" class="link-info" style="cursor: pointer"> Load all languages<i class="material-icons notranslate">arrow_drop_down</i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 25rem; max-height: 35rem; overflow: auto">
+          <div class="card-header">
+            <i class="material-icons notranslate">sell</i>Top <span id="tagCount">10</span> tags <small class="text-body-secondary">Excluding language tags</small>
+          </div>
+          <div class="card-body">
+            <div class="container text-center p-0 m-0" id="tagsDiv">
+              <div class="row">
+                <div class="col align-self-center">Tag</div>
+                <div class="col align-self-start">Number of channels</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col align-self-center" id="tag0">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag0_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag1">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag1_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag2">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag2_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag3">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag3_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag4">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag4_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag5">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag5_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag6">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag6_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag7">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag7_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag8">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag8_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col align-self-center" id="tag9">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag9_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+              </div>
+            </div>
+
+            Total unique tags:
+            <span id="total_tags">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <br />
+            Average number of unique tags per channel:
+            <span id="sum_tags">
+              <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
+            </span>
+            <div style="text-align: center" id="load100Tags">
+              <a onclick="loadStats.load100Tags()" class="link-info" style="cursor: pointer"> Load top 100 tags<i class="material-icons notranslate">arrow_drop_down</i> </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Channel with the highest uptime</div>
+          <div class="card-body">
+            <span id="highest_uptime">
+              <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Newest live channel</div>
+          <div class="card-body">
+            <span id="newest_user">
+              <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Oldest live channel</div>
+          <div class="card-body">
+            <span id="oldest_user">
+              <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Most watched category</div>
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img id="most_viewed_img" class="img-fluid donkstats-category" alt="Loading..." />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body" id="most_viewed">
+                <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Most streamed category</div>
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img id="most_streamed_img" class="img-fluid donkstats-category" alt="Loading..." />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body" id="most_streamed">
+                <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Category with the highest viewer to streamer ratio</div>
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img id="highest_ratio_img" class="img-fluid donkstats-category" alt="Loading..." />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body" id="highest_ratio">
+                <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 35rem">
+          <div class="card-header">Least popular categories <small class="text-body-secondary">Categories with 1 live channel and 0 viewers</small></div>
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img id="least_popular_img" class="img-fluid donkstats-category" alt="Loading..." />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body" id="least_popular">
+                <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 50rem">
+          <div class="card-header">Random small channels <small class="text-body-secondary">Channels with 0 viewers</small></div>
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img id="small_channels_img" class="img-fluid donkstats-thumbnail" alt="Loading..." />
+            </div>
+            <div class="col-md-6">
+              <div class="card-body" id="small_channels">
+                <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 20rem">
+          <div class="card-header">Info</div>
+          <div class="card-body">
+            <span id="info">
+              <span class="placeholder-wave"> <span class="placeholder col-6"></span> </span>
+            </span>
+            <br />
+            Stats will update every 30 minutes, as long as I have it running :) If you see that the stats are way older than 30mins clear your cache or contact me
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/okayeg.min.js"></script>
+    <script>
+      window.onload = function () {
+        loadStats();
+      };
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KLNTNP8BV4");
+    </script>
+  </body>
+</html>

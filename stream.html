@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stream | OkayegBOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Experimental interactive stream that lets viewers fight against each other to earn egs. It also shows the bot's stats and events" />
+    <meta name="keywords" content="twitch, chat, bot, okayeg" />
+    <meta property="og:title" content="Stream | OkayegBOT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://okayeg.com/stream" />
+    <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="Experimental interactive stream that lets viewers fight against each other to earn egs. It also shows the bot's stats and events" />
+
+    <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/pics/icon/favicon-16x16.png" />
+    <link rel="manifest" href="/pics/icon/site.webmanifest" />
+    <link rel="mask-icon" href="/pics/icon/safari-pinned-tab.svg" color="#1cb24b" />
+    <link rel="shortcut icon" href="/pics/icon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdce82" />
+    <meta name="msapplication-config" content="/pics/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/datatables.min.css" />
+    <link rel="stylesheet" href="/css/icons.css" />
+    <link rel="stylesheet" href="/css/okayeg.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand notranslate" href="#"><img src="/pics/okayeg.png" alt="Okayeg" style="height: 30px; width: 30px" class="d-inline-block align-top" />OkayegBOT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/"><i class="material-icons notranslate">info</i>About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/commands.html"><i class="material-icons notranslate">smart_toy</i>Commands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"><i class="material-icons notranslate">live_tv</i>Stream</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/egdle/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">egg</i>Egdle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard.html"><i class="material-icons notranslate">leaderboard</i>Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stocks.html"><i class="material-icons notranslate">trending_up</i>Stocks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/market.html"><i class="material-icons notranslate">storefront</i>NFE market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/" target="_blank" rel="noopener noreferrer"><i class="material-icons notranslate">api</i>API</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile.html"><i class="material-icons notranslate">account_circle</i>Profile</a>
+            </li>
+            <div class="vr"></div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img id="twitchLogo" style="height: 1.2em; filter: opacity(70%)" alt="twitch" src="/pics/twitch.png" /> Twitch data
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/twitch/">Twitch related pages:</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/stats.html"><i class="material-icons notranslate">query_stats</i>Donk stats</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes.html"><i class="material-icons notranslate">emoji_emotions</i>Channel emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/emotes-global.html"><i class="material-icons notranslate">public</i>Global emotes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/user.html"><i class="material-icons notranslate">person</i>User info</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/time.html"><i class="material-icons notranslate">history</i>VOD time</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/twitch/followlist.html"><i class="material-icons notranslate">groups</i>Follow list</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-1"></div>
+
+        <div class="col-xl-10">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div id="twitch-embed"></div>
+            </div>
+          </div>
+
+          <h6 class="display-6">Stream commands:</h6>
+          <table id="streamCommands" class="table table-dark table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="col-xl-1"></div>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/datatables.min.js"></script>
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script src="/js/okayeg.min.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
+    <script>
+      window.onload = function () {
+        loadEmbedStream();
+      };
+    </script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KLNTNP8BV4");
+    </script>
+  </body>
+</html>
