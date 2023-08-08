@@ -1267,6 +1267,66 @@ async function loadStats() {
         },
       ],
     };
+    const data3 = {
+      labels: [
+        ">10,000 viewers",
+        "2,000 → 10,000 viewers",
+        "1,000 → 2,000 viewers",
+        "500 → 1,000 viewers",
+        "200 → 500 viewers",
+        "100 → 200 viewers",
+        "10 → 100 viewers",
+        "5 → 10 viewers",
+        "1 → 5 viewers",
+        "1 viewer",
+        "0 viewers",
+      ],
+      datasets: [
+        {
+          label: "Channels",
+          data: [
+            stats.stats.tenthousand,
+            stats.stats.twothousand_tenthousand,
+            stats.stats.thousand_twothousand,
+            stats.stats.fivehundred_thousand,
+            stats.stats.twohundred_fivehundred,
+            stats.stats.hundred_twohundred,
+            stats.stats.ten_hundred,
+            stats.stats.five_ten,
+            stats.stats.one_five,
+            stats.stats.one,
+            stats.stats.zero,
+          ],
+          backgroundColor: [
+            "rgba(165, 0, 38, 0.8)",
+            "rgba(215, 48, 39, 0.8)",
+            "rgba(244, 109, 67, 0.8)",
+            "rgba(253, 174, 97, 0.8)",
+            "rgba(254, 224, 139, 0.8)",
+            "rgba(255, 255, 191, 0.8)",
+            "rgba(217, 239, 139, 0.8)",
+            "rgba(166, 217, 106, 0.8)",
+            "rgba(102, 189, 99, 0.8)",
+            "rgba(26, 152, 80, 0.8)",
+            "rgba(0, 104, 55, 0.8)",
+          ],
+          borderColor: [
+            "rgba(165, 0, 38, 1)",
+            "rgba(215, 48, 39, 1)",
+            "rgba(244, 109, 67, 1)",
+            "rgba(253, 174, 97, 1)",
+            "rgba(254, 224, 139, 1)",
+            "rgba(255, 255, 191, 1)",
+            "rgba(217, 239, 139, 1)",
+            "rgba(166, 217, 106, 1)",
+            "rgba(102, 189, 99, 1)",
+            "rgba(26, 152, 80, 1)",
+            "rgba(0, 104, 55, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    };
 
     const config = {
       type: "pie",
@@ -1324,9 +1384,31 @@ async function loadStats() {
       },
     };
 
-    // render init block
+    const config3 = {
+      type: "bar",
+      data: data3,
+      options: {
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            type: "logarithmic",
+          },
+        },
+      },
+    };
+
+    for (let element of document.getElementsByClassName("spinner-border")) {
+      element.style.display = "none";
+    }
     const channelsChart = new Chart(document.getElementById("channelsChart"), config);
     const viewersChart = new Chart(document.getElementById("viewersChart"), config2);
+    const segmentsChart = new Chart(document.getElementById("segmentsChart"), config3);
 
     document.getElementById("totalChannels").innerHTML = `${stats.stats.live.toLocaleString()}`;
     document.getElementById("totalViewers").innerHTML = `${stats.stats.viewers.toLocaleString()}`;

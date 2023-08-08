@@ -115,8 +115,20 @@
             </span>
 
             <div id="chartContainer" style="height: 20rem; display: inline-flex; text-align: center">
-              <div style="width: 18rem; margin-right: 20px">Streamers<canvas id="channelsChart"></canvas></div>
-              <div style="width: 18rem">Viewers watching<canvas id="viewersChart"></canvas></div>
+              <div style="width: 18rem; margin-right: 20px">
+                Streamers
+                <canvas id="channelsChart"></canvas>
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+              <div style="width: 18rem">
+                Viewers watching
+                <canvas id="viewersChart"></canvas>
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
             </div>
 
             <br />
@@ -140,6 +152,11 @@
         <div class="card m-2 p-0" style="width: 30rem">
           <div class="card-header">Number of channels at different viewer counts</div>
           <div class="card-body">
+            <canvas id="segmentsChart"></canvas>
+            <div class="spinner-border" role="status" style="position: absolute; left: 13.5rem; top: 5rem">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
             <div class="container text-center p-0 m-0">
               <div class="row">
                 <div class="col align-self-center">Viewer segment</div>
@@ -178,7 +195,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col align-self-center">100 → 200viewers:</div>
+                <div class="col align-self-center">100 → 200 viewers:</div>
                 <div class="col align-self-start" id="hundred_twohundred">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
