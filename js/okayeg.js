@@ -1242,6 +1242,92 @@ async function loadStats() {
   try {
     let response = await fetch(`https://api.okayeg.com/donkstats`, requestOptions);
     let stats = await response.json();
+
+    const data = {
+      labels: ["Partners", "Affiliates", "Others"],
+      datasets: [
+        {
+          label: "Channels",
+          data: [stats.stats.partners, stats.stats.affiliates, stats.stats.live - stats.stats.partners - stats.stats.affiliates],
+          backgroundColor: ["rgba(191, 148, 255, 0.8)", "rgba(30, 130, 50, 0.8)", "rgba(38, 80, 158, 0.8)"],
+          borderColor: ["rgba(191, 148, 255, 1)", "rgba(30, 130, 50, 1)", "rgba(38, 80, 158, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    };
+    const data2 = {
+      labels: ["Partners", "Affiliates", "Others"],
+      datasets: [
+        {
+          label: "Channels",
+          data: [stats.stats.partner_viewers, stats.stats.affiliate_viewers, stats.stats.viewers - stats.stats.partner_viewers - stats.stats.affiliate_viewers],
+          backgroundColor: ["rgba(191, 148, 255, 0.8)", "rgba(30, 130, 50, 0.8)", "rgba(38, 80, 158, 0.8)"],
+          borderColor: ["rgba(191, 148, 255, 1)", "rgba(30, 130, 50, 1)", "rgba(38, 80, 158, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    const config = {
+      type: "pie",
+      data: data,
+      plugins: [ChartDataLabels],
+      options: {
+        plugins: {
+          datalabels: {
+            backgroundColor: function (context) {
+              return context.dataset.backgroundColor;
+            },
+            borderColor: "white",
+            borderRadius: 25,
+            borderWidth: 1,
+            color: "white",
+            display: true,
+            font: {
+              weight: "bold",
+            },
+            formatter: (val, ctx) => {
+              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.stats.live) * 100)}%)`;
+            },
+          },
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+      },
+    };
+
+    const config2 = {
+      type: "pie",
+      data: data2,
+      plugins: [ChartDataLabels],
+      options: {
+        plugins: {
+          datalabels: {
+            backgroundColor: function (context) {
+              return context.dataset.backgroundColor;
+            },
+            borderColor: "white",
+            borderRadius: 25,
+            borderWidth: 1,
+            color: "white",
+            display: true,
+            font: {
+              weight: "bold",
+            },
+            formatter: (val, ctx) => {
+              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.stats.viewers) * 100)}%)`;
+            },
+          },
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+      },
+    };
+
+    // render init block
+    const channelsChart = new Chart(document.getElementById("channelsChart"), config);
+    const viewersChart = new Chart(document.getElementById("viewersChart"), config2);
+
     document.getElementById("totalChannels").innerHTML = `${stats.stats.live.toLocaleString()}`;
     document.getElementById("totalViewers").innerHTML = `${stats.stats.viewers.toLocaleString()}`;
     document.getElementById("totalGames").innerHTML = `${stats.stats.sum_games.toLocaleString()}`;
@@ -1366,33 +1452,6 @@ async function loadStats() {
     document.getElementById("drops").innerHTML = `${stats.stats.drops.toLocaleString()} 
     <span class="text-body-secondary">(${roundToTwo((stats.stats.drops / stats.stats.live) * 100)}%)</span>`;
 
-    document.getElementById("highest_uptime").innerHTML = `
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-      <a href="https://twitch.tv/${stats.stats.highest_uptime.username}" target="_blank" rel="noopener noreferrer">
-        <img src="${stats.stats.highest_uptime.profile_image_url}" class="img-fluid rounded-start donkstats-pfp" title="${stats.stats.highest_uptime.display_name}" alt="${
-      stats.stats.highest_uptime.display_name
-    }"></a>
-      </div>
-      <div class="col">
-        <div class="card-body">
-          <h5 class="card-title"><a href="https://twitch.tv/${stats.stats.highest_uptime.username}" target="_blank" rel="noopener noreferrer">${
-      stats.stats.highest_uptime.username == stats.stats.highest_uptime.display_name.toLowerCase()
-        ? ` ${stats.stats.highest_uptime.display_name}`
-        : ` ${stats.stats.highest_uptime.display_name} (${stats.stats.highest_uptime.username})`
-    }${stats.stats.highest_uptime.broadcaster_type == "partner" ? svg : ""}${stats.stats.highest_uptime.type == "staff" ? staffpic : ""}</a></h5>
-          <p class="card-text">
-          Live for ${convertTime2(stats.stats.highest_uptime.started_at_timestamp)}<br>
-          ${stats.stats.highest_uptime.game_name || "<span class='text-body-secondary'>No category</span>"} • ${stats.stats.highest_uptime.viewers.toLocaleString()} ${
-      stats.stats.highest_uptime.viewers == 1 ? "Viewer" : "Viewers"
-    }
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>`;
     document.getElementById("oldest_user").innerHTML = `
     <div class="container-fluid">
     <div class="row">
@@ -1452,21 +1511,6 @@ async function loadStats() {
     </div>
   </div>
 </div>`;
-
-    let most_viewed_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_viewed.id}-285x380.jpg`);
-    document.getElementById("most_viewed_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_viewed.id}${most_viewed_link ? "" : "_IGDB"}-285x380.jpg`;
-    document.getElementById("most_viewed_img").title = stats.stats.most_viewed.name;
-    document.getElementById("most_viewed_img").alt = stats.stats.most_viewed.name;
-    document.getElementById("most_viewed").innerHTML = `
-    <h5 class="card-title">
-    <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(stats.stats.most_viewed.name)}" target="_blank" rel="noopener noreferrer">${stats.stats.most_viewed.name}</a>
-    </h5>
-    <p class="card-text">
-    ${stats.stats.most_viewed.viewers.toLocaleString()} Viewers <span class="text-body-secondary">(${roundToTwo((stats.stats.most_viewed.viewers / stats.stats.viewers) * 100)}%)</span><br>
-    ${stats.stats.most_viewed.channels.toLocaleString()} Live Channels <span class="text-body-secondary">(${roundToTwo(
-      (stats.stats.most_viewed.channels / stats.stats.live) * 100,
-    )}%)</span><br>
-    </p>`;
 
     let most_streamed_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_streamed.id}-285x380.jpg`);
     document.getElementById("most_streamed_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_streamed.id}${most_streamed_link ? "" : "_IGDB"}-285x380.jpg`;
