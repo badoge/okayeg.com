@@ -1625,27 +1625,58 @@ async function loadStats() {
     } with a total of ${stats.stats.highest_ratio.viewers.toLocaleString()} viewers</p>`;
 
     load_least_popular();
-    async function load_least_popular() {
-      let random = stats.stats.least_popular[Math.floor(Math.random() * stats.stats.least_popular.length)];
+    async function load_least_popular(direction = "random") {
+      let categoryIndex;
+      switch (direction) {
+        case "next":
+          categoryIndex = parseInt(document.getElementById("least_popular").dataset.index, 10);
+          categoryIndex++;
+          break;
+        case "back":
+          categoryIndex = parseInt(document.getElementById("least_popular").dataset.index, 10);
+          categoryIndex--;
+          break;
+        default:
+          categoryIndex = Math.floor(Math.random() * stats.stats.least_popular.length);
+      }
+      document.getElementById("least_popular").dataset.index = categoryIndex;
+      let random = stats.stats.least_popular[categoryIndex % stats.stats.least_popular.length];
       let least_popular_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${random.game_id}-285x380.jpg`);
 
       document.getElementById("least_popular_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${random.game_id}${least_popular_link ? "" : "_IGDB"}-285x380.jpg`;
       document.getElementById("least_popular_img").title = stats.stats.least_popular.name;
       document.getElementById("least_popular_img").alt = stats.stats.least_popular.name;
       document.getElementById("least_popular").innerHTML = `
-      <h5 class="card-title">
+      <h4 class="card-title">
       <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(random.game_name)}" target="_blank" rel="noopener noreferrer">${random.game_name}</a>
-      </h5>
-      <p class="card-text">
-      <small class="text-body-secondary">Multiple categories (${stats.stats.least_popular.length}) meet this condition, clicking the refresh button will show another random one</small>
-      <br><button type="button" onclick="loadStats.load_least_popular()" class="btn btn-secondary float-end"><i class="material-icons notranslate">refresh</i></button><br>
-      </p>`;
+      </h4>
+      <p class="card-text text-body-secondary">
+      Multiple categories (${stats.stats.least_popular.length}) meet this condition, use the buttons below to see more categories
+      </p>
+      <div class="btn-group float-end" role="group" aria-label="least popular categories browser">
+          <button type="button" onclick="loadStats.load_least_popular('back')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_back</i></button>
+          <button type="button" onclick="loadStats.load_least_popular('next')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_forward</i></button>
+      </div>`;
     }
     loadStats.load_least_popular = load_least_popular;
 
     load_small_channels();
-    async function load_small_channels() {
-      let random = stats.stats.small_channels[Math.floor(Math.random() * stats.stats.small_channels.length)];
+    async function load_small_channels(direction = "random") {
+      let channelIndex;
+      switch (direction) {
+        case "next":
+          channelIndex = parseInt(document.getElementById("small_channels").dataset.index, 10);
+          channelIndex++;
+          break;
+        case "back":
+          channelIndex = parseInt(document.getElementById("small_channels").dataset.index, 10);
+          channelIndex--;
+          break;
+        default:
+          channelIndex = Math.floor(Math.random() * stats.stats.small_channels.length);
+      }
+      document.getElementById("small_channels").dataset.index = channelIndex;
+      let random = stats.stats.small_channels[channelIndex % stats.stats.small_channels.length];
       let tags = "";
       for (let index = 0; index < random.current_tags.length; index++) {
         tags += `<span class="badge rounded-pill text-bg-secondary">${random.current_tags[index]}</span>`;
@@ -1668,9 +1699,12 @@ async function loadStats() {
       }
       </a>
        • ${convertTime2(random.started_at_timestamp)}<br>
-       ${tags}<br>
-       <br><button type="button" onclick="loadStats.load_small_channels()" class="btn btn-secondary float-end"><i class="material-icons notranslate">refresh</i></button><br>
-      </p>`;
+       ${tags}
+       </p>
+       <div class="btn-group float-end" role="group" aria-label="small channels browser">
+          <button type="button" onclick="loadStats.load_small_channels('back')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_back</i></button>
+          <button type="button" onclick="loadStats.load_small_channels('next')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_forward</i></button>
+      </div>`;
     }
     loadStats.load_small_channels = load_small_channels;
 
