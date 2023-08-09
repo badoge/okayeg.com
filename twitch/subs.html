@@ -31,6 +31,7 @@
     <style>
       body {
         overflow: hidden;
+        background: #163d64;
       }
     </style>
   </head>
@@ -110,6 +111,50 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col p-0 m-0">
+          <div class="form-floating" id="currencySelectDiv">
+            <select class="form-select" id="currencySelect" aria-label="currency select">
+              <option value="AED">AED</option>
+              <option value="AUD">AUD</option>
+              <option value="BRL">BRL</option>
+              <option value="BYN">BYN</option>
+              <option value="CAD">CAD</option>
+              <option value="CLP">CLP</option>
+              <option value="CRC">CRC</option>
+              <option value="DKK">DKK</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="HKD">HKD</option>
+              <option value="INR">INR</option>
+              <option value="ISK">ISK</option>
+              <option value="KRW">KRW</option>
+              <option value="KWD">KWD</option>
+              <option value="MXN">MXN</option>
+              <option value="MYR">MYR</option>
+              <option value="NOK">NOK</option>
+              <option value="NZD">NZD</option>
+              <option value="PEN">PEN</option>
+              <option value="PHP">PHP</option>
+              <option value="QAR">QAR</option>
+              <option value="RUB">RUB</option>
+              <option value="SAR">SAR</option>
+              <option value="SEK">SEK</option>
+              <option value="SGD">SGD</option>
+              <option value="THB">THB</option>
+              <option value="TRY">TRY</option>
+              <option value="TWD">TWD</option>
+              <option value="UAH">UAH</option>
+              <option value="USD" selected>USD</option>
+              <option value="ZAR">ZAR</option>
+            </select>
+            <label for="currencySelect">Currency</label>
+          </div>
+          <div class="form-floating" id="typeSelectDiv">
+            <select class="form-select" id="typeSelect" aria-label="type select">
+              <option value="subs" selected>Subs</option>
+              <option value="turbo">Turbo</option>
+            </select>
+            <label for="typeSelect">Type</label>
+          </div>
           <div id="map"></div>
         </div>
       </div>
@@ -117,10 +162,16 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/svg-pan-zoom.min.js"></script>
     <script src="/js/svgMap.min.js"></script>
-    <script src="/js/okayeg.js"></script>
+    <script src="/js/okayeg.min.js"></script>
     <script>
       window.onload = function () {
-        loadSubPrices();
+        loadSubPrices("subs", "USD");
+        document.getElementById("currencySelect").onchange = function () {
+          loadSubPrices(document.getElementById("typeSelect").value, this.value);
+        };
+        document.getElementById("typeSelect").onchange = function () {
+          loadSubPrices(this.value, document.getElementById("currencySelect").value);
+        };
       };
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>

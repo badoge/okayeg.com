@@ -196,3 +196,27 @@ body {
   height: 60vh;
   overflow: auto;
 }
+
+.svgMap-map-wrapper {
+  background: #163d64;
+}
+.svgMap-map-controls-wrapper {
+  position: fixed;
+  bottom: 60px !important;
+}
+
+#currencySelectDiv {
+  position: fixed;
+  z-index: 100;
+  width: 100px;
+  right: 10px;
+  top: 60px;
+}
+
+#typeSelectDiv {
+  position: fixed;
+  z-index: 100;
+  width: 100px;
+  right: 10px;
+  top: 130px;
+}

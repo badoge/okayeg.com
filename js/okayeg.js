@@ -2525,33 +2525,54 @@ function addOrdinalSuffix(number) {
   return number + suffix;
 }
 
-async function loadSubPrices() {
+let countries = [];
+async function loadSubPrices(type, currency) {
   let res = await fetch(`/data/subs.json`, requestOptions);
-  let res2 = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json`, requestOptions);
+  let res2 = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency.toLowerCase()}.min.json`, requestOptions);
   let data = await res.json();
   let data2 = await res2.json();
-
+  let min = 1000000;
+  let max = 0;
   let values = {};
-  for (let index = 0; index < data.countries.length; index++) {
-    values[data.countries[index].code] = {
-      price: data.countries[index].currency == "USD" ? data.countries[index].price : roundToTwo(data.countries[index].price / data2.usd[data.countries[index].currency.toLowerCase()]) || 1,
-      currency: data.countries[index].currency,
+  for (let index = 0; index < data[type].length; index++) {
+    let price = data[type][index].price / data2[currency.toLowerCase()][data[type][index].currency.toLowerCase()];
+    values[data[type][index].code] = {
+      price: data[type][index].currency == currency ? data[type][index].price : roundToTwo(price) || 1,
     };
+    if (max < price) {
+      max = price;
+    }
+    if (min > price) {
+      min = price;
+    }
+    if (!countries.some((e) => e.code === data[type][index].code)) {
+      countries.push(data[type][index]);
+    }
   }
-
+  if (type == "turbo") {
+    for (let index = 0; index < countries.length; index++) {
+      if (!(countries[index].code in values)) {
+        values[countries[index].code] = {
+          price: roundToTwo(11.99 / data2[currency.toLowerCase()].usd),
+        };
+      }
+    }
+  }
+  document.getElementById("map").innerHTML = "";
   new svgMap({
     targetElementID: "map",
     showZoomReset: true,
     zoomScaleSensitivity: 0.3,
     colorMin: "#27d444",
     colorMax: "#e72222",
+    colorNoData: "#909090",
     data: {
       data: {
         price: {
-          name: "Local Subscription Price",
-          format: "{0} USD",
-          thresholdMax: 6,
-          thresholdMin: 0,
+          name: type == "subs" ? "Local Subscription Price" : "Turbo Local Pricing",
+          format: `{0} ${currency}`,
+          thresholdMax: max,
+          thresholdMin: min,
         },
       },
       applyData: "price",
