@@ -2524,3 +2524,38 @@ function addOrdinalSuffix(number) {
   const suffix = suffixes[(lastTwoDigits - 20) % 10] || suffixes[lastTwoDigits] || suffixes[0];
   return number + suffix;
 }
+
+async function loadSubPrices() {
+  let res = await fetch(`/data/subs.json`, requestOptions);
+  let res2 = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json`, requestOptions);
+  let data = await res.json();
+  let data2 = await res2.json();
+
+  let values = {};
+  for (let index = 0; index < data.countries.length; index++) {
+    values[data.countries[index].code] = {
+      price: data.countries[index].currency == "USD" ? data.countries[index].price : roundToTwo(data.countries[index].price / data2.usd[data.countries[index].currency.toLowerCase()]) || 1,
+      currency: data.countries[index].currency,
+    };
+  }
+
+  new svgMap({
+    targetElementID: "map",
+    showZoomReset: true,
+    zoomScaleSensitivity: 0.3,
+    colorMin: "#27d444",
+    colorMax: "#e72222",
+    data: {
+      data: {
+        price: {
+          name: "Local Subscription Price",
+          format: "{0} USD",
+          thresholdMax: 6,
+          thresholdMin: 0,
+        },
+      },
+      applyData: "price",
+      values: values,
+    },
+  });
+} //loadSubPrices

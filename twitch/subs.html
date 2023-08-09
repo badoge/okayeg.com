@@ -2,16 +2,16 @@
 <html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <title>Global Emotes | OkayegBOT</title>
+    <title>Twitch local subscription prices | OkayegBOT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="View the current global Twitch/BTTV/FFZ/7TV emotes" />
-    <meta name="keywords" content="twitch, chat, bot, okayeg, emotes, badges, bttv, ffz, 7tv" />
-    <meta property="og:title" content="Global Emotes | OkayegBOT" />
+    <meta name="description" content="View the local Twitch subscription prices with currency conversion" />
+    <meta name="keywords" content="twitch, chat, bot, okayeg" />
+    <meta property="og:title" content="Twitch local subscription prices | OkayegBOT" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://okayeg.com/twitch/emotes-global" />
+    <meta property="og:url" content="https://okayeg.com/twitch/subs" />
     <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:description" content="View the current global Twitch/BTTV/FFZ/7TV emotes" />
+    <meta property="og:description" content="View the local Twitch subscription prices with currency conversion" />
 
     <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
@@ -24,12 +24,19 @@
     <meta name="theme-color" content="#ffffff" />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/svgMap.min.css" />
     <link rel="stylesheet" href="/css/icons.css" />
     <link rel="stylesheet" href="/css/okayeg.min.css" />
+
+    <style>
+      body {
+        overflow: hidden;
+      }
+    </style>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand notranslate" href="#"><img src="/pics/okayeg.png" alt="Okayeg" style="height: 30px; width: 30px" class="d-inline-block align-top" />OkayegBOT</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,16 +86,16 @@
                   <a class="dropdown-item" href="/twitch/emotes.html"><i class="material-icons notranslate">emoji_emotions</i>Channel emotes</a>
                 </li>
                 <li>
-                  <a class="dropdown-item active" aria-current="page" href="#"><i class="material-icons notranslate">public</i>Global emotes</a>
+                  <a class="dropdown-item" href="/twitch/emotes-global.html"><i class="material-icons notranslate">public</i>Global emotes</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/twitch/subs.html"><i class="material-icons notranslate">attach_money</i>Local sub prices</a>
+                  <a class="dropdown-item active" aria-current="page" href="/twitch/subs.html"><i class="material-icons notranslate">attach_money</i>Local sub prices</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="/twitch/user.html"><i class="material-icons notranslate">person</i>User info</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/twitch/time.html"><i class="material-icons notranslate">history</i>VOD time</a>
+                  <a class="dropdown-item" href="#"><i class="material-icons notranslate">history</i>VOD time</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="/twitch/followlist.html"><i class="material-icons notranslate">groups</i>Follow list</a>
@@ -99,45 +106,21 @@
         </div>
       </div>
     </nav>
+
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-10">
-          <h1 class="display-1">
-            Global Twitch Emotes<span id="twitchCount" class="text-body-secondary"></span>:
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              onclick="reloadTwitchGlobal()"
-              data-bs-toggle="tooltip"
-              data-bs-delay="200"
-              data-bs-placement="top"
-              data-bs-title="Reload global Twitch emotes. The emote list is manually rearranged by me to look pretty so it might be out of date sometimes, reloading fetches the emote list from twitch directly."
-            >
-              <i class="material-icons notranslate">refresh</i>
-            </button>
-          </h1>
-          <br />
-          <div id="twitch" class="emotecontainer"></div>
-          <h1 class="display-1">Global BTTV Emotes<span id="bttvCount" class="text-body-secondary"></span>:</h1>
-          <div id="bttv" class="emotecontainer"></div>
-
-          <h1 class="display-1">Global FFZ Emotes<span id="ffzCount" class="text-body-secondary"></span>:</h1>
-          <div id="ffz" class="emotecontainer"></div>
-
-          <h1 class="display-1">Global 7TV Emotes<span id="7tvCount" class="text-body-secondary"></span>:</h1>
-          <div id="7tv" class="emotecontainer"></div>
+        <div class="col p-0 m-0">
+          <div id="map"></div>
         </div>
-        <div class="col-xl-1"></div>
       </div>
     </div>
-
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/okayeg.min.js"></script>
+    <script src="/js/svg-pan-zoom.min.js"></script>
+    <script src="/js/svgMap.min.js"></script>
+    <script src="/js/okayeg.js"></script>
     <script>
       window.onload = function () {
-        enableTooltips();
-        loadGlobalEmotes();
+        loadSubPrices();
       };
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
