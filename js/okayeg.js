@@ -791,7 +791,7 @@ async function loadFollowList() {
         <h1 class="display-1"><a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is following ${
           followList.data.total
         } people:</h1>
-        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)}</div>`;
+        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)} Use the <kbd>=optout followlist</kbd> command in OkayegBOT's chat to opt out</div>`;
 
         for (let i = 0, j = list.length; i < j; i++) {
           let to_name = followList.data.following[i].to_name;
