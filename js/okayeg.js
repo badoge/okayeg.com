@@ -763,22 +763,35 @@ async function loadFollowList() {
 
     try {
       let response = await fetch(`https://api.okayeg.com/followlist?username=${username}`, requestOptions);
-      let followList = await response.json();
 
+      if (response.status !== 200) {
+        document.getElementById("title1").innerHTML = `<h1 class="display-1">
+        <a href="https://twitch.tv/${username}" target="_blank" rel="noopener noreferrer">${username}</a> was never looked up
+        </h1>`;
+        document.getElementById("list").innerHTML = "";
+        return;
+      }
+
+      let followList = await response.json();
+      let fetchTime = followList.data.time;
+      followList = followList.data;
       let displayName = followList.data.display_name.toLowerCase() == followList.data.login ? followList.data.display_name : `${followList.data.display_name} (${followList.data.login})`;
 
       document.getElementById("list").innerHTML = "";
       if (followList.data.total == 0) {
-        document.getElementById(
-          "title1",
-        ).innerHTML = `<a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is not following anyone.`;
+        document.getElementById("title1").innerHTML = `
+        <h1 class="display-1"><a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is not following anyone.</h1>
+        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)}</div>`;
         return;
       }
 
       let list = followList.data.following;
       if (list.length > 0) {
         document.getElementById("title1").innerHTML = `
-        <a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is following ${followList.data.total} people:`;
+        <h1 class="display-1"><a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is following ${
+          followList.data.total
+        } people:</h1>
+        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)}</div>`;
 
         for (let i = 0, j = list.length; i < j; i++) {
           let to_name = followList.data.following[i].to_name;
