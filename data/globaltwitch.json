@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": "emotesv2_0cb91e8a01c741fe9d4a0607f70395db",
+      "name": "FlawlessVictory",
+      "images": {
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0cb91e8a01c741fe9d4a0607f70395db/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0cb91e8a01c741fe9d4a0607f70395db/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0cb91e8a01c741fe9d4a0607f70395db/static/light/3.0"
+      },
+      "format": ["static"],
+      "scale": ["1.0", "2.0", "3.0"],
+      "theme_mode": ["light", "dark"]
+    },
+    {
       "id": "emotesv2_a25ad7124e584c949e2f63917e3d747a",
       "name": "PikaRamen",
       "images": {
