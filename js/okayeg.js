@@ -794,20 +794,20 @@ async function loadFollowList() {
         <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)} Use the <kbd>=optout followlist</kbd> command in OkayegBOT's chat to opt out</div>`;
 
         for (let i = 0, j = list.length; i < j; i++) {
-          let to_name = followList.data.following[i].to_name;
-          let label = to_name;
-          let to_login = followList.data.following[i].to_login;
+          let display_name = followList.data.following[i].display_name;
+          let label = display_name;
+          let login = followList.data.following[i].login;
           let profile_image_url = followList.data.following[i].profile_image_url ? followList.data.following[i].profile_image_url : "/pics/banned.png";
           let type = followList.data.following[i].broadcaster_type ? followList.data.following[i].broadcaster_type : "";
           let staff = followList.data.following[i].type == "staff";
           let description = followList.data.following[i].description ? followList.data.following[i].description : "";
           let followed_at = followList.data.following[i].followed_at ? followList.data.following[i].followed_at.replace("T", " ").replace("Z", " ") : "";
-          if (to_name.toLowerCase() !== to_login.toLowerCase()) {
-            label = `${to_login} (${to_name})`;
+          if (display_name.toLowerCase() !== login.toLowerCase()) {
+            label = `${login} (${display_name})`;
           }
           document.getElementById("list").innerHTML += `
           <div class="border ${profile_image_url == "/pics/banned.png" ? "border-danger" : "border-secondary"} emote">
-          <a href="https://twitch.tv/${to_login}" target="_blank" rel="noopener noreferrer"><img src="${profile_image_url}" loading="lazy" title="${description}" alt="${to_name}">
+          <a href="https://twitch.tv/${login}" target="_blank" rel="noopener noreferrer"><img src="${profile_image_url}" loading="lazy" title="${description}" alt="${display_name}">
           <div class="text-body-secondary text-center">${label}${type == "partner" ? svg : ""}${
             staff ? staffpic : ""
           }</div><div class="text-body-secondary text-center">Followed at: ${followed_at}</div>
