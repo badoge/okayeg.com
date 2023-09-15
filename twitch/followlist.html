@@ -116,7 +116,19 @@
                 <label for="username">Username</label>
                 <div id="desc" class="form-text">View All Twitch channels a user is following.</div>
               </div>
-              <button style="margin-top: 10px" type="button" class="btn btn-success float-end" onclick="loadFollowList()"><i class="material-icons notranslate">search</i>Lookup</button>
+              <button
+                type="button"
+                class="btn btn-twitch"
+                id="login"
+                onclick="login()"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                data-bs-title="Sign in to publish your own follow list for others to see"
+              >
+                <span class="twitch-icon"></span>Sign in with Twitch
+              </button>
+
+              <button type="button" class="btn btn-success float-end" onclick="loadFollowList()"><i class="material-icons notranslate">search</i>Lookup</button>
             </div>
           </div>
         </div>
@@ -139,12 +151,21 @@
     <script>
       window.onload = function () {
         loadFollowList();
+        enableTooltips();
       };
       document.getElementById("username").onkeydown = function (event) {
         if (event.key === "Enter") {
           loadFollowList();
         }
       };
+
+      function login() {
+        document.getElementById(
+          "login",
+        ).innerHTML = `<div style="display: table; margin: 0 auto;" class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`;
+        window.open("/prompt.html", "loginWindow", "toolbar=0,status=0,scrollbars=0,width=500px,height=800px");
+        return false;
+      } //login
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
     <script>

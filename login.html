@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Follow list login| OkayegBOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Check what channels any Twitch user is following" />
+    <meta name="keywords" content="twitch, chat, bot, okayeg, follow, followers, following, followlist" />
+    <meta property="og:title" content="Follow list | OkayegBOT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://okayeg.com/login" />
+    <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="Check what channels any Twitch user is following" />
+
+    <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/pics/icon/favicon-16x16.png" />
+    <link rel="manifest" href="/pics/icon/site.webmanifest" />
+    <link rel="mask-icon" href="/pics/icon/safari-pinned-tab.svg" color="#1cb24b" />
+    <link rel="shortcut icon" href="/pics/icon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#fdce82" />
+    <meta name="msapplication-config" content="/pics/icon/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/icons.css" />
+    <link rel="stylesheet" href="/css/okayeg.min.css" />
+
+    <style>
+      html,
+      body {
+        margin: 10px;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 70%">
+      <div class="row">
+        <strong class="text-success" style="font-size: 2rem">You can close this window now :)</strong>
+      </div>
+    </div>
+
+    <script>
+      let url = window.location.href;
+      let access_token = url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
+      sendData();
+
+      async function sendData() {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + access_token);
+        myHeaders.append("Client-Id", "9ot8nj44bx2vt3y6pvqowknvljqjxg");
+        let requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+        try {
+          let response = await fetch("https://api.okayeg.com/followlist", requestOptions);
+          if (response.status == 200) {
+            window.opener.document.getElementById("login").innerHTML = `Follow list saved :)`;
+            window.opener.document.getElementById("login").disabled = true;
+          } else {
+            window.opener.document.getElementById("login").innerHTML = `Something went wrong :(`;
+          }
+          window.close();
+        } catch (error) {
+          console.log(error);
+          window.opener.document.getElementById("login").innerHTML = `Something went wrong :(`;
+          window.close();
+        }
+      }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KLNTNP8BV4");
+    </script>
+  </body>
+</html>
