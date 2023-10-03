@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": "emotesv2_d0d72de2c28840d39a628314f483f521",
+      "name": "BlowTheWhistle",
+      "images": {
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/3.0"
+      },
+      "format": ["static"],
+      "scale": ["1.0", "2.0", "3.0"],
+      "theme_mode": ["light", "dark"]
+    },
+    {
       "id": "emotesv2_5d523adb8bbb4786821cd7091e47da21",
       "name": "PopNemo",
       "images": {
