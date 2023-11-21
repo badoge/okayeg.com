@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": "emotesv2_db3385fb0ea54913bf58fa5554edfdf2",
+      "name": "ForSigmar",
+      "images": {
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_db3385fb0ea54913bf58fa5554edfdf2/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_db3385fb0ea54913bf58fa5554edfdf2/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_db3385fb0ea54913bf58fa5554edfdf2/static/light/3.0"
+      },
+      "format": ["static"],
+      "scale": ["1.0", "2.0", "3.0"],
+      "theme_mode": ["light", "dark"]
+    },
+    {
       "id": "emotesv2_d93dd4f2388640c4a5f83d2bfd685fca",
       "name": "JonesyW",
       "images": {
