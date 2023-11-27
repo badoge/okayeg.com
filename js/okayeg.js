@@ -362,7 +362,7 @@ async function getLeaderboard() {
 async function loadLBPFPs() {
   let ids = document.querySelectorAll(".lb-pfp");
   ids = [...ids].map((e) => e.dataset.userid);
-  let response = await fetch(`https://helper.pepega.workers.dev/twitch/users?id=${ids.join(",")}`, requestOptions);
+  let response = await fetch(`https://helper.donk.workers.dev/twitch/users?id=${ids.join(",")}`, requestOptions);
   let users = await response.json();
   for (let index = 1; index <= 10; index++) {
     let pfp = users.data.find((x) => x.id === document.getElementById(`user${index}PFP`).dataset.userid)?.profile_image_url || "/pics/okayeg.png";
@@ -2011,7 +2011,7 @@ async function createPoll() {
         multianswer: multianswer,
       }),
     };
-    let response = await fetch(`https://polls.pepega.workers.dev/createpoll`, requestOptions);
+    let response = await fetch(`https://polls.donk.workers.dev/createpoll`, requestOptions);
     //let response = await fetch(`http://127.0.0.1:8787/createpoll`, requestOptions);
 
     let result = await response.json();
@@ -2150,7 +2150,7 @@ async function loadUserInfo() {
     document.getElementById("info").style.display = "";
 
     try {
-      let response = await fetch(`https://helper.pepega.workers.dev/twitch/users?login=${username}`, requestOptions);
+      let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`, requestOptions);
       let result = await response.json();
       if (result?.data[0]?.id) {
         document.getElementById("output").innerHTML = "";
@@ -2184,7 +2184,7 @@ async function loadUserInfo() {
           document.getElementById("offlineimage").innerHTML = `<span class="text-body-secondary">No offline image found</span>`;
         }
 
-        let response2 = await fetch(`https://helper.pepega.workers.dev/twitch/streams?user_id=${result.data[0].id}`, requestOptions);
+        let response2 = await fetch(`https://helper.donk.workers.dev/twitch/streams?user_id=${result.data[0].id}`, requestOptions);
         let result2 = await response2.json();
         if (result2?.data[0]) {
           //channel is live
@@ -2212,7 +2212,7 @@ async function loadUserInfo() {
           }
         } else {
           //channel is offline
-          let response3 = await fetch(`https://helper.pepega.workers.dev/twitch/channels?broadcaster_id=${result.data[0].id}`, requestOptions);
+          let response3 = await fetch(`https://helper.donk.workers.dev/twitch/channels?broadcaster_id=${result.data[0].id}`, requestOptions);
           let result3 = await response3.json();
           if (result3?.data[0]) {
             document.getElementById("channelstatus").innerHTML = `Offline`;
@@ -2234,7 +2234,7 @@ async function loadUserInfo() {
           }
         }
 
-        let response4 = await fetch(`https://helper.pepega.workers.dev/twitch/schedule?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response4 = await fetch(`https://helper.donk.workers.dev/twitch/schedule?broadcaster_id=${result.data[0].id}`, requestOptions);
         let result4 = await response4.json();
         if (result4?.data?.segments) {
           document.getElementById("upcomingstream").innerHTML = `${relativeTime(
@@ -2245,7 +2245,7 @@ async function loadUserInfo() {
           document.getElementById("upcomingstream").innerHTML = `<span class="text-body-secondary">Could not load schedule</span>`;
         }
 
-        let response5 = await fetch(`https://helper.pepega.workers.dev/twitch/users/extensions?user_id=${result.data[0].id}`, requestOptions);
+        let response5 = await fetch(`https://helper.donk.workers.dev/twitch/users/extensions?user_id=${result.data[0].id}`, requestOptions);
         let result5 = await response5.json();
         if (result5?.data?.component[1]?.active || result5?.data?.component[2]?.active) {
           document.getElementById("componentextensions").innerHTML = "<br>";
@@ -2284,7 +2284,7 @@ async function loadUserInfo() {
           document.getElementById("panelextensions").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response6 = await fetch(`https://helper.pepega.workers.dev/twitch/teams/channel?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response6 = await fetch(`https://helper.donk.workers.dev/twitch/teams/channel?broadcaster_id=${result.data[0].id}`, requestOptions);
         let result6 = await response6.json();
         if (result6?.data) {
           document.getElementById("teams").innerHTML = ``;
@@ -2298,7 +2298,7 @@ async function loadUserInfo() {
           document.getElementById("teams").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response7 = await fetch(`https://helper.pepega.workers.dev/twitch/chat/settings?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response7 = await fetch(`https://helper.donk.workers.dev/twitch/chat/settings?broadcaster_id=${result.data[0].id}`, requestOptions);
         let result7 = await response7.json();
         if (result7?.data[0]?.emote_mode || result7?.data[0]?.follower_mode || result7?.data[0]?.slow_mode || result7?.data[0]?.subscriber_mode || result7?.data[0]?.unique_chat_mode) {
           document.getElementById("chatsettings").innerHTML = "<br>";
@@ -2312,7 +2312,7 @@ async function loadUserInfo() {
           document.getElementById("chatsettings").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response8 = await fetch(`https://helper.pepega.workers.dev/twitch/chat/color?user_id=${result.data[0].id}`, requestOptions);
+        let response8 = await fetch(`https://helper.donk.workers.dev/twitch/chat/color?user_id=${result.data[0].id}`, requestOptions);
         let result8 = await response8.json();
         if (result8?.data) {
           document.getElementById("linkText").style.color = result8.data[0].color;
@@ -2360,14 +2360,14 @@ async function findTimestamp() {
   }
   let target = new Date(input).getTime();
   try {
-    let response = await fetch(`https://helper.pepega.workers.dev/twitch/users?login=${channel}`, requestOptions);
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`, requestOptions);
     let result = await response.json();
     if (!result?.data[0]?.id) {
       document.getElementById("output").innerHTML = "Channel not found";
       return;
     }
 
-    let response2 = await fetch(`https://helper.pepega.workers.dev/twitch/videos?user_id=${result.data[0].id}&first=100`, requestOptions);
+    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result.data[0].id}&first=100`, requestOptions);
     let result2 = await response2.json();
     if (!result2?.data[0]) {
       document.getElementById("output").innerHTML = "Could not find any VODs for the given channel";
@@ -2425,14 +2425,14 @@ async function findClipTimestamp() {
       return;
     }
 
-    let response1 = await fetch(`https://helper.pepega.workers.dev/twitch/users?login=${channel}`, requestOptions);
+    let response1 = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`, requestOptions);
     let result1 = await response1.json();
     if (!result1?.data[0]?.id) {
       document.getElementById("output").innerHTML = "Channel not found";
       return;
     }
 
-    let response = await fetch(`https://helper.pepega.workers.dev/twitch/clips?id=${clipID[1]}`, requestOptions);
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/clips?id=${clipID[1]}`, requestOptions);
     let result = await response.json();
     if (!result?.data[0]?.broadcaster_id) {
       document.getElementById("output").innerHTML = "Could not find clip info";
@@ -2446,14 +2446,14 @@ async function findClipTimestamp() {
 
     let target;
     if (result?.data[0]?.video_id && result?.data[0]?.vod_offset) {
-      let response3 = await fetch(`https://helper.pepega.workers.dev/twitch/videos?id=${result.data[0].video_id}`, requestOptions);
+      let response3 = await fetch(`https://helper.donk.workers.dev/twitch/videos?id=${result.data[0].video_id}`, requestOptions);
       let result3 = await response3.json();
       target = new Date(result3.data[0].created_at).getTime() + result.data[0].vod_offset * 1000;
     } else {
       target = new Date(result.data[0].created_at).getTime();
     }
 
-    let response2 = await fetch(`https://helper.pepega.workers.dev/twitch/videos?user_id=${result1.data[0].id}&first=100`, requestOptions);
+    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result1.data[0].id}&first=100`, requestOptions);
     let result2 = await response2.json();
     if (!result2?.data[0]) {
       document.getElementById("output").innerHTML = "Could not find any VODs that were live at the time the clip was created";
