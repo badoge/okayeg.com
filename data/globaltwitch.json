@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": "emotesv2_c1f4899e65cf4f53b2fd98e15733973a",
+      "name": "GoldPLZ",
+      "images": {
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_c1f4899e65cf4f53b2fd98e15733973a/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_c1f4899e65cf4f53b2fd98e15733973a/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_c1f4899e65cf4f53b2fd98e15733973a/static/light/3.0"
+      },
+      "format": ["static", "animated"],
+      "scale": ["1.0", "2.0", "3.0"],
+      "theme_mode": ["light", "dark"]
+    },
+    {
       "id": "emotesv2_db3385fb0ea54913bf58fa5554edfdf2",
       "name": "ForSigmar",
       "images": {
