@@ -2593,3 +2593,5 @@ async function loadSubPrices(type, currency) {
     },
   });
 } //loadSubPrices
+
+function loadRecap(global = false) {} //loadRecap
