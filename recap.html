@@ -102,34 +102,60 @@
     </nav>
 
     <div class="container-fluid">
+      <div class="row mb-3" style="height: 70vh">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6 border rounded">
+          <div class="card" id="global">
+            <div class="card-body">
+              <h4>work in progress/not ready yet :) - Global stats</h4>
+              total users: 9,435<br />
+              total egs earned: 6,900,276<br />
+              =eg commaned used 321,582 times - <small>225,426 positive egs - 64,191 zero egs - 31,965 negative egs</small><br />
+              15,032 egs eaten<br />
+              total commands used: 835,795<br />
+              135,437 coinflips - only 67,837 were won<br />
+              56,502 lottery tickets bought<br />
+              11,571,259/18,208,427 egs sent/received <br />
+              stocks: 6,858 shungite - 7,091 chicken - 13,563 bajcoin - 9,209 copium<br />
+              31,433 trivia questions answered<br />
+              2,720 duels fought<br />
+              roulette wheel spun 14,900 times but players won 4,921 times only<br />
+              only 145 users didn't miss a single season the past year<br />
+            </div>
+          </div>
+
+          <div class="card" id="user" style="display: none">
+            <div class="card-body"></div>
+          </div>
+        </div>
+        <div class="col-xl-3"></div>
+      </div>
       <div class="row">
         <div class="col-xl-4"></div>
         <div class="col-xl-4">
           <div class="card" style="margin-top: 10px">
             <div class="card-body">
-              <h3>View a user's recap</h3>
+              <h3>work in progress/not ready yet :) - View a user's recap</h3>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="desc" />
                 <label for="username">Username</label>
                 <div id="desc" class="form-text">View any user's OkayegBOT recap for the past year.</div>
               </div>
-              <button type="button" class="btn btn-primary float-start" onclick="loadRecap(true)"><i class="material-icons notranslate">public</i>Global recap</button>
+              <button type="button" class="btn btn-primary float-start" onclick="loadGlobalRecap()"><i class="material-icons notranslate">public</i>Global recap</button>
               <button type="button" class="btn btn-success float-end" onclick="loadRecap()"><i class="material-icons notranslate">search</i>Lookup</button>
             </div>
           </div>
         </div>
         <div class="col-xl-4"></div>
       </div>
-      <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-10">asd</div>
-        <div class="col-xl-1"></div>
-      </div>
     </div>
 
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/okayeg.min.js"></script>
+    <script src="/js/okayeg.js"></script>
     <script>
+      window.onload = function () {
+        loadRecap();
+      };
       document.getElementById("username").onkeydown = function (event) {
         if (event.key === "Enter") {
           loadRecap();

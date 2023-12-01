@@ -133,6 +133,7 @@ let global = {
   egseaten: 0,
   uses: 0,
   coinflips: 0,
+  coinflipwins: 0,
   plus: 0,
   zero: 0,
   negative: 0,
@@ -146,6 +147,7 @@ let global = {
   trivia: 0,
   duels: 0,
   roulettes: 0,
+  rouletteswon: 0,
   allSeasons: 0,
 
   egsArray: [],
@@ -173,6 +175,7 @@ for (let index = 0; index < users.length; index++) {
   global.egseaten += users[index].egseaten;
   global.uses += users[index].uses;
   global.coinflips += users[index].coinflips;
+  global.coinflipwins += users[index].coinflipwins;
   global.plus += users[index].plus;
   global.zero += users[index].zero;
   global.negative += users[index].negative;
@@ -186,6 +189,7 @@ for (let index = 0; index < users.length; index++) {
   global.trivia += users[index].trivia;
   global.duels += users[index].duels;
   global.roulettes += users[index].roulettes;
+  global.rouletteswon += users[index].rouletteswon;
 
   global.egsArray.push(users[index].egs);
   global.egusesArray.push(users[index].eguses);
