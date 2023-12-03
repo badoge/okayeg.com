@@ -2597,6 +2597,11 @@ async function loadSubPrices(type, currency) {
 async function loadRecap() {
   let input = location.hash;
   let username = input.replace("#", "").toLowerCase().replace(/\s/g, "");
+
+  if (!username && !document.getElementById("username").value) {
+    return;
+  }
+
   if (document.getElementById("username").value) {
     username = document.getElementById("username").value.toLowerCase().replace(/\s/g, "");
   } else {
