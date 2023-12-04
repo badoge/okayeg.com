@@ -126,6 +126,18 @@ for (let i = 0; i < seasons.length; i++) {
   }
 }
 
+for (let index = 0; index < users.length; index++) {
+  if (users[index].coinflips > 10) {
+    users[index].coinflipwinrate = roundToTwo((users[index].coinflipwins / users[index].coinflips) * 100);
+  }
+  if (users[index].duels > 10) {
+    users[index].duelwinrate = roundToTwo((users[index].duelswon / users[index].duels) * 100);
+  }
+  if (users[index].roulettes > 10) {
+    users[index].roulettewinrate = roundToTwo((users[index].rouletteswon / users[index].roulettes) * 100);
+  }
+}
+
 let global = {
   users: 0,
   egs: 0,
@@ -166,6 +178,10 @@ let global = {
   biggestduelwinArray: [],
   biggestduellossArray: [],
   rouletteswonArray: [],
+  coinflipwinrateArray: [],
+  duelwinrateArray: [],
+  roulettewinrateArray: [],
+  unluckylotteryArray: [],
 };
 
 for (let index = 0; index < users.length; index++) {
@@ -208,6 +224,20 @@ for (let index = 0; index < users.length; index++) {
   global.biggestduellossArray.push(users[index].biggestduelloss);
   global.rouletteswonArray.push(users[index].rouletteswon);
 
+  if (users[index]?.coinflipwinrate) {
+    global.coinflipwinrateArray.push(users[index].coinflipwinrate);
+  }
+  if (users[index]?.duelwinrate) {
+    global.duelwinrateArray.push(users[index].duelwinrate);
+  }
+  if (users[index]?.roulettewinrate) {
+    global.roulettewinrateArray.push(users[index].roulettewinrate);
+  }
+
+  if (users[index].lotteryjoins > 10 && users[index].lotterywins == 0) {
+    global.unluckylotteryArray.push(users[index].lotteryjoins);
+  }
+
   sortAndClean(global.egsArray);
   sortAndClean(global.egusesArray);
   sortAndClean(global.egseatenArray);
@@ -224,6 +254,10 @@ for (let index = 0; index < users.length; index++) {
   sortAndClean(global.biggestduelwinArray);
   sortAndClean(global.biggestduellossArray);
   sortAndClean(global.rouletteswonArray);
+  sortAndClean(global.coinflipwinrateArray);
+  sortAndClean(global.duelwinrateArray);
+  sortAndClean(global.roulettewinrateArray);
+  sortAndClean(global.unluckylotteryArray);
 
   if (users[index].seasons.length == 12) {
     global.allSeasons++;
@@ -244,3 +278,7 @@ function sortAndClean(array) {
     return b - a;
   });
 } //sortAndClean
+
+function roundToTwo(num) {
+  return +(Math.round(num + "e+2") + "e-2");
+} //roundToTwo

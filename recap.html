@@ -201,6 +201,11 @@
                         The luckiest player was <a href="https://twitch.tv/biankaorban" target="_blank">biankaorban</a>, They bought a total of 865 tickets throughout the year and won the
                         lottery 14 times!
                       </small>
+                      <br />
+                      <small class="text-body-secondary">
+                        The unluckiest player was <a href="https://twitch.tv/4kjone" target="_blank">4Kjone</a>, They bought a total of 2,506 tickets throughout the year but didn't win a
+                        single time
+                      </small>
                     </p>
                   </div>
                 </div>
@@ -260,8 +265,137 @@
             </div>
           </div>
 
-          <div class="card" id="user" style="display: none">
-            <div class="card-body"></div>
+          <div id="user" style="display: none">
+            <h6 class="text-info">A global recap can be viewed using button at the bottom</h6>
+            <br />
+            <h1 class="display-4" id="recapusername">username's recap</h1>
+
+            <p class="lead" id="seasons">?</p>
+
+            <div class="card mb-3" id="egs" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">egs</h5>
+                    <p class="card-text">Total egs earned: <span id="egscount">?</span></p>
+                    <p class="card-text">
+                      <small class="text-body-secondary" id="egseaten">?</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="commands" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Command stats</h5>
+                    <p class="card-text">The <kbd>=eg</kbd> commaned was used <span id="egcmd">?</span></p>
+                    <p class="card-text">
+                      <small class="text-body-secondary" id="egcmdstats">?</small>
+                    </p>
+                    <p class="card-text">All other commands were used <span id="cmd">?</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="stocks" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Stocks</h5>
+                    <p class="card-text" id="stockcount">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="coinflips" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Coinflips</h5>
+                    <p class="card-text" id="coinflipstats">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="lottery" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Lottery</h5>
+                    <p class="card-text" id="lotterystats">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="trading" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Trading</h5>
+                    <p class="card-text" id="tradingstats"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="trivia" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Trivia</h5>
+                    <p class="card-text" id="triviastats">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="duels" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Duels</h5>
+                    <p class="card-text" id="duelstats">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3" id="roulette" style="display: none">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/pics/okayeg.png" class="img-fluid rounded-start" alt="okayeg" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Roulette</h5>
+                    <p class="card-text" id="roulettestats">?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-xl-3"></div>

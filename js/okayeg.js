@@ -2624,61 +2624,112 @@ async function loadRecap() {
     return;
   }
   if (!user) {
-    document.getElementById("user").innerHTML = "User not found";
+    document.getElementById("recapusername").innerHTML = "User not found :(";
+    document.getElementById("seasons").innerHTML = ``;
+    document.getElementById("egs").style.display = "none";
+    document.getElementById("commands").style.display = "none";
+    document.getElementById("stocks").style.display = "none";
+    document.getElementById("coinflips").style.display = "none";
+    document.getElementById("lottery").style.display = "none";
+    document.getElementById("trading").style.display = "none";
+    document.getElementById("trivia").style.display = "none";
+    document.getElementById("duels").style.display = "none";
+    document.getElementById("roulette").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
 
   console.log(user);
 
-  document.getElementById("user").innerHTML = `
-work in progress/not ready yet :) -  ${username}'s recap:<br />
-total egs earned: ${user.egs.toLocaleString()}<br />
-=eg commaned used ${user.eguses.toLocaleString()} times - ${user.plus.toLocaleString()} positive egs - ${user.zero.toLocaleString()} zero egs - ${user.negative.toLocaleString()} negative egs<br />
-${user.egseaten.toLocaleString()} egs eaten<br />
-total commands used: ${user.uses.toLocaleString()}<br />
-${user.coinflips.toLocaleString()} coinflips - only ${user.coinflipwins.toLocaleString()} were won - biggest win: ${user.biggestcoinflipwin.toLocaleString()} - biggest loss: ${user.biggestcoinfliploss.toLocaleString()} <br />
-${user.lotteryjoins.toLocaleString()} lottery tickets bought - won ${user.lotterywins} ${user.lotterywins == 1 ? "time" : "times"}<br />
-${user.egsgiven.toLocaleString()}/${user.egsreceived.toLocaleString()} egs sent/received <br />
-stocks: ${user.shungite.toLocaleString()} shungite - ${user.chicken.toLocaleString()} chicken - ${user.bajcoin.toLocaleString()} bajcoin - ${user.copium.toLocaleString()} copium<br />
-${user.trivia.toLocaleString()} trivia questions answered<br />
-${user.duels.toLocaleString()} duels fought - won ${user.duelswon.toLocaleString()} duels - biggest victory: ${user.biggestduelwin.toLocaleString()}  - biggest defeat: ${user.biggestduelloss.toLocaleString()} <br />
-roulette wheel spun ${user.roulettes.toLocaleString()} times but won ${user.rouletteswon.toLocaleString()} times only - biggest win: ${user.biggestroulettewin.toLocaleString()} - biggest loss: ${user.biggestrouletteloss.toLocaleString()} <br />
-Played in ${user.seasons.length}/12 seasons<br />`;
+  document.getElementById("recapusername").innerHTML = `${user.username}'s recap`;
+
+  document.getElementById("seasons").innerHTML = `Played in ${user.seasons.length}/12 seasons ${user.seasons.length == 12 ? "(1 of 145 players only!)" : ""}`;
+
+  if (user.egs) {
+    document.getElementById("egscount").innerHTML = user.egs.toLocaleString();
+    if (user.egseaten) {
+      document.getElementById("egseaten").innerHTML = `${user.egseaten.toLocaleString()} egs were eaten using the <kbd>=eat</kbd> command`;
+    }
+    document.getElementById("egs").style.display = "";
+  } else {
+    document.getElementById("egs").style.display = "none";
+  }
+
+  if (user.uses || user.eguses) {
+    document.getElementById("egcmd").innerHTML = `${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"}`;
+    document.getElementById("egcmdstats").innerHTML = `The command gave out positive egs ${user.plus.toLocaleString()} ${
+      user.plus == 1 ? "time" : "times"
+    } - zero egs ${user.zero.toLocaleString()} ${user.zero == 1 ? "time" : "times"} - negative egs ${user.negative.toLocaleString()} ${user.negative == 1 ? "time" : "times"}`;
+    document.getElementById("cmd").innerHTML = `${user.uses.toLocaleString()} ${user.uses == 1 ? "time" : "times"}`;
+
+    document.getElementById("commands").style.display = "";
+  } else {
+    document.getElementById("commands").style.display = "none";
+  }
+
+  if (user.shungite || user.chicken || user.bajcoin || user.copium) {
+    document.getElementById(
+      "stockcount",
+    ).innerHTML = `${user.shungite.toLocaleString()} shungite - ${user.chicken.toLocaleString()} chicken - ${user.bajcoin.toLocaleString()} bajcoin - ${user.copium.toLocaleString()} copium`;
+    document.getElementById("stocks").style.display = "";
+  } else {
+    document.getElementById("stocks").style.display = "none";
+  }
+
+  if (user.coinflips) {
+    document.getElementById(
+      "coinflipstats",
+    ).innerHTML = `${user.coinflips.toLocaleString()} coinflips - only ${user.coinflipwins.toLocaleString()} were won - biggest win: ${user.biggestcoinflipwin.toLocaleString()} - biggest loss: ${user.biggestcoinfliploss.toLocaleString()}`;
+    document.getElementById("coinflips").style.display = "";
+  } else {
+    document.getElementById("coinflips").style.display = "none";
+  }
+
+  if (user.lotteryjoins) {
+    document.getElementById("lotterystats").innerHTML = `${user.lotteryjoins.toLocaleString()} lottery tickets bought - won ${user.lotterywins} ${user.lotterywins == 1 ? "time" : "times"}`;
+    document.getElementById("lottery").style.display = "";
+  } else {
+    document.getElementById("lottery").style.display = "none";
+  }
+
+  if (user.egsgiven || user.egsreceived) {
+    document.getElementById("tradingstats").innerHTML = `${user.egsgiven.toLocaleString()} egs sent to other players -  ${user.egsreceived.toLocaleString()} egs received from other players`;
+    document.getElementById("trading").style.display = "";
+  } else {
+    document.getElementById("trading").style.display = "none";
+  }
+
+  if (user.trivia) {
+    document.getElementById("triviastats").innerHTML = `${user.trivia.toLocaleString()} trivia questions answered`;
+    document.getElementById("trivia").style.display = "";
+  } else {
+    document.getElementById("trivia").style.display = "none";
+  }
+
+  if (user.duels) {
+    document.getElementById("duelstats").innerHTML = `${user.duels.toLocaleString()} duels fought - won ${user.duelswon.toLocaleString()} ${
+      user.duelswon == 1 ? "duel" : "duels"
+    } - biggest victory: ${user.biggestduelwin.toLocaleString()}  - biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
+    document.getElementById("duels").style.display = "";
+  } else {
+    document.getElementById("duels").style.display = "none";
+  }
+
+  if (user.roulettes) {
+    document.getElementById("roulettestats").innerHTML = `roulette wheel spun ${user.roulettes.toLocaleString()} times but won ${user.rouletteswon.toLocaleString()} ${
+      user.rouletteswon == 1 ? "time" : "times"
+    } only - biggest win: ${user.biggestroulettewin.toLocaleString()} - biggest loss: ${user.biggestrouletteloss.toLocaleString()}`;
+    document.getElementById("roulette").style.display = "";
+  } else {
+    document.getElementById("roulette").style.display = "none";
+  }
 
   history.replaceState(undefined, undefined, `#${username}`);
-
-  // "egs": 0,
-  // "eguses": 0,
-  // "egseaten": 0,
-  // "uses": 0,
-  // "coinflips": 0,
-  // "coinflipwins": 0,
-  // "biggestcoinflipwin": 0,
-  // "biggestcoinfliploss": 0,
-  // "plus": 0,
-  // "zero": 0,
-  // "negative": 0,
-  // "lotteryjoins": 0,
-  // "lotterywins": 0,
-  // "egsgiven": 0,
-  // "egsreceived": 0,
-  // "shungite": 0,
-  // "chicken": 0,
-  // "bajcoin": 0,
-  // "copium": 0,
-  // "trivia": 0,
-  // "duels": 0,
-  // "duelswon": 0,
-  // "biggestduelwin": 0,
-  // "biggestduelloss": 0,
-  // "roulettes": 0,
-  // "rouletteswon": 0,
-  // "biggestroulettewin": 0,
-  // "biggestrouletteloss": 0,
-  // "seasons": []
+  window.scrollTo({ top: 0, behavior: "smooth" });
 } //loadRecap
 
 function loadGlobalRecap() {
   document.getElementById("global").style.display = "";
   document.getElementById("user").style.display = "none";
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
