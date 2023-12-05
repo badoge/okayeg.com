@@ -155,7 +155,7 @@
                     <h5 class="card-title">Command stats</h5>
                     <p class="card-text">The <kbd>=eg</kbd> commaned was used 321,582 times</p>
                     <p class="card-text"><small class="text-body-secondary">The command gave out positive egs 225,426 times - zero egs 64,191 times - negative egs 31,965 times</small></p>
-                    <p class="card-text">All other commands were used 835,795 times</p>
+                    <p class="card-text">All other commands were used 514,213 times</p>
                   </div>
                 </div>
               </div>
@@ -270,7 +270,7 @@
             <br />
             <h1 class="display-4" id="recapusername">username's recap</h1>
 
-            <p class="lead" id="seasons">?</p>
+            <p class="lead" id="seasons"></p>
 
             <div class="card mb-3" id="egs" style="display: none">
               <div class="row g-0">
@@ -280,10 +280,11 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">egs</h5>
-                    <p class="card-text">Total egs earned: <span id="egscount">?</span></p>
+                    <p class="card-text" id="egscount"></p>
                     <p class="card-text">
-                      <small class="text-body-secondary" id="egseaten">?</small>
+                      <small class="text-body-secondary" id="egseaten"></small>
                     </p>
+                    <p class="card-text" id="egrank"></p>
                   </div>
                 </div>
               </div>
@@ -296,11 +297,11 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Command stats</h5>
-                    <p class="card-text">The <kbd>=eg</kbd> commaned was used <span id="egcmd">?</span></p>
+                    <p class="card-text" id="egcmd"></p>
                     <p class="card-text">
-                      <small class="text-body-secondary" id="egcmdstats">?</small>
+                      <small class="text-body-secondary" id="egcmdstats"></small>
                     </p>
-                    <p class="card-text">All other commands were used <span id="cmd">?</span></p>
+                    <p class="card-text" id="cmd"></p>
                   </div>
                 </div>
               </div>
@@ -313,7 +314,10 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Stocks</h5>
-                    <p class="card-text" id="stockcount">?</p>
+                    <p class="card-text" id="stockcount"></p>
+                    <p class="card-text">
+                      <small class="text-body-secondary">(Shares that you held till the end of a season)</small>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -326,7 +330,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Coinflips</h5>
-                    <p class="card-text" id="coinflipstats">?</p>
+                    <p class="card-text" id="coinflipstats"></p>
                   </div>
                 </div>
               </div>
@@ -339,7 +343,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Lottery</h5>
-                    <p class="card-text" id="lotterystats">?</p>
+                    <p class="card-text" id="lotterystats"></p>
                   </div>
                 </div>
               </div>
@@ -365,7 +369,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Trivia</h5>
-                    <p class="card-text" id="triviastats">?</p>
+                    <p class="card-text" id="triviastats"></p>
                   </div>
                 </div>
               </div>
@@ -378,7 +382,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Duels</h5>
-                    <p class="card-text" id="duelstats">?</p>
+                    <p class="card-text" id="duelstats"></p>
                   </div>
                 </div>
               </div>
@@ -391,7 +395,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Roulette</h5>
-                    <p class="card-text" id="roulettestats">?</p>
+                    <p class="card-text" id="roulettestats"></p>
                   </div>
                 </div>
               </div>

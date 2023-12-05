@@ -2639,28 +2639,71 @@ async function loadRecap() {
     return;
   }
 
+  document.getElementById("egscount").innerHTML = "";
+  document.getElementById("egseaten").innerHTML = "";
+  document.getElementById("egrank").innerHTML = "";
+  document.getElementById("egcmd").innerHTML = "";
+  document.getElementById("egcmdstats").innerHTML = "";
+  document.getElementById("cmd").innerHTML = "";
+  document.getElementById("stockcount").innerHTML = "";
+  document.getElementById("coinflipstats").innerHTML = "";
+  document.getElementById("lotterystats").innerHTML = "";
+  document.getElementById("tradingstats").innerHTML = "";
+  document.getElementById("triviastats").innerHTML = "";
+  document.getElementById("duelstats").innerHTML = "";
+  document.getElementById("roulettestats").innerHTML = "";
+
+  let medals = { 0: "🥇", 1: "🥈", 2: "🥉" };
   console.log(user);
 
   document.getElementById("recapusername").innerHTML = `${user.username}'s recap`;
 
-  document.getElementById("seasons").innerHTML = `Played in ${user.seasons.length}/12 seasons ${user.seasons.length == 12 ? "(1 of 145 players only!)" : ""}`;
+  if (user.seasons.length == 12) {
+    document.getElementById("seasons").innerHTML = "Played in all 12 seasons! (1 of 145 players only)";
+  } else {
+    document.getElementById("seasons").innerHTML = `Played in ${user.seasons.length == 1 ? "only" : ""} ${user.seasons.length} of the 12 seasons`;
+  }
 
-  if (user.egs) {
-    document.getElementById("egscount").innerHTML = user.egs.toLocaleString();
+  if (user.eguses) {
+    document.getElementById("egscount").innerHTML = `Total egs earned: ${user.egs.toLocaleString()}`;
     if (user.egseaten) {
-      document.getElementById("egseaten").innerHTML = `${user.egseaten.toLocaleString()} egs were eaten using the <kbd>=eat</kbd> command`;
+      let eatrank = globalRecap.egseatenArray.indexOf(user.egseaten);
+
+      document.getElementById("egseaten").innerHTML = `
+      ${user.egseaten.toLocaleString()} egs were eaten using the <kbd>=eat</kbd> command - 
+      Rank #${(eatrank + 1).toLocaleString()} ${eatrank < 3 ? medals[eatrank] : ""} 
+      ${globalRecap.egseatenArray[eatrank + 1] == globalRecap.egseatenArray[eatrank] ? "(tied)" : ""}`;
     }
+    let rank = globalRecap.egsArray.indexOf(user.egs);
+    if (rank > -1) {
+      document.getElementById("egrank").innerHTML = `Your rank is #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""} 
+      ${globalRecap.egsArray[rank + 1] == globalRecap.egsArray[rank] ? "(tied)" : ""}`;
+    }
+
     document.getElementById("egs").style.display = "";
   } else {
     document.getElementById("egs").style.display = "none";
   }
 
   if (user.uses || user.eguses) {
-    document.getElementById("egcmd").innerHTML = `${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"}`;
-    document.getElementById("egcmdstats").innerHTML = `The command gave out positive egs ${user.plus.toLocaleString()} ${
-      user.plus == 1 ? "time" : "times"
-    } - zero egs ${user.zero.toLocaleString()} ${user.zero == 1 ? "time" : "times"} - negative egs ${user.negative.toLocaleString()} ${user.negative == 1 ? "time" : "times"}`;
-    document.getElementById("cmd").innerHTML = `${user.uses.toLocaleString()} ${user.uses == 1 ? "time" : "times"}`;
+    if (user.eguses) {
+      let rank = globalRecap.egusesArray.indexOf(user.eguses);
+
+      document.getElementById("egcmd").innerHTML = `
+      You used the <kbd>=eg</kbd> command ${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"} - 
+      Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.egusesArray[rank + 1] == globalRecap.egusesArray[rank] ? "(tied)" : ""}`;
+
+      document.getElementById("egcmdstats").innerHTML = `
+      The command gave you positive egs ${user.plus.toLocaleString()} ${user.plus == 1 ? "time" : "times"} - 
+      zero egs ${user.zero.toLocaleString()} ${user.zero == 1 ? "time" : "times"} - 
+      negative egs ${user.negative.toLocaleString()} ${user.negative == 1 ? "time" : "times"}`;
+    }
+
+    let rank = globalRecap.usesArray.indexOf(user.uses);
+
+    document.getElementById("cmd").innerHTML = `
+    All other commands were used ${(user.uses - user.eguses).toLocaleString()} ${user.uses - user.eguses == 1 ? "time" : "times"} - 
+    Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.usesArray[rank + 1] == globalRecap.usesArray[rank] ? "(tied)" : ""}`;
 
     document.getElementById("commands").style.display = "";
   } else {
@@ -2668,9 +2711,41 @@ async function loadRecap() {
   }
 
   if (user.shungite || user.chicken || user.bajcoin || user.copium) {
-    document.getElementById(
-      "stockcount",
-    ).innerHTML = `${user.shungite.toLocaleString()} shungite - ${user.chicken.toLocaleString()} chicken - ${user.bajcoin.toLocaleString()} bajcoin - ${user.copium.toLocaleString()} copium`;
+    let shungiterank = globalRecap.shungiteArray.indexOf(user.shungite);
+    let chickenrank = globalRecap.chickenArray.indexOf(user.chicken);
+    let bajcoinrank = globalRecap.bajcoinArray.indexOf(user.bajcoin);
+    let copiumrank = globalRecap.copiumArray.indexOf(user.copium);
+
+    if (shungiterank != -1) {
+      document.getElementById("stockcount").innerHTML += `
+      ${user.shungite.toLocaleString()} shungite - 
+      Rank #${(shungiterank + 1).toLocaleString()} ${shungiterank < 3 ? medals[shungiterank] : ""}  ${
+        globalRecap.shungiteArray[shungiterank + 1] == globalRecap.shungiteArray[shungiterank] ? "(tied)" : ""
+      }<br>`;
+    }
+
+    if (chickenrank != -1) {
+      document.getElementById("stockcount").innerHTML += `
+      ${user.chicken.toLocaleString()} chicken - 
+      Rank #${(chickenrank + 1).toLocaleString()} ${chickenrank < 3 ? medals[chickenrank] : ""}  ${
+        globalRecap.chickenArray[chickenrank + 1] == globalRecap.chickenArray[chickenrank] ? "(tied)" : ""
+      }<br>`;
+    }
+    if (bajcoinrank != -1) {
+      document.getElementById("stockcount").innerHTML += `
+      ${user.bajcoin.toLocaleString()} bajcoin - 
+      Rank #${(bajcoinrank + 1).toLocaleString()} ${bajcoinrank < 3 ? medals[bajcoinrank] : ""}  ${
+        globalRecap.bajcoinArray[bajcoinrank + 1] == globalRecap.bajcoinArray[bajcoinrank] ? "(tied)" : ""
+      }<br>`;
+    }
+    if (copiumrank != -1) {
+      document.getElementById("stockcount").innerHTML += `
+      ${user.copium.toLocaleString()} copium - 
+      Rank #${(copiumrank + 1).toLocaleString()} ${copiumrank < 3 ? medals[copiumrank] : ""}  ${
+        globalRecap.copiumArray[copiumrank + 1] == globalRecap.copiumArray[copiumrank] ? "(tied)" : ""
+      }`;
+    }
+
     document.getElementById("stocks").style.display = "";
   } else {
     document.getElementById("stocks").style.display = "none";
@@ -2700,7 +2775,11 @@ async function loadRecap() {
   }
 
   if (user.trivia) {
-    document.getElementById("triviastats").innerHTML = `${user.trivia.toLocaleString()} trivia questions answered`;
+    let rank = globalRecap.triviaArray.indexOf(user.trivia);
+
+    document.getElementById("triviastats").innerHTML = `
+    ${user.trivia.toLocaleString()} trivia questions answered - 
+    Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.triviaArray[rank + 1] == globalRecap.triviaArray[rank] ? "(tied)" : ""}`;
     document.getElementById("trivia").style.display = "";
   } else {
     document.getElementById("trivia").style.display = "none";
@@ -2732,4 +2811,6 @@ function loadGlobalRecap() {
   document.getElementById("global").style.display = "";
   document.getElementById("user").style.display = "none";
   window.scrollTo({ top: 0, behavior: "smooth" });
+  history.replaceState(undefined, undefined, "#");
+  document.getElementById("username").value = "";
 }
