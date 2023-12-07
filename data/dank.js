@@ -62,7 +62,7 @@ for (let i = 0; i < seasons.length; i++) {
       users[k].egs += user.egs;
       users[k].eguses += user.eguses;
       users[k].egseaten += user.egseaten;
-      users[k].uses += user.uses;
+      users[k].uses += user.uses - user.eguses;
       users[k].coinflips += user.coinflips;
       users[k].coinflipwins += user.coinflipwins;
       users[k].biggestcoinflipwin = user.biggestcoinflipwin > users[k].biggestcoinflipwin ? user.biggestcoinflipwin : users[k].biggestcoinflipwin;
@@ -95,7 +95,7 @@ for (let i = 0; i < seasons.length; i++) {
         egs: user.egs,
         eguses: user.eguses,
         egseaten: user.egseaten,
-        uses: user.uses,
+        uses: user.uses - user.eguses,
         coinflips: user.coinflips,
         coinflipwins: user.coinflipwins,
         biggestcoinflipwin: user.biggestcoinflipwin,

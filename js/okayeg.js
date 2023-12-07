@@ -2786,18 +2786,64 @@ async function loadRecap() {
   }
 
   if (user.duels) {
-    document.getElementById("duelstats").innerHTML = `${user.duels.toLocaleString()} duels fought - won ${user.duelswon.toLocaleString()} ${
-      user.duelswon == 1 ? "duel" : "duels"
-    } - biggest victory: ${user.biggestduelwin.toLocaleString()}  - biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
+    let rank = globalRecap.duelswonArray.indexOf(user.duelswon);
+    let winrate = roundToTwo((user.duelswon / user.duels) * 100);
+    let winraterank = globalRecap.duelwinrateArray.indexOf(winrate);
+    let winratestring = "";
+    let duelswonstring = "";
+    if (user.duels > 10) {
+      winratestring = `
+      Winrate: ${winrate}% - 
+      Rank #${(winraterank + 1).toLocaleString()} ${winraterank < 3 ? medals[winraterank] : ""}  ${
+        globalRecap.duelwinrateArray[winraterank + 1] == globalRecap.duelwinrateArray[winraterank] ? "(tied)" : ""
+      }<br>`;
+    }
+
+    if (user.duelswon) {
+      duelswonstring = `
+      Won ${user.duelswon.toLocaleString()} ${user.duelswon == 1 ? "duel" : "duels"} - 
+      Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.duelswonArray[rank + 1] == globalRecap.duelswonArray[rank] ? "(tied)" : ""}<br>
+      Biggest victory: ${user.biggestduelwin.toLocaleString()}  - Biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
+    } else {
+      duelswonstring = `Lost all duels :(<br>Biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
+    }
+
+    document.getElementById("duelstats").innerHTML = `
+    ${user.duels.toLocaleString()} duels fought<br>
+    ${duelswonstring}
+    ${winratestring}`;
     document.getElementById("duels").style.display = "";
   } else {
     document.getElementById("duels").style.display = "none";
   }
 
   if (user.roulettes) {
-    document.getElementById("roulettestats").innerHTML = `roulette wheel spun ${user.roulettes.toLocaleString()} times but won ${user.rouletteswon.toLocaleString()} ${
-      user.rouletteswon == 1 ? "time" : "times"
-    } only - biggest win: ${user.biggestroulettewin.toLocaleString()} - biggest loss: ${user.biggestrouletteloss.toLocaleString()}`;
+    let rank = globalRecap.rouletteswonArray.indexOf(user.rouletteswon);
+    let winrate = roundToTwo((user.rouletteswon / user.roulettes) * 100);
+    let winraterank = globalRecap.roulettewinrateArray.indexOf(winrate);
+    let winratestring = "";
+    let rouletteswonstring = "";
+    if (user.roulettes > 10) {
+      winratestring = `
+      Winrate: ${winrate}% - 
+      Rank #${(winraterank + 1).toLocaleString()} ${winraterank < 3 ? medals[winraterank] : ""}  ${
+        globalRecap.roulettewinrateArray[winraterank + 1] == globalRecap.roulettewinrateArray[winraterank] ? "(tied)" : ""
+      }<br>`;
+    }
+
+    if (user.rouletteswon) {
+      rouletteswonstring = `
+      Won ${user.rouletteswon.toLocaleString()} ${user.rouletteswon == 1 ? "time" : "times"} - 
+      Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.rouletteswonArray[rank + 1] == globalRecap.rouletteswonArray[rank] ? "(tied)" : ""}<br>
+      Biggest win: ${user.biggestduelwin.toLocaleString()}  - Biggest loss: ${user.biggestrouletteloss.toLocaleString()}<br>`;
+    } else {
+      rouletteswonstring = `Lost all spins :(<br>Biggest loss: ${user.biggestrouletteloss.toLocaleString()}`;
+    }
+
+    document.getElementById("roulettestats").innerHTML = `
+    Roulette wheel spun ${user.roulettes.toLocaleString()} ${user.roulettes == 1 ? "time" : "times"}<br>
+    ${rouletteswonstring}
+    ${winratestring}`;
     document.getElementById("roulette").style.display = "";
   } else {
     document.getElementById("roulette").style.display = "none";
