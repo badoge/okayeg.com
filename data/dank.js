@@ -168,20 +168,22 @@ let global = {
   usesArray: [],
   lotteryjoinsArray: [],
   lotterywinsArray: [],
+  unluckylotteryArray: [],
+  coinflipsArray: [],
   coinflipwinsArray: [],
+  coinflipwinrateArray: [],
   shungiteArray: [],
   chickenArray: [],
   bajcoinArray: [],
   copiumArray: [],
   triviaArray: [],
+  duelsArray: [],
   duelswonArray: [],
   biggestduelwinArray: [],
   biggestduellossArray: [],
-  rouletteswonArray: [],
-  coinflipwinrateArray: [],
   duelwinrateArray: [],
+  rouletteswonArray: [],
   roulettewinrateArray: [],
-  unluckylotteryArray: [],
 };
 
 for (let index = 0; index < users.length; index++) {
@@ -213,12 +215,14 @@ for (let index = 0; index < users.length; index++) {
   global.usesArray.push(users[index].uses);
   global.lotteryjoinsArray.push(users[index].lotteryjoins);
   global.lotterywinsArray.push(users[index].lotterywins);
+  global.coinflipsArray.push(users[index].coinflips);
   global.coinflipwinsArray.push(users[index].coinflipwins);
   global.shungiteArray.push(users[index].shungite);
   global.chickenArray.push(users[index].chicken);
   global.bajcoinArray.push(users[index].bajcoin);
   global.copiumArray.push(users[index].copium);
   global.triviaArray.push(users[index].trivia);
+  global.duelsArray.push(users[index].duels);
   global.duelswonArray.push(users[index].duelswon);
   global.biggestduelwinArray.push(users[index].biggestduelwin);
   global.biggestduellossArray.push(users[index].biggestduelloss);
@@ -244,12 +248,14 @@ for (let index = 0; index < users.length; index++) {
   sortAndClean(global.usesArray);
   sortAndClean(global.lotteryjoinsArray);
   sortAndClean(global.lotterywinsArray);
+  sortAndClean(global.coinflipsArray);
   sortAndClean(global.coinflipwinsArray);
   sortAndClean(global.shungiteArray);
   sortAndClean(global.chickenArray);
   sortAndClean(global.bajcoinArray);
   sortAndClean(global.copiumArray);
   sortAndClean(global.triviaArray);
+  sortAndClean(global.duelsArray);
   sortAndClean(global.duelswonArray);
   sortAndClean(global.biggestduelwinArray);
   sortAndClean(global.biggestduellossArray);

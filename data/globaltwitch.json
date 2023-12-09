@@ -1,12 +1,12 @@
 {
   "data": [
     {
-      "id": "emotesv2_1e31de3d785545b2b32502e7b7bdbc91",
+      "id": "emotesv2_e41e4d6808224f25ae1fb625aa26de63",
       "name": "GoatEmotey",
       "images": {
-        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1e31de3d785545b2b32502e7b7bdbc91/static/light/1.0",
-        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1e31de3d785545b2b32502e7b7bdbc91/static/light/2.0",
-        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1e31de3d785545b2b32502e7b7bdbc91/static/light/3.0"
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e41e4d6808224f25ae1fb625aa26de63/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e41e4d6808224f25ae1fb625aa26de63/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e41e4d6808224f25ae1fb625aa26de63/static/light/3.0"
       },
       "format": ["static"],
       "scale": ["1.0", "2.0", "3.0"],

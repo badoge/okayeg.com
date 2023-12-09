@@ -2526,7 +2526,7 @@ function convertSecondsToISO8601(seconds) {
     isoString += sec + "s";
   }
   return isoString;
-}
+} //convertSecondsToISO8601
 
 function addOrdinalSuffix(number) {
   if (typeof number !== "number" || isNaN(number)) {
@@ -2536,7 +2536,7 @@ function addOrdinalSuffix(number) {
   const lastTwoDigits = Math.abs(number % 100);
   const suffix = suffixes[(lastTwoDigits - 20) % 10] || suffixes[lastTwoDigits] || suffixes[0];
   return number + suffix;
-}
+} //addOrdinalSuffix
 
 let countries = [];
 async function loadSubPrices(type, currency) {
@@ -2752,16 +2752,59 @@ async function loadRecap() {
   }
 
   if (user.coinflips) {
-    document.getElementById(
-      "coinflipstats",
-    ).innerHTML = `${user.coinflips.toLocaleString()} coinflips - only ${user.coinflipwins.toLocaleString()} were won - biggest win: ${user.biggestcoinflipwin.toLocaleString()} - biggest loss: ${user.biggestcoinfliploss.toLocaleString()}`;
+    let rank = globalRecap.coinflipsArray.indexOf(user.coinflips);
+    let winrank = globalRecap.coinflipwinsArray.indexOf(user.coinflipwins);
+    let winrate = roundToTwo((user.coinflipwins / user.coinflips) * 100);
+    let winraterank = globalRecap.coinflipwinrateArray.indexOf(winrate);
+    let winratestring = "";
+    let winsstring = "";
+    if (user.coinflips > 10) {
+      winratestring = `<br>
+      Winrate: ${winrate}% - 
+      Rank #${(winraterank + 1).toLocaleString()} ${winraterank < 3 ? medals[winraterank] : ""}  ${
+        globalRecap.coinflipwinrateArray[winraterank + 1] == globalRecap.coinflipwinrateArray[winraterank] ? "(tied)" : ""
+      }<br>`;
+    }
+
+    if (user.coinflipwins) {
+      winsstring = `
+      Won ${user.coinflipwins.toLocaleString()} ${user.coinflipwins == 1 ? "coinflip only" : "coinflips"} - 
+      Rank #${(winrank + 1).toLocaleString()} ${winrank < 3 ? medals[winrank] : ""}  ${
+        globalRecap.coinflipwinsArray[winrank + 1] == globalRecap.coinflipwinsArray[winrank] ? "(tied)" : ""
+      }<br>
+      Biggest win: ${user.biggestcoinflipwin.toLocaleString()}  - Biggest loss: ${user.biggestcoinfliploss.toLocaleString()}`;
+    } else {
+      winsstring = `Lost all coinflips :(<br>Biggest loss: ${user.biggestcoinfliploss.toLocaleString()}`;
+    }
+
+    document.getElementById("coinflipstats").innerHTML = `
+    ${user.coinflips.toLocaleString()} coinflips - 
+    Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.coinflipsArray[rank + 1] == globalRecap.coinflipsArray[rank] ? "(tied)" : ""}<br>
+    ${winsstring}
+    ${winratestring}`;
     document.getElementById("coinflips").style.display = "";
   } else {
     document.getElementById("coinflips").style.display = "none";
   }
 
   if (user.lotteryjoins) {
-    document.getElementById("lotterystats").innerHTML = `${user.lotteryjoins.toLocaleString()} lottery tickets bought - won ${user.lotterywins} ${user.lotterywins == 1 ? "time" : "times"}`;
+    let rank = globalRecap.lotteryjoinsArray.indexOf(user.lotteryjoins);
+    let wins = "";
+    if (user.lotterywins == 0) {
+      let rank = globalRecap.unluckylotteryArray.indexOf(user.lotteryjoins);
+      wins = `You did not win a single lottery - You were the ${rank == 0 ? "" : `${addOrdinalSuffix(rank + 1)}`} most unlucky player ${rank < 3 ? medals[rank] : ""} 
+      ${globalRecap.unluckylotteryArray[rank + 1] == globalRecap.unluckylotteryArray[rank] ? "(tied)" : ""}`;
+    } else {
+      let rank = globalRecap.lotterywinsArray.indexOf(user.lotterywins);
+      wins = `
+      Won ${user.lotterywins} ${user.lotterywins == 1 ? "time" : "times"} - 
+      Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.lotterywinsArray[rank + 1] == globalRecap.lotterywinsArray[rank] ? "(tied)" : ""}<br>`;
+    }
+
+    document.getElementById("lotterystats").innerHTML = `
+    ${user.lotteryjoins.toLocaleString()} lottery tickets bought - 
+    Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.lotteryjoinsArray[rank + 1] == globalRecap.lotteryjoinsArray[rank] ? "(tied)" : ""}<br>
+    ${wins}`;
     document.getElementById("lottery").style.display = "";
   } else {
     document.getElementById("lottery").style.display = "none";
@@ -2786,13 +2829,14 @@ async function loadRecap() {
   }
 
   if (user.duels) {
-    let rank = globalRecap.duelswonArray.indexOf(user.duelswon);
+    let rank = globalRecap.duelsArray.indexOf(user.duels);
+    let winrank = globalRecap.duelswonArray.indexOf(user.duelswon);
     let winrate = roundToTwo((user.duelswon / user.duels) * 100);
     let winraterank = globalRecap.duelwinrateArray.indexOf(winrate);
     let winratestring = "";
     let duelswonstring = "";
     if (user.duels > 10) {
-      winratestring = `
+      winratestring = `<br>
       Winrate: ${winrate}% - 
       Rank #${(winraterank + 1).toLocaleString()} ${winraterank < 3 ? medals[winraterank] : ""}  ${
         globalRecap.duelwinrateArray[winraterank + 1] == globalRecap.duelwinrateArray[winraterank] ? "(tied)" : ""
@@ -2802,14 +2846,15 @@ async function loadRecap() {
     if (user.duelswon) {
       duelswonstring = `
       Won ${user.duelswon.toLocaleString()} ${user.duelswon == 1 ? "duel" : "duels"} - 
-      Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.duelswonArray[rank + 1] == globalRecap.duelswonArray[rank] ? "(tied)" : ""}<br>
+      Rank #${(winrank + 1).toLocaleString()} ${winrank < 3 ? medals[winrank] : ""}  ${globalRecap.duelswonArray[winrank + 1] == globalRecap.duelswonArray[winrank] ? "(tied)" : ""}<br>
       Biggest victory: ${user.biggestduelwin.toLocaleString()}  - Biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
     } else {
       duelswonstring = `Lost all duels :(<br>Biggest defeat: ${user.biggestduelloss.toLocaleString()}`;
     }
 
     document.getElementById("duelstats").innerHTML = `
-    ${user.duels.toLocaleString()} duels fought<br>
+    ${user.duels.toLocaleString()} duels fought - 
+    Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.duelsArray[rank + 1] == globalRecap.duelsArray[rank] ? "(tied)" : ""}<br>
     ${duelswonstring}
     ${winratestring}`;
     document.getElementById("duels").style.display = "";
