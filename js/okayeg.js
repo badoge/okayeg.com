@@ -2624,7 +2624,9 @@ async function loadRecap() {
     return;
   }
   if (!user) {
-    document.getElementById("recapusername").innerHTML = "User not found :(";
+    document.getElementById("recapusername").innerHTML = `
+    Player not found <img src="/pics/sadeg.png" alt="sadeg" />
+    <br><small class="text-body-secondary" style="font-size: 0.3em;">If you changed your username recently try searching for your old username</small>`;
     document.getElementById("seasons").innerHTML = ``;
     document.getElementById("egs").style.display = "none";
     document.getElementById("commands").style.display = "none";
