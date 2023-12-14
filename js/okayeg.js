@@ -1544,6 +1544,19 @@ async function loadStats() {
     document.getElementById("drops").innerHTML = `${stats.stats.drops.toLocaleString()} 
     <span class="text-body-secondary">(${roundToTwo((stats.stats.drops / stats.stats.live) * 100)}%)</span>`;
 
+    document.getElementById("ccl_DrugsIntoxication").innerHTML = `${stats.stats.ccls["DrugsIntoxication"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["DrugsIntoxication"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_Gambling").innerHTML = `${stats.stats.ccls["Gambling"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["Gambling"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_MatureGame").innerHTML = `${stats.stats.ccls["MatureGame"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["MatureGame"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_ProfanityVulgarity").innerHTML = `${stats.stats.ccls["ProfanityVulgarity"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ProfanityVulgarity"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_SexualThemes").innerHTML = `${stats.stats.ccls["SexualThemes"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["SexualThemes"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_ViolentGraphic").innerHTML = `${stats.stats.ccls["ViolentGraphic"].toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ViolentGraphic"] / stats.stats.live) * 100)}%)</span>`;
+
     document.getElementById("oldest_user").innerHTML = `
     <div class="container-fluid">
     <div class="row">
