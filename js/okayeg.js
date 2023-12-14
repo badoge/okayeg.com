@@ -1502,8 +1502,9 @@ async function loadStats() {
 
     for (let index = 0; index < 10; index++) {
       document.getElementById(`tag${index}`).innerHTML = stats.stats.top_tags[index].tag;
-      document.getElementById(`tag${index}_channels`).innerHTML = `${stats.stats.top_tags[index].count.toLocaleString()}
-      <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].count / stats.stats.live) * 100)}%)</span>`;
+      document.getElementById(`tag${index}_channels`).innerHTML = `${stats.stats.top_tags[index].channels.toLocaleString()}
+      <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].channels / stats.stats.live) * 100)}%)</span>`;
+      document.getElementById(`tag${index}_avg`).innerHTML = roundToTwo(stats.stats.top_tags[index].viewers / stats.stats.top_tags[index].channels).toLocaleString();
     }
 
     function load100Tags() {
@@ -1515,9 +1516,12 @@ async function loadStats() {
             ${stats.stats.top_tags[index].tag}
              </div>
             <div class="col align-self-start">
-            ${stats.stats.top_tags[index].count.toLocaleString()}
-            <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].count / stats.stats.live) * 100)}%)</span>
+            ${stats.stats.top_tags[index].channels.toLocaleString()}
+            <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].channels / stats.stats.live) * 100)}%)</span>
             </div>
+            <div class="col align-self-start">
+            <span class="placeholder-wave">${roundToTwo(stats.stats.top_tags[index].viewers / stats.stats.top_tags[index].channels).toLocaleString()}</span>
+          </div>
           </div>`;
       }
       document.getElementById("tagsDiv").innerHTML += list;
@@ -1544,18 +1548,30 @@ async function loadStats() {
     document.getElementById("drops").innerHTML = `${stats.stats.drops.toLocaleString()} 
     <span class="text-body-secondary">(${roundToTwo((stats.stats.drops / stats.stats.live) * 100)}%)</span>`;
 
-    document.getElementById("ccl_DrugsIntoxication").innerHTML = `${stats.stats.ccls["DrugsIntoxication"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["DrugsIntoxication"] / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ccl_Gambling").innerHTML = `${stats.stats.ccls["Gambling"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["Gambling"] / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ccl_MatureGame").innerHTML = `${stats.stats.ccls["MatureGame"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["MatureGame"] / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ccl_ProfanityVulgarity").innerHTML = `${stats.stats.ccls["ProfanityVulgarity"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ProfanityVulgarity"] / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ccl_SexualThemes").innerHTML = `${stats.stats.ccls["SexualThemes"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["SexualThemes"] / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ccl_ViolentGraphic").innerHTML = `${stats.stats.ccls["ViolentGraphic"].toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ViolentGraphic"] / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("ccl_DrugsIntoxication").innerHTML = `
+    ${stats.stats.ccls["DrugsIntoxication"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["DrugsIntoxication"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["DrugsIntoxication"].viewers / stats.stats.ccls["DrugsIntoxication"].channels).toLocaleString()}`;
+    document.getElementById("ccl_Gambling").innerHTML = `
+    ${stats.stats.ccls["Gambling"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["Gambling"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["Gambling"].viewers / stats.stats.ccls["Gambling"].channels).toLocaleString()}`;
+    document.getElementById("ccl_MatureGame").innerHTML = `
+    ${stats.stats.ccls["MatureGame"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["MatureGame"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["MatureGame"].viewers / stats.stats.ccls["MatureGame"].channels).toLocaleString()}`;
+    document.getElementById("ccl_ProfanityVulgarity").innerHTML = `
+    ${stats.stats.ccls["ProfanityVulgarity"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ProfanityVulgarity"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["ProfanityVulgarity"].viewers / stats.stats.ccls["ProfanityVulgarity"].channels).toLocaleString()}`;
+    document.getElementById("ccl_SexualThemes").innerHTML = `
+    ${stats.stats.ccls["SexualThemes"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["SexualThemes"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["SexualThemes"].viewers / stats.stats.ccls["SexualThemes"].channels).toLocaleString()}`;
+    document.getElementById("ccl_ViolentGraphic").innerHTML = `
+    ${stats.stats.ccls["ViolentGraphic"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ViolentGraphic"].channels / stats.stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.stats.ccls["ViolentGraphic"].viewers / stats.stats.ccls["ViolentGraphic"].channels).toLocaleString()}`;
 
     document.getElementById("oldest_user").innerHTML = `
     <div class="container-fluid">
@@ -1687,7 +1703,9 @@ async function loadStats() {
   } catch (error) {
     console.log(error);
   }
-}
+
+  enableTooltips();
+} //loadStats
 
 function roundToTwo(num) {
   return +(Math.round(num + "e+2") + "e-2");

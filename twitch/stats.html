@@ -235,12 +235,12 @@
                 </div>
               </div>
             </div>
-            Average viewcount:
+            Average view count:
             <span id="avg_viewcount">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            Median viewcount:
+            Median view count:
             <span id="median_viewcount">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
@@ -426,7 +426,7 @@
           </div>
         </div>
 
-        <div class="card m-2 p-0" style="width: 40rem">
+        <div class="card m-2 p-0" style="width: 28rem">
           <div class="card-header">General stats</div>
           <div class="card-body">
             <i class="material-icons notranslate">account_circle</i> Channels using default profile picture:
@@ -434,58 +434,116 @@
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">subtitles_off</i> Channels with no description:
+            <i class="material-icons notranslate mt-2">subtitles_off</i> Channels with no description:
             <span id="nodesc">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">subtitles_off</i> Streams with no title:
+            <i class="material-icons notranslate mt-2">subtitles_off</i> Streams with no title:
             <span id="notitle">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">subtitles_off</i> Streams with no category:
+            <i class="material-icons notranslate mt-2">subtitles_off</i> Streams with no category:
             <span id="nogame">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">redeem</i> Channels with drops enabled:
+            <i class="material-icons notranslate mt-2">redeem</i> Channels with drops enabled:
             <span id="drops">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">sports_esports</i> Total unique categories:
+            <i class="material-icons notranslate mt-2">sports_esports</i> Total unique categories:
             <span id="totalGames">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
-            <hr />
-            <h4>Content Classification Labels</h4>
-            <i class="material-icons notranslate">smoking_rooms</i> Drugs, Intoxication, or Excessive Tobacco Use:
+          </div>
+        </div>
+
+        <div class="card m-2 p-0" style="width: 32rem">
+          <div class="card-header">Content Classification Labels</div>
+          <div class="card-body">
+            <i class="material-icons notranslate">smoking_rooms</i> <strong>Drugs, Intoxication, or Excessive Tobacco Use</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs."
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_DrugsIntoxication">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">casino</i> Gambling:
+            <i class="material-icons notranslate mt-2">casino</i> <strong>Gambling</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Participating in online or in-person gambling, poker or fantasy sports, that involve the exchange of real money."
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_Gambling">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">videogame_asset</i> Mature-rated game:
+            <i class="material-icons notranslate mt-2">videogame_asset</i> <strong>Mature-rated game</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Games that are rated Mature or less suitable for a younger audience. (automatically applied based on current game)"
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_MatureGame">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">mood_bad</i> Significant Profanity or Vulgarity:
+            <i class="material-icons notranslate mt-2">mood_bad</i> <strong>Significant Profanity or Vulgarity</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Prolonged, and repeated use of obscenities, profanities, and vulgarities, especially as a regular part of speech."
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_ProfanityVulgarity">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">18_up_rating</i> Sexual Themes:
+            <i class="material-icons notranslate mt-2">18_up_rating</i> <strong>Sexual Themes</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Content that focuses on sexualized physical attributes and activities, sexual topics, or experiences."
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_SexualThemes">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
             <br />
-            <i class="material-icons notranslate">sports_kabaddi</i> Violent and Graphic Depictions:
+            <i class="material-icons notranslate mt-2">sports_kabaddi</i> <strong>Violent and Graphic Depictions</strong>
+            <i
+              class="material-icons notranslate cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-title="Simulations and/or depictions of realistic violence, gore, extreme injury, or death."
+            >
+              help_outline
+            </i>
+            <br />
             <span id="ccl_ViolentGraphic">
               <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
             </span>
@@ -493,7 +551,7 @@
           </div>
         </div>
 
-        <div class="card m-2 p-0" style="width: 25rem; max-height: 29rem; overflow: auto">
+        <div class="card m-2 p-0" style="width: 35rem; max-height: 29rem; overflow: auto">
           <div class="card-header">
             <i class="material-icons notranslate">sell</i>Top <span id="tagCount">10</span> tags <small class="text-body-secondary">Excluding language tags</small>
           </div>
@@ -502,6 +560,7 @@
               <div class="row">
                 <div class="col align-self-center">Tag</div>
                 <div class="col align-self-start">Number of channels</div>
+                <div class="col align-self-start">Average view count</div>
               </div>
               <hr />
               <div class="row">
@@ -509,6 +568,9 @@
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
                 <div class="col align-self-start" id="tag0_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag0_avg">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
               </div>
@@ -520,6 +582,9 @@
                 <div class="col align-self-start" id="tag1_channels">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
+                <div class="col align-self-start" id="tag1_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
               </div>
 
               <div class="row">
@@ -527,6 +592,9 @@
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
                 <div class="col align-self-start" id="tag2_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag2_avg">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
               </div>
@@ -538,6 +606,9 @@
                 <div class="col align-self-start" id="tag3_channels">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
+                <div class="col align-self-start" id="tag3_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
               </div>
 
               <div class="row">
@@ -545,6 +616,9 @@
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
                 <div class="col align-self-start" id="tag4_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag4_avg">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
               </div>
@@ -556,6 +630,9 @@
                 <div class="col align-self-start" id="tag5_channels">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
+                <div class="col align-self-start" id="tag5_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
               </div>
 
               <div class="row">
@@ -563,6 +640,9 @@
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
                 <div class="col align-self-start" id="tag6_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag6_avg">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
               </div>
@@ -574,6 +654,9 @@
                 <div class="col align-self-start" id="tag7_channels">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
+                <div class="col align-self-start" id="tag7_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
               </div>
 
               <div class="row">
@@ -583,6 +666,9 @@
                 <div class="col align-self-start" id="tag8_channels">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
+                <div class="col align-self-start" id="tag8_avg">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
               </div>
 
               <div class="row">
@@ -590,6 +676,9 @@
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
                 <div class="col align-self-start" id="tag9_channels">
+                  <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
+                </div>
+                <div class="col align-self-start" id="tag9_avg">
                   <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>
                 </div>
               </div>

@@ -156,6 +156,10 @@ body {
   margin-bottom: 5px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 #toastContainer {
   position: fixed;
   bottom: 10px;
