@@ -1670,54 +1670,6 @@ async function loadStats() {
     }
     loadStats.load_least_popular = load_least_popular;
 
-    load_small_channels();
-    async function load_small_channels(direction = "random") {
-      let channelIndex;
-      switch (direction) {
-        case "next":
-          channelIndex = parseInt(document.getElementById("small_channels").dataset.index, 10);
-          channelIndex++;
-          break;
-        case "back":
-          channelIndex = parseInt(document.getElementById("small_channels").dataset.index, 10);
-          channelIndex--;
-          break;
-        default:
-          channelIndex = Math.floor(Math.random() * stats.stats.small_channels.length);
-      }
-      document.getElementById("small_channels").dataset.index = channelIndex;
-      let random = stats.stats.small_channels[channelIndex % stats.stats.small_channels.length];
-      let tags = "";
-      for (let index = 0; index < random.current_tags.length; index++) {
-        tags += `<span class="badge rounded-pill text-bg-secondary">${random.current_tags[index]}</span>`;
-      }
-      document.getElementById("small_channels_img").src = random.thumbnail_url.replace("{width}x{height}", "440x248");
-      document.getElementById("small_channels_img").title = random.display_name;
-      document.getElementById("small_channels_img").alt = random.display_name;
-      document.getElementById("small_channels").innerHTML = `
-      <h4 class="card-title">
-      <img src="${random.profile_image_url}" class="img-fluid donkstats-pfp-small" title="${random.description}" alt="${random.display_name}">
-      <a href="https://twitch.tv/${random.username}" target="_blank" rel="noopener noreferrer">${
-        random.username == random.display_name.toLowerCase() ? ` ${random.display_name}` : ` ${random.display_name} (${random.username})`
-      }${random.broadcaster_type == "partner" ? svg : ""}${random.type == "staff" ? staffpic : ""}
-      </a>
-      </h4>
-      <p class="card-text">
-      <h5>${random.title ? random.title : "<span class='text-body-secondary'>No title</span>"}</h5>
-      <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(random.game_name)}" target="_blank" rel="noopener noreferrer">${
-        random.game_name || "<span class='text-body-secondary'>No category</span>"
-      }
-      </a>
-       • ${convertTime2(random.started_at_timestamp)}<br>
-       ${tags}
-       </p>
-       <div class="btn-group float-end" role="group" aria-label="small channels browser">
-          <button type="button" onclick="loadStats.load_small_channels('back')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_back</i></button>
-          <button type="button" onclick="loadStats.load_small_channels('next')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_forward</i></button>
-      </div>`;
-    }
-    loadStats.load_small_channels = load_small_channels;
-
     document.getElementById("info").innerHTML = `Stats updated on ${new Date(stats.stats.time)}`;
   } catch (error) {
     console.log(error);
