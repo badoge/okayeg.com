@@ -1529,9 +1529,6 @@ async function loadStats() {
     document.getElementById("total_tags").innerHTML = `${stats.stats.total_tags.toLocaleString()}`;
     document.getElementById("sum_tags").innerHTML = roundToTwo(stats.stats.sum_tags / stats.stats.live);
 
-    document.getElementById("mature").innerHTML = `${stats.stats.is_mature.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.is_mature / stats.stats.live) * 100)}%)</span>`;
-
     document.getElementById("defaultpfp").innerHTML = `${stats.stats.defaultpfp.toLocaleString()} 
     <span class="text-body-secondary">(${roundToTwo((stats.stats.defaultpfp / stats.stats.live) * 100)}%)</span>`;
 
@@ -2201,7 +2198,6 @@ async function loadUserInfo() {
           }
           document.getElementById("tags").innerHTML = tags || `<span class="text-body-secondary">None</span>`;
           document.getElementById("language").innerHTML = getLanguage(result2.data[0].language);
-          document.getElementById("matureonly").innerHTML = result2.data[0].is_mature ? "Yes" : "No";
           if (result2.data[0].thumbnail_url) {
             document.getElementById("thumbnail").classList = "text-center ratio ratio-16x9";
             document.getElementById("thumbnail").innerHTML = `<img src="${result2.data[0].thumbnail_url.replace("{width}x{height}", "1280x720")}" class="rounded mx-auto d-block" 
@@ -2228,7 +2224,6 @@ async function loadUserInfo() {
             }
             document.getElementById("tags").innerHTML = tags || `<span class="text-body-secondary">None</span>`;
             document.getElementById("language").innerHTML = getLanguage(result3.data[0].broadcaster_language);
-            document.getElementById("matureonly").innerHTML = `<span class="text-body-secondary">Can't check while channel is offline</span>`;
             document.getElementById("thumbnail").classList = "text-center";
             document.getElementById("thumbnail").innerHTML = `<span class="text-body-secondary">No thumbnail found</span>`;
           }
