@@ -2357,7 +2357,7 @@ async function findTimestamp() {
       let endTime = new Date(startTime + duration).getTime();
       if (target >= startTime && target <= endTime) {
         found = true;
-        let timestamp = convertSecondsToISO8601((target - startTime) / 1000);
+        let timestamp = secondsToTimeString(Math.round((target - startTime) / 1000));
         document.getElementById("output").innerHTML = `VOD link with timestamp: <a href="${result2.data[index].url}?t=${timestamp}" target="_blank" rel="noopener noreferrer">
         ${result2.data[index].url}?t=${timestamp}</a>
         <br><div id="embed" class="ratio ratio-16x9"></div>`;
@@ -2443,7 +2443,7 @@ async function findClipTimestamp() {
       let endTime = new Date(startTime + duration).getTime();
       if (target >= startTime && target <= endTime) {
         found = true;
-        let timestamp = convertSecondsToISO8601((target - startTime) / 1000);
+        let timestamp = secondsToTimeString(Math.round((target - startTime) / 1000));
         document.getElementById("output").innerHTML = `VOD link with timestamp: <a href="${result2.data[index].url}?t=${timestamp}" target="_blank" rel="noopener noreferrer">
         ${result2.data[index].url}?t=${timestamp}</a>
         <br><div id="embed" class="ratio ratio-16x9"></div>`;
@@ -2485,26 +2485,26 @@ function convertDuration(duration) {
   return totalSeconds;
 }
 
-function convertSecondsToISO8601(seconds) {
-  if (typeof seconds !== "number" || seconds < 0) {
-    throw new Error("Invalid seconds value");
-  }
-  let isoString = "";
+function secondsToTimeString(seconds) {
+  let string = "";
   const hours = Math.floor(seconds / 3600);
   seconds %= 3600;
   const minutes = Math.floor(seconds / 60);
   const sec = seconds % 60;
   if (hours) {
-    isoString += hours + "h";
+    string += hours + ":";
   }
   if (minutes) {
-    isoString += minutes + "m";
+    string += minutes + ":";
+  }
+  if (sec && !minutes) {
+    string += "00:";
   }
   if (sec) {
-    isoString += sec + "s";
+    string += sec;
   }
-  return isoString;
-} //convertSecondsToISO8601
+  return string;
+} //secondsToTimeString
 
 function addOrdinalSuffix(number) {
   if (typeof number !== "number" || isNaN(number)) {
