@@ -2,16 +2,16 @@
 <html lang="en" prefix="og: https://ogp.me/ns#" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <title>404 | OkayegBOT</title>
+    <title>Bounty | OkayegBOT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Okayeg twitch chat bot" />
+    <meta name="description" content="Stuff that you can help with to earn egs" />
     <meta name="keywords" content="twitch, chat, bot, okayeg" />
-    <meta property="og:title" content="404 | OkayegBOT" />
+    <meta property="og:title" content="Bounty | OkayegBOT" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://okayeg.com" />
+    <meta property="og:url" content="https://okayeg.com/bounty" />
     <meta property="og:image" content="https://okayeg.com/pics/okayeg.png" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:description" content="Okayeg twitch chat bot" />
+    <meta property="og:description" content="Stuff that you can help with to earn egs" />
 
     <link rel="apple-touch-icon" sizes="76x76" href="/pics/icon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/pics/icon/favicon-32x32.png" />
@@ -100,62 +100,20 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <h1 class="display-1">404</h1>
-      <h1 class="display-1">NOTHING HERE</h1>
-      <img src="/pics/okayeg.png" alt="okayeg" style="width: 220px" />
-      <p id="hint" style="font-size: 2rem; margin-top: 2rem"></p>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+          temp lidl list :) <br />
+          Current bounties:<br />
+          Submit new =eg or =eat lines using =suggest | 100 egs reward for each line that gets added<br />
+          Report mistakes/typos in trivia questions/answers using =suggest | 50 egs reward for each question/answer that gets fixed<br />
+        </div>
+        <div class="col-xl-3"></div>
+      </div>
     </div>
-
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/okayeg.min.js"></script>
-
-    <script>
-      let aliases = {
-        api: ["api"],
-        bounty: ["bounty"],
-        egdle: ["egdle"],
-        clips: ["clips", "clip", "topclips"],
-        commands: ["commands", "command"],
-        leaderboard: ["leaderboard", "lb", "season", "seasons"],
-        profile: ["profile", "settings"],
-        stocks: ["stocks", "stock", "price", "prices"],
-        market: ["market", "nfe", "marketplace", "nfes", "store"],
-        stream: ["stream"],
-        submissions: ["submissions", "submission", "submit", "list"],
-        "twitch/stats": ["stats", "donkstats", "donkstat", "stat", "twitch/stat", "twitch/donkstat", "twitch/donkstats"],
-        "twitch/emotes": ["emotes", "emote", "channelemotes", "channelemote", "twitch/emote", "twitch/channelemotes", "twitch/channelemote"],
-        "twitch/emotes-global": [
-          "emotes-global",
-          "global",
-          "emotes_global",
-          "emotesglobal",
-          "globalemotes",
-          "global-emotes",
-          "global_emotes",
-          "twitch/global",
-          "twitch/emotes_global",
-          "twitch/emotesglobal",
-          "twitch/globalemotes",
-          "twitch/global-emotes",
-          "twitch/global_emotes",
-        ],
-        "twitch/subs": ["subs", "sub", "price", "prices", "localsubs", "localprices", "twitch/sub", "twitch/price", "twitch/prices", "twitch/localsubs"],
-        "twitch/user": ["user", "users", "userinfo", "usersinfo", "twitch/users", "twitch/userinfo", "twitch/usersinfo"],
-        "twitch/time": ["time", "timer", "vod", "vodtime", "vodtimer", "twitch/timer", "twitch/vod", "twitch/vodtime", "twitch/vodtimer"],
-        "twitch/followlist": ["followlist", "followers", "following", "follow", "follows", "twitch/followers", "twitch/following", "twitch/follow", "twitch/follows"],
-      };
-      let folders = ["api", "egdle"];
-      let path = window.location.pathname.replace("/", "").toLowerCase();
-      for (let key in aliases) {
-        if (aliases.hasOwnProperty(key)) {
-          if (aliases[key].indexOf(path) !== -1) {
-            document.getElementById("hint").innerHTML = `Did you mean <a href="https://okayeg.com/${key}${folders.includes(path) ? "/" : ".html"}">okayeg.com/${key}</a>?`;
-          }
-        }
-      }
-    </script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLNTNP8BV4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

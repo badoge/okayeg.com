@@ -167,7 +167,7 @@ async function getProfile() {
         ${user.egseaten.toLocaleString()} ${user.egseaten == 1 ? "eg" : "egs"} eaten`;
 
         document.getElementById("commands").innerHTML = `
-        =eg used ${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"}<br>
+        =eg used ${(user?.eguses || 0).toLocaleString()} ${user?.eguses == 1 ? "time" : "times"}<br>
         Other commands used ${user.uses.toLocaleString()} ${user.uses == 1 ? "time" : "times"}`;
 
         document.getElementById("coinflip").innerHTML = `
@@ -214,7 +214,7 @@ async function getProfile() {
         ${user.egseaten.toLocaleString()} ${user.egseaten == 1 ? "eg" : "egs"} eaten`;
 
         document.getElementById("commandsAllTime").innerHTML = `
-        =eg used ${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"}<br>
+        =eg used ${(user?.eguses || 0).toLocaleString()} ${user?.eguses == 1 ? "time" : "times"}<br>
         Other commands used ${user.uses.toLocaleString()} ${user.uses == 1 ? "time" : "times"}`;
 
         document.getElementById("coinflipAllTime").innerHTML = `
@@ -2644,7 +2644,7 @@ async function loadRecap() {
     document.getElementById("seasons").innerHTML = `Played in ${user.seasons.length == 1 ? "only" : ""} ${user.seasons.length} of the 12 seasons`;
   }
 
-  if (user.eguses) {
+  if (user?.eguses) {
     document.getElementById("egscount").innerHTML = `Total egs earned: ${user.egs.toLocaleString()}`;
     if (user.egseaten) {
       let eatrank = globalRecap.egseatenArray.indexOf(user.egseaten);
@@ -2665,12 +2665,12 @@ async function loadRecap() {
     document.getElementById("egs").style.display = "none";
   }
 
-  if (user.uses || user.eguses) {
-    if (user.eguses) {
-      let rank = globalRecap.egusesArray.indexOf(user.eguses);
+  if (user.uses || user?.eguses) {
+    if (user?.eguses) {
+      let rank = globalRecap.egusesArray.indexOf(user?.eguses);
 
       document.getElementById("egcmd").innerHTML = `
-      You used the <kbd>=eg</kbd> command ${user.eguses.toLocaleString()} ${user.eguses == 1 ? "time" : "times"} - 
+      You used the <kbd>=eg</kbd> command ${(user?.eguses || 0).toLocaleString()} ${user?.eguses == 1 ? "time" : "times"} - 
       Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.egusesArray[rank + 1] == globalRecap.egusesArray[rank] ? "(tied)" : ""}`;
 
       document.getElementById("egcmdstats").innerHTML = `
@@ -2682,7 +2682,7 @@ async function loadRecap() {
     let rank = globalRecap.usesArray.indexOf(user.uses);
 
     document.getElementById("cmd").innerHTML = `
-    All other commands were used ${(user.uses - user.eguses).toLocaleString()} ${user.uses - user.eguses == 1 ? "time" : "times"} - 
+    All other commands were used ${(user.uses - (user?.eguses || 0)).toLocaleString()} ${user.uses - (user?.eguses || 0) == 1 ? "time" : "times"} - 
     Rank #${(rank + 1).toLocaleString()} ${rank < 3 ? medals[rank] : ""}  ${globalRecap.usesArray[rank + 1] == globalRecap.usesArray[rank] ? "(tied)" : ""}`;
 
     document.getElementById("commands").style.display = "";
