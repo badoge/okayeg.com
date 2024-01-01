@@ -483,45 +483,37 @@ async function loadChannelEmotes() {
           bits = "";
         for (let i = 0, j = twitchemotes.length; i < j; i++) {
           if (twitchemotes[i].tier == "1000") {
-            if (twitchemotes[i].id.startsWith("emotesv2")) {
-              t1c++;
-              t1 += `<div class="border border-secondary emote">
+            t1c++;
+            t1 += `<div class="border border-secondary emote">
               <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" loading="lazy" title="${twitchemotes[i].name}" alt="${twitchemotes[i].name}">
               <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
               </div>`;
-            } else {
-              t1c++;
-              t1 += `<div class="border border-secondary emote">
-              <img src="${twitchemotes[i].images.url_4x}" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
-              <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-              </div>`;
-            }
           }
           if (twitchemotes[i].tier == "2000") {
             t2c++;
             t2 += `<div class="border border-secondary emote">
-            <img src="${twitchemotes[i].images.url_4x}" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
             <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
             </div>`;
           }
           if (twitchemotes[i].tier == "3000") {
             t3c++;
             t3 += `<div class="border border-secondary emote">
-            <img src="${twitchemotes[i].images.url_4x}" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
             <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
             </div>`;
           }
           if (twitchemotes[i].emote_type == "follower") {
             followerc++;
             follower += `<div class="border border-secondary emote">
-            <img  src="${twitchemotes[i].images.url_4x}" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
+            <img  src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
             <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
             </div>`;
           }
           if (twitchemotes[i].emote_type == "bitstier") {
             bitsc++;
             bits += `<div class="border border-secondary emote">
-            <img src="${twitchemotes[i].images.url_4x}" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
             <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
             </div>`;
           }
