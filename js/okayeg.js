@@ -734,7 +734,12 @@ async function loadChannelEmotes() {
 
 function enableTooltips() {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-  const tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) =>
+      new bootstrap.Tooltip(tooltipTriggerEl, {
+        trigger: "hover",
+      }),
+  );
 } //enableTooltips
 
 async function loadFollowList() {
@@ -2012,7 +2017,9 @@ async function createPoll() {
         </button>
       </div>
       `;
-    copyTooltip = new bootstrap.Tooltip(document.getElementById("copyLinkButton"));
+    copyTooltip = new bootstrap.Tooltip(document.getElementById("copyLinkButton"), {
+      trigger: "hover",
+    });
 
     //load title
     document.getElementById("pollTitleDiv").innerHTML = `
