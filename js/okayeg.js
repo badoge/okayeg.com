@@ -630,14 +630,14 @@ async function loadChannelEmotes() {
           if (bttvchannelEmotes) {
             bttvchannelEmotes = `<h3>BTTV channel emotes <span class="text-body-secondary">(${bttvData.channelEmotes.length} ${
               bttvData.channelEmotes.length == 1 ? "emote" : "emotes"
-            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-delay="200" data-bs-title="Channel emotes are emotes that were uploaded to BTTV by ${
+            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-title="Channel emotes are emotes that were uploaded to BTTV by ${
               twitchData.data.login
             }.">?</span></h3><div class="emotecontainer">${bttvchannelEmotes}</div>`;
           }
           if (bttvsharedEmotes) {
             bttvsharedEmotes = `<h3>BTTV shared emotes <span class="text-body-secondary">(${bttvData.sharedEmotes.length} ${
               bttvData.channelEmotes.length == 1 ? "emote" : "emotes"
-            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-delay="200" data-bs-title="Shared emotes are emotes that were uploaded to BTTV by other users.">?</span></h3><div class="emotecontainer">${bttvsharedEmotes}</div>`;
+            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-title="Shared emotes are emotes that were uploaded to BTTV by other users.">?</span></h3><div class="emotecontainer">${bttvsharedEmotes}</div>`;
           }
           document.getElementById("bttv").innerHTML += bttvchannelEmotes + bttvsharedEmotes;
           enableTooltips();
@@ -2008,7 +2008,6 @@ async function createPoll() {
           id="copyLinkButton"
           class="btn btn-outline-secondary"
           data-bs-toggle="tooltip"
-          data-bs-delay="200"
           data-bs-trigger="manual"
           data-bs-placement="bottom"
           data-bs-title="Link copied :)"
