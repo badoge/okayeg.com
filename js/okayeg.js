@@ -1697,6 +1697,10 @@ async function loadStats() {
     loadStats.load_least_popular = load_least_popular;
 
     document.getElementById("info").innerHTML = `Stats updated on ${new Date(stats.stats.time)}`;
+    if (Date.now() - stats.stats.time > 7200000) {
+      document.getElementById("outdatedWarningText").innerHTML = `Stats are outdated, last update on ${new Date(stats.stats.time)}. Try refreshing or contacting me :)`;
+      document.getElementById("outdatedWarning").style.display = "";
+    }
   } catch (error) {
     console.log(error);
   }
