@@ -209,7 +209,7 @@ body {
 #currencySelectDiv {
   position: fixed;
   z-index: 100;
-  width: 100px;
+  width: 175px;
   right: 10px;
   top: 60px;
 }
@@ -217,7 +217,7 @@ body {
 #typeSelectDiv {
   position: fixed;
   z-index: 100;
-  width: 100px;
+  width: 175px;
   right: 10px;
   top: 130px;
 }

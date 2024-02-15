@@ -1587,5 +1587,1111 @@
       "currency": "GBP",
       "price": 11.99
     }
+  ],
+  "primepayout": [
+    {
+      "country": "Australia",
+      "code": "AU",
+      "currency": "USD",
+      "price": 2.15
+    },
+    {
+      "country": "Azerbaijan",
+      "code": "AZ",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Bangladesh",
+      "code": "BD",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Bhutan",
+      "code": "BT",
+      "currency": "USD",
+      "price": 0.65
+    },
+    {
+      "country": "Brunei Darussalam",
+      "code": "BN",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Cambodia",
+      "code": "KH",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Fiji",
+      "code": "FJ",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "French Polynesia",
+      "code": "PF",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Guam",
+      "code": "GU",
+      "currency": "USD",
+      "price": 1.65
+    },
+    {
+      "country": "Hong Kong",
+      "code": "HK",
+      "currency": "USD",
+      "price": 1.6
+    },
+    {
+      "country": "Indonesia",
+      "code": "ID",
+      "currency": "USD",
+      "price": 0.75
+    },
+    {
+      "country": "Japan",
+      "code": "JP",
+      "currency": "USD",
+      "price": 1.75
+    },
+    {
+      "country": "Kyrgyzstan",
+      "code": "KG",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Laos",
+      "code": "LA",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Macau",
+      "code": "MO",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Malaysia",
+      "code": "MY",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Maldives",
+      "code": "MV",
+      "currency": "USD",
+      "price": 1.25
+    },
+    {
+      "country": "Mongolia",
+      "code": "MN",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Myanmar",
+      "code": "MM",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Nepal",
+      "code": "NP",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "New Caledonia",
+      "code": "NC",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "New Zealand",
+      "code": "NZ",
+      "currency": "USD",
+      "price": 1.65
+    },
+    {
+      "country": "Pakistan",
+      "code": "PK",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Philippines",
+      "code": "PH",
+      "currency": "USD",
+      "price": 0.75
+    },
+    {
+      "country": "Western Samoa",
+      "code": "WS",
+      "currency": "USD",
+      "price": 1.35
+    },
+    {
+      "country": "Singapore",
+      "code": "SG",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Sri Lanka",
+      "code": "LK",
+      "currency": "USD",
+      "price": 0.65
+    },
+    {
+      "country": "Taiwan",
+      "code": "TW",
+      "currency": "USD",
+      "price": 1
+    },
+    {
+      "country": "Vanuatu",
+      "code": "VU",
+      "currency": "USD",
+      "price": 1.6
+    },
+    {
+      "country": "Tajikistan",
+      "code": "TJ",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Thailand",
+      "code": "TH",
+      "currency": "USD",
+      "price": 0.75
+    },
+    {
+      "country": "Uzbekistan",
+      "code": "UZ",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "Antigua and Barbuda",
+      "code": "AG",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Argentina",
+      "code": "AR",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Aruba",
+      "code": "AW",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Bahamas, The",
+      "code": "BS",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Barbados",
+      "code": "BB",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Belize",
+      "code": "BZ",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Bolivia",
+      "code": "BO",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "Brazil",
+      "code": "BR",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "British Virgin Islands",
+      "code": "VG",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Cayman Islands",
+      "code": "KY",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Chile",
+      "code": "CL",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Colombia",
+      "code": "CO",
+      "currency": "USD",
+      "price": 0.75
+    },
+    {
+      "country": "Costa Rica",
+      "code": "CR",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Curacao",
+      "code": "CW",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Dominica",
+      "code": "DM",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Dominican Republic",
+      "code": "DO",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Ecuador",
+      "code": "EC",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "El Salvador",
+      "code": "SV",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "French Guiana",
+      "code": "GF",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Grenada",
+      "code": "GD",
+      "currency": "USD",
+      "price": 1.2
+    },
+    {
+      "country": "Guadeloupe",
+      "code": "GP",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Guatemala",
+      "code": "GT",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Guyana",
+      "code": "GY",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Haiti",
+      "code": "HT",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Honduras",
+      "code": "HN",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Jamaica",
+      "code": "JM",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Martinique",
+      "code": "MQ",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Mexico",
+      "code": "MX",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Nicaragua",
+      "code": "NI",
+      "currency": "USD",
+      "price": 0.65
+    },
+    {
+      "country": "Panama",
+      "code": "PA",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Paraguay",
+      "code": "PY",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "Peru",
+      "code": "PE",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Saint Barthelemy",
+      "code": "BL",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "St. Kitts and Nevis",
+      "code": "KN",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "St. Lucia",
+      "code": "LC",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Saint Martin",
+      "code": "MF",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Sint Maarten",
+      "code": "SX",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "St. Vincent and the Grenadines",
+      "code": "VC",
+      "currency": "USD",
+      "price": 1.2
+    },
+    {
+      "country": "Suriname",
+      "code": "SR",
+      "currency": "USD",
+      "price": 1.35
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "code": "TT",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Turks and Caicos Islands",
+      "code": "TC",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Uruguay",
+      "code": "UY",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Venezuela",
+      "code": "VE",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Virgin Islands",
+      "code": "VI",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Algeria",
+      "code": "DZ",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Angola",
+      "code": "AO",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Bahrain",
+      "code": "BH",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Botswana",
+      "code": "BW",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Burkina Faso",
+      "code": "BF",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Burundi",
+      "code": "BI",
+      "currency": "USD",
+      "price": 1.49
+    },
+    {
+      "country": "Cape Verde",
+      "code": "CV",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Cameroon",
+      "code": "CM",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Congo, Dem. Rep.",
+      "code": "CD",
+      "currency": "USD",
+      "price": 1.15
+    },
+    {
+      "country": "Congo, Rep.",
+      "code": "CG",
+      "currency": "USD",
+      "price": 1
+    },
+    {
+      "country": "Cote d'Ivoire",
+      "code": "CI",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Egypt",
+      "code": "EG",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Equatorial Guinea",
+      "code": "GQ",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Ethiopia",
+      "code": "ET",
+      "currency": "USD",
+      "price": 1.5
+    },
+    {
+      "country": "Gabon",
+      "code": "GA",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Ghana",
+      "code": "GH",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Guinea",
+      "code": "GN",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Iraq",
+      "code": "IQ",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Israel",
+      "code": "IL",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Jordan",
+      "code": "JO",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Kazakhstan",
+      "code": "KZ",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Kenya",
+      "code": "KE",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Kuwait",
+      "code": "KW",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Lebanon",
+      "code": "LB",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Libya",
+      "code": "LY",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Mayotte",
+      "code": "YT",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Macedonia",
+      "code": "MK",
+      "currency": "USD",
+      "price": 0.55
+    },
+    {
+      "country": "Madagascar",
+      "code": "MG",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "Malawi",
+      "code": "MW",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Mali",
+      "code": "ML",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Mauritius",
+      "code": "MU",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Morocco",
+      "code": "MA",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Mozambique",
+      "code": "MZ",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Namibia",
+      "code": "NA",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Niger",
+      "code": "NE",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Nigeria",
+      "code": "NG",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Oman",
+      "code": "OM",
+      "currency": "USD",
+      "price": 1.05
+    },
+    {
+      "country": "Palestine",
+      "code": "PS",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Qatar",
+      "code": "QA",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Reunion",
+      "code": "RE",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Rwanda",
+      "code": "RW",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Saudi Arabia",
+      "code": "SA",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "Senegal",
+      "code": "SN",
+      "currency": "USD",
+      "price": 0.8
+    },
+    {
+      "country": "Seychelles",
+      "code": "SC",
+      "currency": "USD",
+      "price": 1.21
+    },
+    {
+      "country": "Sierra Leone",
+      "code": "SL",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "South Africa",
+      "code": "ZA",
+      "currency": "USD",
+      "price": 0.65
+    },
+    {
+      "country": "Tanzania",
+      "code": "TZ",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "Togo",
+      "code": "TG",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Tunisia",
+      "code": "TN",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Uganda",
+      "code": "UG",
+      "currency": "USD",
+      "price": 0.9
+    },
+    {
+      "country": "United Arab Emirates",
+      "code": "AE",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Yemen",
+      "code": "YE",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "Zambia",
+      "code": "ZM",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Zimbabwe",
+      "code": "ZW",
+      "currency": "USD",
+      "price": 1.1
+    },
+    {
+      "country": "Aland Islands",
+      "code": "AX",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Albania",
+      "code": "AL",
+      "currency": "USD",
+      "price": 0.95
+    },
+    {
+      "country": "Andorra",
+      "code": "AD",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Armenia",
+      "code": "AM",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "Austria",
+      "code": "AT",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Belgium",
+      "code": "BE",
+      "currency": "USD",
+      "price": 1.5
+    },
+    {
+      "country": "Bosnia and Herzegovina",
+      "code": "BA",
+      "currency": "USD",
+      "price": 0.85
+    },
+    {
+      "country": "Bermuda",
+      "code": "BM",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Bulgaria",
+      "code": "BG",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Croatia",
+      "code": "HR",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Cyprus",
+      "code": "CY",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Czech Republic",
+      "code": "CZ",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Denmark",
+      "code": "DK",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Estonia",
+      "code": "EE",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Faroe Islands",
+      "code": "FO",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Finland",
+      "code": "FI",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "France",
+      "code": "FR",
+      "currency": "USD",
+      "price": 1.55
+    },
+    {
+      "country": "Georgia",
+      "code": "GE",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Germany",
+      "code": "DE",
+      "currency": "USD",
+      "price": 1.55
+    },
+    {
+      "country": "Gibraltar",
+      "code": "GI",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Greece",
+      "code": "GR",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Greenland",
+      "code": "GL",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Hungary",
+      "code": "HU",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Iceland",
+      "code": "IS",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Ireland",
+      "code": "IE",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Isle of Man",
+      "code": "IM",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Italy",
+      "code": "IT",
+      "currency": "USD",
+      "price": 1.55
+    },
+    {
+      "country": "Latvia",
+      "code": "LV",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Liechtenstein",
+      "code": "LI",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Lithuania",
+      "code": "LT",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Luxembourg",
+      "code": "LU",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Malta",
+      "code": "MT",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Moldova",
+      "code": "MD",
+      "currency": "USD",
+      "price": 0.6
+    },
+    {
+      "country": "Monaco",
+      "code": "MC",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Montenegro",
+      "code": "ME",
+      "currency": "USD",
+      "price": 0.7
+    },
+    {
+      "country": "Netherlands",
+      "code": "NL",
+      "currency": "USD",
+      "price": 1.5
+    },
+    {
+      "country": "Norway",
+      "code": "NO",
+      "currency": "USD",
+      "price": 1.3
+    },
+    {
+      "country": "Poland",
+      "code": "PL",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Portugal",
+      "code": "PT",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Romania",
+      "code": "RO",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "San Marino",
+      "code": "SM",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Serbia",
+      "code": "RS",
+      "currency": "USD",
+      "price": 0.65
+    },
+    {
+      "country": "Slovakia",
+      "code": "SK",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Slovenia",
+      "code": "SI",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Spain",
+      "code": "ES",
+      "currency": "USD",
+      "price": 1.55
+    },
+    {
+      "country": "Sweden",
+      "code": "SE",
+      "currency": "USD",
+      "price": 1.4
+    },
+    {
+      "country": "Switzerland",
+      "code": "CH",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "Turkey",
+      "code": "TR",
+      "currency": "USD",
+      "price": 0.09
+    },
+    {
+      "country": "Ukraine",
+      "code": "UA",
+      "currency": "USD",
+      "price": 0.35
+    },
+    {
+      "country": "United Kingdom",
+      "code": "GB",
+      "currency": "USD",
+      "price": 1.8
+    },
+    {
+      "country": "Canada",
+      "code": "CA",
+      "currency": "USD",
+      "price": 2.25
+    },
+    {
+      "country": "Puerto Rico",
+      "code": "PR",
+      "currency": "USD",
+      "price": 2.25
+    },
+    {
+      "country": "Saint Pierre and Miquelon",
+      "code": "PM",
+      "currency": "USD",
+      "price": 1.45
+    },
+    {
+      "country": "United States",
+      "code": "US",
+      "currency": "USD",
+      "price": 2.25
+    }
   ]
 }

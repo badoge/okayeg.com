@@ -2526,6 +2526,9 @@ async function loadSubPrices(type, currency) {
   let data2 = await res2.json();
   let min = 1000000;
   let max = 0;
+  let colorMin = "#27d444";
+  let colorMax = "#e72222";
+  let name = "Local Subscription Price";
   let values = {};
   for (let index = 0; index < data[type].length; index++) {
     let price = data[type][index].price / data2[currency.toLowerCase()][data[type][index].currency.toLowerCase()];
@@ -2543,6 +2546,7 @@ async function loadSubPrices(type, currency) {
     }
   }
   if (type == "turbo") {
+    name = "Turbo Local Pricing";
     for (let index = 0; index < countries.length; index++) {
       if (!(countries[index].code in values)) {
         values[countries[index].code] = {
@@ -2551,18 +2555,25 @@ async function loadSubPrices(type, currency) {
       }
     }
   }
+
+  if (type == "primepayout") {
+    name = "Prime gaming sub payout";
+    colorMin = "#e72222";
+    colorMax = "#27d444";
+  }
+
   document.getElementById("map").innerHTML = "";
   new svgMap({
     targetElementID: "map",
     showZoomReset: true,
     zoomScaleSensitivity: 0.3,
-    colorMin: "#27d444",
-    colorMax: "#e72222",
+    colorMin: colorMin,
+    colorMax: colorMax,
     colorNoData: "#909090",
     data: {
       data: {
         price: {
-          name: type == "subs" ? "Local Subscription Price" : "Turbo Local Pricing",
+          name: name,
           format: `{0} ${currency}`,
           thresholdMax: max,
           thresholdMin: min,
