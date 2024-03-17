@@ -1028,7 +1028,7 @@ async function loadClips() {
                         View count: ${clips[index].view_count.toLocaleString()}<br>
                         Created at: ${new Date(clips[index].created_at).toUTCString()}<br>
                         Clipped by: <a href="https://twitch.tv/${clips[index].creator_name}" target="_blank" rel="noopener noreferrer">${clips[index].creator_name}</a><br>
-                        Language: ${getLanguage(clips[index].language)}<br>
+                        Language: ${getLanguage(clips[index].language || "en")}<br>
                         Duration: ${clips[index].duration}<br>
                         URL: <a href="${clips[index].url}" target="_blank" rel="noopener noreferrer">${clips[index].url}</a><br>
                     </div>
