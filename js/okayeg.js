@@ -1023,7 +1023,7 @@ async function loadClips() {
                     </div>
                     <div class="col-xl-7">
                         Title: ${clips[index].title}<br>
-                        Category: ${games.find((o) => o.id === clips[index].game_id).name}<br>
+                        Category: ${games.find((o) => o.id === clips[index].game_id)?.name || "🤷"}<br>
                         Channel: <a href="https://twitch.tv/${clips[index].broadcaster_name}" target="_blank" rel="noopener noreferrer">${clips[index].broadcaster_name}</a><br>
                         View count: ${clips[index].view_count.toLocaleString()}<br>
                         Created at: ${new Date(clips[index].created_at).toUTCString()}<br>
