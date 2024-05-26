@@ -5,7 +5,7 @@
       "code": "AU",
       "currency": "AUD",
       "old_price": 8.99,
-      "price": 7.99
+      "price": 8.99
     },
     {
       "country": "Azerbaijan",
@@ -1335,7 +1335,7 @@
       "code": "TR",
       "currency": "TRY",
       "old_price": 38.99,
-      "price": 9.9
+      "price": 43.9
     },
     {
       "country": "Ukraine",
@@ -1349,7 +1349,7 @@
       "code": "GB",
       "currency": "GBP",
       "old_price": 4.99,
-      "price": 3.99
+      "price": 4.99
     },
     {
       "country": "United States",
@@ -1363,7 +1363,7 @@
       "code": "CA",
       "currency": "CAD",
       "old_price": 6.99,
-      "price": 6.99
+      "price": 7.99
     },
     {
       "country": "Switzerland",

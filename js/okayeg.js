@@ -2521,7 +2521,7 @@ function addOrdinalSuffix(number) {
 let countries = [];
 async function loadSubPrices(type, currency) {
   let res = await fetch(`/data/subs.json`, requestOptions);
-  let res2 = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency.toLowerCase()}.min.json`, requestOptions);
+  let res2 = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency.toLowerCase()}.min.json`, requestOptions);
   let data = await res.json();
   let data2 = await res2.json();
   let min = 1000000;

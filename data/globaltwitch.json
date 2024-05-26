@@ -1,26 +1,14 @@
 {
   "data": [
     {
-      "id": "emotesv2_a62f8dec04654aa692f3888edc068fc4",
-      "name": "GTACamera",
+      "id": "emotesv2_0e0a3592d8334ef5a1cfcae6f3e76acb",
+      "name": "ChewyYAY",
       "images": {
-        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a62f8dec04654aa692f3888edc068fc4/static/light/1.0",
-        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a62f8dec04654aa692f3888edc068fc4/static/light/2.0",
-        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a62f8dec04654aa692f3888edc068fc4/static/light/3.0"
+        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0e0a3592d8334ef5a1cfcae6f3e76acb/static/light/1.0",
+        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0e0a3592d8334ef5a1cfcae6f3e76acb/static/light/2.0",
+        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0e0a3592d8334ef5a1cfcae6f3e76acb/static/light/3.0"
       },
-      "format": ["static", "animated"],
-      "scale": ["1.0", "2.0", "3.0"],
-      "theme_mode": ["light", "dark"]
-    },
-    {
-      "id": "emotesv2_ce92acf5e7e842c299e385577a37d693",
-      "name": "GTAFist",
-      "images": {
-        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_ce92acf5e7e842c299e385577a37d693/static/light/1.0",
-        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_ce92acf5e7e842c299e385577a37d693/static/light/2.0",
-        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_ce92acf5e7e842c299e385577a37d693/static/light/3.0"
-      },
-      "format": ["static", "animated"],
+      "format": ["static"],
       "scale": ["1.0", "2.0", "3.0"],
       "theme_mode": ["light", "dark"]
     },
@@ -73,18 +61,7 @@
       "scale": ["1.0", "2.0", "3.0"],
       "theme_mode": ["light", "dark"]
     },
-    {
-      "id": "emotesv2_d0d72de2c28840d39a628314f483f521",
-      "name": "BlowTheWhistle",
-      "images": {
-        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/1.0",
-        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/2.0",
-        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d0d72de2c28840d39a628314f483f521/static/light/3.0"
-      },
-      "format": ["static"],
-      "scale": ["1.0", "2.0", "3.0"],
-      "theme_mode": ["light", "dark"]
-    },
+
     {
       "id": "emotesv2_5d523adb8bbb4786821cd7091e47da21",
       "name": "PopNemo",
@@ -164,18 +141,6 @@
         "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_53f6a6af8b0e453d874bbefee49b3e73/static/light/1.0",
         "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_53f6a6af8b0e453d874bbefee49b3e73/static/light/2.0",
         "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_53f6a6af8b0e453d874bbefee49b3e73/static/light/3.0"
-      },
-      "format": ["static"],
-      "scale": ["1.0", "2.0", "3.0"],
-      "theme_mode": ["light", "dark"]
-    },
-    {
-      "id": "emotesv2_d29854e38d054e9894f1ed1fb0a0e608",
-      "name": "Awwdible",
-      "images": {
-        "url_1x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d29854e38d054e9894f1ed1fb0a0e608/static/light/1.0",
-        "url_2x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d29854e38d054e9894f1ed1fb0a0e608/static/light/2.0",
-        "url_4x": "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d29854e38d054e9894f1ed1fb0a0e608/static/light/3.0"
       },
       "format": ["static"],
       "scale": ["1.0", "2.0", "3.0"],
