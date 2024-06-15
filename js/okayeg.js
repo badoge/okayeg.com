@@ -1710,12 +1710,12 @@ async function loadStats() {
 
 function roundToTwo(num) {
   return +(Math.round(num + "e+2") + "e-2");
-}
+} //roundToTwo
 
 function convertTime(time) {
   let diff = (new Date() - time) / 1000;
   return new Date(diff * 1000).toISOString().substr(11, 8);
-}
+} //convertTime
 
 function convertTime2(time) {
   let t = (Date.now() - time) / 1000;
@@ -1735,7 +1735,7 @@ function convertTime2(time) {
     return dDisplay + hDisplay + mDisplay.slice(0, -2);
   }
   return dDisplay + hDisplay + mDisplay + sDisplay;
-}
+} //convertTime2
 
 const getLanguage = (code) => {
   const lang = new Intl.DisplayNames(["en"], { type: "language" });
@@ -2359,7 +2359,7 @@ async function findTimestamp() {
       let endTime = new Date(startTime + duration).getTime();
       if (target >= startTime && target <= endTime) {
         found = true;
-        let timestamp = secondsToTimeString(Math.round((target - startTime) / 1000));
+        let timestamp = secondsToTwitchStupidTime(Math.round((target - startTime) / 1000));
         document.getElementById("output").innerHTML = `VOD link with timestamp: <a href="${result2.data[index].url}?t=${timestamp}" target="_blank" rel="noopener noreferrer">
         ${result2.data[index].url}?t=${timestamp}</a>
         <br><div id="embed" class="ratio ratio-16x9"></div>`;
@@ -2445,7 +2445,7 @@ async function findClipTimestamp() {
       let endTime = new Date(startTime + duration).getTime();
       if (target >= startTime && target <= endTime) {
         found = true;
-        let timestamp = secondsToTimeString(Math.round((target - startTime) / 1000));
+        let timestamp = secondsToTwitchStupidTime(Math.round((target - startTime) / 1000));
         document.getElementById("output").innerHTML = `VOD link with timestamp: <a href="${result2.data[index].url}?t=${timestamp}" target="_blank" rel="noopener noreferrer">
         ${result2.data[index].url}?t=${timestamp}</a>
         <br><div id="embed" class="ratio ratio-16x9"></div>`;
@@ -2485,7 +2485,7 @@ function convertDuration(duration) {
     totalSeconds += parseInt(seconds);
   }
   return totalSeconds;
-}
+} //convertDuration
 
 function secondsToTimeString(seconds) {
   let string = "";
@@ -2507,6 +2507,14 @@ function secondsToTimeString(seconds) {
   }
   return string;
 } //secondsToTimeString
+
+function secondsToTwitchStupidTime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  seconds %= 3600;
+  const minutes = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${hours}h${minutes}m${sec}s`;
+} //secondsToTwitchStupidTime
 
 function addOrdinalSuffix(number) {
   if (typeof number !== "number" || isNaN(number)) {
