@@ -148,48 +148,7 @@ body {
   margin: 10px;
 }
 
-#createpollbtn {
-  text-shadow: -1px 1px 2px #000000;
-  font-weight: bold;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 5px;
-}
-
 .cursor-pointer {
-  cursor: pointer;
-}
-
-#toastContainer {
-  position: fixed;
-  bottom: 10px;
-  z-index: 1056;
-  font-weight: bold;
-  text-shadow: -1px 1px 2px #000000;
-}
-
-#toastContainer > div > div {
-  font-size: 1.5em;
-}
-
-#pollLink > i,
-#copyLinkButton {
-  color: #000000;
-  border-color: #d3c22e;
-  background-color: #ebda44;
-}
-
-#pollLink {
-  border-color: #d3c22e;
-  cursor: pointer;
-}
-
-#copyLinkButton:hover {
-  background-color: #cabb36;
-  border-color: #d3c22e;
-}
-
-#polltitle:hover {
   cursor: pointer;
 }
 

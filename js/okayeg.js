@@ -93,11 +93,6 @@ const staffpic = `<img src="/pics/staff.png" loading="lazy" width="16px" height=
 
 const spinner = `<div style="display: table; margin: 0 auto;" class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`;
 
-let requestOptions = {
-  method: "GET",
-  redirect: "follow",
-};
-
 let copyTooltip;
 let token;
 
@@ -117,7 +112,7 @@ async function getProfile() {
     document.getElementById("title3").innerHTML = `${username}'s NFEs`;
 
     try {
-      let response = await fetch(`https://api.okayeg.com/profile?username=${username}`, requestOptions);
+      let response = await fetch(`https://api.okayeg.com/profile?username=${username}`);
       let profile = await response.json();
 
       if (profile.channelInfo) {
@@ -294,7 +289,7 @@ async function getProfile() {
 
 async function getLeaderboard() {
   try {
-    let response = await fetch(`https://api.okayeg.com/leaderboard`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/leaderboard`);
     let leaderboard = await response.json();
     let seasonSelect = document.getElementById("seasonSelect");
     seasonSelect.remove(0);
@@ -362,7 +357,7 @@ async function getLeaderboard() {
 async function loadLBPFPs() {
   let ids = document.querySelectorAll(".lb-pfp");
   ids = [...ids].map((e) => e.dataset.userid);
-  let response = await fetch(`https://helper.donk.workers.dev/twitch/users?id=${ids.join(",")}`, requestOptions);
+  let response = await fetch(`https://helper.donk.workers.dev/twitch/users?id=${ids.join(",")}`);
   let users = await response.json();
   for (let index = 1; index <= 10; index++) {
     let pfp = users.data.find((x) => x.id === document.getElementById(`user${index}PFP`).dataset.userid)?.profile_image_url || "/pics/okayeg.png";
@@ -373,7 +368,7 @@ async function loadLBPFPs() {
 async function reloadTwitchGlobal() {
   document.getElementById("twitch").innerHTML = spinner;
   try {
-    let response = await fetch(`https://api.okayeg.com/emotes/global`, requestOptions);
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/chat/emotes/global`);
     let emotes = await response.json();
     document.getElementById("twitch").innerHTML = "";
     for (let i = 0, j = emotes.data.length; i < j; i++) {
@@ -391,7 +386,7 @@ async function reloadTwitchGlobal() {
 
 async function loadGlobalEmotes() {
   try {
-    let response1 = await fetch(`/data/globaltwitch.json`, requestOptions);
+    let response1 = await fetch(`/data/globaltwitch.json`);
     let globalTwitch = await response1.json();
     for (let i = 0, j = globalTwitch.data.length; i < j; i++) {
       document.getElementById("twitch").innerHTML += `<div class="border border-secondary emote">
@@ -401,7 +396,7 @@ async function loadGlobalEmotes() {
     } //for globalTwitch
     document.getElementById("twitchCount").innerHTML = ` (${globalTwitch.data.length} emotes)`;
 
-    let response2 = await fetch(`https://api.betterttv.net/3/cached/emotes/global`, requestOptions);
+    let response2 = await fetch(`https://api.betterttv.net/3/cached/emotes/global`);
     let globalBTTV = await response2.json();
     for (let i = 0, j = globalBTTV.length; i < j; i++) {
       document.getElementById("bttv").innerHTML += `<div class="border border-secondary emote">
@@ -411,7 +406,7 @@ async function loadGlobalEmotes() {
     } //for globalBTTV
     document.getElementById("bttvCount").innerHTML = ` (${globalBTTV.length} emotes)`;
 
-    let response3 = await fetch(`https://api.frankerfacez.com/v1/set/global`, requestOptions);
+    let response3 = await fetch(`https://api.frankerfacez.com/v1/set/global`);
     let globalFFZ = await response3.json();
     for (let index = 0; index < globalFFZ.default_sets.length; index++) {
       let set = globalFFZ.default_sets[index];
@@ -429,7 +424,7 @@ async function loadGlobalEmotes() {
     } //for globalFFZ
     document.getElementById("ffzCount").innerHTML = ` (${globalFFZ.sets["3"].emoticons.length} emotes)`;
 
-    let response4 = await fetch(`https://7tv.io/v3/emote-sets/global`, requestOptions);
+    let response4 = await fetch(`https://7tv.io/v3/emote-sets/global`);
     let global7TV = await response4.json();
     for (let i = 0, j = global7TV.emotes.length; i < j; i++) {
       let files = global7TV.emotes[i].data.host.files.filter((e) => e.format == "AVIF");
@@ -445,6 +440,20 @@ async function loadGlobalEmotes() {
   }
 } //loadGlobalEmotes
 
+async function getTwitchUser(username) {
+  try {
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`);
+    let result = await response.json();
+    if (!result?.data || !result?.data[0]?.id) {
+      return null;
+    }
+    return result.data[0];
+  } catch (error) {
+    console.log("getTwitchUser error", error);
+    return null;
+  }
+} //getTwitchUser
+
 async function loadChannelEmotes() {
   let displayName = "";
   let input = location.hash;
@@ -454,282 +463,368 @@ async function loadChannelEmotes() {
   } else {
     document.getElementById("channel").value = channel;
   }
-  if (channel) {
+  if (!channel) {
+    return;
+  }
+
+  let user = await getTwitchUser(channel);
+  if (!user) {
+    document.getElementById("output").style.display = "";
+    document.getElementById("output").innerHTML = `<h1 class="display-1 text-center">Channel not found</h1>`;
     document.getElementById("twitch").innerHTML = "";
     document.getElementById("badges").innerHTML = "";
     document.getElementById("bttv").innerHTML = "";
     document.getElementById("ffz").innerHTML = "";
     document.getElementById("seventv").innerHTML = "";
+    return;
+  } else {
+    document.getElementById("output").style.display = "none";
+    displayName = user.display_name.toLowerCase() == user.login ? user.display_name : `${user.display_name} (${user.login})`;
+  }
 
-    try {
-      let response = await fetch(`https://api.okayeg.com/emotes?channel=${channel}`, requestOptions);
-      let twitchData = await response.json();
-      if (response.status == 200 && twitchData.data.emotes.length > 0) {
-        displayName = twitchData.data.display_name.toLowerCase() == twitchData.data.login ? twitchData.data.display_name : `${twitchData.data.display_name} (${twitchData.data.login})`;
-        let twitchemotes = twitchData.data.emotes;
-        twitchemotes.sort((a, b) => a.name.localeCompare(b.name));
-        document.getElementById("twitch").innerHTML += `<h1 class="display-1"><a href="https://twitch.tv/${twitchData.data.login}" target="_blank" rel="noopener noreferrer">${
-          displayName || channel
-        }</a>'s Subscriber Emotes:</h1>`;
-        let t1c = 0,
-          t2c = 0,
-          t3c = 0,
-          followerc = 0,
-          bitsc = 0;
-        let t1 = "",
-          t2 = "",
-          t3 = "",
-          follower = "",
-          bits = "";
-        for (let i = 0, j = twitchemotes.length; i < j; i++) {
-          if (twitchemotes[i].tier == "1000") {
-            t1c++;
-            t1 += `<div class="border border-secondary emote">
-              <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" loading="lazy" title="${twitchemotes[i].name}" alt="${twitchemotes[i].name}">
-              <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-              </div>`;
-          }
-          if (twitchemotes[i].tier == "2000") {
-            t2c++;
-            t2 += `<div class="border border-secondary emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
-            <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-            </div>`;
-          }
-          if (twitchemotes[i].tier == "3000") {
-            t3c++;
-            t3 += `<div class="border border-secondary emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
-            <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-            </div>`;
-          }
-          if (twitchemotes[i].emote_type == "follower") {
-            followerc++;
-            follower += `<div class="border border-secondary emote">
-            <img  src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
-            <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-            </div>`;
-          }
-          if (twitchemotes[i].emote_type == "bitstier") {
-            bitsc++;
-            bits += `<div class="border border-secondary emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${twitchemotes[i].id}/default/dark/3.0" title="${twitchemotes[i].name}" loading="lazy" alt="${twitchemotes[i].name}">
-            <div class="text-body-secondary emotetext text-center">${twitchemotes[i].name}</div>
-            </div>`;
-          }
-        }
-        if (t1) {
-          t1 = `<h3>Tier 1 Emotes <span class="text-body-secondary">(${t1c} ${t1c == 1 ? "emote" : "emotes"})</span>:</h3><div class="emotecontainer">${t1}</div>`;
-        }
-        if (t2) {
-          t2 = `<h3>Tier 2 Emotes <span class="text-body-secondary">(${t2c} ${t2c == 1 ? "emote" : "emotes"})</span>:</h3><div class="emotecontainer">${t2}</div>`;
-        }
-        if (t3) {
-          t3 = `<h3>Tier 3 Emotes <span class="text-body-secondary">(${t3c} ${t3c == 1 ? "emote" : "emotes"})</span>:</h3><div class="emotecontainer">${t3}</div>`;
-        }
-        if (follower) {
-          follower = `<h3>Follower Emotes <span class="text-body-secondary">(${followerc} ${followerc == 1 ? "emote" : "emotes"})</span>:</h3><div class="emotecontainer">${follower}</div>`;
-        }
-        if (bits) {
-          bits = `<h3>Bits Tier Emotes <span class="text-body-secondary">(${bitsc} ${bitsc == 1 ? "emote" : "emotes"})</span>:</h3><div class="emotecontainer">${bits}</div>`;
-        }
-        document.getElementById("twitch").innerHTML += t1 + t2 + t3 + follower + bits;
-      } //if emotes
+  document.getElementById("twitch").innerHTML = "";
+  document.getElementById("badges").innerHTML = "";
+  document.getElementById("bttv").innerHTML = "";
+  document.getElementById("ffz").innerHTML = "";
+  document.getElementById("seventv").innerHTML = "";
 
-      if (response.status == 200 && twitchData.data.badges.length > 0) {
-        let bitbadges = [];
-        let subbadges = [];
-        let bits = "",
-          subt1 = "",
-          subt2 = "",
-          subt3 = "";
-        if (twitchData.data.badges[0]) {
-          if (twitchData.data.badges[0].set_id == "subscriber") {
-            subbadges = twitchData.data.badges[0].versions;
-          } else if (twitchData.data.badges[0].set_id == "bits") {
-            bitbadges = twitchData.data.badges[0].versions;
-          }
-        }
-        if (twitchData.data.badges[1]) {
-          if (twitchData.data.badges[1].set_id == "subscriber") {
-            subbadges = twitchData.data.badges[1].versions;
-          } else if (twitchData.data.badges[1].set_id == "bits") {
-            bitbadges = twitchData.data.badges[1].versions;
-          }
-        }
-        subbadges.sort(function (a, b) {
-          return parseInt(a.id, 10) - parseInt(b.id, 10);
-        });
-        bitbadges.sort(function (a, b) {
-          return parseInt(a.id, 10) - parseInt(b.id, 10);
-        });
-
-        for (let i = 0, j = subbadges.length; i < j; i++) {
-          if (subbadges[i].id >= 3000) {
-            subt3 += `<div class="border border-secondary emote">
-            <img src="${subbadges[i].image_url_4x}" loading="lazy">
-            <div class="text-body-secondary text-center">${months[subbadges[i].id]}</div>
-            </div>`;
-          } else if (subbadges[i].id >= 2000) {
-            subt2 += `<div class="border border-secondary emote">
-            <img src="${subbadges[i].image_url_4x}" loading="lazy">
-            <div class="text-body-secondary text-center">${months[subbadges[i].id]}</div>
-            </div>`;
-          } else {
-            subt1 += `<div class="border border-secondary emote">
-            <img src="${subbadges[i].image_url_4x}" loading="lazy">
-            <div class="text-body-secondary text-center">${months[subbadges[i].id]}</div>
-            </div>`;
-          }
-        }
-        for (let i = 0, j = bitbadges.length; i < j; i++) {
-          bits += `<div class="border border-secondary emote">
-          <img src="${bitbadges[i].image_url_4x}" loading="lazy">
-          <div class="text-body-secondary text-center">${bitbadges[i].id} ${bitbadges[i].id == 1 ? "Bit" : "Bits"}</div>
+  try {
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/chat/emotes?broadcaster_id=${user.id}`);
+    let result = await response.json();
+    if (result?.data?.length > 0) {
+      result.data.sort((a, b) => a.name.localeCompare(b.name));
+      document.getElementById("twitch").innerHTML = `
+      <h1 class="display-1">
+        <a href="https://twitch.tv/${user.login}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s Subscriber Emotes:
+      </h1>`;
+      let tier1Count = 0;
+      let tier2Count = 0;
+      let tier3Count = 0;
+      let followerCount = 0;
+      let bitsCount = 0;
+      let t1 = "";
+      let t2 = "";
+      let t3 = "";
+      let follower = "";
+      let bits = "";
+      for (let i = 0, j = result.data.length; i < j; i++) {
+        if (result.data[i].tier == "1000") {
+          tier1Count++;
+          t1 += `
+          <div class="border border-secondary emote">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" loading="lazy" title="${result.data[i].name}" alt="${result.data[i].name}">
+            <div class="text-body-secondary emotetext text-center">${escapeString(result.data[i].name)}</div>
           </div>`;
         }
-        if (subt1) {
-          subt1 = `<h3>Tier 1 Sub Badges:</h3><div class="emotecontainer">${subt1}</div>`;
+        if (result.data[i].tier == "2000") {
+          tier2Count++;
+          t2 += `
+          <div class="border border-secondary emote">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
+            <div class="text-body-secondary emotetext text-center">${escapeString(result.data[i].name)}</div>
+          </div>`;
         }
-        if (subt2) {
-          subt2 = `<h3>Tier 2 Sub Badges:</h3><div class="emotecontainer">${subt2}</div>`;
+        if (result.data[i].tier == "3000") {
+          tier3Count++;
+          t3 += `
+          <div class="border border-secondary emote">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
+            <div class="text-body-secondary emotetext text-center">${escapeString(result.data[i].name)}</div>
+          </div>`;
         }
-        if (subt3) {
-          subt3 = `<h3>Tier 3 Sub Badges:</h3><div class="emotecontainer">${subt3}</div>`;
+        if (result.data[i].emote_type == "follower") {
+          followerCount++;
+          follower += `
+          <div class="border border-secondary emote">
+            <img  src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
+            <div class="text-body-secondary emotetext text-center">${escapeString(result.data[i].name)}</div>
+          </div>`;
         }
-        if (bits) {
-          bits = `<h3>Bit badges:</h3><div class="emotecontainer">${bits}</div>`;
+        if (result.data[i].emote_type == "bitstier") {
+          bitsCount++;
+          bits += `
+          <div class="border border-secondary emote">
+            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
+            <div class="text-body-secondary emotetext text-center">${escapeString(result.data[i].name)}</div>
+          </div>`;
         }
-        document.getElementById("badges").innerHTML += subt1 + subt2 + subt3 + bits;
-      } //if badges
-
-      try {
-        let response2 = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${twitchData.data.id}`, requestOptions);
-        let bttvData = await response2.json();
-        if (response2.status == 200 && bttvData.message != "user not found") {
-          let bttvchannelEmotes = "",
-            bttvsharedEmotes = "";
-          bttvData.channelEmotes.sort((a, b) => a.code.localeCompare(b.code));
-          bttvData.sharedEmotes.sort((a, b) => a.code.localeCompare(b.code));
-          document.getElementById("bttv").innerHTML += `<h1 class="display-1"><a href="https://betterttv.com/users/${bttvData.id}" target="_blank" rel="noopener noreferrer">${
-            displayName || channel
-          }</a>'s BTTV Emotes:</h1>`;
-
-          for (let i = 0, j = bttvData.channelEmotes.length; i < j; i++) {
-            bttvchannelEmotes += `<div class="border border-secondary emote">
-            <a href="https://betterttv.com/emotes/${bttvData.channelEmotes[i].id}" target="_blank" rel="noopener noreferrer"><img src="https://cdn.betterttv.net/emote/${bttvData.channelEmotes[i].id}/3x" loading="lazy" alt="${bttvData.channelEmotes[i].code}" title="${bttvData.channelEmotes[i].code}"></a>
-            <div class="text-body-secondary emotetextwide text-center">${bttvData.channelEmotes[i].code}</div>
-            </div>`;
-          }
-          for (let i = 0, j = bttvData.sharedEmotes.length; i < j; i++) {
-            bttvsharedEmotes += `<div class="border border-secondary emote">
-            <a href="https://betterttv.com/emotes/${bttvData.sharedEmotes[i].id}" target="_blank" rel="noopener noreferrer"><img src="https://cdn.betterttv.net/emote/${bttvData.sharedEmotes[i].id}/3x" loading="lazy" alt="${bttvData.sharedEmotes[i].code}" title="${bttvData.sharedEmotes[i].code}"></a>
-            <div class="text-body-secondary emotetextwide text-center">${bttvData.sharedEmotes[i].code}</div>
-            </div>`;
-          }
-          if (bttvchannelEmotes) {
-            bttvchannelEmotes = `<h3>BTTV channel emotes <span class="text-body-secondary">(${bttvData.channelEmotes.length} ${
-              bttvData.channelEmotes.length == 1 ? "emote" : "emotes"
-            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-title="Channel emotes are emotes that were uploaded to BTTV by ${
-              twitchData.data.login
-            }.">?</span></h3><div class="emotecontainer">${bttvchannelEmotes}</div>`;
-          }
-          if (bttvsharedEmotes) {
-            bttvsharedEmotes = `<h3>BTTV shared emotes <span class="text-body-secondary">(${bttvData.sharedEmotes.length} ${
-              bttvData.channelEmotes.length == 1 ? "emote" : "emotes"
-            })</span>:<span style="font-size:0.4em;"class="badge rounded-pill bg-info text-dark" data-bs-toggle="tooltip" data-bs-title="Shared emotes are emotes that were uploaded to BTTV by other users.">?</span></h3><div class="emotecontainer">${bttvsharedEmotes}</div>`;
-          }
-          document.getElementById("bttv").innerHTML += bttvchannelEmotes + bttvsharedEmotes;
-          enableTooltips();
-        } //bttv
-      } catch (error) {
-        console.log("bttv error", error);
       }
-
-      try {
-        let response3 = await fetch(`https://api.frankerfacez.com/v1/room/id/${twitchData.data.id}`, requestOptions);
-        let ffzEmotes = await response3.json();
-        if (response3.status == 200) {
-          let ffz = "";
-          let setid = ffzEmotes.room.set;
-          let sets = ffzEmotes.sets[setid];
-          sets.emoticons.sort((a, b) => a.name.localeCompare(b.name));
-
-          document.getElementById("ffz").innerHTML += `<h1 class="display-1"><a href="https://www.frankerfacez.com/channel/${channel}" target="_blank" rel="noopener noreferrer">${
-            displayName || channel
-          }</a>'s FFZ Emotes <span class="text-body-secondary">(${sets.emoticons.length} ${sets.emoticons.length == 1 ? "emote" : "emotes"})</span>:</h1>`;
-
-          for (let i = 0, j = sets.emoticons.length; i < j; i++) {
-            let url = sets.emoticons[i].urls["4"];
-            if (sets.emoticons[i].animated) {
-              url = sets.emoticons[i].animated["4"];
-            }
-            ffz += `<div class="border border-secondary emote">
-            <a href="https://www.frankerfacez.com/emoticon/${sets.emoticons[i].id}" target="_blank" rel="noopener noreferrer"><img src="${url}" loading="lazy" alt="${sets.emoticons[i].name}" title="${sets.emoticons[i].name}"></a>
-            <div class="text-body-secondary emotetextwide text-center">${sets.emoticons[i].name}</div>
-            </div>`;
-          } //ffz emotes
-
-          if (ffz) {
-            ffz = `<div class="emotecontainer">${ffz}</div>`;
-          }
-          document.getElementById("ffz").innerHTML += ffz;
-
-          if (ffzEmotes.room.mod_urls) {
-            document.getElementById("badges").innerHTML += `<h3>Mod badge:</h3>
-            <div id="modbadge" class="emotecontainer">
-            <div class="border border-secondary emote">
-            <img src="${ffzEmotes.room.mod_urls["4"]}" loading="lazy" alt="Mod badge" title="Mod badge">
-            <div class="text-body-secondary text-center">Mod badge</div>
-            </div>
-            </div>`;
-          } //ffz mod badge
-          if (ffzEmotes.room.vip_badge) {
-            document.getElementById("badges").innerHTML += `<h3>VIP badge:</h3>
-            <div id="vipbadge" class="emotecontainer">
-            <div class="border border-secondary emote">
-            <img src="${ffzEmotes.room.vip_badge["4"]}" loading="lazy" alt="VIP badge" title="VIP badge">
-            <div class="text-body-secondary text-center">VIP badge</div>
-            </div>
-            </div>`;
-          } //ffz vip badge
-        } //ffz
-      } catch (error) {
-        console.log("ffz error", error);
+      if (t1) {
+        t1 = `
+        <h3>
+          Tier 1 Emotes <span class="text-body-secondary">(${tier1Count} ${tier1Count == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${t1}</div>`;
       }
-
-      try {
-        let response4 = await fetch(`https://7tv.io/v3/users/twitch/${twitchData.data.id}`, requestOptions);
-        let seventvEmotes = await response4.json();
-        if (response4.status != 404 && seventvEmotes.emote_set.emotes.length > 0) {
-          seventvEmotes.emote_set.emotes.sort((a, b) => a.name.localeCompare(b.name));
-          let seventv = "";
-          document.getElementById("seventv").innerHTML += `<h1 class="display-1"><a href="https://7tv.app/users/${seventvEmotes.user.id}" target="_blank" rel="noopener noreferrer">${
-            displayName || channel
-          }</a>'s 7TV Emotes <span class="text-body-secondary">(${seventvEmotes.emote_set.emotes.length} ${seventvEmotes.emote_set.emotes.length == 1 ? "emote" : "emotes"})</span>:</h1>`;
-          for (let i = 0, j = seventvEmotes.emote_set.emotes.length; i < j; i++) {
-            let files = seventvEmotes.emote_set.emotes[i].data.host.files.filter((e) => e.format == "AVIF");
-            seventv += `
-            <div class="border border-secondary emote">
-            <a href="https://7tv.app/emotes/${seventvEmotes.emote_set.emotes[i].id}" target="_blank" rel="noopener noreferrer">
-            <img src="${seventvEmotes.emote_set.emotes[i].data.host.url}/${files[3].name}" loading="lazy" 
-            alt="${seventvEmotes.emote_set.emotes[i].name}" title="${seventvEmotes.emote_set.emotes[i].name}">
-            </a>
-            <div class="text-body-secondary emotetextwide text-center">${seventvEmotes.emote_set.emotes[i].name}</div>
-            </div>`;
-          }
-          if (seventv) {
-            seventv = `<div class="emotecontainer">${seventv}</div>`;
-          }
-          document.getElementById("seventv").innerHTML += seventv;
-        } //7tv
-      } catch (error) {
-        console.log("7tv error", error);
+      if (t2) {
+        t2 = `
+        <h3>
+          Tier 2 Emotes <span class="text-body-secondary">(${tier2Count} ${tier2Count == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${t2}</div>`;
       }
-    } catch (error) {
-      console.log("twitch error", error);
+      if (t3) {
+        t3 = `
+        <h3>
+          Tier 3 Emotes <span class="text-body-secondary">(${tier3Count} ${tier3Count == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${t3}</div>`;
+      }
+      if (follower) {
+        follower = `
+        <h3>
+          Follower Emotes <span class="text-body-secondary">(${followerCount} ${followerCount == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${follower}</div>`;
+      }
+      if (bits) {
+        bits = `
+        <h3>
+          Bits Tier Emotes <span class="text-body-secondary">(${bitsCount} ${bitsCount == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${bits}</div>`;
+      }
+      document.getElementById("twitch").innerHTML += t1 + t2 + t3 + follower + bits;
     }
-  } //if channel
+  } catch (error) {
+    console.log("twitch emotes error", error);
+  }
+
+  try {
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/chat/badges?broadcaster_id=${user.id}`);
+    let result = await response.json();
+    if (result?.data?.length > 0) {
+      let subBadges = [];
+      let bitBadges = [];
+      if (result?.data[0]?.versions?.length > 0) {
+        if (result.data[0].set_id == "subscriber") {
+          subBadges = result.data[0].versions;
+        }
+        if (result.data[0].set_id == "bits") {
+          bitBadges = result.data[0].versions;
+        }
+      }
+      if (result?.data[1]?.versions?.length > 0) {
+        if (result.data[1].set_id == "subscriber") {
+          subBadges = result.data[1].versions;
+        }
+        if (result.data[1].set_id == "bits") {
+          bitBadges = result.data[1].versions;
+        }
+      }
+      subBadges.sort(function (a, b) {
+        return parseInt(a.id, 10) - parseInt(b.id, 10);
+      });
+      bitBadges.sort(function (a, b) {
+        return parseInt(a.id, 10) - parseInt(b.id, 10);
+      });
+
+      let subt1 = "";
+      let subt2 = "";
+      let subt3 = "";
+      let bits = "";
+
+      for (let i = 0, j = subBadges.length; i < j; i++) {
+        if (subBadges[i].id >= 3000) {
+          subt3 += `
+          <div class="border border-secondary emote">
+            <img src="${subBadges[i].image_url_4x}" loading="lazy">
+            <div class="text-body-secondary text-center">${months[subBadges[i].id]}</div>
+          </div>`;
+        } else if (subBadges[i].id >= 2000) {
+          subt2 += `
+          <div class="border border-secondary emote">
+            <img src="${subBadges[i].image_url_4x}" loading="lazy">
+            <div class="text-body-secondary text-center">${months[subBadges[i].id]}</div>
+          </div>`;
+        } else {
+          subt1 += `
+          <div class="border border-secondary emote">
+            <img src="${subBadges[i].image_url_4x}" loading="lazy">
+            <div class="text-body-secondary text-center">${months[subBadges[i].id]}</div>
+          </div>`;
+        }
+      }
+      for (let i = 0, j = bitBadges.length; i < j; i++) {
+        bits += `
+        <div class="border border-secondary emote">
+          <img src="${bitBadges[i].image_url_4x}" loading="lazy">
+          <div class="text-body-secondary text-center">${escapeString(bitBadges[i].title)}</div>
+        </div>`;
+      }
+      if (subt1) {
+        subt1 = `<h3>Tier 1 Sub Badges:</h3><div class="emotecontainer">${subt1}</div>`;
+      }
+      if (subt2) {
+        subt2 = `<h3>Tier 2 Sub Badges:</h3><div class="emotecontainer">${subt2}</div>`;
+      }
+      if (subt3) {
+        subt3 = `<h3>Tier 3 Sub Badges:</h3><div class="emotecontainer">${subt3}</div>`;
+      }
+      if (bits) {
+        bits = `<h3>Bit badges:</h3><div class="emotecontainer">${bits}</div>`;
+      }
+      document.getElementById("badges").innerHTML = subt1 + subt2 + subt3 + bits;
+    }
+  } catch (error) {
+    console.log("twitch badges error", error);
+  }
+
+  try {
+    let response = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${user.id}`);
+    let result = await response.json();
+    if (result?.channelEmotes?.length > 0 || result?.sharedEmotes?.length > 0) {
+      let bttvChannelEmotes = "";
+      let bttvSharedEmotes = "";
+      result.channelEmotes.sort((a, b) => a.code.localeCompare(b.code));
+      result.sharedEmotes.sort((a, b) => a.code.localeCompare(b.code));
+      document.getElementById("bttv").innerHTML = `
+      <h1 class="display-1">
+        <a href="https://betterttv.com/users/${result.id}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s BTTV Emotes:
+      </h1>`;
+
+      for (let i = 0, j = result.channelEmotes.length; i < j; i++) {
+        bttvChannelEmotes += `
+        <div class="border border-secondary emote">
+          <a href="https://betterttv.com/emotes/${result.channelEmotes[i].id}" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn.betterttv.net/emote/${result.channelEmotes[i].id}/3x" loading="lazy" alt="${result.channelEmotes[i].code}" title="${result.channelEmotes[i].code}">
+          </a>
+          <div class="text-body-secondary emotetextwide text-center">${escapeString(result.channelEmotes[i].code)}</div>
+        </div>`;
+      }
+      for (let i = 0, j = result.sharedEmotes.length; i < j; i++) {
+        bttvSharedEmotes += `
+        <div class="border border-secondary emote">
+          <a href="https://betterttv.com/emotes/${result.sharedEmotes[i].id}" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn.betterttv.net/emote/${result.sharedEmotes[i].id}/3x" loading="lazy" alt="${result.sharedEmotes[i].code}" title="${result.sharedEmotes[i].code}">
+          </a>
+          <div class="text-body-secondary emotetextwide text-center">${escapeString(result.sharedEmotes[i].code)}</div>
+        </div>`;
+      }
+      if (bttvChannelEmotes) {
+        bttvChannelEmotes = `
+        <h3>
+          BTTV channel emotes
+          <i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-title="Channel emotes are emotes that were uploaded to BTTV by ${user.login}.">info</i>
+          <span class="text-body-secondary">(${result.channelEmotes.length} ${result.channelEmotes.length == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${bttvChannelEmotes}</div>`;
+      }
+      if (bttvSharedEmotes) {
+        bttvSharedEmotes = `
+        <h3>
+          BTTV shared emotes
+          <i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-title="Shared emotes are emotes that were uploaded to BTTV by other users.">info</i>
+          <span class="text-body-secondary">(${result.sharedEmotes.length} ${result.channelEmotes.length == 1 ? "emote" : "emotes"})</span>:
+        </h3>
+        <div class="emotecontainer">${bttvSharedEmotes}</div>`;
+      }
+      document.getElementById("bttv").innerHTML += bttvChannelEmotes + bttvSharedEmotes;
+      enableTooltips();
+    }
+  } catch (error) {
+    console.log("bttv error", error);
+  }
+
+  try {
+    let response = await fetch(`https://api.frankerfacez.com/v1/room/id/${user.id}`);
+    let result = await response.json();
+    if (response.status == 200 && result?.room?.set && result.sets[result?.room?.set]?.emoticons?.length > 0) {
+      let ffz = "";
+      let setid = result.room.set;
+      let sets = result.sets[setid];
+      sets.emoticons.sort((a, b) => a.name.localeCompare(b.name));
+
+      document.getElementById("ffz").innerHTML = `
+      <h1 class="display-1">
+        <a href="https://www.frankerfacez.com/channel/${user.login}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s FFZ Emotes 
+        <span class="text-body-secondary">(${sets.emoticons.length} ${sets.emoticons.length == 1 ? "emote" : "emotes"})</span>:
+      </h1>`;
+
+      for (let i = 0, j = sets.emoticons.length; i < j; i++) {
+        let url = sets.emoticons[i].urls["4"];
+        if (sets.emoticons[i].animated) {
+          url = sets.emoticons[i].animated["4"];
+        }
+        ffz += `
+        <div class="border border-secondary emote">
+          <a href="https://www.frankerfacez.com/emoticon/${sets.emoticons[i].id}" target="_blank" rel="noopener noreferrer">
+            <img src="${url}" loading="lazy" alt="${sets.emoticons[i].name}" title="${sets.emoticons[i].name}">
+          </a>
+          <div class="text-body-secondary emotetextwide text-center">${escapeString(sets.emoticons[i].name)}</div>
+        </div>`;
+      } //ffz emotes
+
+      if (ffz) {
+        ffz = `<div class="emotecontainer">${ffz}</div>`;
+      }
+      document.getElementById("ffz").innerHTML += ffz;
+
+      if (result.room.mod_urls) {
+        document.getElementById("badges").innerHTML += `
+        <h3>Mod badge:</h3>
+        <div class="emotecontainer">
+          <div class="border border-secondary emote">
+            <img src="${result.room.mod_urls["4"]}" loading="lazy" alt="Mod badge" title="Mod badge">
+            <div class="text-body-secondary text-center">Mod badge</div>
+          </div>
+        </div>`;
+      } //ffz mod badge
+      if (result.room.vip_badge) {
+        document.getElementById("badges").innerHTML += `
+        <h3>VIP badge:</h3>
+        <div class="emotecontainer">
+          <div class="border border-secondary emote">
+            <img src="${result.room.vip_badge["4"]}" loading="lazy" alt="VIP badge" title="VIP badge">
+            <div class="text-body-secondary text-center">VIP badge</div>
+          </div>
+        </div>`;
+      } //ffz vip badge
+    }
+  } catch (error) {
+    console.log("ffz error", error);
+  }
+
+  try {
+    let response = await fetch(`https://7tv.io/v3/users/twitch/${user.id}`);
+    let result = await response.json();
+    if (response.status == 200 && result?.emote_set?.emotes?.length > 0) {
+      result.emote_set.emotes.sort((a, b) => a.name.localeCompare(b.name));
+      let seventv = "";
+      document.getElementById("seventv").innerHTML = `
+      <h1 class="display-1">
+        <a href="https://7tv.app/users/${result.user.id}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s 7TV Emotes 
+        <span class="text-body-secondary">(${result.emote_set.emotes.length} ${result.emote_set.emotes.length == 1 ? "emote" : "emotes"})</span>:
+      </h1>`;
+      for (let i = 0, j = result.emote_set.emotes.length; i < j; i++) {
+        let files = result.emote_set.emotes[i].data.host.files.filter((e) => e.format == "AVIF");
+        seventv += `
+        <div class="border border-secondary emote">
+          <a href="https://7tv.app/emotes/${result.emote_set.emotes[i].id}" target="_blank" rel="noopener noreferrer">
+            <img src="${result.emote_set.emotes[i].data.host.url}/${files[3].name}" loading="lazy" alt="${result.emote_set.emotes[i].name}" title="${result.emote_set.emotes[i].name}">
+          </a>
+          <div class="text-body-secondary emotetextwide text-center">${escapeString(result.emote_set.emotes[i].name)}</div>
+        </div>`;
+      }
+      if (seventv) {
+        seventv = `<div class="emotecontainer">${seventv}</div>`;
+      }
+      document.getElementById("seventv").innerHTML += seventv;
+    } //7tv
+  } catch (error) {
+    console.log("7tv error", error);
+  }
+
+  if (
+    document.getElementById("twitch").innerHTML == "" &&
+    document.getElementById("badges").innerHTML == "" &&
+    document.getElementById("bttv").innerHTML == "" &&
+    document.getElementById("ffz").innerHTML == "" &&
+    document.getElementById("seventv").innerHTML == ""
+  ) {
+    document.getElementById("output").style.display = "";
+    document.getElementById("output").innerHTML = `<h1 class="display-1 text-center">Channel Has no emotes</h1>`;
+  }
 } //loadChannelEmotes
 
 function enableTooltips() {
@@ -759,7 +854,7 @@ async function loadFollowList() {
     document.getElementById("list").innerHTML = spinner;
 
     try {
-      let response = await fetch(`https://api.okayeg.com/followlist?username=${username}`, requestOptions);
+      let response = await fetch(`https://api.okayeg.com/followlist?username=${username}`);
 
       if (response.status !== 200) {
         document.getElementById("title1").innerHTML = `<h1 class="display-1">
@@ -829,7 +924,7 @@ async function initGraph() {
   let time = [];
 
   try {
-    let response = await fetch(`https://api.okayeg.com/stockhistory`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/stockhistory`);
     let stockHistory = await response.json();
     for (let index = 0, j = stockHistory.length; index < j; index++) {
       if (stockHistory[index].stock == "chicken") {
@@ -927,7 +1022,7 @@ async function loadNFEMarket() {
     let input = location.hash;
     let NFEID = input.replace("#", "").toLowerCase().replace(/\s/g, "");
 
-    let response = await fetch(`https://api.okayeg.com/market`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/market`);
     let nfes = await response.json();
 
     let rarities = {
@@ -1009,7 +1104,7 @@ function copyListCommand(id, event) {
 
 async function loadClips() {
   try {
-    let response = await fetch(`https://api.okayeg.com/clips`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/clips`);
     let data = await response.json();
     let clips = data.clips;
     let games = data.games;
@@ -1046,7 +1141,7 @@ async function loadClips() {
 
 async function loadBotStats() {
   try {
-    let response = await fetch(`https://api.okayeg.com/stats`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/stats`);
     let data = await response.json();
     console.log(data);
     document.getElementById("botstats").innerHTML = `Connected to  ${data.stats.channels} channels<br>
@@ -1081,7 +1176,7 @@ async function loadEmbedStream() {
   });
 
   try {
-    let response = await fetch(`https://api.okayeg.com/commands`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/commands`);
     let commands = await response.json();
     for (let i = 0; i < commands.length; i++) {
       let aliases = commands[i].aliases
@@ -1209,7 +1304,7 @@ async function loadCommands() {
   });
 
   try {
-    let response = await fetch(`https://api.okayeg.com/commands`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/commands`);
     let commands = await response.json();
     for (let i = 0; i < commands.length; i++) {
       let aliases = commands[i].aliases
@@ -1250,7 +1345,7 @@ async function loadCommands() {
 
 async function loadStats() {
   try {
-    let response = await fetch(`https://api.okayeg.com/donkstats`, requestOptions);
+    let response = await fetch(`https://api.okayeg.com/donkstats`);
     let stats = await response.json();
 
     const data = {
@@ -1737,15 +1832,15 @@ function convertTime2(time) {
   return dDisplay + hDisplay + mDisplay + sDisplay;
 } //convertTime2
 
-const getLanguage = (code) => {
+function getLanguage(code) {
   const lang = new Intl.DisplayNames(["en"], { type: "language" });
   return lang.of(code);
-};
+} //getLanguage
 
 async function checkPic(link) {
-  let response = await fetch(link, requestOptions);
+  let response = await fetch(link);
   return response.url == link;
-}
+} //checkPic
 
 function relativeTime(miliseconds) {
   let finalRealtiveTime = "";
@@ -1824,299 +1919,7 @@ function relativeTime(miliseconds) {
     miliseconds -= seconds * units.second;
   }
   return finalRealtiveTime;
-}
-
-function showToast(msg, type, timeout) {
-  let id = new Date().getTime();
-  let toast = `<div id="${id}" class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-      <div class="toast-body">${msg}</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      </div>`;
-  document.getElementById("toastContainer").innerHTML += toast;
-  let toastElList = [].slice.call(document.querySelectorAll(".toast"));
-  let toastList = toastElList.map(function (toastEl) {
-    return new bootstrap.Toast(toastEl, {
-      autohide: false,
-    });
-  });
-  toastList[toastList.length - 1].show();
-  //dismiss this way bcz built in dismiss wont work if there are multiple toasts FeelsDankMan
-  setTimeout(function () {
-    toastList[toastList.length - 1].hide();
-    document.getElementById(id).remove();
-  }, timeout);
-} //showToast
-
-function updateTimer(element) {
-  if (element.value > 0) {
-    document.getElementById("results_timer").disabled = false;
-  } else {
-    if (document.getElementById("results_timer").checked) {
-      document.getElementById("results_anyone").checked = true;
-    }
-    document.getElementById("results_timer").disabled = true;
-  }
-} //updateTimer
-
-async function loadSubmissions() {
-  document.getElementById("pollTimerValue").onchange = function () {
-    updateTimer(this);
-  };
-
-  let input = location.hash;
-  let channel = input.replace("#", "").toLowerCase().replace(/\s/g, "");
-  if (channel) {
-    try {
-      let requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
-      //let response = await fetch(`http://localhost:3000/submissions?channel=${channel}`, requestOptions);
-      let response = await fetch(`https://api.okayeg.com/submissions?channel=${channel}`, requestOptions);
-      if (response.status == 200) {
-        let submissions = await response.json();
-        let settings = submissions.submissions.find((e) => e._id.length < 20);
-        console.log(settings);
-        console.log(submissions.submissions);
-        document.getElementById("infoCard").innerHTML = `<h4 id="polltitle" contenteditable="true">${channel}'s channel submissions</h4><br>
-          Type <kbd>=submit</kbd> in chat to send submissions<br>
-          <span class='text-body-secondary'>Submission limit: ${settings.limit} ${settings.subonly ? " (Subscribers only)" : ""}</span>`;
-
-        let cards = `
-          <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" onclick="selectall()" class="btn btn-secondary">Select all</button>
-          <button type="button" onclick="unselectall()" class="btn btn-secondary">Unselect all</button>
-          </div>`;
-        for (let index = 0; index < submissions.submissions.length; index++) {
-          if (submissions.submissions[index]._id.length < 20) {
-            continue;
-          }
-          let others = "";
-          if (submissions.submissions[index].others.length > 0) {
-            others = `and <span onclick="showOthers('${submissions.submissions[index].text}','${submissions.submissions[index].username}','${submissions.submissions[index].others.join(
-              ", ",
-            )}')" style='color: #00bc8c; cursor: pointer'>${submissions.submissions[index].others.length} other ${
-              submissions.submissions[index].others.length == 1 ? "viewer" : "viewers"
-            }</span>`;
-          }
-          cards += `
-            <div class="input-group mt-3">
-            <div class="input-group-text">
-            <input class="form-check-input mb-0 checkbox" type="checkbox" id="option${index}checkbox" checked="true" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="text" class="form-control poll-option" id="option${index}" value="${submissions.submissions[index].text}" aria-label="Text input with checkbox">
-            </div>
-            <div class="text-body-secondary">Submitted by ${submissions.submissions[index].username} ${others}</div>`;
-        }
-        document.getElementById("optionsCard").innerHTML = cards;
-      } else {
-        document.getElementById("infoCard").innerText = `Could not load submissions for ${channel} :(`;
-      }
-    } catch (error) {
-      console.log("loadSubmissions error", error);
-      document.getElementById("infoCard").innerText = `Could not load submissions for ${channel} :(`;
-    }
-  }
-} //loadCommands
-
-async function createPoll() {
-  let modal2 = new bootstrap.Modal(document.getElementById("modal2"));
-  let modal4 = new bootstrap.Modal(document.getElementById("modal4"));
-  let donkdonk;
-  const donk = import("/js/donk.min.js").then((donk) => donk.load());
-  const ckey = "6LdzxrwdAAAAADyHX2t8ZS4U5QxTNLVWNrGOeNp0";
-  donk.then((fp) => fp.get()).then((result) => (donkdonk = result.visitorId));
-
-  let mode = 0;
-  if (document.getElementById("results_anyone").checked) {
-    mode = 0;
-  }
-  if (document.getElementById("results_voters").checked) {
-    mode = 1;
-  }
-  if (document.getElementById("results_timer").checked) {
-    mode = 2;
-  }
-
-  let multianswer = document.getElementById("multipleAnswersAllowed").checked;
-  let polltimer;
-  switch (document.getElementById("pollTimerUnit").value) {
-    case "m":
-      polltimer = Math.ceil(parseFloat(document.getElementById("pollTimerValue").value) * 60) || 0;
-      break;
-    case "h":
-      polltimer = Math.ceil(parseFloat(document.getElementById("pollTimerValue").value) * 3600) || 0;
-      break;
-    case "d":
-      polltimer = Math.ceil(parseFloat(document.getElementById("pollTimerValue").value) * 86400) || 0;
-      break;
-    default:
-      polltimer = 0;
-  }
-  let pollOptions = [...document.querySelectorAll(".poll-option")];
-  let pollOptionsArray = [];
-  for (let index = 0, j = pollOptions.length; index < j; index++) {
-    if (!pollOptions[index].value || !document.getElementById(`${pollOptions[index].id}checkbox`).checked) {
-      continue;
-    }
-    pollOptionsArray.push(pollOptions[index].value);
-  }
-  if (pollOptionsArray.length < 2) {
-    showToast("You can't create a poll with less than 2 options", "warning", 3000);
-    return;
-  }
-
-  resetModal2();
-  modal2.show();
-
-  try {
-    token = await grecaptcha.execute(ckey, { action: "submit" });
-    if (!token) {
-      modal4.show();
-      return;
-    }
-    let requestOptions = {
-      method: "POST",
-      headers: {},
-      redirect: "follow",
-      "Content-Type": "application/json",
-      body: JSON.stringify({
-        captchatoken: token,
-        userid: donkdonk,
-        title: document.getElementById("polltitle").innerText,
-        options: pollOptionsArray,
-        mode: mode,
-        endtime: polltimer,
-        multianswer: multianswer,
-      }),
-    };
-    let response = await fetch(`https://polls.donk.workers.dev/createpoll`, requestOptions);
-    //let response = await fetch(`http://127.0.0.1:8787/createpoll`, requestOptions);
-
-    let result = await response.json();
-    if (response.status != 200) {
-      document.getElementById("errorDiv").innerHTML = `Failed to create poll.<br>Error: ${result.message}`;
-      return;
-    }
-    //open poll link
-    window.open(`https://poll.chat.vote/${result.data.id}`, "_blank").focus();
-
-    //load link div
-    document.getElementById("pollLinkDiv").innerHTML = `
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" id="pollLink" onclick="copyLink('https://poll.chat.vote/${result.data.id}')" value="https://poll.chat.vote/${result.data.id}" />
-        <button
-          type="button"
-          id="copyLinkButton"
-          class="btn btn-outline-secondary"
-          data-bs-toggle="tooltip"
-          data-bs-trigger="manual"
-          data-bs-placement="bottom"
-          data-bs-title="Link copied :)"
-          onclick="copyLink('https://poll.chat.vote/${result.data.id}')">
-          <i class="material-icons notranslate">content_copy</i>
-        </button>
-      </div>
-      `;
-    copyTooltip = new bootstrap.Tooltip(document.getElementById("copyLinkButton"), {
-      trigger: "hover",
-    });
-
-    //load title
-    document.getElementById("pollTitleDiv").innerHTML = `
-      <ul class="list-unstyled">
-        <li>
-        <ul>
-          <li>${result.data.title}</li>
-        </ul>
-        </li>
-      </ul>`;
-
-    //load options
-    let options = `
-              <ul class="list-unstyled">
-              <li>
-              <ul>`;
-    for (let index = 0, j = result.data.options.length; index < j; index++) {
-      options += `<li>${result.data.options[index]}</li>`;
-    }
-    options += `
-              </ul>
-              </li>
-              </ul>`;
-    document.getElementById("pollOptionsDiv").innerHTML = options;
-
-    //load settings
-    let pollmode = "";
-    switch (result.data.mode) {
-      case 0:
-        pollmode = "Results visible to anyone";
-        break;
-      case 1:
-        pollmode = "Results visible voters only";
-        break;
-      case 2:
-        pollmode = `Results will be revealed in ${Math.ceil((parseInt(result.data.endtime, 10) - Date.now() / 1000) / 60)} minutes`;
-        break;
-    }
-    let endtime = "No time limit";
-    if (result.data.endtime) {
-      endtime = `Poll will close in ${Math.ceil((parseInt(result.data.endtime, 10) - Date.now() / 1000) / 60)} minutes`;
-    }
-    document.getElementById("pollSettingsDiv").innerHTML = `
-        <ul class="list-unstyled">
-          <li>
-          <ul>
-            <li>${pollmode}</li>
-            <li>${result.data.multianswer ? "Multiple answers allowed" : "Multiple answers not allowed"}</li>
-            <li>${endtime}</li>
-          </ul>
-          </li>
-        </ul>`;
-  } catch (error) {
-    document.getElementById("errorDiv").innerHTML = `Failed to create poll.<br>Error: ${error}`;
-  }
-} //createPoll
-
-function resetModal2() {
-  document.getElementById("errorDiv").innerHTML = "";
-  document.getElementById("pollLinkDiv").innerHTML = `<p class="placeholder-glow">
-    <span class="placeholder placeholder-lg col-12 bg-warning"></span>
-  </p>`;
-  document.getElementById("pollTitleDiv").innerHTML = `<p class="placeholder-glow">
-    <span class="placeholder col-12"></span>
-  </p>`;
-  document.getElementById("pollOptionsDiv").innerHTML = `<p class="placeholder-glow">
-    <span class="placeholder col-12"></span>
-  </p>`;
-  document.getElementById("pollSettingsDiv").innerHTML = `<p class="placeholder-glow">
-    <span class="placeholder col-12"></span>
-  </p>`;
-} //resetModal2
-
-function selectall() {
-  document.querySelectorAll(".checkbox").forEach((e) => (e.checked = true));
-} //selectall
-
-function unselectall() {
-  document.querySelectorAll(".checkbox").forEach((e) => (e.checked = false));
-} //unselectall
-
-function copyLink(link) {
-  navigator.clipboard.writeText(link);
-  copyTooltip.show();
-  setTimeout(() => {
-    copyTooltip.hide();
-  }, 1000);
-} //copyLink
-
-function showOthers(submission, username, others) {
-  let modal1 = new bootstrap.Modal(document.getElementById("modal1"));
-  document.getElementById("modal1body").innerHTML = `"${submission}" was first submitted by ${username}<br> ${others} sent the same submission afterwards`;
-  modal1.show();
-} //showOthers
+} //relativeTime
 
 async function loadUserInfo() {
   let input = location.hash;
@@ -2132,7 +1935,7 @@ async function loadUserInfo() {
     document.getElementById("info").style.display = "";
 
     try {
-      let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`, requestOptions);
+      let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`);
       let result = await response.json();
       if (result?.data[0]?.id) {
         document.getElementById("output").innerHTML = "";
@@ -2166,7 +1969,7 @@ async function loadUserInfo() {
           document.getElementById("offlineimage").innerHTML = `<span class="text-body-secondary">No offline image found</span>`;
         }
 
-        let response2 = await fetch(`https://helper.donk.workers.dev/twitch/streams?user_id=${result.data[0].id}`, requestOptions);
+        let response2 = await fetch(`https://helper.donk.workers.dev/twitch/streams?user_id=${result.data[0].id}`);
         let result2 = await response2.json();
         if (result2?.data[0]) {
           //channel is live
@@ -2193,7 +1996,7 @@ async function loadUserInfo() {
           }
         } else {
           //channel is offline
-          let response3 = await fetch(`https://helper.donk.workers.dev/twitch/channels?broadcaster_id=${result.data[0].id}`, requestOptions);
+          let response3 = await fetch(`https://helper.donk.workers.dev/twitch/channels?broadcaster_id=${result.data[0].id}`);
           let result3 = await response3.json();
           if (result3?.data[0]) {
             document.getElementById("channelstatus").innerHTML = `Offline`;
@@ -2214,7 +2017,7 @@ async function loadUserInfo() {
           }
         }
 
-        let response4 = await fetch(`https://helper.donk.workers.dev/twitch/schedule?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response4 = await fetch(`https://helper.donk.workers.dev/twitch/schedule?broadcaster_id=${result.data[0].id}`);
         let result4 = await response4.json();
         if (result4?.data?.segments) {
           document.getElementById("upcomingstream").innerHTML = `${relativeTime(
@@ -2225,7 +2028,7 @@ async function loadUserInfo() {
           document.getElementById("upcomingstream").innerHTML = `<span class="text-body-secondary">Could not load schedule</span>`;
         }
 
-        let response5 = await fetch(`https://helper.donk.workers.dev/twitch/users/extensions?user_id=${result.data[0].id}`, requestOptions);
+        let response5 = await fetch(`https://helper.donk.workers.dev/twitch/users/extensions?user_id=${result.data[0].id}`);
         let result5 = await response5.json();
         if (result5?.data?.component[1]?.active || result5?.data?.component[2]?.active) {
           document.getElementById("componentextensions").innerHTML = "<br>";
@@ -2264,7 +2067,7 @@ async function loadUserInfo() {
           document.getElementById("panelextensions").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response6 = await fetch(`https://helper.donk.workers.dev/twitch/teams/channel?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response6 = await fetch(`https://helper.donk.workers.dev/twitch/teams/channel?broadcaster_id=${result.data[0].id}`);
         let result6 = await response6.json();
         if (result6?.data) {
           document.getElementById("teams").innerHTML = ``;
@@ -2278,7 +2081,7 @@ async function loadUserInfo() {
           document.getElementById("teams").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response7 = await fetch(`https://helper.donk.workers.dev/twitch/chat/settings?broadcaster_id=${result.data[0].id}`, requestOptions);
+        let response7 = await fetch(`https://helper.donk.workers.dev/twitch/chat/settings?broadcaster_id=${result.data[0].id}`);
         let result7 = await response7.json();
         if (result7?.data[0]?.emote_mode || result7?.data[0]?.follower_mode || result7?.data[0]?.slow_mode || result7?.data[0]?.subscriber_mode || result7?.data[0]?.unique_chat_mode) {
           document.getElementById("chatsettings").innerHTML = "<br>";
@@ -2292,7 +2095,7 @@ async function loadUserInfo() {
           document.getElementById("chatsettings").innerHTML = `<span class="text-body-secondary">None</span>`;
         }
 
-        let response8 = await fetch(`https://helper.donk.workers.dev/twitch/chat/color?user_id=${result.data[0].id}`, requestOptions);
+        let response8 = await fetch(`https://helper.donk.workers.dev/twitch/chat/color?user_id=${result.data[0].id}`);
         let result8 = await response8.json();
         if (result8?.data) {
           document.getElementById("linkText").style.color = result8.data[0].color;
@@ -2340,14 +2143,14 @@ async function findTimestamp() {
   }
   let target = new Date(input).getTime();
   try {
-    let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`, requestOptions);
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`);
     let result = await response.json();
     if (!result?.data[0]?.id) {
       document.getElementById("output").innerHTML = "Channel not found";
       return;
     }
 
-    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result.data[0].id}&first=100`, requestOptions);
+    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result.data[0].id}&first=100`);
     let result2 = await response2.json();
     if (!result2?.data[0]) {
       document.getElementById("output").innerHTML = "Could not find any VODs for the given channel";
@@ -2405,14 +2208,14 @@ async function findClipTimestamp() {
       return;
     }
 
-    let response1 = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`, requestOptions);
+    let response1 = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${channel}`);
     let result1 = await response1.json();
     if (!result1?.data[0]?.id) {
       document.getElementById("output").innerHTML = "Channel not found";
       return;
     }
 
-    let response = await fetch(`https://helper.donk.workers.dev/twitch/clips?id=${clipID[1]}`, requestOptions);
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/clips?id=${clipID[1]}`);
     let result = await response.json();
     if (!result?.data[0]?.broadcaster_id) {
       document.getElementById("output").innerHTML = "Could not find clip info";
@@ -2426,14 +2229,14 @@ async function findClipTimestamp() {
 
     let target;
     if (result?.data[0]?.video_id && result?.data[0]?.vod_offset) {
-      let response3 = await fetch(`https://helper.donk.workers.dev/twitch/videos?id=${result.data[0].video_id}`, requestOptions);
+      let response3 = await fetch(`https://helper.donk.workers.dev/twitch/videos?id=${result.data[0].video_id}`);
       let result3 = await response3.json();
       target = new Date(result3.data[0].created_at).getTime() + result.data[0].vod_offset * 1000;
     } else {
       target = new Date(result.data[0].created_at).getTime();
     }
 
-    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result1.data[0].id}&first=100`, requestOptions);
+    let response2 = await fetch(`https://helper.donk.workers.dev/twitch/videos?user_id=${result1.data[0].id}&first=100`);
     let result2 = await response2.json();
     if (!result2?.data[0]) {
       document.getElementById("output").innerHTML = "Could not find any VODs that were live at the time the clip was created";
@@ -2528,8 +2331,8 @@ function addOrdinalSuffix(number) {
 
 let countries = [];
 async function loadSubPrices(type, currency) {
-  let res = await fetch(`/data/subs.json`, requestOptions);
-  let res2 = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency.toLowerCase()}.min.json`, requestOptions);
+  let res = await fetch(`/data/subs.json`);
+  let res2 = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency.toLowerCase()}.min.json`);
   let data = await res.json();
   let data2 = await res2.json();
   let min = 1000000;
@@ -2610,8 +2413,8 @@ async function loadRecap() {
   document.getElementById("global").style.display = "none";
   document.getElementById("user").style.display = "";
 
-  let response1 = await fetch(`/data/usersrecap.json`, requestOptions);
-  let response2 = await fetch(`/data/globalrecap.json`, requestOptions);
+  let response1 = await fetch(`/data/usersrecap.json`);
+  let response2 = await fetch(`/data/globalrecap.json`);
 
   let usersRecap = await response1.json();
   let globalRecap = await response2.json();
@@ -2905,4 +2708,32 @@ function loadGlobalRecap() {
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(undefined, undefined, "#");
   document.getElementById("username").value = "";
-}
+} //loadGlobalRecap
+
+/**
+ * @description replace <, >, &, ', ", `, \ and / with HTML entities. - from https://github.com/validatorjs/validator.js
+ * @param {*} str
+ * @returns {*}
+ */
+function escapeString(str) {
+  assertString(str);
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\//g, "&#x2F;")
+    .replace(/\\/g, "&#x5C;")
+    .replace(/`/g, "&#96;");
+} //escapeString
+
+function assertString(input) {
+  let isString = typeof input === "string" || input instanceof String;
+  if (!isString) {
+    let invalidType = _typeof(input);
+    if (input === null) invalidType = "null";
+    else if (invalidType === "object") invalidType = input.constructor.name;
+    throw new TypeError("Expected a string but received a ".concat(invalidType));
+  }
+} //assertString
