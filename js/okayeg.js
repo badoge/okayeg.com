@@ -866,7 +866,6 @@ async function loadFollowList() {
 
       let followList = await response.json();
       let fetchTime = followList.data.time;
-      followList = followList.data;
       let displayName = followList.data.display_name.toLowerCase() == followList.data.login ? followList.data.display_name : `${followList.data.display_name} (${followList.data.login})`;
 
       document.getElementById("list").innerHTML = "";
@@ -1144,11 +1143,11 @@ async function loadBotStats() {
     let response = await fetch(`https://api.okayeg.com/stats`);
     let data = await response.json();
     console.log(data);
-    document.getElementById("botstats").innerHTML = `Connected to  ${data.stats.channels} channels<br>
-    RAM usage: ${data.stats.ramUsage}MB<br>
-    Bot uptime: ${data.stats.botUptime}<br>
-    Server uptime: ${data.stats.serverUptime}<br>
-    Season ${data.stats.season} ends in ${relativeTime(data.stats.seasonEnd * 1000)}`;
+    document.getElementById("botstats").innerHTML = `Connected to  ${data.channels} channels<br>
+    RAM usage: ${data.ramUsage}MB<br>
+    Bot uptime: ${data.botUptime}<br>
+    Server uptime: ${data.serverUptime}<br>
+    Season ${data.season} ends in ${relativeTime(data.seasonEnd * 1000)}`;
   } catch (error) {
     console.log("loadBotStats error", error);
   }
@@ -1353,7 +1352,7 @@ async function loadStats() {
       datasets: [
         {
           label: "Channels",
-          data: [stats.stats.partners, stats.stats.affiliates, stats.stats.live - stats.stats.partners - stats.stats.affiliates],
+          data: [stats.partners, stats.affiliates, stats.live - stats.partners - stats.affiliates],
           backgroundColor: ["rgba(191, 148, 255, 0.8)", "rgba(30, 130, 50, 0.8)", "rgba(38, 80, 158, 0.8)"],
           borderColor: ["rgba(191, 148, 255, 1)", "rgba(30, 130, 50, 1)", "rgba(38, 80, 158, 1)"],
           borderWidth: 1,
@@ -1365,7 +1364,7 @@ async function loadStats() {
       datasets: [
         {
           label: "Channels",
-          data: [stats.stats.partner_viewers, stats.stats.affiliate_viewers, stats.stats.viewers - stats.stats.partner_viewers - stats.stats.affiliate_viewers],
+          data: [stats.partner_viewers, stats.affiliate_viewers, stats.viewers - stats.partner_viewers - stats.affiliate_viewers],
           backgroundColor: ["rgba(191, 148, 255, 0.8)", "rgba(30, 130, 50, 0.8)", "rgba(38, 80, 158, 0.8)"],
           borderColor: ["rgba(191, 148, 255, 1)", "rgba(30, 130, 50, 1)", "rgba(38, 80, 158, 1)"],
           borderWidth: 1,
@@ -1390,17 +1389,17 @@ async function loadStats() {
         {
           label: "Channels",
           data: [
-            stats.stats.tenthousand,
-            stats.stats.twothousand_tenthousand,
-            stats.stats.thousand_twothousand,
-            stats.stats.fivehundred_thousand,
-            stats.stats.twohundred_fivehundred,
-            stats.stats.hundred_twohundred,
-            stats.stats.ten_hundred,
-            stats.stats.five_ten,
-            stats.stats.one_five,
-            stats.stats.one,
-            stats.stats.zero,
+            stats.tenthousand,
+            stats.twothousand_tenthousand,
+            stats.thousand_twothousand,
+            stats.fivehundred_thousand,
+            stats.twohundred_fivehundred,
+            stats.hundred_twohundred,
+            stats.ten_hundred,
+            stats.five_ten,
+            stats.one_five,
+            stats.one,
+            stats.zero,
           ],
           backgroundColor: [
             "rgba(165, 0, 38, 0.8)",
@@ -1452,7 +1451,7 @@ async function loadStats() {
               weight: "bold",
             },
             formatter: (val, ctx) => {
-              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.stats.live) * 100)}%)`;
+              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.live) * 100)}%)`;
             },
           },
           legend: { display: false },
@@ -1480,7 +1479,7 @@ async function loadStats() {
               weight: "bold",
             },
             formatter: (val, ctx) => {
-              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.stats.viewers) * 100)}%)`;
+              return `${ctx.chart.data.labels[ctx.dataIndex]}: ${val.toLocaleString()} (${roundToTwo((val / stats.viewers) * 100)}%)`;
             },
           },
           legend: { display: false },
@@ -1515,74 +1514,74 @@ async function loadStats() {
     const viewersChart = new Chart(document.getElementById("viewersChart"), config2);
     const segmentsChart = new Chart(document.getElementById("segmentsChart"), config3);
 
-    document.getElementById("totalChannels").innerHTML = `${stats.stats.live.toLocaleString()}`;
-    document.getElementById("totalViewers").innerHTML = `${stats.stats.viewers.toLocaleString()}`;
-    document.getElementById("totalGames").innerHTML = `${stats.stats.sum_games.toLocaleString()}`;
+    document.getElementById("totalChannels").innerHTML = `${stats.live.toLocaleString()}`;
+    document.getElementById("totalViewers").innerHTML = `${stats.viewers.toLocaleString()}`;
+    document.getElementById("totalGames").innerHTML = `${stats.sum_games.toLocaleString()}`;
 
-    document.getElementById("partners").innerHTML = `${stats.stats.partners.toLocaleString()} 
-    <br>Partners make up only ${roundToTwo((stats.stats.partners / stats.stats.live) * 100)}% of streamers but have ${roundToTwo(
-      (stats.stats.partner_viewers / stats.stats.viewers) * 100,
-    )}% (${stats.stats.partner_viewers.toLocaleString()}) of all viewers`;
-    document.getElementById("affiliates").innerHTML = `${stats.stats.affiliates.toLocaleString()} 
-    <br>Affiliates make up ${roundToTwo((stats.stats.affiliates / stats.stats.live) * 100)}% of streamers and have ${roundToTwo(
-      (stats.stats.affiliate_viewers / stats.stats.viewers) * 100,
-    )}% (${stats.stats.affiliate_viewers.toLocaleString()}) of all viewers`;
-    document.getElementById("others").innerHTML = `${(stats.stats.live - stats.stats.partners - stats.stats.affiliates).toLocaleString()} 
-    <br>Others make up ${roundToTwo(((stats.stats.live - stats.stats.partners - stats.stats.affiliates) / stats.stats.live) * 100)}% of streamers and have ${roundToTwo(
-      ((stats.stats.viewers - stats.stats.partner_viewers - stats.stats.affiliate_viewers) / stats.stats.viewers) * 100,
-    )}% (${(stats.stats.viewers - stats.stats.partner_viewers - stats.stats.affiliate_viewers).toLocaleString()}) of all viewers`;
-    document.getElementById("zero").innerHTML = `${stats.stats.zero.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.zero / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("one").innerHTML = `${stats.stats.one.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.one / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("one_five").innerHTML = `${stats.stats.one_five.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.one_five / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("five_ten").innerHTML = `${stats.stats.five_ten.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.five_ten / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("ten_hundred").innerHTML = `${stats.stats.ten_hundred.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ten_hundred / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("hundred_twohundred").innerHTML = `${stats.stats.hundred_twohundred.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.hundred_twohundred / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("twohundred_fivehundred").innerHTML = `${stats.stats.twohundred_fivehundred.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.twohundred_fivehundred / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("fivehundred_thousand").innerHTML = `${stats.stats.fivehundred_thousand.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.fivehundred_thousand / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("thousand_twothousand").innerHTML = `${stats.stats.thousand_twothousand.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.thousand_twothousand / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("twothousand_tenthousand").innerHTML = `${stats.stats.twothousand_tenthousand.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.twothousand_tenthousand / stats.stats.live) * 100)}%)</span>`;
-    document.getElementById("tenthousand").innerHTML = `${stats.stats.tenthousand.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.tenthousand / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("partners").innerHTML = `${stats.partners.toLocaleString()} 
+    <br>Partners make up only ${roundToTwo((stats.partners / stats.live) * 100)}% of streamers but have ${roundToTwo(
+      (stats.partner_viewers / stats.viewers) * 100,
+    )}% (${stats.partner_viewers.toLocaleString()}) of all viewers`;
+    document.getElementById("affiliates").innerHTML = `${stats.affiliates.toLocaleString()} 
+    <br>Affiliates make up ${roundToTwo((stats.affiliates / stats.live) * 100)}% of streamers and have ${roundToTwo(
+      (stats.affiliate_viewers / stats.viewers) * 100,
+    )}% (${stats.affiliate_viewers.toLocaleString()}) of all viewers`;
+    document.getElementById("others").innerHTML = `${(stats.live - stats.partners - stats.affiliates).toLocaleString()} 
+    <br>Others make up ${roundToTwo(((stats.live - stats.partners - stats.affiliates) / stats.live) * 100)}% of streamers and have ${roundToTwo(
+      ((stats.viewers - stats.partner_viewers - stats.affiliate_viewers) / stats.viewers) * 100,
+    )}% (${(stats.viewers - stats.partner_viewers - stats.affiliate_viewers).toLocaleString()}) of all viewers`;
+    document.getElementById("zero").innerHTML = `${stats.zero.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.zero / stats.live) * 100)}%)</span>`;
+    document.getElementById("one").innerHTML = `${stats.one.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.one / stats.live) * 100)}%)</span>`;
+    document.getElementById("one_five").innerHTML = `${stats.one_five.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.one_five / stats.live) * 100)}%)</span>`;
+    document.getElementById("five_ten").innerHTML = `${stats.five_ten.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.five_ten / stats.live) * 100)}%)</span>`;
+    document.getElementById("ten_hundred").innerHTML = `${stats.ten_hundred.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.ten_hundred / stats.live) * 100)}%)</span>`;
+    document.getElementById("hundred_twohundred").innerHTML = `${stats.hundred_twohundred.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.hundred_twohundred / stats.live) * 100)}%)</span>`;
+    document.getElementById("twohundred_fivehundred").innerHTML = `${stats.twohundred_fivehundred.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.twohundred_fivehundred / stats.live) * 100)}%)</span>`;
+    document.getElementById("fivehundred_thousand").innerHTML = `${stats.fivehundred_thousand.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.fivehundred_thousand / stats.live) * 100)}%)</span>`;
+    document.getElementById("thousand_twothousand").innerHTML = `${stats.thousand_twothousand.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.thousand_twothousand / stats.live) * 100)}%)</span>`;
+    document.getElementById("twothousand_tenthousand").innerHTML = `${stats.twothousand_tenthousand.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.twothousand_tenthousand / stats.live) * 100)}%)</span>`;
+    document.getElementById("tenthousand").innerHTML = `${stats.tenthousand.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.tenthousand / stats.live) * 100)}%)</span>`;
 
-    document.getElementById("avg_viewcount").innerHTML = roundToTwo(stats.stats.viewers / stats.stats.live).toLocaleString();
-    document.getElementById("median_viewcount").innerHTML = roundToTwo(stats.stats.medianviewers).toLocaleString();
-    document.getElementById("avg_uptime").innerHTML = convertTime(stats.stats.avguptime);
-    document.getElementById("median_uptime").innerHTML = convertTime(stats.stats.medianuptime);
+    document.getElementById("avg_viewcount").innerHTML = roundToTwo(stats.viewers / stats.live).toLocaleString();
+    document.getElementById("median_viewcount").innerHTML = roundToTwo(stats.medianviewers).toLocaleString();
+    document.getElementById("avg_uptime").innerHTML = convertTime(stats.avguptime);
+    document.getElementById("median_uptime").innerHTML = convertTime(stats.medianuptime);
 
     for (let index = 0; index < 10; index++) {
-      document.getElementById(`lang${index}`).innerHTML = getLanguage(stats.stats.languages[index]._id);
-      document.getElementById(`lang${index}_channels`).innerHTML = `${stats.stats.languages[index].count.toLocaleString()}
-      <span class="text-body-secondary">(${roundToTwo((stats.stats.languages[index].count / stats.stats.live) * 100)}%)</span>`;
-      document.getElementById(`lang${index}_avg`).innerHTML = stats.stats.languages[index].avg_viewers;
-      document.getElementById(`lang${index}_max`).innerHTML = stats.stats.languages[index].max_viewers.toLocaleString();
+      document.getElementById(`lang${index}`).innerHTML = getLanguage(stats.languages[index]._id);
+      document.getElementById(`lang${index}_channels`).innerHTML = `${stats.languages[index].count.toLocaleString()}
+      <span class="text-body-secondary">(${roundToTwo((stats.languages[index].count / stats.live) * 100)}%)</span>`;
+      document.getElementById(`lang${index}_avg`).innerHTML = stats.languages[index].avg_viewers;
+      document.getElementById(`lang${index}_max`).innerHTML = stats.languages[index].max_viewers.toLocaleString();
     }
 
     function load100Langs() {
       let list = "";
-      for (let index = 10; index < stats.stats.languages.length; index++) {
+      for (let index = 10; index < stats.languages.length; index++) {
         list += `<div class="row">
           <div class="col align-self-center">
-          ${getLanguage(stats.stats.languages[index]._id)}
+          ${getLanguage(stats.languages[index]._id)}
           </div>
           <div class="col align-self-start">
-          ${stats.stats.languages[index].count.toLocaleString()}
-          <span class="text-body-secondary">(${roundToTwo((stats.stats.languages[index].count / stats.stats.live) * 100)}%)</span>
+          ${stats.languages[index].count.toLocaleString()}
+          <span class="text-body-secondary">(${roundToTwo((stats.languages[index].count / stats.live) * 100)}%)</span>
           </div>
           <div class="col align-self-start">
-          ${stats.stats.languages[index].avg_viewers}
+          ${stats.languages[index].avg_viewers}
           </div>
           <div class="col align-self-start">
-          ${stats.stats.languages[index].max_viewers.toLocaleString()}
+          ${stats.languages[index].max_viewers.toLocaleString()}
           </div>
         </div>`;
       }
@@ -1593,10 +1592,10 @@ async function loadStats() {
     loadStats.load100Langs = load100Langs;
 
     for (let index = 0; index < 10; index++) {
-      document.getElementById(`tag${index}`).innerHTML = stats.stats.top_tags[index].tag;
-      document.getElementById(`tag${index}_channels`).innerHTML = `${stats.stats.top_tags[index].channels.toLocaleString()}
-      <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].channels / stats.stats.live) * 100)}%)</span>`;
-      document.getElementById(`tag${index}_avg`).innerHTML = roundToTwo(stats.stats.top_tags[index].viewers / stats.stats.top_tags[index].channels).toLocaleString();
+      document.getElementById(`tag${index}`).innerHTML = stats.top_tags[index].tag;
+      document.getElementById(`tag${index}_channels`).innerHTML = `${stats.top_tags[index].channels.toLocaleString()}
+      <span class="text-body-secondary">(${roundToTwo((stats.top_tags[index].channels / stats.live) * 100)}%)</span>`;
+      document.getElementById(`tag${index}_avg`).innerHTML = roundToTwo(stats.top_tags[index].viewers / stats.top_tags[index].channels).toLocaleString();
     }
 
     function load100Tags() {
@@ -1605,14 +1604,14 @@ async function loadStats() {
         list += `
           <div class="row">
             <div class="col align-self-center">
-            ${stats.stats.top_tags[index].tag}
+            ${stats.top_tags[index].tag}
              </div>
             <div class="col align-self-start">
-            ${stats.stats.top_tags[index].channels.toLocaleString()}
-            <span class="text-body-secondary">(${roundToTwo((stats.stats.top_tags[index].channels / stats.stats.live) * 100)}%)</span>
+            ${stats.top_tags[index].channels.toLocaleString()}
+            <span class="text-body-secondary">(${roundToTwo((stats.top_tags[index].channels / stats.live) * 100)}%)</span>
             </div>
             <div class="col align-self-start">
-            <span class="placeholder-wave">${roundToTwo(stats.stats.top_tags[index].viewers / stats.stats.top_tags[index].channels).toLocaleString()}</span>
+            <span class="placeholder-wave">${roundToTwo(stats.top_tags[index].viewers / stats.top_tags[index].channels).toLocaleString()}</span>
           </div>
           </div>`;
       }
@@ -1622,72 +1621,68 @@ async function loadStats() {
     }
     loadStats.load100Tags = load100Tags;
 
-    document.getElementById("total_tags").innerHTML = `${stats.stats.total_tags.toLocaleString()}`;
-    document.getElementById("sum_tags").innerHTML = roundToTwo(stats.stats.sum_tags / stats.stats.live);
+    document.getElementById("total_tags").innerHTML = `${stats.total_tags.toLocaleString()}`;
+    document.getElementById("sum_tags").innerHTML = roundToTwo(stats.sum_tags / stats.live);
 
-    document.getElementById("defaultpfp").innerHTML = `${stats.stats.defaultpfp.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.defaultpfp / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("defaultpfp").innerHTML = `${stats.defaultpfp.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.defaultpfp / stats.live) * 100)}%)</span>`;
 
-    document.getElementById("nodesc").innerHTML = `${stats.stats.nodesc.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.nodesc / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("nodesc").innerHTML = `${stats.nodesc.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.nodesc / stats.live) * 100)}%)</span>`;
 
-    document.getElementById("notitle").innerHTML = `${stats.stats.notitle.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.notitle / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("notitle").innerHTML = `${stats.notitle.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.notitle / stats.live) * 100)}%)</span>`;
 
-    document.getElementById("nogame").innerHTML = `${stats.stats.nogame.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.nogame / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("nogame").innerHTML = `${stats.nogame.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.nogame / stats.live) * 100)}%)</span>`;
 
-    document.getElementById("drops").innerHTML = `${stats.stats.drops.toLocaleString()} 
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.drops / stats.stats.live) * 100)}%)</span>`;
+    document.getElementById("drops").innerHTML = `${stats.drops.toLocaleString()} 
+    <span class="text-body-secondary">(${roundToTwo((stats.drops / stats.live) * 100)}%)</span>`;
 
     document.getElementById("ccl_DrugsIntoxication").innerHTML = `
-    ${stats.stats.ccls["DrugsIntoxication"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["DrugsIntoxication"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["DrugsIntoxication"].viewers / stats.stats.ccls["DrugsIntoxication"].channels).toLocaleString()}`;
+    ${stats.ccls["DrugsIntoxication"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["DrugsIntoxication"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["DrugsIntoxication"].viewers / stats.ccls["DrugsIntoxication"].channels).toLocaleString()}`;
     document.getElementById("ccl_Gambling").innerHTML = `
-    ${stats.stats.ccls["Gambling"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["Gambling"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["Gambling"].viewers / stats.stats.ccls["Gambling"].channels).toLocaleString()}`;
+    ${stats.ccls["Gambling"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["Gambling"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["Gambling"].viewers / stats.ccls["Gambling"].channels).toLocaleString()}`;
     document.getElementById("ccl_MatureGame").innerHTML = `
-    ${stats.stats.ccls["MatureGame"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["MatureGame"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["MatureGame"].viewers / stats.stats.ccls["MatureGame"].channels).toLocaleString()}`;
+    ${stats.ccls["MatureGame"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["MatureGame"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["MatureGame"].viewers / stats.ccls["MatureGame"].channels).toLocaleString()}`;
     document.getElementById("ccl_ProfanityVulgarity").innerHTML = `
-    ${stats.stats.ccls["ProfanityVulgarity"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ProfanityVulgarity"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["ProfanityVulgarity"].viewers / stats.stats.ccls["ProfanityVulgarity"].channels).toLocaleString()}`;
+    ${stats.ccls["ProfanityVulgarity"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["ProfanityVulgarity"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["ProfanityVulgarity"].viewers / stats.ccls["ProfanityVulgarity"].channels).toLocaleString()}`;
     document.getElementById("ccl_SexualThemes").innerHTML = `
-    ${stats.stats.ccls["SexualThemes"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["SexualThemes"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["SexualThemes"].viewers / stats.stats.ccls["SexualThemes"].channels).toLocaleString()}`;
+    ${stats.ccls["SexualThemes"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["SexualThemes"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["SexualThemes"].viewers / stats.ccls["SexualThemes"].channels).toLocaleString()}`;
     document.getElementById("ccl_ViolentGraphic").innerHTML = `
-    ${stats.stats.ccls["ViolentGraphic"].channels.toLocaleString()} channels
-    <span class="text-body-secondary">(${roundToTwo((stats.stats.ccls["ViolentGraphic"].channels / stats.stats.live) * 100)}%)</span> - 
-    Average view count: ${roundToTwo(stats.stats.ccls["ViolentGraphic"].viewers / stats.stats.ccls["ViolentGraphic"].channels).toLocaleString()}`;
+    ${stats.ccls["ViolentGraphic"].channels.toLocaleString()} channels
+    <span class="text-body-secondary">(${roundToTwo((stats.ccls["ViolentGraphic"].channels / stats.live) * 100)}%)</span> - 
+    Average view count: ${roundToTwo(stats.ccls["ViolentGraphic"].viewers / stats.ccls["ViolentGraphic"].channels).toLocaleString()}`;
 
     document.getElementById("oldest_user").innerHTML = `
     <div class="container-fluid">
     <div class="row">
       <div class="col-md-4">
-      <a href="https://twitch.tv/${stats.stats.oldest_user.username}" target="_blank" rel="noopener noreferrer">
-        <img src="${stats.stats.oldest_user.profile_image_url}" class="img-fluid rounded-start donkstats-pfp" title="${stats.stats.oldest_user.display_name}" alt="${
-      stats.stats.oldest_user.display_name
-    }"></a>
+      <a href="https://twitch.tv/${stats.oldest_user.username}" target="_blank" rel="noopener noreferrer">
+        <img src="${stats.oldest_user.profile_image_url}" class="img-fluid rounded-start donkstats-pfp" title="${stats.oldest_user.display_name}" alt="${stats.oldest_user.display_name}"></a>
       </div>
       <div class="col">
         <div class="card-body">
-          <h5 class="card-title"><a href="https://twitch.tv/${stats.stats.oldest_user.username}" target="_blank" rel="noopener noreferrer">${
-      stats.stats.oldest_user.username == stats.stats.oldest_user.display_name.toLowerCase()
-        ? ` ${stats.stats.oldest_user.display_name}`
-        : ` ${stats.stats.oldest_user.display_name} (${stats.stats.oldest_user.username})`
-    }${stats.stats.oldest_user.broadcaster_type == "partner" ? svg : ""}${stats.stats.oldest_user.type == "staff" ? staffpic : ""}</a></h5>
+          <h5 class="card-title"><a href="https://twitch.tv/${stats.oldest_user.username}" target="_blank" rel="noopener noreferrer">${
+      stats.oldest_user.username == stats.oldest_user.display_name.toLowerCase() ? ` ${stats.oldest_user.display_name}` : ` ${stats.oldest_user.display_name} (${stats.oldest_user.username})`
+    }${stats.oldest_user.broadcaster_type == "partner" ? svg : ""}${stats.oldest_user.type == "staff" ? staffpic : ""}</a></h5>
           <p class="card-text">
-          Account created ${relativeTime(Date.now() - stats.stats.oldest_user.age_timestamp)} ago <span class="text-body-secondary">(${new Date(stats.stats.oldest_user.age_timestamp)
+          Account created ${relativeTime(Date.now() - stats.oldest_user.age_timestamp)} ago <span class="text-body-secondary">(${new Date(stats.oldest_user.age_timestamp)
       .toISOString()
       .replace("T", " ")
       .replace("Z", "")})</span> <br>
-          ${stats.stats.oldest_user.game_name || "<span class='text-body-secondary'>No category</span>"} • ${stats.stats.oldest_user.viewers.toLocaleString()} ${
-      stats.stats.oldest_user.viewers == 1 ? "Viewer" : "Viewers"
+          ${stats.oldest_user.game_name || "<span class='text-body-secondary'>No category</span>"} • ${stats.oldest_user.viewers.toLocaleString()} ${
+      stats.oldest_user.viewers == 1 ? "Viewer" : "Viewers"
     }
           </p>
         </div>
@@ -1699,25 +1694,21 @@ async function loadStats() {
   <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
-    <a href="https://twitch.tv/${stats.stats.newest_user.username}" target="_blank" rel="noopener noreferrer">
-      <img src="${stats.stats.newest_user.profile_image_url}" class="img-fluid rounded-start donkstats-pfp" title="${stats.stats.newest_user.display_name}" alt="${
-      stats.stats.newest_user.display_name
-    }"></a>
+    <a href="https://twitch.tv/${stats.newest_user.username}" target="_blank" rel="noopener noreferrer">
+      <img src="${stats.newest_user.profile_image_url}" class="img-fluid rounded-start donkstats-pfp" title="${stats.newest_user.display_name}" alt="${stats.newest_user.display_name}"></a>
     </div>
     <div class="col">
       <div class="card-body">
-        <h5 class="card-title"><a href="https://twitch.tv/${stats.stats.newest_user.username}" target="_blank" rel="noopener noreferrer">${
-      stats.stats.newest_user.username == stats.stats.newest_user.display_name.toLowerCase()
-        ? ` ${stats.stats.newest_user.display_name}`
-        : ` ${stats.stats.newest_user.display_name} (${stats.stats.newest_user.username})`
-    }${stats.stats.newest_user.broadcaster_type == "partner" ? svg : ""}${stats.stats.newest_user.type == "staff" ? staffpic : ""}</a></h5>
+        <h5 class="card-title"><a href="https://twitch.tv/${stats.newest_user.username}" target="_blank" rel="noopener noreferrer">${
+      stats.newest_user.username == stats.newest_user.display_name.toLowerCase() ? ` ${stats.newest_user.display_name}` : ` ${stats.newest_user.display_name} (${stats.newest_user.username})`
+    }${stats.newest_user.broadcaster_type == "partner" ? svg : ""}${stats.newest_user.type == "staff" ? staffpic : ""}</a></h5>
         <p class="card-text">
-        Account created ${relativeTime(Date.now() - stats.stats.newest_user.age_timestamp)} ago <span class=text-body-secondary>(${new Date(stats.stats.newest_user.age_timestamp)
+        Account created ${relativeTime(Date.now() - stats.newest_user.age_timestamp)} ago <span class=text-body-secondary>(${new Date(stats.newest_user.age_timestamp)
       .toISOString()
       .replace("T", " ")
       .replace("Z", "")})</span><br>
-        ${stats.stats.newest_user.game_name || "<span class='text-body-secondary'>No category</span>"} • ${stats.stats.newest_user.viewers.toLocaleString()} ${
-      stats.stats.newest_user.viewers == 1 ? "Viewer" : "Viewers"
+        ${stats.newest_user.game_name || "<span class='text-body-secondary'>No category</span>"} • ${stats.newest_user.viewers.toLocaleString()} ${
+      stats.newest_user.viewers == 1 ? "Viewer" : "Viewers"
     }
         </p>
       </div>
@@ -1725,35 +1716,29 @@ async function loadStats() {
   </div>
 </div>`;
 
-    let most_streamed_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_streamed.id}-285x380.jpg`);
-    document.getElementById("most_streamed_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.most_streamed.id}${most_streamed_link ? "" : "_IGDB"}-285x380.jpg`;
-    document.getElementById("most_streamed_img").title = stats.stats.most_streamed.name;
-    document.getElementById("most_streamed_img").alt = stats.stats.most_streamed.name;
+    let most_streamed_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.most_streamed.id}-285x380.jpg`);
+    document.getElementById("most_streamed_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.most_streamed.id}${most_streamed_link ? "" : "_IGDB"}-285x380.jpg`;
+    document.getElementById("most_streamed_img").title = stats.most_streamed.name;
+    document.getElementById("most_streamed_img").alt = stats.most_streamed.name;
     document.getElementById("most_streamed").innerHTML = `
     <h5 class="card-title">
-    <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(stats.stats.most_streamed.name)}" target="_blank" rel="noopener noreferrer">${stats.stats.most_streamed.name}</a>
+    <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(stats.most_streamed.name)}" target="_blank" rel="noopener noreferrer">${stats.most_streamed.name}</a>
     </h5>
     <p class="card-text">
-    ${stats.stats.most_streamed.viewers.toLocaleString()} Viewers <span class="text-body-secondary">(${roundToTwo(
-      (stats.stats.most_streamed.viewers / stats.stats.viewers) * 100,
-    )}%)</span><br>
-    ${stats.stats.most_streamed.channels.toLocaleString()} Live Channels <span class="text-body-secondary">(${roundToTwo(
-      (stats.stats.most_streamed.channels / stats.stats.live) * 100,
-    )}%)</span><br>
+    ${stats.most_streamed.viewers.toLocaleString()} Viewers <span class="text-body-secondary">(${roundToTwo((stats.most_streamed.viewers / stats.viewers) * 100)}%)</span><br>
+    ${stats.most_streamed.channels.toLocaleString()} Live Channels <span class="text-body-secondary">(${roundToTwo((stats.most_streamed.channels / stats.live) * 100)}%)</span><br>
     </p>`;
 
-    let highest_ratio_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.highest_ratio.id}-285x380.jpg`);
-    document.getElementById("highest_ratio_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.stats.highest_ratio.id}${highest_ratio_link ? "" : "_IGDB"}-285x380.jpg`;
-    document.getElementById("highest_ratio_img").title = stats.stats.highest_ratio.name;
-    document.getElementById("highest_ratio_img").alt = stats.stats.highest_ratio.name;
+    let highest_ratio_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${stats.highest_ratio.id}-285x380.jpg`);
+    document.getElementById("highest_ratio_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${stats.highest_ratio.id}${highest_ratio_link ? "" : "_IGDB"}-285x380.jpg`;
+    document.getElementById("highest_ratio_img").title = stats.highest_ratio.name;
+    document.getElementById("highest_ratio_img").alt = stats.highest_ratio.name;
     document.getElementById("highest_ratio").innerHTML = `
     <h5 class="card-title">
-    <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(stats.stats.highest_ratio.name)}" target="_blank" rel="noopener noreferrer">${stats.stats.highest_ratio.name}</a>
+    <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(stats.highest_ratio.name)}" target="_blank" rel="noopener noreferrer">${stats.highest_ratio.name}</a>
     </h5>
     <p class="card-text">
-    Only ${stats.stats.highest_ratio.channels} live ${
-      stats.stats.highest_ratio.channels == 1 ? "channel" : "channels"
-    } with a total of ${stats.stats.highest_ratio.viewers.toLocaleString()} viewers</p>`;
+    Only ${stats.highest_ratio.channels} live ${stats.highest_ratio.channels == 1 ? "channel" : "channels"} with a total of ${stats.highest_ratio.viewers.toLocaleString()} viewers</p>`;
 
     load_least_popular();
     async function load_least_popular(direction = "random") {
@@ -1768,21 +1753,21 @@ async function loadStats() {
           categoryIndex--;
           break;
         default:
-          categoryIndex = Math.floor(Math.random() * stats.stats.least_popular.length);
+          categoryIndex = Math.floor(Math.random() * stats.least_popular.length);
       }
       document.getElementById("least_popular").dataset.index = categoryIndex;
-      let random = stats.stats.least_popular[categoryIndex % stats.stats.least_popular.length];
+      let random = stats.least_popular[categoryIndex % stats.least_popular.length];
       let least_popular_link = await checkPic(`https://static-cdn.jtvnw.net/ttv-boxart/${random.game_id}-285x380.jpg`);
 
       document.getElementById("least_popular_img").src = `https://static-cdn.jtvnw.net/ttv-boxart/${random.game_id}${least_popular_link ? "" : "_IGDB"}-285x380.jpg`;
-      document.getElementById("least_popular_img").title = stats.stats.least_popular.name;
-      document.getElementById("least_popular_img").alt = stats.stats.least_popular.name;
+      document.getElementById("least_popular_img").title = stats.least_popular.name;
+      document.getElementById("least_popular_img").alt = stats.least_popular.name;
       document.getElementById("least_popular").innerHTML = `
       <h4 class="card-title">
       <a href="https://www.twitch.tv/directory/game/${encodeURIComponent(random.game_name)}" target="_blank" rel="noopener noreferrer">${random.game_name}</a>
       </h4>
       <p class="card-text text-body-secondary">
-      Multiple categories (${stats.stats.least_popular.length}) meet this condition, use the buttons below to see more categories
+      Multiple categories (${stats.least_popular.length}) meet this condition, use the buttons below to see more categories
       </p>
       <div class="btn-group float-end" role="group" aria-label="least popular categories browser">
           <button type="button" onclick="loadStats.load_least_popular('back')" class="btn btn-secondary"><i class="material-icons notranslate">arrow_back</i></button>
@@ -1791,9 +1776,9 @@ async function loadStats() {
     }
     loadStats.load_least_popular = load_least_popular;
 
-    document.getElementById("info").innerHTML = `Stats updated on ${new Date(stats.stats.time)}`;
-    if (Date.now() - stats.stats.time > 7200000) {
-      document.getElementById("outdatedWarningText").innerHTML = `Stats are outdated, last update on ${new Date(stats.stats.time)}. Try refreshing or contacting me :)`;
+    document.getElementById("info").innerHTML = `Stats updated on ${new Date(stats.time)}`;
+    if (Date.now() - stats.time > 7200000) {
+      document.getElementById("outdatedWarningText").innerHTML = `Stats are outdated, last update on ${new Date(stats.time)}. Try refreshing or contacting me :)`;
       document.getElementById("outdatedWarning").style.display = "";
     }
   } catch (error) {
