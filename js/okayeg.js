@@ -865,14 +865,14 @@ async function loadFollowList() {
       }
 
       let followList = await response.json();
-      let fetchTime = followList.data.time;
+      let fetchTime = followList.time;
       let displayName = followList.data.display_name.toLowerCase() == followList.data.login ? followList.data.display_name : `${followList.data.display_name} (${followList.data.login})`;
 
       document.getElementById("list").innerHTML = "";
       if (followList.data.total == 0) {
         document.getElementById("title1").innerHTML = `
         <h1 class="display-1"><a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is not following anyone.</h1>
-        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)}</div>`;
+        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime).toISOString()}</div>`;
         return;
       }
 
@@ -882,7 +882,9 @@ async function loadFollowList() {
         <h1 class="display-1"><a href="https://twitch.tv/${followList.data.login}" target="_blank" rel="noopener noreferrer">${displayName}</a> is following ${
           followList.data.total
         } people:</h1>
-        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(fetchTime)} Use the <kbd>=optout followlist</kbd> command in OkayegBOT's chat to opt out</div>`;
+        <div class="alert alert-warning" role="alert">Cached follow list from ${new Date(
+          fetchTime,
+        ).toISOString()} Use the <kbd>=optout followlist</kbd> command in OkayegBOT's chat to opt out</div>`;
 
         for (let i = 0, j = list.length; i < j; i++) {
           let display_name = followList.data.following[i].display_name;
