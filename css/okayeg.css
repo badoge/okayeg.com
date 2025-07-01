@@ -73,20 +73,6 @@
   overflow: hidden;
 }
 
-.emote {
-  border-radius: 6px;
-  min-width: 122px;
-  margin: 5px;
-  width: fit-content;
-}
-
-.emotecontainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  text-align: center;
-}
-
 .nn {
   image-rendering: pixelated;
 }

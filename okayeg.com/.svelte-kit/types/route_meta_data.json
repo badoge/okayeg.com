@@ -1,0 +1,28 @@
+{
+	"/": [],
+	"/api": [],
+	"/bounty": [],
+	"/clips": [],
+	"/commands": [],
+	"/egdle": [
+		"src/routes/egdle/+page.js"
+	],
+	"/leaderboard": [],
+	"/market": [],
+	"/mod": [],
+	"/profile": [],
+	"/recap": [],
+	"/stocks": [],
+	"/stream": [],
+	"/trivia": [],
+	"/twitch": [],
+	"/twitch/emotes": [],
+	"/twitch/emote": [],
+	"/twitch/global": [],
+	"/twitch/global/emotes": [],
+	"/twitch/stats": [],
+	"/twitch/subs": [],
+	"/twitch/time": [],
+	"/twitch/user": [],
+	"/[...path]": []
+}
