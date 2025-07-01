@@ -3,13 +3,20 @@ import { today } from "$lib/game/consts";
 import { showAdviceFriend } from "$lib/utils/adviceFriend";
 import { sample } from "$lib/utils/common";
 
+/**
+ * @type {string[]}
+ */
 const facts = [];
 
+/**
+ * @param {Date} lastVisitDate
+ */
 export function dailyEggFactRequired(lastVisitDate) {
   if (!browser) return false;
 
   // egg facts are daily
   const params = ["getFullYear", "getMonth", "getDate"];
+  // @ts-ignore
   return params.some((method) => lastVisitDate[method]() !== today[method]());
 }
 

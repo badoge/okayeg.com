@@ -3,6 +3,9 @@ import { nullFunction } from "$lib/game/consts";
 import AdviceFriend from "$lib/elements/AdviceFriend.svelte";
 import { mount, unmount } from "svelte";
 
+/**
+ * @param {string} content
+ */
 export function showAdviceFriend(content, title = "", sanitize = false) {
   if (!browser) return;
 
@@ -33,6 +36,9 @@ export function showAdviceFriend(content, title = "", sanitize = false) {
   });
 }
 
+/**
+ * @param {string} content
+ */
 export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallback = nullFunction) {
   if (!browser) return;
 
