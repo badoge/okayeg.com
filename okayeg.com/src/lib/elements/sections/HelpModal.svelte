@@ -1,23 +1,22 @@
-<!-- @migration-task Error while migrating Svelte code: `</b>` attempted to close an element that was not open
-https://svelte.dev/e/element_invalid_closing_tag -->
 <script>
   import IcBaselineSettings from "~icons/ic/baseline-settings";
-  import IcBaselineHelpOutline from '~icons/ic/baseline-help-outline';
-  import IcBaselineFavorite from '~icons/ic/baseline-favorite';
+  import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
+  import IcBaselineFavorite from "~icons/ic/baseline-favorite";
   import game from "$lib/utils/state";
 </script>
 
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title fs-5" id="mdlHelpTitle">
-      <IcBaselineHelpOutline/> About
+      <IcBaselineHelpOutline /> About
     </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">
     {#if $game}
       <h4>{$game.name}</h4>
-      <svelte:component this={$game.helperComponent} />
+      {@const SvelteComponent = $game.helperComponent}
+      <SvelteComponent />
     {:else}
       <h4>
         <img class="align-text-bottom me-1" src="/pics/icon/favicon-32x32.png" alt="Okayeg" width="28" height="28" />
@@ -29,7 +28,7 @@ https://svelte.dev/e/element_invalid_closing_tag -->
       </p>
       <p>
         Information about each game is available inside: select any game, then click the
-        <b><IcBaselineHelpOutline> Help</b> icon.
+        <b><IcBaselineHelpOutline /> Help</b> icon.
       </p>
       <p>
         Most games will require basic interaction by means of <em>clicking</em> or <em>tapping</em>. Use left mouse button to click stuff, or your touch screen to tap stuff. Simple enough,
@@ -43,7 +42,7 @@ https://svelte.dev/e/element_invalid_closing_tag -->
     <hr />
     <div class="authorship text-muted">
       <a href="https://github.com/g7eternal/egdle2" rel="noreferrer" target="_blank">Egdle Game Hub</a>
-      created with <IcBaselineFavorite class="text-red text-xl"> by
+      created with <IcBaselineFavorite class="text-red text-xl" /> by
       <a href="https://g7eternal.com/" rel="noreferrer" target="_blank" translate="no">G7Eternal</a>
     </div>
   </div>
