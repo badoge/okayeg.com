@@ -1,7 +1,4 @@
-<p>
-  This is a logic puzzle involving placement of differently colored eggs (red and blue by default) on a grid. The
-  objective is to fill the grid as quickly as possible.
-</p>
+<p>This is a logic puzzle involving placement of differently colored eggs (red and blue by default) on a grid. The objective is to fill the grid as quickly as possible.</p>
 
 <hr />
 <img src="example/binary.webp" alt="Example - Binary" class="main" />
@@ -42,10 +39,7 @@
 
 <p>Each puzzle begins with several squares already filled. Prefilled cells are locked and cannot be changed.</p>
 <p>Click on an empty cell to put an egg in it. Each click will change the color of the egg.</p>
-<p>
-  The timer starts once you reveal the starting position. The timer stops when the game ends. Abandoning the game does
-  not stop the timer!
-</p>
+<p>The timer starts once you reveal the starting position. The timer stops when the game ends. Abandoning the game does not stop the timer!</p>
 
 <hr />
 

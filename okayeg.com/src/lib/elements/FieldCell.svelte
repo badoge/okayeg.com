@@ -1,10 +1,9 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from "svelte/legacy";
 
   import { Confetti } from "svelte-confetti";
   import game, { forceUpdateDOM } from "$lib/utils/state";
 
-  
   /**
    * @typedef {Object} Props
    * @property {any} cell
@@ -14,13 +13,11 @@
    */
 
   /** @type {Props} */
-  let {
-    cell,
-    allowFlicks = false,
-    focused = false,
-    isPuzzlePiece = false
-  } = $props();
-  let puzzleScale = $state(), puzzleOffset = $state(), puzzleX = $state(), puzzleY = $state();
+  let { cell, allowFlicks = false, focused = false, isPuzzlePiece = false } = $props();
+  let puzzleScale = $state(),
+    puzzleOffset = $state(),
+    puzzleX = $state(),
+    puzzleY = $state();
 
   run(() => {
     const sizeOffset = 142 - 3 * $game.field.width;

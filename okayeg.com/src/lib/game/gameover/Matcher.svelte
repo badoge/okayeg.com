@@ -11,12 +11,7 @@
   <b class="text-success">{$game.stats.lastClicks}</b>
   clicks.
   <br />
-  {@html flavors[
-    Math.min(
-      Math.max(0, Math.floor(($game.stats.lastClicks - $game.field.size) / 5)),
-      flavors.length - 1
-    )
-  ]}
+  {@html flavors[Math.min(Math.max(0, Math.floor(($game.stats.lastClicks - $game.field.size) / 5)), flavors.length - 1)]}
 </p>
 
 <Stats />

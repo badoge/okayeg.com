@@ -22,9 +22,7 @@
 
 <hr />
 
-<p class="fw-bold">
-  Field will be refreshed each day! Keep playing and share your score with friends!
-</p>
+<p class="fw-bold">Field will be refreshed each day! Keep playing and share your score with friends!</p>
 
 <style>
   img {

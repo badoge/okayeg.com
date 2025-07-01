@@ -6,7 +6,6 @@
   import Stats from "../stats/Puzzle.svelte";
 
   let statRef = $derived($game.stats[$game.options.gridSizes[$game.settings.gridSizes]]);
-  
 </script>
 
 <p>👍 Good job! You've solved the puzzle!</p>

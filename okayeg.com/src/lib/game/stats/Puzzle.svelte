@@ -7,7 +7,6 @@
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
 
   let statRef = $derived($game.stats[$game.options.gridSizes[$game.settings.gridSizes]]);
-  
 </script>
 
 <BaseStatsTable>

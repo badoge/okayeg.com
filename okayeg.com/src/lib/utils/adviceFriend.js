@@ -22,11 +22,11 @@ export function showAdviceFriend(content, title = "", sanitize = false) {
   root.appendChild(textContent);
 
   const adviceFriend = mount(AdviceFriend, {
-      props: {
-        content: root,
-      },
-      target: document.body,
-    });
+    props: {
+      content: root,
+    },
+    target: document.body,
+  });
 
   adviceFriend.$on("hide-advice", () => {
     unmount(adviceFriend);
@@ -53,12 +53,12 @@ export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallba
   root.appendChild(btn);
 
   const adviceFriend = mount(AdviceFriend, {
-      props: {
-        interactive: true,
-        content: root,
-      },
-      target: document.body,
-    });
+    props: {
+      interactive: true,
+      content: root,
+    },
+    target: document.body,
+  });
 
   adviceFriend.$on("hide-advice", () => {
     unmount(adviceFriend);

@@ -15,8 +15,8 @@
   /** @type {Props} */
   let { content, interactive = false } = $props();
 
-  let tippyInstance = null,
-    tippyRoot = $state(null);
+  let tippyInstance = null;
+  let tippyRoot = $state(null);
 
   const dispatch = createEventDispatcher();
 

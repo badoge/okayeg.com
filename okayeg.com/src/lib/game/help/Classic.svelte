@@ -6,8 +6,7 @@
 <hr />
 
 <p>
-  <strong>♨️&nbsp;Hard mode</strong> is an optional challenge. Field cells will fade out after some
-  time, requiring you to keep track of your previous actions. Also this mode adds a
+  <strong>♨️&nbsp;Hard mode</strong> is an optional challenge. Field cells will fade out after some time, requiring you to keep track of your previous actions. Also this mode adds a
   <em>🍳&nbsp;broken egg</em>: if you find one, game will instantly end as a loss.
 </p>
 

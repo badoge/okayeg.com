@@ -9,15 +9,13 @@
 <hr />
 
 <p>
-  Each cell has a different color. You can use the color palette to change colors of your cells.
-  Whenever you do that, any cell that matches chosen color - and is adjacent to a cell with egg - is
-  filled with another egg.
+  Each cell has a different color. You can use the color palette to change colors of your cells. Whenever you do that, any cell that matches chosen color - and is adjacent to a cell with egg
+  - is filled with another egg.
 </p>
 
 <p>
-  Each run is evaluated by two criterias: how fast and how efficient you managed to fill the field.
-  You can try to speedrun the game by using less time and clicking faster, or take more time - but
-  solve the game in less clicks.
+  Each run is evaluated by two criterias: how fast and how efficient you managed to fill the field. You can try to speedrun the game by using less time and clicking faster, or take more time
+  - but solve the game in less clicks.
 </p>
 
 <p>

@@ -26,6 +26,7 @@
   <meta property="og:url" content="https://okayeg.com/egdle" />
   <meta property="og:description" content="Eg-related game. Eg mixes, news, big plays, tilts. Everything that is somewhat related to eg." />
   <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/css/egdle.css" />
 </svelte:head>
 
 {#if pageReady && $appReady}

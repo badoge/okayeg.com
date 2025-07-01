@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from "svelte/legacy";
 
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
@@ -8,7 +8,9 @@
   import GameOverInfo from "./GameOverInfo.svelte";
   import FieldCell from "$lib/elements/FieldCell.svelte";
 
-  let gameOverModalElement = $state(), gameOverModal = $state(), gameOverModalTimer = $state();
+  let gameOverModalElement = $state();
+  let gameOverModal = $state();
+  let gameOverModalTimer = $state();
 
   const cellAnimTiming = $state({
     in: 0,

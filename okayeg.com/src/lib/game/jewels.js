@@ -260,8 +260,7 @@ class Jewels extends BaseGame {
         if (y > 1) {
           const colorsMatch = grid[x][y].color === grid[x][y - 1].color && grid[x][y].color === grid[x][y - 2].color;
           const allCellsAreAlive = grid[x][y].visible && grid[x][y - 1].visible && grid[x][y - 2].visible;
-          const allCellsAreStatic =
-            !grid[x][y].isTraveling && !grid[x][y - 1].isTraveling && !grid[x][y - 2].isTraveling;
+          const allCellsAreStatic = !grid[x][y].isTraveling && !grid[x][y - 1].isTraveling && !grid[x][y - 2].isTraveling;
           if (colorsMatch && allCellsAreStatic && allCellsAreAlive) {
             grid[x][y].finisher = true;
             grid[x][y - 1].finisher = true;
@@ -272,8 +271,7 @@ class Jewels extends BaseGame {
         if (x > 1) {
           const colorsMatch = grid[x][y].color === grid[x - 1][y].color && grid[x][y].color === grid[x - 2][y].color;
           const allCellsAreAlive = grid[x][y].visible && grid[x - 1][y].visible && grid[x - 2][y].visible;
-          const allCellsAreStatic =
-            !grid[x][y].isTraveling && !grid[x - 1][y].isTraveling && !grid[x - 2][y].isTraveling;
+          const allCellsAreStatic = !grid[x][y].isTraveling && !grid[x - 1][y].isTraveling && !grid[x - 2][y].isTraveling;
           if (colorsMatch && allCellsAreStatic && allCellsAreAlive) {
             grid[x][y].finisher = true;
             grid[x - 1][y].finisher = true;

@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from "svelte/legacy";
 
   import { fly } from "svelte/transition";
   import { onMount } from "svelte";
@@ -7,7 +7,9 @@
   import GameOverInfo from "./GameOverInfo.svelte";
   import FieldCell from "$lib/elements/FieldCell.svelte";
 
-  let gameOverModalElement = $state(), gameOverModal = $state(), gameOverModalTimer = $state();
+  let gameOverModalElement = $state();
+  let gameOverModal = $state();
+  let gameOverModalTimer = $state();
 
   run(() => {
     if (!$game._gameOverScreenSeen && $game.gameOver) {

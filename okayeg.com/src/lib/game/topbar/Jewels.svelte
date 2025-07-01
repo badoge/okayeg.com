@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from "svelte/legacy";
 
   import { tweened } from "svelte/motion";
   import currentGame from "$lib/utils/state";
@@ -46,7 +46,13 @@
 
 <div class="timer-bar">
   <div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar bg-success" class:progress-bar-striped={!$currentGame.gameOver} style:width={progress + "%"} class:bg-warning={progress < 35} class:bg-danger={progress < 15}></div>
+    <div
+      class="progress-bar bg-success"
+      class:progress-bar-striped={!$currentGame.gameOver}
+      style:width={progress + "%"}
+      class:bg-warning={progress < 35}
+      class:bg-danger={progress < 15}
+    ></div>
   </div>
 </div>
 

@@ -5,16 +5,12 @@
 <hr />
 
 <p>
-  You start with three 💚 hearts. If you make a mistake, the round is restarted - and you lose a
-  heart.
+  You start with three 💚 hearts. If you make a mistake, the round is restarted - and you lose a heart.
   <br />
   Your goal is to survive for as long as possible. If you run out of hearts, the game ends.
 </p>
 
-<p>
-  Rounds will get increasingly harder as you progress. The amount of eggs in your pattern will grow,
-  and the pattern demonstration time will shorten.
-</p>
+<p>Rounds will get increasingly harder as you progress. The amount of eggs in your pattern will grow, and the pattern demonstration time will shorten.</p>
 
 <style>
   img {
