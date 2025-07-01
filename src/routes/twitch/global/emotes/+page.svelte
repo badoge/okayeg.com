@@ -1,1 +1,1 @@
-<h1>emotes</h1>
+<h1>global emotes</h1>
