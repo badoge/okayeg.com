@@ -1,5 +1,5 @@
 <script>
-  import { run } from 'svelte/legacy';
+  import { run } from "svelte/legacy";
 
   import IcBaselineArrowBack from "~icons/ic/baseline-arrow-back";
   import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
@@ -53,13 +53,6 @@
     </button>
   </div>
 </div>
-
-<!-- settings modal -->
-<!-- <div class="modal fade" id="mdlSettings" tabindex="-1" aria-labelledby="mdlSettingsTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <Settings />
-  </div>
-</div> -->
 
 <dialog id="mdlSettings" class="modal">
   <div class="modal-box">
