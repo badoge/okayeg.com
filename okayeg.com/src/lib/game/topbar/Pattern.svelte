@@ -2,9 +2,9 @@
   import currentGame from "$lib/utils/state";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
-  import { showConfirmAdviceFriend } from "../../utils/adviceFriend";
-  import { emoji } from "../consts";
-  import { STARTING_LIVES } from "../pattern";
+  import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
+  import { emoji } from "$lib/game/consts";
+  import { STARTING_LIVES } from "$lib/game/pattern";
 
   function startNewRun() {
     $currentGame.startNewRun();

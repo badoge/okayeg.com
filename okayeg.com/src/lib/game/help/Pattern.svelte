@@ -1,7 +1,7 @@
 <p>Memorize the shown pattern, then click all the eggs.</p>
 
 <hr />
-<img src="example/pattern.webp" alt="Example - Pattern" />
+<img src="/example/pattern.webp" alt="Example - Pattern" />
 <hr />
 
 <p>

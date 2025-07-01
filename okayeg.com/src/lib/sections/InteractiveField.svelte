@@ -5,7 +5,7 @@
   import { flip } from "svelte/animate";
   import { onMount } from "svelte";
   import game from "$lib/utils/state";
-  import GameOverInfo from "./GameOverInfo.svelte";
+  import GameOverInfo from "$lib/sections/GameOverInfo.svelte";
   import FieldCell from "$lib/elements/FieldCell.svelte";
 
   let gameOverModalElement = $state();

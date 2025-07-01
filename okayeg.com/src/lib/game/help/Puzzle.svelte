@@ -1,7 +1,7 @@
 <p>This game is a variation of a "15" puzzle. Your goal is to assemble the picture by moving pieces around using an empty space.</p>
 
 <hr />
-<img src="example/puzzle.webp" alt="Example - Puzzle" />
+<img src="/example/puzzle.webp" alt="Example - Puzzle" />
 <hr />
 
 <p>

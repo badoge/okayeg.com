@@ -1,6 +1,5 @@
 <script>
   import { dev as devMode, version } from "$app/environment";
-  import { settings } from "$lib/utils/settings";
   import game, { forceUpdateDOM } from "$lib/utils/state";
   import { settingsLibrary, cellColors } from "$lib/game/consts";
 

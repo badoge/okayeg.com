@@ -1,7 +1,7 @@
 <script>
   import currentGame from "$lib/utils/state";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
-  import Stats from "../stats/Aimlab.svelte";
+  import Stats from "$lib/game/stats/Aimlab.svelte";
 
   const timeStore = $currentGame.displayTime;
 </script>

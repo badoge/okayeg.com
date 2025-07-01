@@ -19,7 +19,7 @@
       <SvelteComponent />
     {:else}
       <h4>
-        <img class="align-text-bottom me-1" src="/pics/icon/favicon-32x32.png" alt="Okayeg" width="28" height="28" />
+        <img class="align-text-bottom me-1" src="/icon/favicon-32x32.png" alt="Okayeg" width="28" height="28" />
         <b>Egdle</b> Game Hub 🥚
       </h4>
       <p>

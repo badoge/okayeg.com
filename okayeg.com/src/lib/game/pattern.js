@@ -1,12 +1,12 @@
-import { BaseField, BaseGame } from "./baseClasses";
+import { BaseField, BaseGame } from "$lib/game/baseClasses";
 import { sample, sampleSize } from "$lib/utils/common";
 import { forceUpdateDOM } from "$lib/utils/state";
-import { cellColors, emoji } from "./consts";
+import { cellColors, emoji } from "$lib/game/consts";
 
-import TopBar from "./topbar/Pattern.svelte";
-import Helper from "./help/Pattern.svelte";
-import Stats from "./stats/Pattern.svelte";
-import GameOver from "./gameover/Pattern.svelte";
+import TopBar from "$lib/game/topbar/Pattern.svelte";
+import Helper from "$lib/game/help/Pattern.svelte";
+import Stats from "$lib/game/stats/Pattern.svelte";
+import GameOver from "$lib/game/gameover/Pattern.svelte";
 
 export const STARTING_EGGS = 4,
   STARTING_LIVES = 3,

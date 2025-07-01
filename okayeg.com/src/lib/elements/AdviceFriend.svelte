@@ -58,7 +58,7 @@
 
 {#if animator}
   <div class="okayeg" in:fly={transitionParams} out:fly={transitionParams}>
-    <img src="icon-512x512.png" width="512" height="512" alt="Okayeg" bind:this={tippyRoot} />
+    <img src="/icon/icon-512x512.png" width="512" height="512" alt="Okayeg" bind:this={tippyRoot} />
   </div>
 {/if}
 

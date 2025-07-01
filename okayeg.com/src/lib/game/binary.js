@@ -1,15 +1,15 @@
 import { writable } from "svelte/store";
-import { BaseGame } from "./baseClasses";
-import { cellColors, emoji, binarySeeds } from "./consts";
+import { BaseGame } from "$lib/game/baseClasses";
+import { cellColors, emoji, binarySeeds } from "$lib/game/consts";
 import { formatTimer } from "$lib/utils/common";
 import { forceUpdateDOM } from "$lib/utils/state";
 
 import { showAdviceFriend } from "$lib/utils/adviceFriend";
 
-import Helper from "./help/Binary.svelte";
-import Stats from "./stats/Binary.svelte";
-import GameOver from "./gameover/Binary.svelte";
-import TopBar from "./topbar/Binary.svelte";
+import Helper from "$lib/game/help/Binary.svelte";
+import Stats from "$lib/game/stats/Binary.svelte";
+import GameOver from "$lib/game/gameover/Binary.svelte";
+import TopBar from "$lib/game/topbar/Binary.svelte";
 
 class Binary extends BaseGame {
   constructor() {

@@ -4,14 +4,14 @@
   import { nullFunction } from "$lib/game/consts";
   import { tracker } from "$lib/utils/dailyTracker";
 
-  import { getInstance as egdle } from "../game/classic";
-  import { getInstance as binary } from "../game/binary";
-  import { getInstance as matcher } from "../game/matcher";
-  import { getInstance as jewels } from "../game/jewels";
-  import { getInstance as pattern } from "../game/pattern";
-  import { getInstance as filler } from "../game/filler";
-  import { getInstance as puzzle } from "../game/puzzle";
-  import { getInstance as aimlab } from "../game/aimlab";
+  import { getInstance as egdle } from "$lib/game/classic";
+  import { getInstance as binary } from "$lib/game/binary";
+  import { getInstance as matcher } from "$lib/game/matcher";
+  import { getInstance as jewels } from "$lib/game/jewels";
+  import { getInstance as pattern } from "$lib/game/pattern";
+  import { getInstance as filler } from "$lib/game/filler";
+  import { getInstance as puzzle } from "$lib/game/puzzle";
+  import { getInstance as aimlab } from "$lib/game/aimlab";
 
   import game from "$lib/utils/state";
 
@@ -117,7 +117,7 @@
   <br />
   Contact me at
   <span class="contact discord" title="Discord" translate="no">
-    <img src="/pics/icon/discord.svg" alt="Discord" aria-label="Discord icon" width="32" height="32" />
+    <img src="/icon/discord.svg" alt="Discord" aria-label="Discord icon" width="32" height="32" />
     g7eternal#8037
   </span>
   or

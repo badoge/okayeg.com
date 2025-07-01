@@ -1,13 +1,13 @@
 import { writable } from "svelte/store";
-import { BaseGame } from "./baseClasses";
+import { BaseGame } from "$lib/game/baseClasses";
 import { sample, formatTimer } from "$lib/utils/common";
-import { cellColors, emoji } from "./consts";
+import { cellColors, emoji } from "$lib/game/consts";
 import { forceUpdateDOM } from "$lib/utils/state";
 
-import Helper from "./help/Filler.svelte";
-import TopBar from "./topbar/Filler.svelte";
-import Stats from "./stats/Filler.svelte";
-import GameOver from "./gameover/Filler.svelte";
+import Helper from "$lib/game/help/Filler.svelte";
+import TopBar from "$lib/game/topbar/Filler.svelte";
+import Stats from "$lib/game/stats/Filler.svelte";
+import GameOver from "$lib/game/gameover/Filler.svelte";
 
 class Filler extends BaseGame {
   constructor() {

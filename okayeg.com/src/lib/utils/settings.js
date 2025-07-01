@@ -1,9 +1,9 @@
 import { browser } from "$app/environment";
 import { writable } from "svelte/store";
-import { showAdviceFriend } from "./adviceFriend";
-import { chooseAnnouncementOnLoad } from "./announcements";
-import { migrateSettings } from "./migrateV1";
-import { dailyEggFactRequired, tryShowDailyEggFact } from "./dailyFact";
+import { showAdviceFriend } from "$lib/utils/adviceFriend";
+import { chooseAnnouncementOnLoad } from "$lib/utils/announcements";
+import { migrateSettings } from "$lib/utils/migrateV1";
+import { dailyEggFactRequired, tryShowDailyEggFact } from "$lib/utils/dailyFact";
 
 const lsKey = "egdle2-settings";
 

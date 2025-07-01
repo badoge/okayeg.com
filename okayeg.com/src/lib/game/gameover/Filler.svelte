@@ -3,7 +3,7 @@
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
   import game from "$lib/utils/state";
   import { formatTimer } from "$lib/utils/common";
-  import Stats from "../stats/Filler.svelte";
+  import Stats from "$lib/game/stats/Filler.svelte";
 </script>
 
 <p>Stats for this run:</p>

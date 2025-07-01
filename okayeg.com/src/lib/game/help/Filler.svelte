@@ -5,7 +5,7 @@
 </p>
 
 <hr />
-<img src="example/filler.webp" alt="Example - Pattern" />
+<img src="/example/filler.webp" alt="Example - Pattern" />
 <hr />
 
 <p>

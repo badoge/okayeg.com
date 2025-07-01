@@ -1,7 +1,7 @@
 <p>Your goal in this game is to click all the eggs as quickly as possible.</p>
 
 <hr />
-<img src="example/aimlab.webp" alt="Example - Reflex" />
+<img src="/example/aimlab.webp" alt="Example - Reflex" />
 <hr />
 
 <p>
@@ -11,7 +11,7 @@
 
 <p>
   Need advice? Just click the eggs quickly and accurately.
-  <img src="emotes/4head.webp" alt="loool 4Head" class="emote" />
+  <img src="/emotes/4head.webp" alt="loool 4Head" class="emote" />
 </p>
 
 <p>This game may seem to be slighly easier for mobile devices. As such, your shareable data might contain a notice about that.</p>

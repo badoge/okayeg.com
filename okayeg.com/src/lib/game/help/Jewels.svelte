@@ -1,7 +1,7 @@
 <p>A twist of a popular casual matching game: combine three or more elements to remove them from the grid.</p>
 
 <hr />
-<img src="example/jewels.webp" alt="Example - Egdle Crush" />
+<img src="/example/jewels.webp" alt="Example - Egdle Crush" />
 <hr />
 
 <p>

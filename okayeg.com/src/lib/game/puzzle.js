@@ -1,13 +1,13 @@
 import { writable } from "svelte/store";
-import { BaseField, BaseGame } from "./baseClasses";
+import { BaseField, BaseGame } from "$lib/game/baseClasses";
 import { formatTimer, shuffle } from "$lib/utils/common";
 import { forceUpdateDOM } from "$lib/utils/state";
 
-import Helper from "./help/Puzzle.svelte";
-import TopBar from "./topbar/Puzzle.svelte";
-import Stats from "./stats/Puzzle.svelte";
-import GameOver from "./gameover/Puzzle.svelte";
-import { cellColors } from "./consts";
+import Helper from "$lib/game/help/Puzzle.svelte";
+import TopBar from "$lib/game/topbar/Puzzle.svelte";
+import Stats from "$lib/game/stats/Puzzle.svelte";
+import GameOver from "$lib/game/gameover/Puzzle.svelte";
+import { cellColors } from "$lib/game/consts";
 
 class Puzzle extends BaseGame {
   constructor() {

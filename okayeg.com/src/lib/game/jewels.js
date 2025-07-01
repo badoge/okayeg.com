@@ -1,12 +1,12 @@
-import { BaseCell, BaseGame } from "./baseClasses";
+import { BaseCell, BaseGame } from "$lib/game/baseClasses";
 import { sample } from "$lib/utils/common";
 import { forceUpdateDOM } from "$lib/utils/state";
-import { cellColors, emoji } from "./consts";
+import { cellColors, emoji } from "$lib/game/consts";
 
-import Helper from "./help/Jewels.svelte";
-import TopBar from "./topbar/Jewels.svelte";
-import Stats from "./stats/Jewels.svelte";
-import GameOver from "./gameover/Jewels.svelte";
+import Helper from "$lib/game/help/Jewels.svelte";
+import TopBar from "$lib/game/topbar/Jewels.svelte";
+import Stats from "$lib/game/stats/Jewels.svelte";
+import GameOver from "$lib/game/gameover/Jewels.svelte";
 import { tweened } from "svelte/motion";
 
 class Jewels extends BaseGame {

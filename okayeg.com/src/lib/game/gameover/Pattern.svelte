@@ -1,7 +1,7 @@
 <script>
-  import Stats from "../stats/Pattern.svelte";
-  import game from "../../utils/state";
-  import { resultFlavorTexts as flavors } from "../consts";
+  import Stats from "$lib/game/stats/Pattern.svelte";
+  import game from "$lib/utils/state";
+  import { resultFlavorTexts as flavors } from "$lib/game/consts";
 </script>
 
 <p>

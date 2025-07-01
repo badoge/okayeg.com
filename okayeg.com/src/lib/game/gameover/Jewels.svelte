@@ -1,5 +1,5 @@
 <script>
-  import Stats from "../stats/Jewels.svelte";
+  import Stats from "$lib/game/stats/Jewels.svelte";
   import game from "$lib/utils/state";
 </script>
 

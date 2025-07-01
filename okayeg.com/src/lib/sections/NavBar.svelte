@@ -8,9 +8,9 @@
   import { settings, recordSeenGame } from "$lib/utils/settings";
   import tippy from "$lib/utils/tippy";
   import game from "$lib/utils/state";
-  import Settings from "./Settings.svelte";
-  import HelpModal from "./HelpModal.svelte";
-  import StatsModal from "./StatsModal.svelte";
+  import Settings from "$lib/sections/Settings.svelte";
+  import HelpModal from "$lib/sections/HelpModal.svelte";
+  import StatsModal from "$lib/sections/StatsModal.svelte";
 
   function returnToMenu() {
     $game.pause();

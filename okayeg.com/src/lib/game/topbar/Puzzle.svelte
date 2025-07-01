@@ -71,7 +71,7 @@
       class="btn btn-secondary"
       use:tippy={{
         trigger: "click",
-        content: `<img src="example/puzzle-pic.png" alt="Puzzle" width="250" height="250">`,
+        content: `<img src="/example/puzzle-pic.png" alt="Puzzle" width="250" height="250">`,
       }}
     >
       <IcBaselineTry />

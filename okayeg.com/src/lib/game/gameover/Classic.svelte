@@ -1,8 +1,8 @@
 <script>
-  import Stats from "../stats/Classic.svelte";
-  import game from "../../utils/state";
-  import { resultFlavorTexts as flavors } from "../consts";
-  import DailyCountdown from "../../elements/DailyCountdown.svelte";
+  import Stats from "$lib/game/stats/Classic.svelte";
+  import game from "$lib/utils/state";
+  import { resultFlavorTexts as flavors } from "$lib/game/consts";
+  import DailyCountdown from "$lib/elements/DailyCountdown.svelte";
 </script>
 
 {#if $game.result}

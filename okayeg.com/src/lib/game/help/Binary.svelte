@@ -1,7 +1,7 @@
 <p>This is a logic puzzle involving placement of differently colored eggs (red and blue by default) on a grid. The objective is to fill the grid as quickly as possible.</p>
 
 <hr />
-<img src="example/binary.webp" alt="Example - Binary" class="main" />
+<img src="/example/binary.webp" alt="Example - Binary" class="main" />
 <hr />
 
 <p>While the base objective may seem straightforward, there are some rules to follow:</p>
@@ -10,27 +10,27 @@
     No more than two adjacent cells can contain same-colored eggs.
     <div class="mad-example">
       <div class="madeg">
-        <img src="emotes/madeg.webp" alt="Madeg" />
+        <img src="/emotes/madeg.webp" alt="Madeg" />
       </div>
-      <img src="example/binary-triple.webp" alt="Example: Rule 2" />
+      <img src="/example/binary-triple.webp" alt="Example: Rule 2" />
     </div>
   </li>
   <li>
     Each row and column must contain an equal number of different colored eggs.
     <div class="mad-example">
       <div class="madeg">
-        <img src="emotes/madeg.webp" alt="Madeg" />
+        <img src="/emotes/madeg.webp" alt="Madeg" />
       </div>
-      <img src="example/binary-equal.webp" alt="Example: Rule 1" />
+      <img src="/example/binary-equal.webp" alt="Example: Rule 1" />
     </div>
   </li>
   <li>
     There can be no identical rows or columns.
     <div class="mad-example">
       <div class="madeg">
-        <img src="emotes/madeg.webp" alt="Madeg" />
+        <img src="/emotes/madeg.webp" alt="Madeg" />
       </div>
-      <img src="example/binary-ident.webp" alt="Example: Rule 3" />
+      <img src="/example/binary-ident.webp" alt="Example: Rule 3" />
     </div>
   </li>
 </ul>

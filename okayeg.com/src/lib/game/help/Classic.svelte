@@ -2,7 +2,7 @@
 <p>To make a guess, click on any square - and see what's there. Game ends when you find the egg.</p>
 
 <hr />
-<img src="example/classic.webp" alt="Example - Egdle" />
+<img src="/example/classic.webp" alt="Example - Egdle" />
 <hr />
 
 <p>

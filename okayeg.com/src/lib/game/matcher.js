@@ -1,10 +1,10 @@
-import { BaseGame } from "./baseClasses";
-import { emoji, cellColors } from "./consts";
+import { BaseGame } from "$lib/game/baseClasses";
+import { emoji, cellColors } from "$lib/game/consts";
 
-import Helper from "./help/Matcher.svelte";
-import Stats from "./stats/Matcher.svelte";
-import GameOver from "./gameover/Matcher.svelte";
-import TopBar from "./topbar/Matcher.svelte";
+import Helper from "$lib/game/help/Matcher.svelte";
+import Stats from "$lib/game/stats/Matcher.svelte";
+import GameOver from "$lib/game/gameover/Matcher.svelte";
+import TopBar from "$lib/game/topbar/Matcher.svelte";
 import { showAdviceFriend } from "$lib/utils/adviceFriend";
 
 class Matcher extends BaseGame {

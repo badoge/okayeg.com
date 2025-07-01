@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
 import { today } from "$lib/game/consts";
-import { showAdviceFriend } from "./adviceFriend";
-import { sample } from "./common";
+import { showAdviceFriend } from "$lib/utils/adviceFriend";
+import { sample } from "$lib/utils/common";
 
 const facts = [];
 

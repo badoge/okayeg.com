@@ -1,4 +1,4 @@
-import { nullFunction, emoji, today } from "./consts";
+import { nullFunction, emoji, today } from "$lib/game/consts";
 import { forceUpdateDOM } from "$lib/utils/state";
 import { sample } from "$lib/utils/common";
 import seedrandom from "seedrandom";

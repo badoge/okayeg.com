@@ -6,7 +6,7 @@
 <p>Click two cells, and if they match - they stay. The game ends when you match all the eggs.</p>
 
 <hr />
-<img src="example/matcher.webp" alt="Example - Matcher" />
+<img src="/example/matcher.webp" alt="Example - Matcher" />
 <hr />
 
 <p>

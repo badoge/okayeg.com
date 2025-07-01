@@ -1,5 +1,5 @@
 <script>
-  import Stats from "../stats/Binary.svelte";
+  import Stats from "$lib/game/stats/Binary.svelte";
   import game from "$lib/utils/state";
   import { formatTimer } from "$lib/utils/common";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
