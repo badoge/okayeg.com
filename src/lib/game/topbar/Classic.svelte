@@ -1,19 +1,18 @@
 <script>
   import currentGame from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
 </script>
 
 <div class="bar">
   <div class="section left">
     {#if $currentGame.settings.hardMode}
-      <span use:tippy={{ content: "Hard mode!" }}>♨️</span>
+      <div class="tooltip" data-tip="Hard mode!">♨️</div>
     {/if}
     🥚 {$currentGame.name}
     <b>#{$currentGame.issue}</b>
   </div>
   <div class="section right">
     Clicks:
-    <b class="text-success">{$currentGame.clicks}</b>
+    <b class="text-primary">{$currentGame.clicks}</b>
   </div>
 </div>
 

@@ -1,6 +1,5 @@
 <script>
   import currentGame from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
   import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
   import { forceUpdateDOM } from "$lib/utils/state";
   import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
@@ -37,9 +36,9 @@
 
 <div class="bar">
   <div class="section left">
-    <span use:tippy={{ content: "Time elapsed" }}>
+    <div class="tooltip" data-tip="Time elapsed">
       <IcBaselineTimer class="inline align-text-bottom" />
-    </span>
+    </div>
     <b class="text-primary">{$displayTimerStore}</b>
   </div>
   <div class="section mid">
@@ -60,9 +59,9 @@
     {/if}
   </div>
   <div class="section right">
-    <span use:tippy={{ content: "Click count" }}>
+    <div class="tooltip" data-tip="Click count">
       <IcBaselineAdsClick class="inline align-text-bottom" />
-    </span>
+    </div>
     <b class="text-primary">{$currentGame.clicks}</b>
   </div>
 </div>

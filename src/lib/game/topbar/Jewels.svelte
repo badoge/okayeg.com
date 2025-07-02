@@ -1,7 +1,6 @@
 <script>
   import { tweened } from "svelte/motion";
   import currentGame from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
   import IcBaselinePin from "~icons/ic/baseline-pin";
@@ -74,9 +73,9 @@
     {/if}
   </div>
   <div class="section right">
-    <span use:tippy={{ content: "Score" }}>
+    <div class="tooltip" data-tip="Score">
       <IcBaselinePin class="inline align-text-bottom" />
-    </span>
+    </div>
     <b class="score text-primary">
       {$gameScore | 0}
     </b>

@@ -1,6 +1,5 @@
 <script>
   import currentGame from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
   import { forceUpdateDOM } from "$lib/utils/state";
   import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
@@ -35,9 +34,9 @@
 
 <div class="bar">
   <div class="section left">
-    <span use:tippy={{ content: "Time elapsed" }}>
+    <div class="tooltip" data-tip="Time elapsed">
       <IcBaselineTimer class="inline align-text-bottom" />
-    </span>
+    </div>
     <b class="timer text-primary">
       {$displayTimerStore}
     </b>
@@ -60,9 +59,9 @@
     {/if}
   </div>
   <div class="section right">
-    <span use:tippy={{ content: "Score" }}>
+    <div class="tooltip" data-tip="Score">
       <IcBaselineAdsClick class="inline align-text-bottom" />
-    </span>
+    </div>
     <b class="text-primary">{$currentGame.clicks}</b> / <b>{$currentGame.field.size}</b>
   </div>
 </div>

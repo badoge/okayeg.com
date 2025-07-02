@@ -1,7 +1,6 @@
 <script>
   import { scale } from "svelte/transition";
   import currentGame from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
   import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineCheck from "~icons/ic/baseline-check";
@@ -38,27 +37,30 @@
         </button>
       {/if}
     {:else if $currentGame.result}
-      <div class="badge rounded-pill border border-success text-success" in:scale use:tippy={{ content: "Puzzle solved!" }}>
-        <IcBaselineCheck />
+      <div class="tooltip" data-tip="Puzzle solved!">
+        <div class="badge badge-primary"><IcBaselineCheck class="text-2xl" /></div>
       </div>
     {:else if $currentGame.fieldError}
-      <div class="badge rounded-pill bg-warning text-black" in:scale use:tippy={{ content: $currentGame.fieldError }}>
-        <IcBaselineError />
+      <div class="tooltip">
+        <div class="tooltip-content">
+          {@html $currentGame.fieldError}
+        </div>
+        <IcBaselineError class="text-2xl text-warning" />
       </div>
     {/if}
   </div>
   <div class="section right">
     <div class="right-flex">
-      <span use:tippy={{ content: "Click counter" }}>
+      <div class="tooltip" data-tip="Click counter">
         <IcBaselineAdsClick />
-      </span>
+      </div>
       <b class={$currentGame.clicks ? "text-primary" : "text-muted"}>{$currentGame.clicks}</b>
     </div>
     <div class="right-flex">
       <div class="padder"></div>
-      <span use:tippy={{ content: "Time elapsed" }}>
+      <div class="tooltip" data-tip="Time elapsed">
         <IcBaselineTimer />
-      </span>
+      </div>
       <b class={$currentGame.startTime ? "timer text-success" : "timer text-muted"}>
         {$displayTimerStore}
       </b>

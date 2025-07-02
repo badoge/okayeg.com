@@ -48,17 +48,16 @@
 
       {#if lib.type === "color_multiselect"}
         <hr />
-        <div class="flex flex-row my-2">
+        <div class="flex my-2">
           <div class="flex-grow-1">
-            <span class="form-check-label">{lib.title}</span>
-            <br />
-            <small class="form-text" class:disabled>
+            <p class="text-lg font-bold">{lib.title}</p>
+            <p class="text-xs" class:disabled>
               {disabled ? lib.error : lib.desc}
-            </small>
+            </p>
           </div>
-          <div class="flex flex-column gap-2">
+          <div class="flex gap-1">
             {#each $game.settings[key] as color, colorIndex}
-              <select class="form-select" style:border-color={color} style:color value={color} onchange={(event) => doSetCellColor(event.currentTarget, colorIndex)}>
+              <select class="select" style:border-color={color} style:color value={color} onchange={(event) => doSetCellColor(event.currentTarget, colorIndex)}>
                 {#each Object.keys(cellColors) as colorOption}
                   <option value={colorOption} style:background-color={cellColors[colorOption]}>
                     {colorOption}
@@ -69,30 +68,28 @@
           </div>
         </div>
       {:else if lib.type === "dropdown"}
-        <div class="mt-2 pt-2 border-top">
+        <hr />
+        <div class="mt-5">
           <div class="flex flex-row align-items-center">
-            <label class="form-check-label flex-grow-1" for={"opt_" + key}>{lib.title}</label>
-            <select class="form-select w-auto flex-grow-1" id={"opt_" + key} value={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOptionSelector}>
+            <label class="text-lg flex-grow-1" for={"opt_" + key}>{lib.title}</label>
+            <select class="select w-auto flex-grow-1" id={"opt_" + key} value={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOptionSelector}>
               {#each $game.options[key] as optionText, optionIndex}
                 <option value={optionIndex}>{optionText}</option>
               {/each}
             </select>
           </div>
           <div>
-            <small class="form-text" class:disabled>
+            <p class="text-xs" class:disabled>
               {disabled ? lib.error : lib.desc}
-            </small>
+            </p>
           </div>
         </div>
       {:else}
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id={"opt_" + key} checked={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOption} />
-          <label class="form-check-label" for={"opt_" + key}>{lib.title}</label>
-          <br />
-          <small class="form-text" class:disabled>
-            {disabled ? lib.error : lib.desc}
-          </small>
-        </div>
+        <label class="label text-base-content mt-3">
+          <input id={"opt_" + key} type="checkbox" class="checkbox" checked={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOption} />
+          {lib.title}
+        </label>
+        <p class="text-xs mb-3">{disabled ? lib.error : lib.desc}</p>
       {/if}
     {/each}
   {:else}
@@ -108,37 +105,3 @@
     <DevModeButtons />
   {/if}
 </div>
-
-<style>
-  .option-block {
-    margin: 0;
-    padding: 8px 0;
-    width: 100%;
-    border-bottom: 1px solid var(--bs-modal-header-border-color);
-  }
-  .option-block:last-child {
-    border-bottom: none;
-  }
-
-  .form-check-input {
-    filter: hue-rotate(-75deg) saturate(0.7);
-  }
-
-  select,
-  input,
-  label {
-    cursor: pointer;
-  }
-
-  option {
-    color: var(--bs-body-color);
-  }
-
-  small.form-text {
-    opacity: 0.69;
-  }
-  small.disabled {
-    opacity: 1;
-    color: rgb(136, 104, 0);
-  }
-</style>

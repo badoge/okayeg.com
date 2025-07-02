@@ -2,10 +2,6 @@
   import { onMount, createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
 
-  import tippy from "tippy.js";
-  import "tippy.js/animations/shift-away-extreme.css";
-  import "tippy.js/dist/svg-arrow.css";
-
   /**
    * @typedef {Object} Props
    * @property {any} content

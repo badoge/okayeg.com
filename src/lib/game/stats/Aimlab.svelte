@@ -1,6 +1,5 @@
 <script>
   import game from "$lib/utils/state";
-  import tippy from "$lib/utils/tippy";
   import { formatTimer } from "$lib/utils/common";
   import BaseStatsTable from "$lib/elements/BaseStatsTable.svelte";
 </script>
@@ -19,7 +18,7 @@
     <td class="data">
       {formatTimer($game.stats.lastTime, true)}
       {#if $game.stats.lastTime > 0 && $game.stats.lastTime === $game.stats.bestTime}
-        <span class="cursor-default" use:tippy={{ content: "Your best time!" }}>🎖️</span>
+        <div class="tooltip" data-tip="Your best time!">🎖️</div>
       {/if}
     </td>
   </tr>

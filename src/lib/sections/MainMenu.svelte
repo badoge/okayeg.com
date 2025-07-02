@@ -90,7 +90,7 @@
 <div class="main" in:fade={{ duration: 200 }}>
   {#each variants as section}
     <h2 class="text-primary uppercase text-3xl text-center">{section.title}</h2>
-    <ul class="list bg-base-100 rounded-box shadow-md">
+    <ul class="list bg-base-100 rounded-box shadow-md mb-10">
       {#each section.list as game}
         <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <li
@@ -103,7 +103,7 @@
         >
           <div><img class="size-20" src={`panel/${game.id}.png`} alt={game.id} /></div>
           <div class="list-col-grow">
-            <div class="text-2xl">
+            <div class="text-2xl font-bold">
               {game.name}
               <h3 class="inline">
                 {#if $appReady && !$settings.seenGames.includes(game.id)}
@@ -111,7 +111,7 @@
                 {/if}
               </h3>
             </div>
-            <div class="font-thin opacity-70">{game.desc}</div>
+            <div class="opacity-70">{game.desc}</div>
           </div>
 
           {#if $tracker.done.includes(game.id)}

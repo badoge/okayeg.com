@@ -1,7 +1,6 @@
 <script>
   import game from "$lib/utils/state";
   import { formatTimer } from "$lib/utils/common";
-  import tippy from "$lib/utils/tippy";
   import BaseStatsTable from "$lib/elements/BaseStatsTable.svelte";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
@@ -19,39 +18,39 @@
   <tr>
     <td>Average run:</td>
     <td>
-      <IcBaselineTimer />
+      <IcBaselineTimer class="inline" />
       ~{formatTimer($game.stats.avgTime, true)} <br />
-      <IcBaselineAdsClick />
+      <IcBaselineAdsClick class="inline" />
       {$game.stats.avgClicks.toFixed(2)} clicks
     </td>
   </tr>
   <tr>
     <td>Last run:</td>
     <td>
-      <IcBaselineTimer />
+      <IcBaselineTimer class="inline" />
       {formatTimer($game.stats.lastTime, true)}
       {#if $game.stats.lastTime > 0 && $game.stats.lastTime === $game.stats.bestTime}
-        <span class="cursor-default" use:tippy={{ content: "Your best time!" }}>🎖️</span>
+        <div class="tooltip" data-tip="Your best time!">🎖️</div>
       {/if}
       <br />
-      <IcBaselineAdsClick />
+      <IcBaselineAdsClick class="inline" />
       {$game.stats.lastClicks} clicks
       {#if $game.stats.lastClicks > 0 && $game.stats.lastClicks === $game.stats.bestClicks}
-        <span class="cursor-default" use:tippy={{ content: "Your lowest click count!" }}>🎖️</span>
+        <div class="tooltip" data-tip="Your lowest click count!">🎖️</div>
       {/if}
     </td>
   </tr>
   <tr>
     <td>Best (lowest) time:</td>
     <td>
-      <IcBaselineTimer />
+      <IcBaselineTimer class="inline" />
       {formatTimer($game.stats.bestTime, true)}
     </td>
   </tr>
   <tr>
     <td>Best (lowest) click count:</td>
     <td>
-      <IcBaselineAdsClick />
+      <IcBaselineAdsClick class="inline" />
       {$game.stats.bestClicks}
     </td>
   </tr>
