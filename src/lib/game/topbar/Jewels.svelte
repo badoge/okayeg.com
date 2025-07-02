@@ -42,15 +42,15 @@
 </script>
 
 <div class="timer-bar">
-  <div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-    <div
-      class="progress-bar bg-primary"
-      class:progress-bar-striped={!$currentGame.gameOver}
-      style:width={progress + "%"}
-      class:bg-warning={progress < 35}
-      class:bg-danger={progress < 15}
-    ></div>
-  </div>
+  <progress
+    class="progress h-5"
+    style:width={progress + "%"}
+    class:progress-primary={progress > 35}
+    class:progress-warning={progress < 35 && progress > 15}
+    class:progress-error={progress < 15}
+    value="0"
+    max="100"
+  ></progress>
 </div>
 
 <div class="bar">
@@ -117,8 +117,8 @@
     padding: 0;
     margin: 0;
   }
-  .progress-bar {
-    transition: background-color 1s ease-in;
+  .progress {
+    transition: color 1s ease-in;
   }
 
   @media all and (max-width: 400px) {

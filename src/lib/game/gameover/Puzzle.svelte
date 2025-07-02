@@ -13,14 +13,14 @@
   <li>
     <IcBaselineTimer />
     Time elapsed:
-    <b class="text-success">{formatTimer(statRef.lastTime, true)}</b>
+    <b class="text-primary">{formatTimer(statRef.lastTime, true)}</b>
     {#if statRef.lastTime > 0 && statRef.lastTime === statRef.bestTime}
       <span class="badge bg-success">🎖️ New best!</span>
     {/if}
   </li>
   <li>
     <IcBaselineAdsClick />
-    <b class="text-success">{statRef.lastClicks}</b> swaps
+    <b class="text-primary">{statRef.lastClicks}</b> swaps
     {#if statRef.lastClicks > 0 && statRef.lastClicks === statRef.bestClicks}
       <span class="badge bg-success">🎖️ New best!</span>
     {/if}

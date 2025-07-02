@@ -10,13 +10,13 @@
   <p>
     {#if $game.stats.lastClicks > 1}
       It took
-      <b class="text-success">{$game.stats.lastClicks}</b>
+      <b class="text-primary">{$game.stats.lastClicks}</b>
       tries for you to find the egg today.
       <br />
       {@html flavors[Math.min(Math.floor($game.stats.lastClicks / 3), flavors.length - 1)]}
     {:else}
       No way! You managed to find an egg in just
-      <b class="text-success">{$game.stats.lastClicks}</b>
+      <b class="text-primary">{$game.stats.lastClicks}</b>
       click!
       <br />
       Are you a wizard? Or a champion?
@@ -27,13 +27,13 @@
   <p>
     {#if $game.stats.lastClicks > 1}
       You found a broken egg in
-      <b class="text-success">{$game.stats.lastClicks}</b>
+      <b class="text-primary">{$game.stats.lastClicks}</b>
       tries.
       <br />
       Better luck next time!
     {:else}
       Impressively bad. A broken egg in just
-      <b class="text-success">{$game.stats.lastClicks}</b>
+      <b class="text-primary">{$game.stats.lastClicks}</b>
       click!
       <br />
       Wow, are you ever lucky? 😏

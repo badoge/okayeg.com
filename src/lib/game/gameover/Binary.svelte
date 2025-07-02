@@ -14,14 +14,14 @@
     <li>
       <IcBaselineTimer />
       Time elapsed:
-      <b class="text-success">{formatTimer($game.stats.lastTime, true)}</b>
+      <b class="text-primary">{formatTimer($game.stats.lastTime, true)}</b>
       {#if $game.stats.lastTime > 0 && $game.stats.lastTime === $game.stats.bestTime}
         <span class="badge bg-success">🎖️ New best!</span>
       {/if}
     </li>
     <li>
       <IcBaselineAdsClick />
-      <b class="text-success">{$game.stats.lastClicks}</b> clicks
+      <b class="text-primary">{$game.stats.lastClicks}</b> clicks
       {#if $game.stats.lastClicks > 0 && $game.stats.lastClicks === $game.stats.bestClicks}
         <span class="badge bg-success">🎖️ New best!</span>
       {/if}

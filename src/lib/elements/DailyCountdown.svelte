@@ -37,7 +37,7 @@
   {#if timeDiff >= 0}
     <IcBaselineAlarm />
     {caption}
-    <b class="text-success">{timeLeft}</b>
+    <b class="text-primary">{timeLeft}</b>
   {:else}
     <IcBaselineAlarmOn />
     New issue is ready!

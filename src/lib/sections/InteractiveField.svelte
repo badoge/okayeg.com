@@ -6,8 +6,6 @@
   import GameOverInfo from "$lib/sections/GameOverInfo.svelte";
   import FieldCell from "$lib/elements/FieldCell.svelte";
 
-  let gameOverModalElement = $state();
-  let gameOverModal = $state();
   let gameOverModalTimer = $state();
 
   const cellAnimTiming = $state({
@@ -18,17 +16,16 @@
   $effect(() => {
     if (!$game._gameOverScreenSeen && $game.gameOver) {
       $game._gameOverScreenSeen = true;
-      gameOverModalTimer = setTimeout(() => gameOverModal.show(), 300);
+      gameOverModalTimer = setTimeout(() => mdlGameOver.showModal(), 300);
     }
   });
 
   onMount(() => {
     cellAnimTiming.in = 200; // enables cell animation for when the field is rendered
-    gameOverModal = new bootstrap.Modal(gameOverModalElement, {});
 
     return () => {
       clearTimeout(gameOverModalTimer);
-      gameOverModal.dispose();
+      mdlGameOver.close();
     };
   });
 
@@ -47,11 +44,18 @@
 </div>
 
 <!-- gameover modal -->
-<div class="modal fade" id="mdlGameOver" tabindex="-1" aria-labelledby="mdlGameOverTitle" aria-hidden="true" bind:this={gameOverModalElement}>
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+<dialog id="mdlGameOver" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-xl font-bold"><img class="inline align-text-bottom me-1" src="/icon/favicon-32x32.png" alt="Okayeg" width="28" height="28" /> Game over!</h3>
     <GameOverInfo />
   </div>
-</div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <style>
   .field {

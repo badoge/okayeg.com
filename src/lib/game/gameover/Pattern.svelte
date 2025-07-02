@@ -6,7 +6,7 @@
 
 <p>
   This run has ended on level
-  <b class="text-success">{$game.stats.lastRound}</b>.
+  <b class="text-primary">{$game.stats.lastRound}</b>.
   <br />
   {@html flavors[Math.max(flavors.length - $game.stats.lastRound, 0)]}
 </p>

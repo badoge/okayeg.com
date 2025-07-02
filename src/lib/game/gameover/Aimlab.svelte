@@ -11,7 +11,7 @@
   <br />
   Your time is:
   <IcBaselineTimer />
-  <b class="text-success">{$timeStore}</b>
+  <b class="text-primary">{$timeStore}</b>
 </p>
 
 <Stats />

@@ -5,7 +5,7 @@
 
 <p>
   🥚 Your final score is:
-  <b class="text-success">{$game.score}</b>
+  <b class="text-primary">{$game.score}</b>
 
   {#if $game.score > 0 && $game.stats.lastScore === $game.stats.bestScore}
     <span class="ms-2 badge bg-success">🎖️ New best score!</span>
