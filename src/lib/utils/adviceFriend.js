@@ -6,27 +6,16 @@ import { mount, unmount } from "svelte";
 /**
  * @param {string} content
  */
-export function showAdviceFriend(content, title = "", sanitize = false) {
+export function showAdviceFriend(content, title = "") {
   if (!browser) return;
 
-  const root = document.createElement("div");
-  root.classList = "fs-6 text-dark bg-white";
-
   if (title) {
-    const headContent = document.createElement("div");
-    headContent.classList = "fs-4";
-    headContent[sanitize ? "innerText" : "innerHTML"] = title;
-    root.appendChild(headContent);
+    content = `<span class="text-lg font-bold">${title}</span><br>${content}`;
   }
-
-  const textContent = document.createElement("div");
-  if (!sanitize) content = content.replace(/\n/g, "<br>");
-  textContent[sanitize ? "innerText" : "innerHTML"] = content;
-  root.appendChild(textContent);
 
   const adviceFriend = mount(AdviceFriend, {
     props: {
-      content: root,
+      content: content,
     },
     target: document.body,
   });
@@ -42,26 +31,17 @@ export function showAdviceFriend(content, title = "", sanitize = false) {
 export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallback = nullFunction) {
   if (!browser) return;
 
-  const root = document.createElement("div");
-  root.classList = "d-flex flex-column fs-6 text-dark bg-white";
-
-  const textContent = document.createElement("div");
-  textContent.innerHTML = content;
-  root.appendChild(textContent);
-
-  const btn = document.createElement("button");
-  btn.classList = "btn btn-success border-dark mt-1 my-auto";
-  btn.innerHTML = buttonText;
-  btn.addEventListener("click", function () {
-    unmount(adviceFriend);
-    actionCallback.call(this, arguments);
-  });
-  root.appendChild(btn);
+  content = `
+  <span class="text-lg font-bold">
+    ${content}
+  <span>
+  <br>
+  <button class="btn btn-warning" onclick="${actionCallback}">${buttonText}</button>`;
 
   const adviceFriend = mount(AdviceFriend, {
     props: {
       interactive: true,
-      content: root,
+      content: content,
     },
     target: document.body,
   });

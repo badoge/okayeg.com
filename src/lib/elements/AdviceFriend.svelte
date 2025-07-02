@@ -2,17 +2,8 @@
   import { onMount, createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
 
-  /**
-   * @typedef {Object} Props
-   * @property {any} content
-   * @property {boolean} [interactive]
-   */
-
-  /** @type {Props} */
   let { content, interactive = false } = $props();
-
-  let tippyInstance = null;
-  let tippyRoot = $state(null);
+  console.log(content);
 
   const dispatch = createEventDispatcher();
 
@@ -20,30 +11,6 @@
 
   onMount(() => {
     animator = true;
-
-    setTimeout(() => {
-      tippyInstance = tippy(tippyRoot, {
-        animation: "shift-away-extreme",
-        arrow: false,
-        maxWidth: Math.min(window.innerWidth, 800) / 2,
-        duration: [150, 0],
-        theme: "light-border",
-        placement: "right-end",
-        hideOnClick: true,
-        offset: [69, 10],
-        allowHTML: true,
-        trigger: "manual",
-        onHide: function () {
-          animator = false;
-          setTimeout(() => dispatch("hide-advice"), 500);
-          return true;
-        },
-        interactive,
-        content,
-      });
-
-      tippyInstance.show();
-    }, 180);
   });
 
   const transitionParams = {
@@ -53,8 +20,14 @@
 </script>
 
 {#if animator}
+  <div class="chat chat-start" in:fly={transitionParams} out:fly={transitionParams}>
+    <div class="chat-bubble chat-bubble-accent">
+      {@html content}
+    </div>
+  </div>
+
   <div class="okayeg" in:fly={transitionParams} out:fly={transitionParams}>
-    <img src="/icon/icon-512x512.png" width="512" height="512" alt="Okayeg" bind:this={tippyRoot} />
+    <img src="/okayeg.png" width="512" height="512" alt="Okayeg" />
   </div>
 {/if}
 
@@ -62,12 +35,21 @@
   .okayeg {
     position: fixed;
     z-index: 9900;
-    bottom: -8px;
-    left: -8px;
+    bottom: 0px;
+    left: 0px;
     width: 120px;
     max-width: 33%;
     cursor: crosshair;
   }
+
+  .chat {
+    position: fixed;
+    z-index: 9900;
+    bottom: 20px;
+    left: 125px;
+    max-width: 33%;
+  }
+
   .okayeg img {
     width: 100%;
     height: 100%;
