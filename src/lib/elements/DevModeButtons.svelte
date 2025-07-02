@@ -20,7 +20,7 @@
 
   function doPuzzleSolve() {
     if (!$currentGame) return;
-    $currentGame.field.cells.sort((a, b) => a.puzzleId - b.puzzleId);
+    $currentGame.field.cells.sort((/** @type {{ puzzleId: number; }} */ a, /** @type {{ puzzleId: number; }} */ b) => a.puzzleId - b.puzzleId);
     $currentGame.field.cells.push($currentGame.field.cells.shift()); // move the empty cell to the end
     forceUpdateDOM();
   }
@@ -41,7 +41,7 @@
   }
 </script>
 
-<div class="d-flex flex-wrap justify-content-center">
+<div class="flex flex-wrap justify-center">
   {#if $currentGame?.id === "puzzle"}
     <button class="btn btn-success" onclick={doPuzzleSolve}>
       <IcBaselineExtension />
@@ -49,14 +49,14 @@
     </button>
   {/if}
 
-  <button class="btn btn-outline-secondary" onclick={doConfettiTest}>
+  <button class="btn btn-outline btn-secondary" onclick={doConfettiTest}>
     {#if debugConfetti}
       <Confetti rounded size="12" amount="30" noGravity x={[-0.3, 0.3]} y={[0, 0.5]} duration="1400" colorArray={["#ffda4a78", "#ffcf8a77", "#ffe99e69", "#ba9f6676", "#e6be6097"]} />
     {/if}
     🎉 Confetti
   </button>
 
-  <button class="btn btn-outline-secondary" onclick={tryShowDailyEggFact}> 🥚 Show random egg fact </button>
+  <button class="btn btn-outline btn-secondary" onclick={tryShowDailyEggFact}> 🥚 Show random egg fact </button>
 
   <button class="btn btn-secondary" onclick={forceChromaKey}>
     <IcBaselineGradient />

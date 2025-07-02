@@ -45,6 +45,9 @@ class Jewels extends BaseGame {
 
     this.score = 0;
     this.ongoingCombos = 0; // when 0, game can be ended
+    /**
+     * @type {this | null}
+     */
     this.activeCell = null;
 
     this.maxTime = 20;
@@ -77,6 +80,10 @@ class Jewels extends BaseGame {
     this.field.disableCells();
   }
 
+  /**
+   * @param {string} key
+   * @param {boolean} value
+   */
   setOption(key, value) {
     super.setOption(key, value);
 
@@ -138,7 +145,7 @@ class Jewels extends BaseGame {
   }
 
   addTime(bonus = 0) {
-    this.time.update((t) => Math.min(bonus + t, this.maxTime));
+    this.time.update((/** @type {number} */ t) => Math.min(bonus + t, this.maxTime));
     return this.time;
   }
 

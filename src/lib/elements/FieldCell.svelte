@@ -1,6 +1,4 @@
 <script>
-  import { run } from "svelte/legacy";
-
   import { Confetti } from "svelte-confetti";
   import game, { forceUpdateDOM } from "$lib/utils/state";
 
@@ -19,7 +17,7 @@
     puzzleX = $state(),
     puzzleY = $state();
 
-  run(() => {
+  $effect(() => {
     const sizeOffset = 142 - 3 * $game.field.width;
     puzzleOffset = (cell.puzzleId || $game.field.size) - 1;
     puzzleScale = $game.field.width * sizeOffset + "% " + $game.field.height * sizeOffset + "%";
@@ -27,10 +25,17 @@
     puzzleY = 1 + (110 * Math.floor(puzzleOffset / $game.field.height)) / $game.field.height + "%";
   });
 
+  /**
+   * @param {{ click: () => any; }} cell
+   */
   function doClickCell(cell) {
     if (cell.click()) forceUpdateDOM();
   }
 
+  /**
+   * @param {{ enabled: any; }} cell
+   * @param {TouchEvent & { currentTarget: EventTarget & HTMLDivElement; }} event
+   */
   function startFlick(cell, event) {
     if (!allowFlicks || !cell.enabled) return;
     if (!event?.target) return;
@@ -41,6 +46,11 @@
     $game._touchAction = event.touches[0];
     $game._touchOrigin = event.target.getBoundingClientRect();
   }
+
+  /**
+   * @param {{ enabled: any; }} cell
+   * @param {TouchEvent & { currentTarget: EventTarget & HTMLDivElement; }} event
+   */
   function endFlick(cell, event) {
     if (!allowFlicks || !cell.enabled) return;
     if (!event?.target) return;
@@ -80,11 +90,18 @@
     forceUpdateDOM();
   }
 
+  /**
+   * @param {{ enabled: any; }} cell
+   */
   function startDrag(cell) {
     if (!allowFlicks || !cell.enabled) return;
     // mark original cell
     $game._dragStartCell = cell;
   }
+
+  /**
+   * @param {{ enabled: any; }} cell
+   */
   function endDrag(cell) {
     if (!allowFlicks || !cell.enabled) return;
     if ($game._dragStartCell === cell) return;
@@ -99,6 +116,7 @@
 </script>
 
 <div
+  role="button"
   class="cell"
   class:focused
   class:puzzle-piece={isPuzzlePiece}

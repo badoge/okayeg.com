@@ -1,6 +1,4 @@
 <script>
-  import { run } from "svelte/legacy";
-
   import { tweened } from "svelte/motion";
   import currentGame from "$lib/utils/state";
   import tippy from "$lib/utils/tippy";
@@ -12,14 +10,14 @@
 
   const timer = $currentGame.time;
   let progress = $state(100);
-  run(() => {
+  $effect(() => {
     progress = Math.max(0, (100 * $timer) / $currentGame.maxTime);
   });
 
   const gameScore = tweened($currentGame.score, {
     duration: 200,
   });
-  run(() => {
+  $effect(() => {
     gameScore.set($currentGame.score);
   });
 
@@ -47,7 +45,7 @@
 <div class="timer-bar">
   <div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div
-      class="progress-bar bg-success"
+      class="progress-bar bg-primary"
       class:progress-bar-striped={!$currentGame.gameOver}
       style:width={progress + "%"}
       class:bg-warning={progress < 35}
@@ -63,7 +61,7 @@
   <div class="section mid">
     {#if !$currentGame.result}
       {#if $currentGame.gameOver}
-        <button class="btn btn-success" onclick={startNewRun}>
+        <button class="btn btn-primary" onclick={startNewRun}>
           <IcBaselineFlag />
           Start game
         </button>
@@ -77,9 +75,9 @@
   </div>
   <div class="section right">
     <span use:tippy={{ content: "Score" }}>
-      <IcBaselinePin />
+      <IcBaselinePin class="inline align-text-bottom" />
     </span>
-    <b class="score text-success">
+    <b class="score text-primary">
       {$gameScore | 0}
     </b>
   </div>
@@ -112,7 +110,6 @@
   }
 
   .score {
-    color: inherit;
     transition: color 1s ease-out;
   }
 

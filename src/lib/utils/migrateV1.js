@@ -63,7 +63,7 @@ export function migrateClassicField() {
   try {
     const oldData = JSON.parse(localStorage.getItem("egdle-field"));
 
-    const cellData = oldData.map((emote) => {
+    const cellData = oldData.map((/** @type {string} */ emote) => {
       const cellInfo = {
         enabled: true,
         visible: false,

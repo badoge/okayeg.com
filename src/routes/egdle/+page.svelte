@@ -8,6 +8,9 @@
   import EggField from "$lib/sections/EggField.svelte";
   import InteractiveField from "$lib/sections/InteractiveField.svelte";
 
+  /**
+   * @param {{ detail: null; }} event
+   */
   function doOpenGame(event) {
     $game = event.detail;
   }

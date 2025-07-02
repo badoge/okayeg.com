@@ -43,6 +43,12 @@ export function isMobileClient(strictly = false) {
 
 // legacy pseudo random number generator
 // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+/**
+ * @param {number} a
+ * @param {number} b
+ * @param {number} d
+ * @param {number} c
+ */
 export function sfc32(a, b, d, c) {
   return function () {
     a >>>= 0;
@@ -62,6 +68,9 @@ export function sfc32(a, b, d, c) {
 
 const timeHour = 1000 * 60 * 60;
 const timeDay = timeHour * 24;
+/**
+ * @param { number } time
+ */
 export function formatTimer(time, withMS = false) {
   const timeFormat = time > timeHour ? "HH:MM:ss" : "MM:ss";
   let timeString = dateFormat(time, timeFormat);
@@ -72,6 +81,9 @@ export function formatTimer(time, withMS = false) {
   return timeString;
 }
 
+/**
+ * @param {string | number | Date | undefined} date
+ */
 export function formatDate(date, format = "yyyy-mm-dd") {
   return dateFormat(date, format);
 }

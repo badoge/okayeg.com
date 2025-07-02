@@ -1,6 +1,4 @@
 <script>
-  import { run } from "svelte/legacy";
-
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { onMount } from "svelte";
@@ -17,7 +15,7 @@
     out: 150,
   });
 
-  run(() => {
+  $effect(() => {
     if (!$game._gameOverScreenSeen && $game.gameOver) {
       $game._gameOverScreenSeen = true;
       gameOverModalTimer = setTimeout(() => gameOverModal.show(), 300);

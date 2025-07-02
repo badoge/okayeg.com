@@ -15,6 +15,8 @@
 
   import game from "$lib/utils/state";
 
+  import IcBaselineDiscord from "~icons/ic/baseline-discord";
+
   const variants = [
     {
       title: "Daily games",
@@ -76,6 +78,9 @@
     },
   ];
 
+  /**
+   * @param {{ id?: string; init: any; name?: string; desc?: string; }} variant
+   */
   function setGame(variant) {
     $game = variant.init();
     $game?.unpause();
@@ -84,158 +89,59 @@
 
 <div class="main" in:fade={{ duration: 200 }}>
   {#each variants as section}
-    <h2 class="text-success">{section.title}</h2>
-    <ul>
+    <h2 class="text-primary uppercase text-3xl text-center">{section.title}</h2>
+    <ul class="list bg-base-100 rounded-box shadow-md">
       {#each section.list as game}
+        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <li
-          class="btn btn-outline-secondary"
+          class="list-row mb-1"
           class:disabled={game.init === nullFunction}
-          class:solved={$tracker.done.includes(game.id)}
           onclick={() => setGame(game)}
           onkeypress={(event) => {
             if (event.key === "Enter") setGame(game);
           }}
         >
-          <img src={`panel/${game.id}.png`} alt="Okayeg" />
-          <div>
-            <h3>
+          <div><img class="size-20" src={`panel/${game.id}.png`} alt={game.id} /></div>
+          <div class="list-col-grow">
+            <div class="text-2xl">
               {game.name}
-              {#if $appReady && !$settings.seenGames.includes(game.id)}
-                <span class="badge bg-success">New!</span>
-              {/if}
-            </h3>
-            <p>{game.desc}</p>
+              <h3 class="inline">
+                {#if $appReady && !$settings.seenGames.includes(game.id)}
+                  <div class="badge badge-success">New!</div>
+                {/if}
+              </h3>
+            </div>
+            <div class="font-thin opacity-70">{game.desc}</div>
           </div>
+
+          {#if $tracker.done.includes(game.id)}
+            <div class="tooltip m-auto" data-tip="Today's game solved">
+              <div class="text-2xl">✅</div>
+            </div>
+          {/if}
         </li>
       {/each}
     </ul>
   {/each}
 </div>
 
-<p class="promise">
-  Have an idea for a game? Want to share your feedback?
-  <br />
-  Contact me at
-  <span class="contact discord" title="Discord" translate="no">
-    <img src="/icon/discord.svg" alt="Discord" aria-label="Discord icon" width="32" height="32" />
-    g7eternal#8037
-  </span>
-  or
-  <a class="contact" href="https://github.com/g7eternal/egdle2/issues" title="Go to Github" target="_blank"> create a ticket </a>
-  with your ideas
-</p>
+<footer class="footer footer-horizontal footer-center mt-20">
+  <aside>
+    <p class="font-bold">Have an idea for a game? Want to share your feedback?</p>
+    <p>
+      Contact me at <span style="color: #5865f2;"><IcBaselineDiscord class="inline align-middle" /> @g7eternal</span> or
+      <a class="link" href="https://github.com/g7eternal/egdle2/issues" title="Go to Github" target="_blank"> create a ticket </a> with your ideas
+    </p>
+  </aside>
+</footer>
 
 <style>
-  .main {
-    padding: 8px;
-  }
-  h2 {
-    margin-bottom: 16px;
-    width: 100%;
-    font-size: 24px;
-    text-align: center;
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
-  h3 {
-    margin: 8px 0;
-  }
-  h3 .badge {
-    font-size: 50%;
-    vertical-align: middle;
-  }
-  ul {
-    padding: 0;
-    margin-bottom: 40px;
-    list-style-type: none;
+  li:hover {
+    opacity: 70%;
+    cursor: pointer;
   }
 
-  li {
-    list-style-type: none;
-    width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 8px;
-  }
   li.disabled {
     display: none;
-  }
-  li img {
-    width: 84px;
-    height: 84px;
-    border-color: var(--bs-btn-border-color);
-    border-style: solid;
-    border-width: 0px;
-    border-right-width: 1px;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    margin: auto 8px auto 0;
-  }
-  li p {
-    font-size: 90%;
-    margin: 0;
-  }
-
-  .solved {
-    position: relative;
-  }
-  .solved:after {
-    content: "✅";
-    z-index: 2;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 2em;
-    color: green;
-    opacity: 40%;
-  }
-
-  .btn {
-    margin: 4px 0;
-    padding: 0;
-    text-align: left;
-  }
-
-  .promise {
-    width: 100%;
-    margin: 0;
-    padding-bottom: 16px;
-    font-style: italic;
-    text-align: center;
-    opacity: 0.5;
-  }
-  .contact {
-    font-weight: bold;
-    filter: none;
-    transition: filter 0.2s ease;
-  }
-  .contact:hover {
-    filter: brightness(1.5) contrast(1.2);
-  }
-  .contact.discord {
-    cursor: default;
-    color: #5865f2;
-    user-select: all;
-  }
-  .contact.discord img {
-    width: 1rem;
-    height: auto;
-    vertical-align: baseline;
-    user-select: none;
-  }
-
-  @media all and (max-width: 360px) {
-    li {
-      flex-flow: column nowrap;
-    }
-    li img {
-      margin: 16px auto 0 auto;
-      border-width: 1px;
-      border-radius: 6px;
-    }
-    .btn {
-      padding: 0 8px 8px 8px;
-      text-align: center;
-    }
   }
 </style>

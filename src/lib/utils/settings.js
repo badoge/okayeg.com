@@ -63,12 +63,6 @@ try {
       // first visit - autodetect some options
       s.firstVisit = false;
       s.announcements.push("firstReturnVisit"); // prevents "welcome back" message
-      if (browser && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        toggleDarkMode(true);
-      }
-    } else {
-      // apply settings
-      toggleDarkMode(s.darkMode);
     }
 
     setTimeout(() => {
@@ -96,15 +90,6 @@ try {
 
   // set ready flag to True as we finished parsing settings
   appReady.set(true);
-}
-
-export function toggleDarkMode(newState) {
-  settings.update((s) => {
-    if (newState === undefined) newState = !s.darkMode;
-    s.darkMode = newState;
-    document.documentElement.dataset.bsTheme = s.darkMode ? "dark" : "light";
-    return s;
-  });
 }
 
 export function recordSeenGame(id) {

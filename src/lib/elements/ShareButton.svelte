@@ -11,6 +11,9 @@
     ready: true,
   });
 
+  /**
+   * @param {string} result
+   */
   function reEnableShareBtn(result) {
     share.result = result;
     setTimeout(() => {
@@ -62,7 +65,7 @@
   }
 </script>
 
-<button class="btn btn-success" class:btn-happy={share.result} class:btn-danger={share.error} disabled={!share.ready} onclick={doShare}>
+<button class="btn btn-primary" class:btn-happy={share.result} class:btn-danger={share.error} disabled={!share.ready} onclick={doShare}>
   {#if share.error}
     <IcBaselineErrorOutline />
     Sharing failed!
@@ -73,16 +76,13 @@
     <IcBaselineShare />
     Share your stats
   {:else}
-    <div class="spinner-grow spinner-grow-sm" role="status">
-      <span class="visually-hidden">Share in progress...</span>
-    </div>
+    <span class="loading loading-spinner text-accent self-center"></span>
   {/if}
 </button>
 
 <style>
   .btn {
     min-width: 50%;
-    margin: auto;
     filter: none;
     transition:
       opacity 0.3s ease-out,

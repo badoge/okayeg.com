@@ -1,12 +1,9 @@
 <script>
-  import { run } from "svelte/legacy";
-
   import IcBaselineArrowBack from "~icons/ic/baseline-arrow-back";
   import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
   import IcBaselineLeaderboard from "~icons/ic/baseline-leaderboard";
   import IcBaselineSettings from "~icons/ic/baseline-settings";
   import { settings, recordSeenGame } from "$lib/utils/settings";
-  import tippy from "$lib/utils/tippy";
   import game from "$lib/utils/state";
   import Settings from "$lib/sections/Settings.svelte";
   import HelpModal from "$lib/sections/HelpModal.svelte";
@@ -18,7 +15,7 @@
   }
 
   let aboutClickerBtn = $state(); // controls automatic "about" helper showing on first visit of a game
-  run(() => {
+  $effect(() => {
     if ($game) {
       if (!$settings.seenGames.includes($game.id)) {
         recordSeenGame($game.id);
@@ -26,39 +23,47 @@
       }
     }
   });
-
-  function showSettingsModal() {
-    mdlSettings.showModal();
-  }
 </script>
 
 <div class="header">
   <div class="header-side">
-    <button disabled={!$game} onclick={returnToMenu} use:tippy={{ content: "Return to main menu", placement: "bottom" }}>
-      <IcBaselineArrowBack class="text-3xl" />
-    </button>
-    <button use:tippy={{ content: "About", placement: "bottom" }} data-bs-toggle="modal" data-bs-target="#mdlHelp" bind:this={aboutClickerBtn}>
-      <IcBaselineHelpOutline class="text-3xl" />
-    </button>
+    <div class="tooltip tooltip-bottom" data-tip={$game ? "Return to main menu" : ""}>
+      <button disabled={!$game} onclick={returnToMenu}>
+        <IcBaselineArrowBack class="text-3xl" />
+      </button>
+    </div>
+
+    <div class="tooltip tooltip-bottom" data-tip="About">
+      <button data-bs-toggle="modal" data-bs-target="#mdlHelp" onclick={mdlHelp.showModal()} bind:this={aboutClickerBtn}>
+        <IcBaselineHelpOutline class="text-3xl" />
+      </button>
+    </div>
   </div>
 
   <h1>Egdle</h1>
 
   <div class="header-side">
-    <button disabled={!$game} use:tippy={{ content: "View stats", placement: "bottom" }} data-bs-toggle="modal" data-bs-target="#mdlStats">
-      <IcBaselineLeaderboard class="text-3xl" />
-    </button>
-    <button use:tippy={{ content: "Settings", placement: "bottom" }} data-bs-toggle="modal" onclick={showSettingsModal}>
-      <IcBaselineSettings class="text-3xl" />
-    </button>
+    <div class="tooltip tooltip-bottom" data-tip={$game ? "View stats" : ""}>
+      <button disabled={!$game} onclick={mdlStats.showModal()}>
+        <IcBaselineLeaderboard class="text-3xl" />
+      </button>
+    </div>
+
+    <div class="tooltip tooltip-bottom" data-tip="Settings">
+      <button onclick={mdlSettings.showModal()}>
+        <IcBaselineSettings class="text-3xl" />
+      </button>
+    </div>
   </div>
 </div>
 
+<!-- settings modal -->
 <dialog id="mdlSettings" class="modal">
   <div class="modal-box">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
+    <h3 class="text-xl font-bold"><IcBaselineSettings class="inline align-text-bottom" /> Settings</h3>
     <Settings />
   </div>
   <form method="dialog" class="modal-backdrop">
@@ -67,18 +72,32 @@
 </dialog>
 
 <!-- helper modal -->
-<div class="modal fade" id="mdlHelp" tabindex="-1" aria-labelledby="mdlHelpTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+<dialog id="mdlHelp" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-xl font-bold"><IcBaselineHelpOutline class="inline align-text-bottom" /> About</h3>
     <HelpModal />
   </div>
-</div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <!-- stats modal -->
-<div class="modal fade" id="mdlStats" tabindex="-1" aria-labelledby="mdlStatsTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+<dialog id="mdlStats" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-xl font-bold"><IcBaselineLeaderboard class="inline align-text-bottom" /> Stats</h3>
     <StatsModal />
   </div>
-</div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
 
 <style>
   .header {

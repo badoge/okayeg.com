@@ -21,6 +21,9 @@ const announcementList = {
   },
 };
 
+/**
+ * @param { string[] } seenAnnoList
+ */
 export function chooseAnnouncementOnLoad(seenAnnoList) {
   // build unseen announcements list:
   const annoKeys = Object.keys(announcementList);
@@ -29,8 +32,14 @@ export function chooseAnnouncementOnLoad(seenAnnoList) {
     announce: null,
   };
 
-  const important = [],
-    generic = [];
+  /**
+   * @type { string[] }
+   */
+  const important = [];
+  /**
+   * @type { string[] }
+   */
+  const generic = [];
 
   // split all into generic and important, and filter seen ones
   annoKeys.forEach((k) => {

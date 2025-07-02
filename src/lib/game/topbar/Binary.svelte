@@ -32,7 +32,7 @@
       {#if countdown}
         <GameStartCountdown bind:isVisible={countdown} runFunction={startNewRun} />
       {:else}
-        <button class="btn btn-success" onclick={doStart}>
+        <button class="btn btn-primary" onclick={doStart}>
           <IcBaselineFlag />
           Start game
         </button>
@@ -52,7 +52,7 @@
       <span use:tippy={{ content: "Click counter" }}>
         <IcBaselineAdsClick />
       </span>
-      <b class={$currentGame.clicks ? "text-success" : "text-muted"}>{$currentGame.clicks}</b>
+      <b class={$currentGame.clicks ? "text-primary" : "text-muted"}>{$currentGame.clicks}</b>
     </div>
     <div class="right-flex">
       <div class="padder"></div>
@@ -107,7 +107,6 @@
   }
 
   .timer {
-    color: inherit;
     transition: color 1s ease-out;
   }
 

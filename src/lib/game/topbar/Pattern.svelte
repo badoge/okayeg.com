@@ -18,12 +18,12 @@
 <div class="bar">
   <div class="section left">
     Level
-    <b class="text-success">{$currentGame.level}</b>
+    <b class="text-primary">{$currentGame.level}</b>
   </div>
   <div class="section mid">
     {#if !$currentGame.result}
       {#if $currentGame.gameOver}
-        <button class="btn btn-success" onclick={startNewRun}>
+        <button class="btn btn-primary" onclick={startNewRun}>
           <IcBaselineFlag />
           Start game
         </button>

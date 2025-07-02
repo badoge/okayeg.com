@@ -1,10 +1,8 @@
 <script>
-  import { run } from "svelte/legacy";
-
   import currentGame from "$lib/utils/state";
 
   let overflow = $state(0);
-  run(() => {
+  $effect(() => {
     overflow = $currentGame.clicks - $currentGame.field.size;
   });
 </script>
@@ -16,7 +14,7 @@
   </div>
   <div class="section right">
     Clicks:
-    <b class="text-success">{$currentGame.clicks}</b>
+    <b class="text-primary">{$currentGame.clicks}</b>
     &nbsp;
     {#if overflow >= 0}
       <span class:text-warning={overflow > 24} class:text-secondary={overflow < 12}>

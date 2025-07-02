@@ -38,16 +38,16 @@
 <div class="bar">
   <div class="section left">
     <span use:tippy={{ content: "Time elapsed" }}>
-      <IcBaselineTimer />
+      <IcBaselineTimer class="inline align-text-bottom" />
     </span>
-    <b class="text-success">{$displayTimerStore}</b>
+    <b class="text-primary">{$displayTimerStore}</b>
   </div>
   <div class="section mid">
     {#if !$currentGame.result}
       {#if countdown}
         <GameStartCountdown runFunction={startNewRun} bind:isVisible={countdown} />
       {:else if $currentGame.gameOver}
-        <button class="btn btn-success" onclick={doStart}>
+        <button class="btn btn-primary" onclick={doStart}>
           <IcBaselineFlag />
           Start game
         </button>
@@ -61,9 +61,9 @@
   </div>
   <div class="section right">
     <span use:tippy={{ content: "Click count" }}>
-      <IcBaselineAdsClick />
+      <IcBaselineAdsClick class="inline align-text-bottom" />
     </span>
-    <b class="text-success">{$currentGame.clicks}</b>
+    <b class="text-primary">{$currentGame.clicks}</b>
   </div>
 </div>
 
