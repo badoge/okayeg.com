@@ -92,7 +92,7 @@
           {#each nfes as nfe}
             <div class="card bg-base-200 w-60 shadow-md nfe-card" data-price={nfe.price} data-rarity={rarities[nfe.rarity] || 5}>
               <figure>
-                <img src="data:image/gif;base64,{nfe.image}" class="w-50 m-5" alt="NFE {nfe._id}" title="NFE {nfes._id}" />
+                <img src="data:image/gif;base64,{nfe.image}" class="w-50 m-5" alt="NFE {nfe._id}" title="NFE {nfe._id}" />
               </figure>
               <div class="card-body">
                 <h2 class="card-title font-bold">
