@@ -1,7 +1,7 @@
 import { browser } from "$app/environment"; // sveltekit environment
 import { nullFunction } from "$lib/game/consts";
 import AdviceFriend from "$lib/elements/AdviceFriend.svelte";
-import { mount, unmount } from "svelte";
+import { mount } from "svelte";
 
 /**
  * @param {string} content
@@ -19,10 +19,6 @@ export function showAdviceFriend(content, title = "") {
     },
     target: document.body,
   });
-
-  adviceFriend.$on("hide-advice", () => {
-    unmount(adviceFriend);
-  });
 }
 
 /**
@@ -36,7 +32,7 @@ export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallba
     ${content}
   <span>
   <br>
-  <button class="btn btn-warning" onclick="${actionCallback}">${buttonText}</button>`;
+  <button class="btn btn-warning">${buttonText}</button>`;
 
   const adviceFriend = mount(AdviceFriend, {
     props: {
@@ -44,9 +40,5 @@ export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallba
       content: content,
     },
     target: document.body,
-  });
-
-  adviceFriend.$on("hide-advice", () => {
-    unmount(adviceFriend);
   });
 }

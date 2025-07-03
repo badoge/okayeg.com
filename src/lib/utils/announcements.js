@@ -11,7 +11,7 @@ const announcementList = {
   DO NOT ADD NEW ANNOUNCEMENTS BELOW THIS LINE 
   */
   firstVisit: {
-    text: `If you are new around here,<br>click the <b class="material-icons fs-5 align-text-bottom">help_outline</b> to get help.`,
+    text: `If you are new around here,<br>click the ❔ to get help.`,
     header: "Psst... Yu hav eg?",
   },
   firstReturnVisit: {

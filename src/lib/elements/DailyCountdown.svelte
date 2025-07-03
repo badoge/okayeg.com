@@ -35,11 +35,11 @@
 
 <div>
   {#if timeDiff >= 0}
-    <IcBaselineAlarm />
+    <IcBaselineAlarm class="inline" />
     {caption}
     <b class="text-primary">{timeLeft}</b>
   {:else}
-    <IcBaselineAlarmOn />
+    <IcBaselineAlarmOn class="inline" />
     New issue is ready!
     <a href={window.location.href} target="_self">Refresh</a>
     to play now!

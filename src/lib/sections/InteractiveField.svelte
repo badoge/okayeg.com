@@ -7,6 +7,7 @@
   import FieldCell from "$lib/elements/FieldCell.svelte";
 
   let gameOverModalTimer = $state();
+  let mdlGameOver = $state();
 
   const cellAnimTiming = $state({
     in: 0,
@@ -15,8 +16,10 @@
 
   $effect(() => {
     if (!$game._gameOverScreenSeen && $game.gameOver) {
-      $game._gameOverScreenSeen = true;
-      gameOverModalTimer = setTimeout(() => mdlGameOver.showModal(), 300);
+      gameOverModalTimer = setTimeout(() => {
+        mdlGameOver.showModal();
+        $game._gameOverScreenSeen = true;
+      }, 300);
     }
   });
 
@@ -25,7 +28,7 @@
 
     return () => {
       clearTimeout(gameOverModalTimer);
-      mdlGameOver.close();
+      mdlGameOver?.close();
     };
   });
 
@@ -44,7 +47,7 @@
 </div>
 
 <!-- gameover modal -->
-<dialog id="mdlGameOver" class="modal">
+<dialog id="mdlGameOver" class="modal" bind:this={mdlGameOver}>
   <div class="modal-box">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
