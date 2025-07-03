@@ -1103,43 +1103,6 @@ function copyListCommand(id, event) {
   }, 2000);
 } //copyBuyCommand
 
-async function loadClips() {
-  try {
-    let response = await fetch(`https://api.okayeg.com/clips`);
-    let data = await response.json();
-    let clips = data.clips;
-    let games = data.games;
-    let clipList = "";
-    for (let index = 0, j = clips.length; index < j; index++) {
-      clipList += `<div class="card clipcard">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-5">
-                    <a href="${clips[index].url}" target="_blank" rel="noopener noreferrer"><img src="${clips[index].thumbnail_url}" alt="clip thumbnail" height="272" width="480"></a>
-                    </div>
-                    <div class="col-xl-7">
-                        Title: ${clips[index].title}<br>
-                        Category: ${games.find((o) => o.id === clips[index].game_id)?.name || "🤷"}<br>
-                        Channel: <a href="https://twitch.tv/${clips[index].broadcaster_name}" target="_blank" rel="noopener noreferrer">${clips[index].broadcaster_name}</a><br>
-                        View count: ${clips[index].view_count.toLocaleString()}<br>
-                        Created at: ${new Date(clips[index].created_at).toUTCString()}<br>
-                        Clipped by: <a href="https://twitch.tv/${clips[index].creator_name}" target="_blank" rel="noopener noreferrer">${clips[index].creator_name}</a><br>
-                        Language: ${getLanguage(clips[index].language || "en")}<br>
-                        Duration: ${clips[index].duration}<br>
-                        URL: <a href="${clips[index].url}" target="_blank" rel="noopener noreferrer">${clips[index].url}</a><br>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-    }
-    document.getElementById("clipsdiv").innerHTML = `<h3>Top ${clips.length} clips from ${games[100].startdate} to ${games[101].enddate}</h3>
-        Clips are collected by fetching the top 100 games on twitch every hour during the week then fetching the top 20 clips in the games that were in the list of top 100 games the most throughout the week.
-        ${clipList}`;
-  } catch (error) {
-    console.log("loadClips error", error);
-  }
-} //loadClips
-
 async function loadStats() {
   try {
     let response = await fetch(`https://api.okayeg.com/donkstats`);
@@ -1614,11 +1577,6 @@ function convertTime2(time) {
   }
   return dDisplay + hDisplay + mDisplay + sDisplay;
 } //convertTime2
-
-function getLanguage(code) {
-  const lang = new Intl.DisplayNames(["en"], { type: "language" });
-  return lang.of(code);
-} //getLanguage
 
 async function checkPic(link) {
   let response = await fetch(link);

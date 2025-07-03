@@ -1,4 +1,12 @@
 /**
+ * @param {string} code
+ */
+export function getLanguage(code) {
+  const lang = new Intl.DisplayNames(["en"], { type: "language" });
+  return lang.of(code);
+} //getLanguage
+
+/**
  * @param {number} miliseconds
  */
 export function relativeTime(miliseconds) {
