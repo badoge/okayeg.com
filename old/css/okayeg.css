@@ -32,25 +32,6 @@
   padding-top: 5px;
 }
 
-.nfe {
-  border-radius: 6px;
-  margin: 5px;
-  width: fit-content;
-}
-
-.nfecontainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  text-align: center;
-}
-
-.nfetext {
-  max-width: 128px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .nn {
   image-rendering: pixelated;
 }

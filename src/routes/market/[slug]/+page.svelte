@@ -1,28 +1,49 @@
 <script>
   import { onMount } from "svelte";
+  import { addOrdinalSuffix, relativeTime } from "$lib/functions";
   import IcBaselineContentCopy from "~icons/ic/baseline-content-copy";
-
-  let nfes = $state();
-
-  let rarities = {
-    Common: 1,
-    Rare: 2,
-    Epic: 3,
-    Legendary: 4,
-  };
+  let { data } = $props();
 
   onMount(async () => {
     try {
+      let NFEID = data.slug.toLowerCase().replace(/\s/g, "");
+      console.log(NFEID);
       let response = await fetch(`https://api.okayeg.com/market`);
-      if (response.status !== 200) {
-        nfes = null;
-        return;
-      }
-      nfes = await response.json();
+      let nfes = await response.json();
 
-      if (!nfes) {
-        nfes = null;
-        return;
+      let rarities = {
+        Common: 1,
+        Rare: 2,
+        Epic: 3,
+        Legendary: 4,
+      };
+
+      let html = `<div class="row row-cols-1 row-cols-md-4 g-3" id="listingsRow">`;
+      for (let index = 0; index < nfes.length; index++) {
+        html += `
+      <div class="col nfe-card" data-price="${nfes[index].price}" data-rarity="${rarities[nfes[index].rarity] || 5}">
+      <div class="card" id=${nfes[index]._id}>
+      <img src="data:image/gif;base64,${nfes[index].image}" class="card-img-top" alt="NFE ${nfes[index]._id}" title="NFE ${nfes[index]._id}" />
+      <div class="card-body">
+        <h5 class="card-title">${nfes[index].price.toLocaleString()} ${nfes[index].price == 1 ? "eg" : "egs"}</h5>
+        <p class="card-text">${nfes[index].rarity || "Unknown rarity"} NFE listed by 
+        <a href="https://twitch.tv/${nfes[index].ownerusername}" target="_blank" rel="noopener noreferrer">${nfes[index].ownerusername}</a></p>
+        <button type="button" class="btn btn-secondary" onclick="copyBuyCommand(${nfes[index]._id},event)"><i class="material-icons notranslate">content_copy</i>Copy buy command</button>
+      </div>
+      </div>
+      </div>`;
+      }
+      document.getElementById("listings").innerHTML = html + "</div>";
+      if (document.getElementById(NFEID)) {
+        document.getElementById(NFEID).scrollIntoView();
+        document.getElementById(NFEID).classList.add("border-info");
+        let flashBorder = setInterval(() => {
+          document.getElementById(NFEID).classList.toggle("border-info");
+        }, 200);
+        setTimeout(() => {
+          clearInterval(flashBorder);
+          document.getElementById(NFEID).classList.remove("border-info");
+        }, 2000);
       }
 
       document.getElementById("sort").addEventListener("change", async function () {
@@ -48,22 +69,8 @@
       });
     } catch (error) {
       console.log("loadNFEMarket error", error);
-      nfes = null;
     }
   });
-
-  /**
-   * @param {any} id
-   * @param {any} [event]
-   */
-  function copyBuyCommand(id, event) {
-    navigator.clipboard.writeText(`=nfe buy ${id}`);
-    if (event.target.innerHTML == "Command copied :)") {
-      event.target.innerHTML = "You already copied this :)";
-    } else {
-      event.target.innerHTML = "Command copied :)";
-    }
-  } //copyBuyCommand
 </script>
 
 <svelte:head>
@@ -87,37 +94,29 @@
       <option value="rarityLowest">Rarity lowest to highest</option>
     </select>
     <div id="listings">
-      {#if nfes}
-        <div class="flex flex-wrap gap-4" id="listingsRow">
-          {#each nfes as nfe}
-            <div class="card bg-base-200 w-60 shadow-md nfe-card" data-price={nfe.price} data-rarity={rarities[nfe.rarity] || 5}>
-              <figure>
-                <img src="data:image/gif;base64,{nfe.image}" class="w-50 m-5" alt="NFE {nfe._id}" title="NFE {nfes._id}" />
-              </figure>
-              <div class="card-body">
-                <h2 class="card-title font-bold">
-                  {nfe.price.toLocaleString()}
-                  {nfe.price == 1 ? "eg" : "egs"}
-                </h2>
-                <p>
-                  {nfe.rarity || "Unknown rarity"} NFE listed by
-                  <a class="link" href="https://twitch.tv/{nfe.ownerusername}" target="_blank" rel="noopener noreferrer">{nfe.ownerusername}</a>
-                </p>
-                <div class="card-actions justify-end mt-3">
-                  <button type="button" class="btn btn-secondary" onclick={(event) => copyBuyCommand(nfe._id, event)}><IcBaselineContentCopy />Copy buy command</button>
-                </div>
-              </div>
-            </div>
-          {/each}
-        </div>
-      {:else if nfes?.length == 0}
-        <span class="text-2xl">There are't any NFEs for sale :(</span>
-      {:else if nfes === null}
-        <span class="text-2xl">Could not load the market :(</span>
-      {:else}
-        <span class="loading loading-spinner loading-xl"></span>
-      {/if}
+      <span class="loading loading-spinner loading-xl"></span>
     </div>
   </div>
   <div class="flex-1 shrink"></div>
 </div>
+
+<style>
+  .nfe {
+    border-radius: 6px;
+    margin: 5px;
+    width: fit-content;
+  }
+
+  .nfecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nfetext {
+    max-width: 128px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+</style>
