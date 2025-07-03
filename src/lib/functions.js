@@ -1,4 +1,17 @@
 /**
+ * @param {string | number} number
+ */
+export function addOrdinalSuffix(number) {
+  if (typeof number !== "number" || isNaN(number)) {
+    return number;
+  }
+  const suffixes = ["th", "st", "nd", "rd"];
+  const lastTwoDigits = Math.abs(number % 100);
+  const suffix = suffixes[(lastTwoDigits - 20) % 10] || suffixes[lastTwoDigits] || suffixes[0];
+  return number + suffix;
+} //addOrdinalSuffix
+
+/**
  * @param {string} code
  */
 export function getLanguage(code) {

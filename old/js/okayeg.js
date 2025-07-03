@@ -287,84 +287,6 @@ async function getProfile() {
   }
 } //getProfile
 
-async function getLeaderboard() {
-  try {
-    let response = await fetch(`https://api.okayeg.com/leaderboard`);
-    let leaderboard = await response.json();
-    let seasonSelect = document.getElementById("seasonSelect");
-    seasonSelect.remove(0);
-    for (let i = leaderboard.season; i >= 0; i--) {
-      let option = document.createElement("option");
-      option.value = i;
-      option.text = `Season ${i}`;
-      if (i == leaderboard.season) {
-        option.selected = true;
-      }
-      seasonSelect.appendChild(option);
-    }
-    document.getElementById("season").innerHTML = `Season ${leaderboard.season} Leaderboard`;
-    document.getElementById("endTime").innerHTML = `Ends in ${relativeTime(leaderboard.timeLeft * 1000)}`;
-    for (let index = 0; index < 10; index++) {
-      document.getElementById(`user${index + 1}`).innerHTML = `<a href="https://twitch.tv/${leaderboard.current[index].username}" target="_blank" rel="noopener noreferrer">
-      ${leaderboard.current[index].username}</a>`;
-      document.getElementById(`user${index + 1}PFP`).dataset.userid = leaderboard.current[index].id;
-      document.getElementById(`user${index + 1}Egs`).innerHTML = `${leaderboard.current[index].egs.toLocaleString()} egs`;
-    }
-    await loadLBPFPs();
-    seasonSelect.addEventListener("change", async function () {
-      document.getElementById("season").innerHTML = `Season ${seasonSelect.value} Leaderboard`;
-      document.getElementById("endTime").innerHTML = parseInt(seasonSelect.value, 10) === parseInt(leaderboard.season, 10) ? `Ends in ${relativeTime(leaderboard.timeLeft * 1000)}` : "";
-      let selectedLeaderboard = leaderboard.allTime[0].leaderboard[seasonSelect.value].users;
-      if (parseInt(seasonSelect.value, 10) === parseInt(leaderboard.season, 10)) {
-        selectedLeaderboard = leaderboard.current;
-      }
-      for (let index = 0; index < 10; index++) {
-        document.getElementById(`user${index + 1}`).innerHTML = `<a href="https://twitch.tv/${selectedLeaderboard[index].username}" target="_blank" rel="noopener noreferrer">
-        ${selectedLeaderboard[index].username}</a>`;
-        document.getElementById(`user${index + 1}PFP`).dataset.userid = selectedLeaderboard[index].id;
-        document.getElementById(`user${index + 1}Egs`).innerHTML = `${selectedLeaderboard[index].egs.toLocaleString()} egs`;
-      }
-      document.getElementById("loadTop100").style.display = "";
-      document.getElementById("top100").style.display = "none";
-      await loadLBPFPs();
-    });
-
-    document.getElementById("loadTop100").addEventListener("click", function () {
-      document.getElementById("loadTop100").style.display = "none";
-      let selectedLeaderboard = leaderboard.allTime[0].leaderboard[seasonSelect.value].users;
-      if (seasonSelect.value == leaderboard.season) {
-        selectedLeaderboard = leaderboard.current;
-      }
-      let string = "";
-      for (let index = 10; index < 100; index++) {
-        string += `
-        <tr>
-        <th>${addOrdinalSuffix(index + 1)} Place</th>
-        <td><a href="https://twitch.tv/${selectedLeaderboard[index].username}" target="_blank" rel="noopener noreferrer">
-        ${selectedLeaderboard[index].username}</a>
-        </td>
-        <td>${selectedLeaderboard[index].egs.toLocaleString()} egs</td>
-      </tr>`;
-      }
-      document.getElementById("top100Table").innerHTML = string;
-      document.getElementById("top100").style.display = "";
-    });
-  } catch (error) {
-    console.log("getLeaderboard error" + error);
-  }
-} //getLeaderboard
-
-async function loadLBPFPs() {
-  let ids = document.querySelectorAll(".lb-pfp");
-  ids = [...ids].map((e) => e.dataset.userid);
-  let response = await fetch(`https://helper.donk.workers.dev/twitch/users?id=${ids.join(",")}`);
-  let users = await response.json();
-  for (let index = 1; index <= 10; index++) {
-    let pfp = users.data.find((x) => x.id === document.getElementById(`user${index}PFP`).dataset.userid)?.profile_image_url || "/pics/okayeg.png";
-    document.getElementById(`user${index}PFP`).src = pfp;
-  }
-} //loadLBPFPs
-
 async function reloadTwitchGlobal() {
   document.getElementById("twitch").innerHTML = spinner;
   try {
@@ -1980,16 +1902,6 @@ function secondsToTwitchStupidTime(seconds) {
   const sec = seconds % 60;
   return `${hours}h${minutes}m${sec}s`;
 } //secondsToTwitchStupidTime
-
-function addOrdinalSuffix(number) {
-  if (typeof number !== "number" || isNaN(number)) {
-    return number;
-  }
-  const suffixes = ["th", "st", "nd", "rd"];
-  const lastTwoDigits = Math.abs(number % 100);
-  const suffix = suffixes[(lastTwoDigits - 20) % 10] || suffixes[lastTwoDigits] || suffixes[0];
-  return number + suffix;
-} //addOrdinalSuffix
 
 let countries = [];
 async function loadSubPrices(type, currency) {
