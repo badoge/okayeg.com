@@ -70,5 +70,7 @@
     <p>Example: <kbd class="kbd">=trivia music</kbd></p>
     <p>If you don't provide a category a random one will be picked</p>
     <aside class="text-sm">Some questions don't have a set category, so the only way to get them is to not provide a category when using the command</aside>
+
+    <img src="/nerd.png" class="w-30 m-auto" alt="okayeg nerd" />
   </div>
 </div>
