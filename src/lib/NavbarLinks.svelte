@@ -55,7 +55,7 @@
   <details>
     <summary class={miscPages.includes(route) ? "bg-accent text-accent-content" : ""}><IcBaselineCategory />Misc. pages</summary>
     <ul class="bg-accent text-secondary-content rounded-box w-55 p-2 z-1 mt-2 shadow-sm">
-      <li><a class={route === "/" ? "bg-neutral text-neutral-content" : ""} href="/"><strong>Miscellaneous pages</strong></a></li>
+      <li><a href="/"><strong>Miscellaneous pages</strong></a></li>
       <div class="divider divider-neutral m-0"></div>
       <li><a class={route === "/api" ? "bg-neutral text-neutral-content" : ""} href="/api"><IcBaselineApi />API</a></li>
       <li><a class={route === "/bounty" ? "bg-neutral text-neutral-content" : ""} href="/bounty"><IcBaselineDiamond />Bounty</a></li>
