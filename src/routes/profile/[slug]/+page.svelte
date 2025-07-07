@@ -29,14 +29,13 @@
    * @param {any} id
    * @param {any} [event]
    */
-  function copyBuyCommand(id, event) {
-    navigator.clipboard.writeText(`=nfe buy ${id}`);
-    if (event.target.innerHTML == "Command copied :)") {
-      event.target.innerHTML = "You already copied this :)";
-    } else {
-      event.target.innerHTML = "Command copied :)";
-    }
-  } //copyBuyCommand
+  function copyListCommand(id, event) {
+    navigator.clipboard.writeText(`=nfe list ${id} [price]`);
+    event.target.innerHTML = "Command copied :)";
+    setTimeout(() => {
+      event.target.innerHTML = `<i class="material-icons notranslate">content_copy</i>Copy list command`;
+    }, 2000);
+  } //copyListCommand
 
   /**
    * @param {SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }} event
@@ -401,7 +400,7 @@
                     {nfe.rarity || "Unknown rarity"} NFE
                   </h2>
                   <div class="card-actions justify-center">
-                    <button type="button" class="btn btn-secondary" onclick={(event) => copyBuyCommand(nfe._id, event)}>
+                    <button type="button" class="btn btn-secondary" onclick={(event) => copyListCommand(nfe._id, event)}>
                       <IcBaselineContentCopy />Copy list command
                     </button>
                   </div>

@@ -3,6 +3,14 @@
   import IcBaselinePublic from "~icons/ic/baseline-public";
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
 
+  function loadGlobalRecap() {
+    document.getElementById("global").style.display = "";
+    document.getElementById("user").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(undefined, undefined, "#");
+    document.getElementById("username").value = "";
+  } //loadGlobalRecap
+
   onMount(async () => {
     return;
     let input = location.hash;

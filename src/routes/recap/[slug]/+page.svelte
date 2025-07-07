@@ -2,6 +2,14 @@
   import { onMount } from "svelte";
   let { data } = $props();
 
+  function loadGlobalRecap() {
+    document.getElementById("global").style.display = "";
+    document.getElementById("user").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(undefined, undefined, "#");
+    document.getElementById("username").value = "";
+  } //loadGlobalRecap
+
   onMount(async () => {
     return;
     let username = data.slug.toLowerCase().replace(/\s/g, "");
