@@ -47,7 +47,7 @@
       <li><a class={route === "/twitch/stats" ? "bg-neutral text-neutral-content" : ""} href="/twitch/stats"><IcBaselineQueryStats />Donk stats</a></li>
       <li><a class={route === "/twitch/subs" ? "bg-neutral text-neutral-content" : ""} href="/twitch/subs"><IcBaselineAttachMoney />Local sub prices</a></li>
       <li><a class={route === "/twitch/time" ? "bg-neutral text-neutral-content" : ""} href="/twitch/time"><IcBaselineHistory />VOD time</a></li>
-      <li><a class={route === "/twitch/user" ? "bg-neutral text-neutral-content" : ""} href="/twitch/user"><IcBaselinePerson />User info</a></li>
+      <li><a class={route?.startsWith("/twitch/user") ? "bg-neutral text-neutral-content" : ""} href="/twitch/user"><IcBaselinePerson />User info</a></li>
     </ul>
   </details>
 </li>
