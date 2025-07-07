@@ -448,7 +448,7 @@
         <legend class="fieldset-legend">Individual recap</legend>
         <div class="join">
           <input type="text" class="input join-item" placeholder="Username" />
-          <button class="btn join-item bg-primary"><IcBaselinePersonSearch />Lookup</button>
+          <button class="btn join-item btn-primary"><IcBaselinePersonSearch />Lookup</button>
         </div>
         <p class="label">View any player's OkayegBOT recap for 2023</p>
       </fieldset>

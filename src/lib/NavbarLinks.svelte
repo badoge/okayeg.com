@@ -33,7 +33,7 @@
 <li><a class={route === "/leaderboard" ? "bg-accent text-accent-content" : ""} href="/leaderboard"><IconoirLeaderboardStar />Leaderboard</a></li>
 <li><a class={route === "/stocks" ? "bg-accent text-accent-content" : ""} href="/stocks"><IcOutlineTrendingUp />Stocks</a></li>
 <li><a class={route === "/market" ? "bg-accent text-accent-content" : ""} href="/market"><IcBaselineStorefront />NFE market</a></li>
-<li><a class={route === "/profile" ? "bg-accent text-accent-content" : ""} href="/profile"><IcBaselineAccountCircle />Profile</a></li>
+<li><a class={route?.startsWith("/profile") ? "bg-accent text-accent-content" : ""} href="/profile"><IcBaselineAccountCircle />Profile</a></li>
 <div class="divider divider-horizontal divider-accent m-0"></div>
 <li>
   <details>

@@ -97,11 +97,6 @@ body {
   cursor: pointer;
 }
 
-.profile-card {
-  height: 60vh;
-  overflow: auto;
-}
-
 .svgMap-map-wrapper {
   background: #163d64;
 }
