@@ -17,6 +17,9 @@
   let chatSettings = $derived("");
   let chatColor = $derived("");
 
+  let displayName = $derived("");
+  let profilePic = $derived("");
+
   let colors = {
     "#0000FF": "Blue",
     "#8A2BE2": "BlueViolet",
@@ -58,6 +61,8 @@
         user = "";
       } else {
         user = result?.data[0];
+        displayName = user.display_name;
+        profilePic = user.profile_image_url;
       }
 
       let response2 = await fetch(`https://helper.donk.workers.dev/twitch/streams?user_id=${user.id}`);
@@ -130,11 +135,11 @@
 </script>
 
 <svelte:head>
-  <title>Profile | OkayegBOT</title>
-  <meta name="description" content="View your OkayegBOT profile which contains your stats and NFEs and channel settings" />
-  <meta property="og:title" content="Profile | OkayegBOT" />
-  <meta property="og:url" content="https://okayeg.com/profile" />
-  <meta property="og:description" content="View your OkayegBOT profile which contains your stats and NFEs and channel settings" />
+  <title>Twitch user info | OkayegBOT</title>
+  <meta name="description" content="View all of a Twitch user's public info" />
+  <meta property="og:title" content="Twitch user info | OkayegBOT" />
+  <meta property="og:url" content="https://okayeg.com/twitch/user" />
+  <meta property="og:description" content="View all of a Twitch user's public info" />
 </svelte:head>
 
 <div class="flex justify-center mt-5">
