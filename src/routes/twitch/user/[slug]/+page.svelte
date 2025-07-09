@@ -5,6 +5,7 @@
   import { relativeTime, getLanguage } from "$lib/functions.js";
 
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
+  import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
 
   let { data } = $props();
   let username = $state(data.slug.toLowerCase().replace(/\s/g, ""));
@@ -147,280 +148,370 @@
   </fieldset>
 </div>
 
-<h1 class="display-3">
-  <a href="https://twitch.tv/{user.login}" style="color: {chatColor.color}" target="_blank" rel="noopener noreferrer">{user.display_name}</a>'s Info
-</h1>
-<h1 class="display-6">
-  <b>
-    User ID
-    <i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="An ID that identifies the user. Stays the same even after a username change.">
-      help_outline
-    </i>:
-  </b>
-  {user.id}
-</h1>
-<h1 class="display-6">
-  <b
-    >Username<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The user's login name. Contains lowercase alphanumeric characters only.">
-      help_outline
-    </i>:
-  </b>
-  {user.login}
-</h1>
-<h1 class="display-6">
-  <b
-    >Display name<i
-      class="material-icons notranslate"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      data-bs-title="The user's display name. May contain uppercase letters or spaces and Chinese, Japanese, or Korean characters."
-    >
-      help_outline
-    </i>:
-  </b>
-  {user.display_name}
-</h1>
-<h1 class="display-6">
-  <b
-    >User type<i
-      class="material-icons notranslate"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      data-bs-title="The type of user. Possible values are: admin (Twitch administrator) | global_mod | staff (Twitch staff) | empty (Normal user)"
-    >
-      help_outline
-    </i>:
-  </b>
-  {user.type || `<span class="text-body-secondary">Normal user</span>`}
-</h1>
-<h1 class="display-6">
-  <b
-    >Broadcaster type<i
-      class="material-icons notranslate"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      data-bs-title="The type of broadcaster. Possible values are: affiliate (An affiliate broadcaster) | partner (A partner broadcaster) | empty (A normal broadcaster)"
-    >
-      help_outline
-    </i>:
-  </b>
-  {user.broadcaster_type || `<span class="text-body-secondary">Normal broadcaster</span>`}
-</h1>
-<h1 class="display-6">
-  <b>Description<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The user's description of their channel."> help_outline </i>: </b>
-  {user.description}
-</h1>
-<h1 class="display-6">
-  <b
-    >Account age<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The time since the creation of the user's account"> help_outline </i>:
-  </b>
-  {relativeTime(Date.now() - new Date(user.created_at))} ({user.created_at})
-</h1>
+<div class="flex m-5">
+  <div class="flex-1"></div>
 
-<h1 class="display-6">
-  <b>Profile picture<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The user's profile image."> help_outline </i>: </b>
-  <br />
-  <span class="text-center ratio ratio-1x1" id="profilepicture">
-    <img src={user.profile_image_url} class="rounded mx-auto d-block" title="{user.login}'s profile picture" alt="{user.login}'s profile picture" />
-  </span>
-</h1>
-<b
-  >Offline image<i
-    class="material-icons notranslate"
-    data-bs-toggle="tooltip"
-    data-bs-placement="top"
-    data-bs-title="The user's offline image. Takes place of the video player while the channel is offline."
-  >
-    help_outline
-  </i>
-  :
-</b>
-<br />
+  <div class="flex flex-col justify-center w-250 mt-5">
+    <div class="text-6xl mb-5">
+      <a href="https://twitch.tv/{user.login}" style="color: {chatColor.color}" target="_blank" rel="noopener noreferrer">{user.display_name}</a>'s Info
+    </div>
+    <div class="text-xl">
+      <strong>
+        User ID
+        <div class="tooltip align-text-bottom" data-tip="An ID that identifies the user. Stays the same even after a username change">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {user.id}
+    </div>
+    <div class="text-xl">
+      <strong>
+        Username
+        <div class="tooltip align-text-bottom" data-tip="The user's login name. Contains lowercase alphanumeric characters only">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {user.login}
+    </div>
+    <div class="text-xl">
+      <strong>
+        Display name
+        <div class="tooltip align-text-bottom" data-tip="The user's display name. May contain uppercase letters or spaces and Chinese, Japanese, or Korean characters">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {user.display_name}
+    </div>
+    <div class="text-xl">
+      <strong>
+        User type
+        <div class="tooltip align-text-bottom" data-tip="The type of user. Possible values are: admin (Twitch administrator) | global_mod | staff (Twitch staff) | empty (Normal user)">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if user.type}
+        {user.type}
+      {:else}
+        <span class="opacity-50">Normal user</span>
+      {/if}
+    </div>
+    <div class="text-xl">
+      <strong>
+        Broadcaster type
+        <div
+          class="tooltip align-text-bottom"
+          data-tip="The type of broadcaster. Possible values are: affiliate (An affiliate broadcaster) | partner (A partner broadcaster) | empty (A normal broadcaster)"
+        >
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if user.broadcaster_type}
+        {user.broadcaster_type}
+      {:else}
+        <span class="opacity-50">Normal broadcaster</span>
+      {/if}
+    </div>
+    <div class="text-xl">
+      <strong>
+        Description
+        <div class="tooltip align-text-bottom" data-tip="The user's description of their channel">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if user.description}
+        {user.description}
+      {:else}
+        <span class="opacity-50">No description</span>
+      {/if}
+    </div>
+    <div class="text-xl">
+      <strong>
+        Account age
+        <div class="tooltip align-text-bottom" data-tip="The time since the creation of the user's account">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {relativeTime(Date.now() - new Date(user.created_at))} ({user.created_at})
+    </div>
 
-{#if user.offline_image_url}
-  <span class="text-center ratio ratio-16x9">
-    <img src={user.offline_image_url} class="rounded mx-auto d-block" title="{user.login}'s offline image" alt="{user.login}'s offline image" />
-  </span>
-{:else}
-  <span class="text-center">
-    <span class="text-body-secondary">No offline image found</span>
-  </span>
-{/if}
+    <div class="text-xl">
+      <strong>
+        Profile picture <div class="tooltip align-text-bottom" data-tip="The user's profile image">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      <img src={user.profile_image_url} class="mx-auto w-100" title="{user.login}'s profile picture" alt="{user.login}'s profile picture" />
+    </div>
+    <div class="text-xl">
+      <strong>
+        Offline image
+        <div class="tooltip align-text-bottom" data-tip="The user's offline image. Takes place of the video player while the channel is offline">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if user.offline_image_url}
+        <img src={user.offline_image_url} class="mx-auto w-200" title="{user.login}'s offline image" alt="{user.login}'s offline image" />
+      {:else}
+        <div class="opacity-50">No offline image</div>
+      {/if}
+    </div>
 
-{#if stream}
-  <b>Channel status<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Is the channel live or offline."> help_outline </i>: </b>
-  <div class="inline-grid *:[grid-area:1/1]">
-    <div class="status status-error animate-ping"></div>
-    <div class="status status-error"></div>
+    <!-- stream id - only exists if the channel is live -->
+    {#if stream?.id}
+      <div class="text-xl">
+        <strong>
+          Channel status
+          <div class="tooltip align-text-bottom" data-tip="Is the channel live or offline">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        <div class="inline-grid *:[grid-area:1/1] align-middle">
+          <div class="status status-error animate-ping"></div>
+          <div class="status status-error"></div>
+        </div>
+        Live
+      </div>
+
+      <div class="text-xl">
+        <strong>
+          Uptime <div class="tooltip align-text-bottom" data-tip="How long has the channel been live">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {relativeTime(Date.now() - new Date(stream.started_at))}
+      </div>
+
+      <div class="text-xl">
+        <strong>
+          View count
+          <div class="tooltip align-text-bottom" data-tip="The number of users watching the stream">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {stream?.viewer_count?.toLocaleString()}
+        {stream?.viewer_count == 1 ? "viewer" : "viewers"}
+      </div>
+    {:else}
+      <div class="text-xl">
+        <strong>
+          Channel status
+          <div class="tooltip align-text-bottom" data-tip="Is the channel live or offline">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        Offline
+      </div>
+    {/if}
+
+    <div class="text-xl">
+      <strong>
+        Category <div class="tooltip align-text-bottom" data-tip="What category the stream is in">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if stream.game_name}
+        <a class="link" href="https://www.twitch.tv/directory/game/{stream.game_name}" target="_blank" rel="noopener noreferrer">{stream.game_name}</a>
+      {:else}
+        <span class="opacity-50">None</span>
+      {/if}
+    </div>
+
+    <div class="text-xl">
+      <strong>
+        Title
+        <div class="tooltip align-text-bottom" data-tip="The title of the stream">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if stream.title}
+        {stream.title}
+      {:else}
+        <span class="opacity-50">None</span>
+      {/if}
+    </div>
+
+    <div class="text-xl">
+      <strong>
+        Tags
+        <div class="tooltip align-text-bottom" data-tip="The tags that the user has applied to their channel">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if stream?.tags?.length}
+        {#each stream.tags as tag}
+          <span class="badge badge-ghost me-1">{tag}</span>
+        {/each}
+      {:else}
+        <span class="opacity-50">None</span>
+      {/if}
+    </div>
+
+    <div class="text-xl">
+      <strong
+        >Language
+        <div class="tooltip align-text-bottom" data-tip="The stream's language">
+          <IcBaselineHelpOutline />
+        </div>
+        :
+      </strong>
+      {#if stream?.language}
+        {getLanguage(stream?.language)}
+      {:else if stream?.broadcaster_language}
+        {getLanguage(stream?.broadcaster_language)}
+      {:else}
+        <span class="opacity-50">Unknown</span>
+      {/if}
+    </div>
+
+    {#if stream?.thumbnail_url}
+      <div class="text-xl">
+        <strong
+          >Stream thumbnail
+          <div class="tooltip align-text-bottom" data-tip="A screenshot from the last 5 minutes of the stream">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        <img
+          src={stream?.thumbnail_url.replace("{width}x{height}", "1280x720")}
+          class="w-200 mx-auto d-block"
+          title="{user.login}'s Stream thumbnail"
+          alt="{user.login}'s Stream thumbnail"
+        />
+      </div>
+    {/if}
+
+    {#if schedule}
+      <div class="text-xl">
+        <strong>
+          Upcoming stream <div class="tooltip align-text-bottom" data-tip="The next scheduled stream that the streamer has set up">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {relativeTime(new Date(schedule[0].end_time).getTime() - new Date(schedule[0].start_time).getTime())}
+        {schedule[0]?.category?.name || ""} stream titled "{schedule[0]?.title.trim() || ""}" Starting in {relativeTime(new Date(schedule[0].start_time).getTime() - Date.now())}
+      </div>
+    {/if}
+
+    {#if extensions.panel?.["1"]?.active || extensions.panel?.["2"]?.active || extensions.panel?.["3"]?.active}
+      <div class="text-xl">
+        <strong>
+          Panel extensions
+          <div class="tooltip align-text-bottom" data-tip="Panel extensions appear under the stream">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {#each Object.entries(extensions.panel) as [index, extension]}
+          {#if extension.active}
+            <a class="link" href="https://dashboard.twitch.tv/extensions/{extension.id}" target="_blank" rel="noopener noreferrer"> {extension.name}</a><br />
+          {/if}
+        {/each}
+      </div>
+    {/if}
+
+    {#if extensions?.component?.["1"]?.active || extensions?.component?.["2"]?.active}
+      <div class="text-xl">
+        <strong>
+          Component extensions
+          <div class="tooltip align-text-bottom" data-tip="Component extensions are placed on video player and expand when the user interacts with them">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {#each Object.entries(extensions.component) as [index, extension]}
+          {#if extension.active}
+            <a class="link" href="https://dashboard.twitch.tv/extensions/{extension.id}" target="_blank" rel="noopener noreferrer"> {extension.name}</a><br />
+          {/if}
+        {/each}
+      </div>
+    {/if}
+
+    {#if extensions.overlay?.["1"]?.active}
+      <div class="text-xl">
+        <strong>
+          Overlay extensions
+          <div class="tooltip align-text-bottom" data-tip="Overlay extensions appear over the whole video player">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        <a class="link" href="https://dashboard.twitch.tv/extensions/{extensions.overlay[1].id}" target="_blank" rel="noopener noreferrer"> {extensions.overlay[1].name}</a>
+      </div>
+    {/if}
+
+    {#if teams?.length}
+      <div class="text-xl">
+        <strong>
+          Teams
+          <div class="tooltip align-text-bottom" data-tip="The teams that the user joined. Users can join multiple teams but only one can be displayed on the channel">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {#each teams as team}
+          <div class="text-center">
+            <a class="link text-center" href="https://www.twitch.tv/team/{team.team_name}" target="_blank" rel="noopener noreferrer"> {team.team_display_name}</a>
+            <img src={team.thumbnail_url} class="mx-auto d-block w-100" title="{team.team_display_name}'s team logo" alt="{team.team_display_name}'s team logo" /><br />
+          </div>
+        {/each}
+      </div>
+    {/if}
+
+    {#if chatSettings}
+      <div class="text-xl">
+        <strong>
+          Chat settings
+          <div class="tooltip align-text-bottom" data-tip="The chat settings has the user changed">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        {chatSettings?.emote_mode ? "Emote only mode" : ""}<br />
+        {chatSettings?.follower_mode ? `Followers only mode (${relativeTime(chatSettings.follower_mode_duration * 60000).trim() || "0 minutes"})` : ""}<br />
+        {chatSettings?.slow_mode ? `Slow mode (${relativeTime(chatSettings.slow_mode_wait_time * 1000).trim()})` : ""}<br />
+        {chatSettings?.subscriber_mode ? "Subscribers only mode" : ""}<br />
+        {chatSettings?.unique_chat_mode ? "Unique-chat mode" : ""}<br />
+      </div>
+    {/if}
+
+    {#if chatColor}
+      <div class="text-xl">
+        <strong>
+          Chat color <div class="tooltip align-text-bottom" data-tip="The chat color that the user picked">
+            <IcBaselineHelpOutline />
+          </div>
+          :
+        </strong>
+        <span style="color: {chatColor.color}">
+          {chatColor.color}
+        </span>
+        {#if chatColor.color in colors}
+          Default Twitch color "{colors[chatColor.color]}"
+        {:else if !chatColor.color}
+          <span class="opacity-50">No color selected</span>
+        {:else}
+          Custom color (Twitch Turbo/Prime user)
+        {/if}
+      </div>
+    {/if}
   </div>
-  Live
-  <h1 class="display-6">
-    <b>Category<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="What category the stream is in."> help_outline </i>: </b>
-    {#if stream.game_name}
-      <a href="https://www.twitch.tv/directory/game/{stream.game_name}" target="_blank" rel="noopener noreferrer">{stream.game_name}</a>
-    {:else}
-      <span class="text-body-secondary">None</span>
-    {/if}
-  </h1>
-
-  <h1 class="display-6">
-    <b>Title<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The title of the stream."> help_outline </i>: </b>
-    {#if stream.title}
-      {stream.title}
-    {:else}
-      <span class="text-body-secondary">None</span>
-    {/if}
-  </h1>
-  <h1 class="display-6">
-    <b>Uptime<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="How long has the channel been live."> help_outline </i>: </b>
-    {relativeTime(Date.now() - new Date(stream.started_at))}
-  </h1>
-  <h1 class="display-6">
-    <b>View count<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The number of users watching the stream."> help_outline </i>: </b>
-    {stream?.viewer_count?.toLocaleString()}
-    {stream?.viewer_count == 1 ? "viewer" : "viewers"}
-  </h1>
-
-  <h1 class="display-6">
-    <b
-      >Tags<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The tags that the user has applied to their channel."> help_outline </i>:
-    </b>
-
-    {#if stream?.tags?.length}
-      {#each stream.tags as tag}
-        <span class="badge">{tag}</span>
-      {/each}
-    {:else}
-      <span class="text-body-secondary">None</span>
-    {/if}
-  </h1>
-{/if}
-
-<h1 class="display-6">
-  <b>Language<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The language that the stream uses. "> help_outline </i>: </b>
-  {getLanguage("en")}
-</h1>
-
-{#if stream?.thumbnail_url}
-  <h1 class="display-6">
-    <b
-      >Stream thumbnail<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="A screenshot from the last 5 minutes of the stream.">
-        help_outline
-      </i>
-      :
-    </b>
-    <br />
-    <span class="text-center ratio ratio-16x9">
-      <img
-        src={stream?.thumbnail_url.replace("{width}x{height}", "1280x720")}
-        class="rounded mx-auto d-block"
-        title="{user.login}'s Stream thumbnail"
-        alt="{user.login}'s Stream thumbnail"
-      />
-    </span>
-  </h1>
-{/if}
-
-{#if schedule}
-  <h1 class="display-6">
-    <b
-      >Upcoming stream<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The next scheduled stream that the streamer has set up.">
-        help_outline
-      </i>:
-    </b>
-    {relativeTime(new Date(schedule[0].end_time).getTime() - new Date(schedule[0].start_time).getTime())}
-    {schedule[0]?.category?.name || ""} stream titled "{schedule[0]?.title.trim() || ""}" Starting in {relativeTime(new Date(schedule[0].start_time).getTime() - Date.now())}
-  </h1>
-{/if}
-
-{#if extensions.panel?.["1"]?.active || extensions.panel?.["2"]?.active || extensions.panel?.["3"]?.active}
-  <h1 class="display-6">
-    <b>
-      Panel extensions<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Panel extensions appear under the stream."> help_outline </i>:
-    </b>
-
-    {#each Object.entries(extensions.panel) as [index, extension]}
-      {#if extension.active}
-        <a href="https://dashboard.twitch.tv/extensions/{extension.id}" target="_blank" rel="noopener noreferrer"> {extension.name}</a><br />
-      {/if}
-    {/each}
-  </h1>
-{/if}
-
-{#if extensions?.component?.["1"]?.active || extensions?.component?.["2"]?.active}
-  <h1 class="display-6">
-    <b
-      >Component extensions<i
-        class="material-icons notranslate"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        data-bs-title="Component extensions are placed on video player and expand when the user interacts with them."
-      >
-        help_outline
-      </i>:
-    </b>
-
-    {#each Object.entries(extensions.component) as [index, extension]}
-      {#if extension.active}
-        <a href="https://dashboard.twitch.tv/extensions/{extension.id}" target="_blank" rel="noopener noreferrer"> {extension.name}</a><br />
-      {/if}
-    {/each}
-  </h1>
-{/if}
-
-{#if extensions.overlay?.["1"]?.active}
-  <h1 class="display-6">
-    <b
-      >Overlay extensions<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Overlay extensions appear over the whole video player.">
-        help_outline
-      </i>:
-    </b>
-    <a href="https://dashboard.twitch.tv/extensions/{extensions.overlay[1].id}" target="_blank" rel="noopener noreferrer"> {extensions.overlay[1].name}</a><br />
-  </h1>
-{/if}
-
-{#if teams?.length}
-  <h1 class="display-6">
-    <b
-      >Teams<i
-        class="material-icons notranslate"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        data-bs-title="The teams that the user joined. Users can join multiple teams but only 1 team can be displayed on the channel"
-      >
-        help_outline
-      </i>:
-    </b>
-
-    {#each teams as team}
-      <h1 class="display-6"><a href="https://www.twitch.tv/team/{team.team_name}" target="_blank" rel="noopener noreferrer"> {team.team_display_name}</a></h1>
-      <img src={team.thumbnail_url} class="rounded ratio ratio-1x1 mx-auto d-block" title="{team.team_display_name}'s team logo" alt="{team.team_display_name}'s team logo" /><br />
-    {/each}
-  </h1>
-{/if}
-
-{#if chatSettings}
-  <h1 class="display-6">
-    <b>Chat settings<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The chat settings has the user changed."> help_outline </i>: </b>
-    {chatSettings.emote_mode ? "Emote only mode<br>" : ""}
-    {chatSettings.follower_mode ? `Followers only mode (${relativeTime(chatSettings.follower_mode_duration * 60000).trim() || "0 minutes"})<br>` : ""}
-    {chatSettings.slow_mode ? `Slow mode (${relativeTime(chatSettings.slow_mode_wait_time * 1000).trim()})<br>` : ""}
-    {chatSettings.subscriber_mode ? "Subscribers only mode<br>" : ""}
-    {chatSettings.unique_chat_mode ? "Unique-chat mode<br>" : ""}
-  </h1>
-{/if}
-
-{#if chatColor}
-  <h1 class="display-6">
-    <b>Chat color<i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="The chat color that the user picked."> help_outline </i>: </b>
-    <span style="color: {chatColor.color}">
-      {chatColor.color}
-    </span>
-
-    {#if chatColor.color in colors}
-      Default Twitch color "{colors[chatColor.color]}"
-    {:else}
-      Custom color (Twitch Turbo/Prime user)
-    {/if}
-  </h1>
-{/if}
+  <div class="flex-1"></div>
+</div>

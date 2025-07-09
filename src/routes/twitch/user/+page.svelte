@@ -11,7 +11,7 @@
    */
   function lookup(event) {
     event.preventDefault();
-    goto(`/profile/${username?.toLowerCase().replace(/\s/g, "")}`);
+    goto(`/twitch/user/${username?.toLowerCase().replace(/\s/g, "")}`);
   }
 </script>
 
