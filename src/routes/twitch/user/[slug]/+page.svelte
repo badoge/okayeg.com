@@ -137,7 +137,7 @@
 <svelte:head>
   <title>{displayName}'s Twitch info | OkayegBOT</title>
   <meta name="description" content="View all of a Twitch user's public info" />
-  <meta property="og:title" content="Twitch user info | OkayegBOT" />
+  <meta property="og:title" content="{displayName}'s Twitch info | OkayegBOT" />
   <meta property="og:url" content={profilePic} />
   <meta property="og:description" content="View all of a Twitch user's public info" />
 </svelte:head>

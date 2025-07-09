@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { copyCommand } from "$lib/functions.js";
 
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
   import IcBaselineContentCopy from "~icons/ic/baseline-content-copy";
@@ -24,18 +25,6 @@
   //     });
   //   }
   // }
-
-  /**
-   * @param {any} id
-   * @param {any} [event]
-   */
-  function copyListCommand(id, event) {
-    navigator.clipboard.writeText(`=nfe list ${id} [price]`);
-    event.target.innerHTML = "Command copied :)";
-    setTimeout(() => {
-      event.target.innerHTML = `<i class="material-icons notranslate">content_copy</i>Copy list command`;
-    }, 2000);
-  } //copyListCommand
 
   /**
    * @param {SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }} event
@@ -400,7 +389,7 @@
                     {nfe.rarity || "Unknown rarity"} NFE
                   </h2>
                   <div class="card-actions justify-center">
-                    <button type="button" class="btn btn-secondary" onclick={(event) => copyListCommand(nfe._id, event)}>
+                    <button type="button" class="btn btn-secondary" onclick={(event) => copyCommand(nfe._id, "list", event)}>
                       <IcBaselineContentCopy />Copy list command
                     </button>
                   </div>

@@ -1,5 +1,7 @@
 <script>
   import { escapeString, months } from "$lib/functions";
+  import IcBaselinePublic from "~icons/ic/baseline-public";
+  import IcBaselineSearch from "~icons/ic/baseline-search";
 
   async function getTwitchUser(username) {
     try {
@@ -409,8 +411,8 @@
             <label for="channel">Channel</label>
             <div id="desc" class="form-text">View any Twitch channel's sub, BTTV, FFZ and 7TV emotes.</div>
           </div>
-          <a class="btn btn-primary" href="/twitch/emotes-global.html" role="button"><i class="material-icons notranslate">public</i>Global Emotes</a>
-          <button style="margin-top: 10px" type="button" class="btn btn-success float-end" onclick={loadChannelEmotes()}><i class="material-icons notranslate">search</i>Lookup</button>
+          <a class="btn btn-primary" href="/twitch/emotes-global.html" role="button"><IcBaselinePublic />Global Emotes</a>
+          <button style="margin-top: 10px" type="button" class="btn btn-success float-end" onclick={loadChannelEmotes()}><IcBaselineSearch />Lookup</button>
         </div>
       </div>
     </div>

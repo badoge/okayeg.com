@@ -1,4 +1,6 @@
 <script>
+  import IcBaselineRefresh from "~icons/ic/baseline-refresh";
+
   async function reloadTwitchGlobal() {
     document.getElementById("twitch").innerHTML = spinner;
     try {
@@ -97,7 +99,7 @@
           data-bs-placement="top"
           data-bs-title="Reload global Twitch emotes. The emote list is manually rearranged by me to look pretty so it might be out of date sometimes, reloading fetches the emote list from twitch directly."
         >
-          <i class="material-icons notranslate">refresh</i>
+          <IcBaselineRefresh />
         </button>
       </h1>
       <br />

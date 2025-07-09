@@ -1,5 +1,5 @@
 <script>
-  import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
+  import IcBaselineSearch from "~icons/ic/baseline-search";
 
   function secondsToTwitchStupidTime(seconds) {
     const hours = Math.floor(seconds / 3600);
@@ -257,7 +257,7 @@
             <input type="datetime-local" class="form-control" id="exactTime" />
           </div>
 
-          <button type="button" class="btn btn-success float-end" onclick={findTimestamp()}><i class="material-icons notranslate">search</i>Find timestamp</button>
+          <button type="button" class="btn btn-success float-end" onclick={findTimestamp()}><IcBaselineSearch />Find timestamp</button>
           <br />
           <br />
           <hr />
@@ -272,7 +272,7 @@
             <label for="clip">Clip link</label>
             <div id="clipDesc" class="form-text">A clip from a separate channel that will be used to find the VOD timestamp for the channel you provided above</div>
           </div>
-          <button type="button" class="btn btn-success float-end" onclick={findClipTimestamp()}><i class="material-icons notranslate">search</i>Find timestamp</button>
+          <button type="button" class="btn btn-success float-end" onclick={findClipTimestamp()}><IcBaselineSearch />Find timestamp</button>
         </div>
       </div>
     </div>

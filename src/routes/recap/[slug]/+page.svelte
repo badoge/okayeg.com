@@ -1,5 +1,9 @@
 <script>
   import { onMount } from "svelte";
+
+  import IcBaselineSearch from "~icons/ic/baseline-search";
+  import IcBaselinePublic from "~icons/ic/baseline-public";
+
   let { data } = $props();
 
   function loadGlobalRecap() {
@@ -485,8 +489,8 @@
               <label for="username">Username</label>
               <div id="desc" class="form-text">View any player's OkayegBOT recap for the past year.</div>
             </div>
-            <button type="button" class="btn btn-primary float-start"><i class="material-icons notranslate">public</i>Global recap</button>
-            <button type="button" class="btn btn-success float-end"><i class="material-icons notranslate">search</i>Lookup</button>
+            <button type="button" class="btn btn-primary float-start"><IcBaselinePublic />Global recap</button>
+            <button type="button" class="btn btn-success float-end"><IcBaselineSearch />Lookup</button>
           </div>
         </div>
       </div>

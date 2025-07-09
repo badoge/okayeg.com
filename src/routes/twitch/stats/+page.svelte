@@ -3,6 +3,24 @@
   import { Chart } from "chart.js";
   import * as ChartDataLabels from "chartjs-plugin-datalabels";
 
+  import IcBaselineLanguage from "~icons/ic/baseline-language";
+  import IcBaselineArrowBack from "~icons/ic/baseline-arrow-back";
+  import IcBaselineArrowForward from "~icons/ic/baseline-arrow-forward";
+  import IcBaselineGroups from "~icons/ic/baseline-groups";
+  import IcBaselineArrowDropDown from "~icons/ic/baseline-arrow-drop-down";
+  import IcBaselineAccountCircle from "~icons/ic/baseline-account-circle";
+  import IcBaselineSubtitlesOff from "~icons/ic/baseline-subtitles-off";
+  import IcBaselineRedeem from "~icons/ic/baseline-redeem";
+  import IcBaselineSportsEsports from "~icons/ic/baseline-sports-esports";
+  import IcBaselineSmokingRooms from "~icons/ic/baseline-smoking-rooms";
+  import IcBaselineCasino from "~icons/ic/baseline-casino";
+  import IcBaselineVideogameAsset from "~icons/ic/baseline-videogame-asset";
+  import IcBaselineMoodBad from "~icons/ic/baseline-mood-bad";
+  import IcBaseline18UpRating from "~icons/ic/baseline-18-up-rating";
+  import IcBaselineSportsKabaddi from "~icons/ic/baseline-sports-kabaddi";
+  import IcBaselineSell from "~icons/ic/baseline-sell";
+  import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
+
   const staffpic = `<img src="/staff.png" loading="lazy" width="16px" height="16px" title="Twitch staff" alt="Twitch staff">`;
   const svg =
     '<svg style="fill: #a970ff; position: relative;" type="color-fill-current" width="16px" height="16px" version="1.1" viewBox="0 0 16 16" x="0px" y="0px"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 3.5L8 2L3.5 3.5L2 8L3.5 12.5L8 14L12.5 12.5L14 8L12.5 3.5ZM7.00008 11L11.5 6.5L10 5L7.00008 8L5.5 6.5L4 8L7.00008 11Z"></path></svg>';
@@ -491,7 +509,7 @@
           </span>
         </span>
         <br />
-        <i class="material-icons notranslate">groups</i> Total viewers:
+        <IcBaselineGroups /> Total viewers:
         <span id="totalViewers">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
@@ -638,7 +656,7 @@
     </div>
 
     <div class="card m-2 p-0" style="width: 40rem; max-height: 45rem; overflow: auto">
-      <div class="card-header"><i class="material-icons notranslate">language</i> <span id="langHeader">Top 10 languages</span></div>
+      <div class="card-header"><IcBaselineLanguage /> <span id="langHeader">Top 10 languages</span></div>
       <div class="card-body">
         <div class="container text-center p-0 m-0" id="langDiv">
           <div class="row">
@@ -798,7 +816,7 @@
             </div>
           </div>
           <div style="text-align: center" id="load100Langs">
-            <a onclick={load100Langs()} class="link-info" style="cursor: pointer"> Load all languages<i class="material-icons notranslate">arrow_drop_down</i> </a>
+            <a onclick={load100Langs()} class="link-info" style="cursor: pointer"> Load all languages<IcBaselineArrowDropDown /> </a>
           </div>
         </div>
       </div>
@@ -807,32 +825,32 @@
     <div class="card m-2 p-0" style="width: 28rem">
       <div class="card-header">General stats</div>
       <div class="card-body">
-        <i class="material-icons notranslate">account_circle</i> Channels using default profile picture:
+        <IcBaselineAccountCircle /> Channels using default profile picture:
         <span id="defaultpfp">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">subtitles_off</i> Channels with no description:
+        <IcBaselineSubtitlesOff /> Channels with no description:
         <span id="nodesc">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">subtitles_off</i> Streams with no title:
+        <IcBaselineSubtitlesOff /> Streams with no title:
         <span id="notitle">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">subtitles_off</i> Streams with no category:
+        <IcBaselineSubtitlesOff /> Streams with no category:
         <span id="nogame">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">redeem</i> Channels with drops enabled:
+        <IcBaselineRedeem /> Channels with drops enabled:
         <span id="drops">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">sports_esports</i> Total unique categories:
+        <IcBaselineSportsEsports /> Total unique categories:
         <span id="totalGames">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
@@ -842,85 +860,64 @@
     <div class="card m-2 p-0" style="width: 32rem">
       <div class="card-header">Content Classification Labels</div>
       <div class="card-body">
-        <i class="material-icons notranslate">smoking_rooms</i> <strong>Drugs, Intoxication, or Excessive Tobacco Use</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs."
+        <IcBaselineSmokingRooms /> <strong>Drugs, Intoxication, or Excessive Tobacco Use</strong>
+
+        <div
+          class="tooltip align-text-bottom"
+          data-tip="Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs"
         >
-          help_outline
-        </i>
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_DrugsIntoxication">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">casino</i> <strong>Gambling</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Participating in online or in-person gambling, poker or fantasy sports, that involve the exchange of real money."
-        >
-          help_outline
-        </i>
+        <IcBaselineCasino /> <strong>Gambling</strong>
+
+        <div class="tooltip align-text-bottom" data-tip="Participating in online or in-person gambling, poker or fantasy sports, that involve the exchange of real money">
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_Gambling">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">videogame_asset</i> <strong>Mature-rated game</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Games that are rated Mature or less suitable for a younger audience. (automatically applied based on current game)"
-        >
-          help_outline
-        </i>
+        <IcBaselineVideogameAsset /> <strong>Mature-rated game</strong>
+
+        <div class="tooltip align-text-bottom" data-tip="Games that are rated Mature or less suitable for a younger audience. (automatically applied based on current game)">
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_MatureGame">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">mood_bad</i> <strong>Significant Profanity or Vulgarity</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Prolonged, and repeated use of obscenities, profanities, and vulgarities, especially as a regular part of speech."
-        >
-          help_outline
-        </i>
+        <IcBaselineMoodBad /> <strong>Significant Profanity or Vulgarity</strong>
+
+        <div class="tooltip align-text-bottom" data-tip="Prolonged, and repeated use of obscenities, profanities, and vulgarities, especially as a regular part of speech">
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_ProfanityVulgarity">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">18_up_rating</i> <strong>Sexual Themes</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Content that focuses on sexualized physical attributes and activities, sexual topics, or experiences."
-        >
-          help_outline
-        </i>
+        <IcBaseline18UpRating /> <strong>Sexual Themes</strong>
+
+        <div class="tooltip align-text-bottom" data-tip="Content that focuses on sexualized physical attributes and activities, sexual topics, or experiences">
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_SexualThemes">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <br />
-        <i class="material-icons notranslate mt-2">sports_kabaddi</i> <strong>Violent and Graphic Depictions</strong>
-        <i
-          class="material-icons notranslate cursor-pointer"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-title="Simulations and/or depictions of realistic violence, gore, extreme injury, or death."
-        >
-          help_outline
-        </i>
+        <IcBaselineSportsKabaddi /> <strong>Violent and Graphic Depictions</strong>
+
+        <div class="tooltip align-text-bottom" data-tip="Simulations and/or depictions of realistic violence, gore, extreme injury, or death">
+          <IcBaselineHelpOutline />
+        </div>
         <br />
         <span id="ccl_ViolentGraphic">
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
@@ -931,7 +928,7 @@
 
     <div class="card m-2 p-0" style="width: 35rem; max-height: 29rem; overflow: auto">
       <div class="card-header">
-        <i class="material-icons notranslate">sell</i>Top <span id="tagCount">10</span> tags <small class="text-body-secondary">Excluding language tags</small>
+        <IcBaselineSell />Top <span id="tagCount">10</span> tags <small class="text-body-secondary">Excluding language tags</small>
       </div>
       <div class="card-body">
         <div class="container text-center p-0 m-0" id="tagsDiv">
@@ -1072,7 +1069,7 @@
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <div style="text-align: center" id="load100Tags">
-          <a onclick={load100Tags()} class="link-info" style="cursor: pointer"> Load top 100 tags<i class="material-icons notranslate">arrow_drop_down</i> </a>
+          <a onclick={load100Tags()} class="link-info" style="cursor: pointer"> Load top 100 tags<IcBaselineArrowDropDown /> </a>
         </div>
       </div>
     </div>

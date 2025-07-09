@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import IcBaselineContentCopy from "~icons/ic/baseline-content-copy";
+  import { copyCommand } from "$lib/functions.js";
 
   let nfes = $state();
 
@@ -51,19 +52,6 @@
       nfes = null;
     }
   });
-
-  /**
-   * @param {any} id
-   * @param {any} [event]
-   */
-  function copyBuyCommand(id, event) {
-    navigator.clipboard.writeText(`=nfe buy ${id}`);
-    if (event.target.innerHTML == "Command copied :)") {
-      event.target.innerHTML = "You already copied this :)";
-    } else {
-      event.target.innerHTML = "Command copied :)";
-    }
-  } //copyBuyCommand
 </script>
 
 <svelte:head>
@@ -104,7 +92,7 @@
                   <a class="link" href="https://twitch.tv/{nfe.ownerusername}" target="_blank" rel="noopener noreferrer">{nfe.ownerusername}</a>
                 </p>
                 <div class="card-actions justify-end mt-3">
-                  <button type="button" class="btn btn-secondary" onclick={(event) => copyBuyCommand(nfe._id, event)}><IcBaselineContentCopy />Copy buy command</button>
+                  <button type="button" class="btn btn-secondary" onclick={(event) => copyCommand(nfe._id, "buy", event)}><IcBaselineContentCopy />Copy buy command</button>
                 </div>
               </div>
             </div>

@@ -12,6 +12,28 @@ export function addOrdinalSuffix(number) {
 } //addOrdinalSuffix
 
 /**
+ * @param {any} id
+ * @param {string} type
+ * @param {any} [event]
+ */
+export function copyCommand(id, type, event) {
+  switch (type) {
+    case "buy":
+      navigator.clipboard.writeText(`=nfe buy ${id}`);
+      break;
+    case "list":
+      navigator.clipboard.writeText(`=nfe list ${id} [price]`);
+      break;
+  }
+
+  if (event.target.innerHTML == "Command copied :)") {
+    event.target.innerHTML = "You already copied this :)";
+  } else {
+    event.target.innerHTML = "Command copied :)";
+  }
+} //copyCommand
+
+/**
  * @param {number} num
  */
 export function roundToTwo(num) {
