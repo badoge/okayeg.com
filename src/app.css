@@ -4,10 +4,6 @@
   themes: forest --default, lemonade;
 }
 
-body {
-  margin-bottom: 200px;
-}
-
 .emotecontainer {
   display: flex;
   flex-wrap: wrap;

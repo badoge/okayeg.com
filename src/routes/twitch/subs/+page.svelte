@@ -2,23 +2,27 @@
   import { onMount } from "svelte";
   import { roundToTwo } from "$lib/functions";
   import "svgmap/dist/svgMap.min.css";
+  import IcBaselineCurrencyExchange from "~icons/ic/baseline-currency-exchange";
+  import IcOutlineInfo from "~icons/ic/outline-info";
 
+  let mapCurrency = "USD";
+  let mapType = "subs";
+  let countries = [];
   let svgMap;
+
   onMount(async () => {
     const obj = await import("svgmap");
     svgMap = obj.default;
 
     loadSubPrices("subs", "USD");
-    document.getElementById("currencySelect").onchange = function () {
-      loadSubPrices(document.getElementById("typeSelect").value, this.value);
-    };
-    document.getElementById("typeSelect").onchange = function () {
-      loadSubPrices(this.value, document.getElementById("currencySelect").value);
-    };
   });
 
-  let countries = [];
+  /**
+   * @param {string} type
+   * @param {string} currency
+   */
   async function loadSubPrices(type, currency) {
+    console.log(type, currency);
     let res = await fetch(`/data/subs.json`);
     let res2 = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency.toLowerCase()}.min.json`);
     let data = await res.json();
@@ -60,7 +64,7 @@
       colorMin = "#e72222";
       colorMax = "#27d444";
     }
-
+    document.getElementById("map").innerHTML = "";
     new svgMap({
       targetElementID: "map",
       showZoomReset: true,
@@ -92,87 +96,95 @@
   <meta property="og:description" content="View the local Twitch subscription prices with currency conversion" />
 </svelte:head>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col p-0 m-0">
-      <div class="form-floating" id="currencySelectDiv">
-        <select class="form-select" id="currencySelect" aria-label="currency select">
-          <option value="AED">AED</option>
-          <option value="AUD">AUD</option>
-          <option value="BRL">BRL</option>
-          <option value="BYN">BYN</option>
-          <option value="CAD">CAD</option>
-          <option value="CLP">CLP</option>
-          <option value="CRC">CRC</option>
-          <option value="DKK">DKK</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="HKD">HKD</option>
-          <option value="INR">INR</option>
-          <option value="ISK">ISK</option>
-          <option value="KRW">KRW</option>
-          <option value="KWD">KWD</option>
-          <option value="MXN">MXN</option>
-          <option value="MYR">MYR</option>
-          <option value="NOK">NOK</option>
-          <option value="NZD">NZD</option>
-          <option value="PEN">PEN</option>
-          <option value="PHP">PHP</option>
-          <option value="PLN">PLN</option>
-          <option value="QAR">QAR</option>
-          <option value="RUB">RUB</option>
-          <option value="SAR">SAR</option>
-          <option value="SEK">SEK</option>
-          <option value="SGD">SGD</option>
-          <option value="THB">THB</option>
-          <option value="TRY">TRY</option>
-          <option value="TWD">TWD</option>
-          <option value="UAH">UAH</option>
-          <option value="USD" selected>USD</option>
-          <option value="ZAR">ZAR</option>
-        </select>
-        <label for="currencySelect">Currency</label>
-      </div>
-      <div class="form-floating" id="typeSelectDiv">
-        <select class="form-select" id="typeSelect" aria-label="type select">
-          <option value="subs" selected>Sub price</option>
-          <option value="turbo">Turbo price</option>
-          <option value="primepayout">Prime sub payout</option>
-        </select>
-        <label for="typeSelect">Type</label>
-      </div>
-      <div id="map"></div>
-    </div>
-  </div>
-</div>
+<label class="select" id="currencySelectGroup">
+  <span class="label"><IcBaselineCurrencyExchange />Currency</span>
+  <select id="currencySelect" bind:value={mapCurrency} onchange={() => loadSubPrices(mapType, mapCurrency)}>
+    <option value="AED">AED</option>
+    <option value="AUD">AUD</option>
+    <option value="BRL">BRL</option>
+    <option value="BYN">BYN</option>
+    <option value="CAD">CAD</option>
+    <option value="CLP">CLP</option>
+    <option value="CRC">CRC</option>
+    <option value="DKK">DKK</option>
+    <option value="EUR">EUR</option>
+    <option value="GBP">GBP</option>
+    <option value="HKD">HKD</option>
+    <option value="INR">INR</option>
+    <option value="ISK">ISK</option>
+    <option value="KRW">KRW</option>
+    <option value="KWD">KWD</option>
+    <option value="MXN">MXN</option>
+    <option value="MYR">MYR</option>
+    <option value="NOK">NOK</option>
+    <option value="NZD">NZD</option>
+    <option value="PEN">PEN</option>
+    <option value="PHP">PHP</option>
+    <option value="PLN">PLN</option>
+    <option value="QAR">QAR</option>
+    <option value="RUB">RUB</option>
+    <option value="SAR">SAR</option>
+    <option value="SEK">SEK</option>
+    <option value="SGD">SGD</option>
+    <option value="THB">THB</option>
+    <option value="TRY">TRY</option>
+    <option value="TWD">TWD</option>
+    <option value="UAH">UAH</option>
+    <option value="USD" selected>USD</option>
+    <option value="ZAR">ZAR</option>
+  </select>
+</label>
+
+<label class="select" id="typeSelectGroup">
+  <span class="label"><IcOutlineInfo />Type</span>
+  <select id="typeSelect" bind:value={mapType} onchange={() => loadSubPrices(mapType, mapCurrency)}>
+    <option value="subs" selected>Sub price</option>
+    <option value="turbo">Turbo price</option>
+    <option value="primepayout">Prime sub payout</option>
+  </select>
+</label>
+
+<div id="map"></div>
 
 <style>
-  body {
-    overflow: hidden;
-    background: #163d64;
+  #map {
+    cursor: grab;
   }
 
-  .svgMap-map-wrapper {
-    background: #163d64;
+  #map:active {
+    cursor: grabbing;
   }
-  .svgMap-map-controls-wrapper {
+
+  :global(.svgMap-country:hover) {
+    cursor: default;
+  }
+
+  :global(.svgMap-country:active) {
+    cursor: grabbing;
+  }
+
+  :global(.svgMap-map-image) {
+    background-color: #093cac;
+  }
+
+  :global(.svgMap-map-controls-wrapper) {
     position: fixed;
-    bottom: 60px !important;
+    bottom: 90px !important;
   }
 
-  #currencySelectDiv {
+  #currencySelectGroup {
     position: fixed;
     z-index: 100;
-    width: 175px;
-    right: 10px;
-    top: 60px;
+    width: 240px;
+    left: 20px;
+    top: 90px;
   }
 
-  #typeSelectDiv {
+  #typeSelectGroup {
     position: fixed;
     z-index: 100;
-    width: 175px;
-    right: 10px;
-    top: 130px;
+    width: 240px;
+    left: 20px;
+    top: 140px;
   }
 </style>

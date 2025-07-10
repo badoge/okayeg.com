@@ -1,5 +1,9 @@
 <script>
   import IcBaselineSearch from "~icons/ic/baseline-search";
+  import IcBaselineLink from "~icons/ic/baseline-link";
+  import MdiTwitch from "~icons/mdi/twitch";
+
+  let channel = "";
 
   function secondsToTwitchStupidTime(seconds) {
     const hours = Math.floor(seconds / 3600);
@@ -226,61 +230,70 @@
   <meta property="og:description" content="A simple tool that helps you find a Twitch VOD timestamp from real time or from a clip of a different channel" />
 </svelte:head>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xl-3"></div>
-    <div class="col-xl-6">
-      <div class="card" style="margin-top: 10px">
-        <div class="card-body">
-          <h3>Find VOD timestamp from real time</h3>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="channel" placeholder="channel" aria-describedby="channelDesc" />
-            <label for="channel">Channel</label>
-            <div id="channelDesc" class="form-text">The Twitch channel you want to watch</div>
-          </div>
+<div class="card card-dash bg-base-300 w-fit m-5 mx-auto">
+  <div class="card-body">
+    <h2 class="card-title">Find VOD timestamp from real time</h2>
+    <div class="flex flex-col">
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mb-5 mx-auto">
+        <legend class="fieldset-legend">Channel</legend>
+        <label class="input">
+          <MdiTwitch />
+          <input type="text" id="channel" placeholder="Channel" bind:value={channel} required />
+        </label>
+        <p class="label">The Twitch channel you want to watch</p>
+      </fieldset>
 
-          <label class="form-label">Relative time</label>
-          <div class="input-group mb-3">
-            <label class="input-group-text">Find point in VOD that happened</label>
-            <input type="number" id="timeMinutes" placeholder="0" class="form-control" />
-            <label class="input-group-text">minutes</label>
-            <input type="number" id="timeHours" placeholder="0" class="form-control" />
-            <label class="input-group-text">hours</label>
-            <input type="number" id="timeDays" placeholder="0" class="form-control" />
-            <label class="input-group-text">days</label>
-            <label class="input-group-text">ago</label>
-          </div>
+      <div class="divider divider-neutral"></div>
 
-          <label for="exactTime" class="form-label">Exact time</label>
-          <div class="input-group mb-3">
-            <label class="input-group-text">Find point in VOD that happened at</label>
-            <input type="datetime-local" class="form-control" id="exactTime" />
+      <div class="flex flex-row mb-5">
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 me-4">
+          <legend class="fieldset-legend">Relative time</legend>
+          <p>Find point in VOD that happened</p>
+          <div class="join w-150">
+            <label class="input join-item">
+              <input type="number" id="timeMinutes" placeholder="0" min="0" />
+              <span class="label">minutes</span>
+            </label>
+            <label class="input join-item">
+              <input type="number" id="timeHours" placeholder="0" min="0" />
+              <span class="label">hours</span>
+            </label>
+            <label class="input join-item">
+              <input type="number" id="timeDays" placeholder="0" min="0" />
+              <span class="label">days ago</span>
+            </label>
           </div>
+        </fieldset>
 
-          <button type="button" class="btn btn-success float-end" onclick={findTimestamp()}><IcBaselineSearch />Find timestamp</button>
-          <br />
-          <br />
-          <hr />
-          <h3>Find VOD timestamp from a clip from another channel</h3>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="channelClip" placeholder="channel" aria-describedby="channelClipDesc" />
-            <label for="channelClip">Channel</label>
-            <div id="channelClipDesc" class="form-text">The Twitch channel you want to watch</div>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="clip" placeholder="clip" aria-describedby="clipDesc" />
-            <label for="clip">Clip link</label>
-            <div id="clipDesc" class="form-text">A clip from a separate channel that will be used to find the VOD timestamp for the channel you provided above</div>
-          </div>
-          <button type="button" class="btn btn-success float-end" onclick={findClipTimestamp()}><IcBaselineSearch />Find timestamp</button>
-        </div>
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend class="fieldset-legend">Exact time</legend>
+          <p>Find point in VOD that happened at</p>
+          <input type="datetime-local" class="input" id="exactTime" />
+        </fieldset>
+      </div>
+      <span class="text-xs text-center opacity-50 -mt-5">Relative time and Exact time will update each other when you change one of them</span>
+      <div class="divider">OR</div>
+
+      <div class="flex flex-row mx-auto">
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend class="fieldset-legend">Twitch clip</legend>
+          <p>Find VOD timestamp from a clip from another channel</p>
+          <label class="input">
+            <IcBaselineLink />
+            <input id="clip" type="url" placeholder="Twitch clip link" />
+          </label>
+        </fieldset>
       </div>
     </div>
-    <div class="col-xl-3"></div>
+    <div class="divider divider-neutral"></div>
+
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-success" onclick={findTimestamp()}><IcBaselineSearch />Find timestamp</button>
+    </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-xl-2"></div>
-    <div class="col-xl-8 text-center" id="output"></div>
-    <div class="col-xl-2"></div>
-  </div>
+</div>
+
+<div>
+  output
+  <div class="flex justify-center mt-5" id="output"></div>
 </div>
