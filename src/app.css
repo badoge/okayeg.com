@@ -12,12 +12,10 @@
 }
 
 .emote {
-  border-radius: 6px;
-  min-width: 122px;
   margin: 5px;
   width: fit-content;
 }
 
 .emote > img {
-  margin: 5px;
+  margin-inline: auto;
 }
