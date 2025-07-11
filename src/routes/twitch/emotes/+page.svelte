@@ -14,7 +14,6 @@
 
 <svelte:head>
   <title>Emotes | OkayegBOT</title>
-  <meta name="description" content="View the local Twitch subscription prices with currency conversion" />
   <meta name="description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
   <meta property="og:url" content="https://okayeg.com/twitch/emotes" />
   <meta property="og:description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
