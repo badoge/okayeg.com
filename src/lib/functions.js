@@ -12,6 +12,40 @@ export function addOrdinalSuffix(number) {
 } //addOrdinalSuffix
 
 /**
+ * @param {number} seconds
+ */
+export function secondsToTwitchStupidTime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  seconds %= 3600;
+  const minutes = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${hours}h${minutes}m${sec}s`;
+} //secondsToTwitchStupidTime
+
+/**
+ * @param {string} duration
+ */
+export function convertDuration(duration) {
+  const durationRegex = /(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/;
+  const match = durationRegex.exec(duration);
+  if (!match) {
+    throw new Error("Invalid duration format");
+  }
+  const [, hours, minutes, seconds] = match;
+  let totalSeconds = 0;
+  if (hours) {
+    totalSeconds += parseInt(hours) * 60 * 60;
+  }
+  if (minutes) {
+    totalSeconds += parseInt(minutes) * 60;
+  }
+  if (seconds) {
+    totalSeconds += parseInt(seconds);
+  }
+  return totalSeconds;
+} //convertDuration
+
+/**
  * @param {any} id
  * @param {string} type
  * @param {any} [event]

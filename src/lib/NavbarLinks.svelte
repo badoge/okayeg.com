@@ -44,7 +44,7 @@
       <li><a class={route === "/twitch/emote" ? "bg-neutral text-neutral-content" : ""} href="/twitch/emote"><MingcuteEmojiLine />Emote info</a></li>
       <li><a class={route === "/twitch/emotes" ? "bg-neutral text-neutral-content" : ""} href="/twitch/emotes"><IcOutlineEmojiEmotions />Channel emotes</a></li>
       <li><a class={route === "/twitch/global/emotes" ? "bg-neutral text-neutral-content" : ""} href="/twitch/global/emotes"><IcBaselinePublic />Global emotes</a></li>
-      <li><a class={route === "/twitch/stats" ? "bg-neutral text-neutral-content" : ""} href="/twitch/stats"><IcBaselineQueryStats />Donk stats</a></li>
+      <!-- <li><a class={route === "/twitch/stats" ? "bg-neutral text-neutral-content" : ""} href="/twitch/stats"><IcBaselineQueryStats />Donk stats</a></li> -->
       <li><a class={route === "/twitch/subs" ? "bg-neutral text-neutral-content" : ""} href="/twitch/subs"><IcBaselineAttachMoney />Local sub prices</a></li>
       <li><a class={route === "/twitch/time" ? "bg-neutral text-neutral-content" : ""} href="/twitch/time"><IcBaselineHistory />VOD time</a></li>
       <li><a class={route?.startsWith("/twitch/user") ? "bg-neutral text-neutral-content" : ""} href="/twitch/user"><IcBaselinePerson />User info</a></li>
