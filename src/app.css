@@ -19,3 +19,15 @@
 .emote > img {
   margin-inline: auto;
 }
+
+.emotetextwide {
+  max-width: 384px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.emotetext {
+  max-width: 112px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

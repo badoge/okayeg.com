@@ -109,10 +109,10 @@
 
       let response4 = await fetch(`https://7tv.io/v3/emote-sets/global`);
       let global7TV = await response4.json();
-      document.getElementById("7tv").innerHTML = "";
+      document.getElementById("seventv").innerHTML = "";
       for (let i = 0, j = global7TV.emotes.length; i < j; i++) {
         let files = global7TV.emotes[i].data.host.files.filter((e) => e.format == "AVIF");
-        document.getElementById("7tv")?.insertAdjacentHTML(
+        document.getElementById("seventv")?.insertAdjacentHTML(
           "beforeend",
           `<div class="border border-accent emote">
             <a href="https://7tv.app/emotes/${global7TV.emotes[i].id}" target="_blank" rel="noopener noreferrer">
@@ -162,7 +162,7 @@
   <div class="card w-full bg-base-200 card-xl shadow-sm mb-5">
     <div class="card-body">
       <h2 class="card-title">Global 7TV Emotes<span id="7tvCount" class="text-body-secondary"></span></h2>
-      <div id="7tv" class="emotecontainer"><span class="loading loading-spinner loading-xl"></span></div>
+      <div id="seventv" class="emotecontainer"><span class="loading loading-spinner loading-xl"></span></div>
     </div>
   </div>
 </div>
