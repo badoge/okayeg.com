@@ -415,7 +415,7 @@
   <title>{username}'s Twitch emotes | OkayegBOT</title>
   <meta name="description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
   <meta property="og:title" content="{username}'s Twitch emotes | OkayegBOT" />
-  <meta property="og:url" content="https://okayeg.com/pics/okayeg.png" />
+  <meta property="og:url" content="https://beta.okayeg.com/twitch/emotes/{username}" />
   <meta property="og:description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
 </svelte:head>
 

@@ -138,7 +138,8 @@
   <title>{displayName}'s Twitch info | OkayegBOT</title>
   <meta name="description" content="View all of a Twitch user's public info" />
   <meta property="og:title" content="{displayName}'s Twitch info | OkayegBOT" />
-  <meta property="og:url" content={profilePic} />
+  <meta property="og:url" content="https://beta.okayeg.com/twitch/user/{username}" />
+  <meta property="og:image" content={profilePic} />
   <meta property="og:description" content="View all of a Twitch user's public info" />
 </svelte:head>
 
