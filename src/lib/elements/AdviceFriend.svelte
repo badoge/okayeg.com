@@ -1,14 +1,15 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
+  import { nullFunction } from "$lib/game/consts";
   import { fly } from "svelte/transition";
   import { backOut } from "svelte/easing";
-  let { content, interactive = false } = $props();
+  let { title = null, content, interactive = false, actionCallback = nullFunction, buttonText = "OK" } = $props();
 
   let animator = $state(false); // toggles animation block
 
   onMount(() => {
     animator = true;
-    window.addEventListener("click", hideAdvice);
+    //window.addEventListener("click", hideAdvice);
   });
 
   const transitionInParams = {
@@ -33,22 +34,33 @@
 
   export function hideAdvice() {
     animator = false;
-    window.removeEventListener("click", hideAdvice);
+    // window.removeEventListener("click", hideAdvice);
   }
 </script>
 
 {#if animator}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="chat chat-start advice-friend" in:fly={transitionInParamsChat} out:fly={transitionOutParamsChat} onclick={hideAdvice}>
-    <div class="chat-bubble chat-bubble-accent">
-      {@html content}
-    </div>
-  </div>
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="okayeg advice-friend" in:fly={transitionInParams} out:fly={transitionOutParams} onclick={hideAdvice}>
     <img src="/okayeg.png" width="512" height="512" alt="Okayeg" />
+  </div>
+
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="chat chat-start advice-friend" in:fly={transitionInParamsChat} out:fly={transitionOutParamsChat} onclick={hideAdvice}>
+    <div class="chat-bubble chat-bubble-accent">
+      {#if interactive}
+        <span class="text-lg font-bold">{@html content}</span>
+        <br />
+        <button class="btn btn-warning float-end" onclick={actionCallback}>{buttonText}</button>
+      {:else if title}
+        <span class="text-lg font-bold">{title}</span>
+        <br />
+        {@html content}
+      {:else}
+        {@html content}
+      {/if}
+    </div>
   </div>
 {/if}
 

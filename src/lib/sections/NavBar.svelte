@@ -29,13 +29,13 @@
   <div class="header-side">
     <div class="tooltip tooltip-bottom" data-tip={$game ? "Return to main menu" : ""}>
       <button disabled={!$game} onclick={returnToMenu}>
-        <IcBaselineArrowBack class="text-3xl" />
+        <IcBaselineArrowBack class="text-2xl" />
       </button>
     </div>
 
     <div class="tooltip tooltip-bottom" data-tip="About">
-      <button data-bs-toggle="modal" data-bs-target="#mdlHelp" onclick={mdlHelp.showModal()} bind:this={aboutClickerBtn}>
-        <IcBaselineHelpOutline class="text-3xl" />
+      <button data-bs-toggle="modal" data-bs-target="#mdlHelp" onclick={() => mdlHelp.showModal()} bind:this={aboutClickerBtn}>
+        <IcBaselineHelpOutline class="text-2xl" />
       </button>
     </div>
   </div>
@@ -44,14 +44,14 @@
 
   <div class="header-side">
     <div class="tooltip tooltip-bottom" data-tip={$game ? "View stats" : ""}>
-      <button disabled={!$game} onclick={mdlStats.showModal()}>
-        <IcBaselineLeaderboard class="text-3xl" />
+      <button disabled={!$game} onclick={() => mdlStats.showModal()}>
+        <IcBaselineLeaderboard class="text-2xl" />
       </button>
     </div>
 
     <div class="tooltip tooltip-bottom" data-tip="Settings">
-      <button onclick={mdlSettings.showModal()}>
-        <IcBaselineSettings class="text-3xl" />
+      <button onclick={() => mdlSettings.showModal()}>
+        <IcBaselineSettings class="text-2xl" />
       </button>
     </div>
   </div>

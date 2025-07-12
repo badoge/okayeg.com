@@ -9,12 +9,9 @@ import { mount } from "svelte";
 export function showAdviceFriend(content, title = "") {
   if (!browser) return;
 
-  if (title) {
-    content = `<span class="text-lg font-bold">${title}</span><br>${content}`;
-  }
-
   const adviceFriend = mount(AdviceFriend, {
     props: {
+      title: title,
       content: content,
     },
     target: document.body,
@@ -27,17 +24,12 @@ export function showAdviceFriend(content, title = "") {
 export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallback = nullFunction) {
   if (!browser) return;
 
-  content = `
-  <span class="text-lg font-bold">
-    ${content}
-  <span>
-  <br>
-  <button class="btn btn-warning">${buttonText}</button>`;
-
   const adviceFriend = mount(AdviceFriend, {
     props: {
       interactive: true,
       content: content,
+      buttonText: buttonText,
+      actionCallback: actionCallback,
     },
     target: document.body,
   });
