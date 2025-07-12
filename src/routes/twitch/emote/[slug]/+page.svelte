@@ -50,39 +50,39 @@
    * @type {any[]}
    */
   const combinations = [
-    "BE",
-    "BN",
-    "BT",
-    "BW",
-    "CL",
-    "EB",
-    "EG",
-    "FF",
-    "FC",
-    "FB",
-    "EV",
-    "HF",
-    "HE",
-    "HB",
-    "GR",
-    "KI",
-    "LH",
-    "MC",
-    "PK",
-    "PM",
-    "WD",
-    "WH",
-    "SA",
-    "RA",
-    "RB",
-    "RD",
-    "SF",
-    "SG",
-    "TK",
-    "UN",
-    "SM",
-    "SO",
-    "SQ",
+    { suffix: "BE", name: "Beard" },
+    { suffix: "BN", name: "Bunny ears" },
+    { suffix: "BT", name: "Boba tea" },
+    { suffix: "BW", name: "Greyscale" },
+    { suffix: "CL", name: "Clover" },
+    { suffix: "EB", name: "Easter basket" },
+    { suffix: "EG", name: "Easter eggs" },
+    { suffix: "FF", name: "Fan" },
+    { suffix: "FC", name: "Flower crown" },
+    { suffix: "FB", name: "Scarf" },
+    { suffix: "EV", name: "Red envelope" },
+    { suffix: "HF", name: "Horizontal flip" },
+    { suffix: "HE", name: "Hearts" },
+    { suffix: "HB", name: "Heart break" },
+    { suffix: "GR", name: "Guitar" },
+    { suffix: "KI", name: "Kisses" },
+    { suffix: "LH", name: "Leprechaun hat" },
+    { suffix: "MC", name: "Maracas" },
+    { suffix: "PK", name: "Pumpkin" },
+    { suffix: "PM", name: "Pumpkin" },
+    { suffix: "WD", name: "Women's day" },
+    { suffix: "WH", name: "Witch hat" },
+    { suffix: "SA", name: "Santa hat" },
+    { suffix: "RA", name: "Lunar Rat" },
+    { suffix: "RB", name: "Red bandana" },
+    { suffix: "RD", name: "Reindeer" },
+    { suffix: "SF", name: "Snowflakes" },
+    { suffix: "SG", name: "Sunglasses" },
+    { suffix: "TK", name: "Thinking" },
+    { suffix: "UN", name: "Unicorn" },
+    { suffix: "SM", name: "Snowman" },
+    { suffix: "SO", name: "Sombrero" },
+    { suffix: "SQ", name: "Squished" },
   ];
 
   async function loadEmoteInfo() {
@@ -199,16 +199,16 @@
           <div class="flex flex-row flex-wrap justify-center text-center gap-5">
             {#each combinations as combination}
               <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
-                <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination}/default/dark/3.0">
+                <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0">
                   <img
                     class="mx-auto"
-                    src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination}/default/dark/3.0"
-                    alt="_{combination} modifier"
-                    title="_{combination} modifier"
+                    src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0"
+                    alt="{combination.name} modifier (_{combination.suffix})"
+                    title="{combination.name} modifier (_{combination.suffix})"
                     onerror={(e) => (e.target.closest("div").style.display = "none")}
                   />
                 </a>
-                <h2 class="text-xl">_{combination}</h2>
+                <h2 class="text-xl">{combination.name} <span class="opacity-50">(_{combination.suffix})</span></h2>
               </div>
             {/each}
           </div>
