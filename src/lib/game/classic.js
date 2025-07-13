@@ -1,7 +1,6 @@
 import { BaseGame } from "$lib/game/baseClasses";
 import { cellColors, emoji, today } from "$lib/game/consts";
 import { sample, sfc32 } from "$lib/utils/common";
-import { migrateClassicField, migrateClassicSettings, migrateClassicStats } from "$lib/utils/migrateV1";
 
 import Helper from "$lib/game/help/Classic.svelte";
 import Stats from "$lib/game/stats/Classic.svelte";
@@ -26,7 +25,7 @@ class Egdle extends BaseGame {
     };
 
     // calculate win/lose conditions:
-    this.initRNG(0);
+    this.initRNG();
     this.winnerIndex = this.getRandomInt(36);
     do {
       this.loserIndex = this.getRandomInt(36);
@@ -146,48 +145,6 @@ class Egdle extends BaseGame {
 
   loadState() {
     super.loadState();
-
-    // first visit? attempt to migrate old data from v1
-    if (this.stats.lastVisit.getTime() === 0) {
-      const oldData = migrateClassicSettings();
-      if (oldData) {
-        this.settings.hardMode = oldData.hardMode;
-      }
-
-      const oldStats = migrateClassicStats();
-      if (oldStats) {
-        Object.keys(oldStats).forEach((key) => {
-          this.stats[key] = oldStats[key];
-        });
-        // migrate field too:
-        const oldField = migrateClassicField();
-
-        if (oldField && this.stats.lastIssue === this.issue) {
-          this.field.cells.forEach((cell, idx) => {
-            for (let key in oldField[idx]) {
-              cell[key] = oldField[idx][key];
-            }
-          });
-
-          // fix: if total clicks > field clicks, add the difference to random field
-          this.clicks = this.field.getTotalClicks();
-          if (this.stats.lastClicks > this.clicks) {
-            const randomCell = this.field.cells.find((c) => c.clicks > 0);
-            if (randomCell) randomCell.clicks += this.stats.lastClicks - this.clicks;
-          }
-
-          // fix: detect if game over or not
-          const winnerCell = this.field.cells[this.winnerIndex];
-          winnerCell.winner = true;
-          const loserCell = this.field.cells[this.loserIndex];
-          if (this.settings.hardMode) loserCell.loser = true;
-
-          const isLoss = this.settings.hardMode && loserCell.visible;
-          const isWin = winnerCell.visible;
-          if (isLoss || isWin) this.endGame(isWin, true);
-        }
-      }
-    }
 
     // apply fixups:
     if (this.settings.hardMode) this.setOption("hardMode", true); // resets loser cell state

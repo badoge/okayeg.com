@@ -2,7 +2,6 @@ import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 import { showAdviceFriend } from "$lib/utils/adviceFriend";
 import { chooseAnnouncementOnLoad } from "$lib/utils/announcements";
-import { migrateSettings } from "$lib/utils/migrateV1";
 import { dailyEggFactRequired, tryShowDailyEggFact } from "$lib/utils/dailyFact";
 
 const lsKey = "egdle2-settings";
@@ -15,7 +14,7 @@ const defaultSettings = {
   lastVisit: new Date(),
 };
 
-export const settings = writable(Object.assign({}, defaultSettings));
+export const settings = writable(structuredClone(defaultSettings));
 export const appReady = writable(false);
 
 try {
@@ -26,22 +25,20 @@ try {
 
   if (storedSettings) {
     parsedSettings = JSON.parse(storedSettings);
-  } else {
-    // attempt to migrate from v1
-    parsedSettings = migrateSettings();
-    parsedSettings.firstVisit = false;
   }
 
-  settings.update((s) => {
-    for (let key in parsedSettings) {
-      if (key in defaultSettings) s[key] = parsedSettings[key];
-      if (defaultSettings[key] instanceof Date) {
-        s[key] = new Date(s[key]);
+  if (parsedSettings) {
+    settings.update((s) => {
+      for (let key in parsedSettings) {
+        if (key in defaultSettings) s[key] = parsedSettings[key];
+        if (defaultSettings[key] instanceof Date) {
+          s[key] = new Date(s[key]);
+        }
       }
-    }
 
-    return s;
-  });
+      return s;
+    });
+  }
 } catch (e) {
   console.warn("Failed to restore settings from localStorage", e);
 } finally {
@@ -92,6 +89,7 @@ try {
   appReady.set(true);
 }
 
+/** @param {String} id */
 export function recordSeenGame(id) {
   if (!id) return;
 
@@ -101,11 +99,12 @@ export function recordSeenGame(id) {
   });
 }
 
-export function recordAnnouncements(annoList = []) {
+/** @param {Array<String>} annoList */
+export function recordAnnouncements(...annoList) {
   if (!annoList.length) return;
 
   settings.update((s) => {
-    annoList.forEach((annoId) => {
+    annoList.flat().forEach((annoId) => {
       if (s.announcements.includes(annoId)) return;
       s.announcements.push(annoId);
     });
