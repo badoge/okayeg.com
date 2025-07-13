@@ -79,7 +79,7 @@
   ];
 
   /**
-   * @param {{ id?: string; init: any; name?: string; desc?: string; }} variant
+   * @param {{ id: string; init: function; name: string; desc: string; }} variant
    */
   function setGame(variant) {
     $game = variant.init();
@@ -90,27 +90,27 @@
 <div class="main" in:fade={{ duration: 200 }}>
   {#each variants as section}
     <h2 class="text-primary uppercase text-3xl text-center">{section.title}</h2>
-    <ul class="list bg-base-100 rounded-box shadow-md mb-10">
+    <ul class="list bg-base-100 rounded-box mb-10">
       {#each section.list as game}
         <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <li
-          class="list-row mb-1"
+          class="list-row mb-1 transition-colors hover:bg-secondary/20 hover:cursor-pointer"
           class:disabled={game.init === nullFunction}
           onclick={() => setGame(game)}
           onkeypress={(event) => {
             if (event.key === "Enter") setGame(game);
           }}
         >
-          <div><img class="size-20" src={`panel/${game.id}.png`} alt={game.id} /></div>
-          <div class="list-col-grow">
-            <div class="text-2xl font-bold">
+          <div>
+            <img class="size-20" src={`panel/${game.id}.png`} alt={game.id} />
+          </div>
+          <div class="flex flex-col items-start justify-around">
+            <h3 class="inline text-2xl font-bold">
               {game.name}
-              <h3 class="inline">
-                {#if $appReady && !$settings.seenGames.includes(game.id)}
-                  <div class="badge badge-success">New!</div>
-                {/if}
-              </h3>
-            </div>
+              {#if $appReady && !$settings.seenGames.includes(game.id)}
+                <div class="badge badge-success">New!</div>
+              {/if}
+            </h3>
             <div class="opacity-70">{game.desc}</div>
           </div>
 
@@ -125,22 +125,17 @@
   {/each}
 </div>
 
-<footer class="footer footer-horizontal footer-center mt-20">
+<footer class="footer footer-horizontal footer-center mb-2">
   <aside>
     <p class="font-bold">Have an idea for a game? Want to share your feedback?</p>
     <p>
       Contact me at <span style="color: #5865f2;"><IcBaselineDiscord class="inline align-middle" /> @g7eternal</span> or
-      <a class="link" href="https://github.com/g7eternal/egdle2/issues" title="Go to Github" target="_blank"> create a ticket </a> with your ideas
+      <a class="link text-primary" href="https://github.com/g7eternal/egdle2/issues" title="Go to Github" target="_blank"> create a ticket </a> with your ideas
     </p>
   </aside>
 </footer>
 
 <style>
-  li:hover {
-    opacity: 70%;
-    cursor: pointer;
-  }
-
   li.disabled {
     display: none;
   }
