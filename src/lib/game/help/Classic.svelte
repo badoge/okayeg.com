@@ -16,7 +16,7 @@
   <strong>Field will be refreshed each day! Keep playing and share your score with friends!</strong>
 </p>
 
-<p><small>Original game idea by <span class="text-success">Android#5997</span></small></p>
+<p><small>Original game idea by <span class="text-primary">Android#5997</span></small></p>
 
 <style>
   img {

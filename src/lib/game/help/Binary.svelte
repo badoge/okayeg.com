@@ -52,7 +52,7 @@
     Game concept is also known as Takuzu or Binary Sudoku.
     <br />
     Design is based on
-    <a class="text-success" href="https://0hh1.com/" rel="noreferrer" target="_blank">0h h1</a>
+    <a class="text-primary" href="https://0hh1.com/" rel="noreferrer" target="_blank">0h h1</a>
     logic game.
   </small>
 </p>

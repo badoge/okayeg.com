@@ -65,7 +65,7 @@
   }
 </script>
 
-<button class="btn btn-primary" class:btn-happy={share.result} class:btn-danger={share.error} disabled={!share.ready} onclick={doShare}>
+<button class="btn btn-primary" class:btn-success={share.result} class:btn-danger={share.error} disabled={!share.ready} onclick={doShare}>
   {#if share.error}
     <IcBaselineErrorOutline />
     Sharing failed!
@@ -83,13 +83,5 @@
 <style>
   .btn {
     min-width: 50%;
-    filter: none;
-    transition:
-      opacity 0.3s ease-out,
-      filter 0.4s ease-out;
-  }
-  .btn-happy {
-    filter: saturate(2);
-    font-weight: 500;
   }
 </style>

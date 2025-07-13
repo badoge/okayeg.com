@@ -3,9 +3,12 @@
   import game from "$lib/utils/state";
 </script>
 
-<div class="option-block">
+<div class="pt-2">
   {#if $game}
-    <p class="text-xl text-center mb-3">{$game.name}</p>
+    <p class="text-xl text-center mb-3">
+      {$game.emote}
+      {$game.name}
+    </p>
     {@const SvelteComponent = $game.statsComponent}
     <SvelteComponent />
   {:else}
