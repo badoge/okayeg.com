@@ -175,6 +175,7 @@ export class BaseGame {
     this.id = "baseGame";
     this.name = "Egdle";
     this.kind = "base";
+    this.emote = "🥚";
 
     // subclasses should override these component references:
     this.helperComponent = null;

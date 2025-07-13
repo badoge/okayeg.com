@@ -11,7 +11,7 @@
 
 <p>
   Need advice? Just click the eggs quickly and accurately.
-  <img src="/emotes/4head.webp" alt="loool 4Head" class="emote" />
+  <img src="/emotes/4head.webp" alt="loool 4Head" class="emote inline" />
 </p>
 
 <p>This game may seem to be slighly easier for mobile devices. As such, your shareable data might contain a notice about that.</p>

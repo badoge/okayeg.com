@@ -15,6 +15,7 @@ class Puzzle extends BaseGame {
 
     this.id = "puzzle";
     this.name = "Egdle Puzzle";
+    this.emote = "🧩";
     this.usesInteractiveField = true;
 
     this.helperComponent = Helper;

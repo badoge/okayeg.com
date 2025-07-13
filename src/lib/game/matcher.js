@@ -12,6 +12,7 @@ class Matcher extends BaseGame {
     super();
     this.id = "matcher";
     this.name = "Egdle Pairs";
+    this.emote = "🪺";
     this.kind = "daily";
 
     this.refreshIssueNumber("2023-03-27T00:00:00");

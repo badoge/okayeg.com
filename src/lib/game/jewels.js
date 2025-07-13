@@ -15,6 +15,7 @@ class Jewels extends BaseGame {
 
     this.id = "jewels";
     this.name = "Egdle Crush";
+    this.emote = "💎";
     this.usesInteractiveField = true;
 
     this.helperComponent = Helper;

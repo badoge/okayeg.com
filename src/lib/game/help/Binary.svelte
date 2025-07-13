@@ -5,14 +5,14 @@
 <hr />
 
 <p>While the base objective may seem straightforward, there are some rules to follow:</p>
-<ul>
+<ul class="italic">
   <li>
     No more than two adjacent cells can contain same-colored eggs.
     <div class="mad-example">
       <div class="madeg">
         <img src="/emotes/madeg.webp" alt="Madeg" />
       </div>
-      <img src="/example/binary-triple.webp" alt="Example: Rule 2" />
+      <img src="/example/binary-triple.webp" alt="Example: Rule 1" />
     </div>
   </li>
   <li>
@@ -21,7 +21,7 @@
       <div class="madeg">
         <img src="/emotes/madeg.webp" alt="Madeg" />
       </div>
-      <img src="/example/binary-equal.webp" alt="Example: Rule 1" />
+      <img src="/example/binary-equal.webp" alt="Example: Rule 2" />
     </div>
   </li>
   <li>

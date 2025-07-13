@@ -15,6 +15,7 @@ class Aimlab extends BaseGame {
 
     this.id = "aimlab";
     this.name = "Egdle Reflex";
+    this.emote = "⏱️";
 
     this.helperComponent = Helper;
     this.statsComponent = Stats;

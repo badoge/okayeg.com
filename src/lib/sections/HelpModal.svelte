@@ -5,15 +5,22 @@
   import game from "$lib/utils/state";
 </script>
 
-<div class="option-block">
+<div>
   {#if $game}
-    <h4>{$game.name}</h4>
+    <h4 class="text-2xl text-center m-3">
+      {$game.emote || ""}
+      {$game.name}
+    </h4>
     {@const SvelteComponent = $game.helperComponent}
-    <SvelteComponent />
+    <div class="inner">
+      <SvelteComponent />
+    </div>
   {:else}
-    <p class="text-2xl text-center m-3">
-      <img class="inline" src="/icon/favicon-32x32.png" alt="Okayeg" /><strong>Egdle</strong> Game Hub 🥚
-    </p>
+    <h4 class="text-2xl text-center m-3">
+      <img class="inline me-1" src="/icon/favicon-32x32.png" alt="Okayeg" />
+      <strong>Egdle</strong> Game Hub 🥚
+    </h4>
+
     <p>
       A collection of mini-games with eggs.<br />
       Egg mixes, news, big plays, tilts. Everything that is somewhat related to egg.
@@ -40,7 +47,16 @@
 </div>
 
 <style>
-  p {
-    padding-block: 8px;
+  p,
+  .inner :global(p) {
+    padding-block: 0.25rem;
+  }
+  hr,
+  .inner :global(hr) {
+    margin: 0.5rem 0;
+  }
+  a.link {
+    text-decoration: none;
+    color: var(--color-success);
   }
 </style>

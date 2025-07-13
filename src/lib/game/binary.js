@@ -17,6 +17,7 @@ class Binary extends BaseGame {
     this.id = "binary";
     this.name = "Egdle Binary";
     this.kind = "daily";
+    this.emote = "🍡";
 
     this.refreshIssueNumber("2023-05-27T00:00:00");
 

@@ -50,6 +50,7 @@ class Pattern extends BaseGame {
 
     this.id = "pattern";
     this.name = "Egdle Pattern";
+    this.emote = "📔";
 
     this.topBarComponent = TopBar;
     this.helperComponent = Helper;
