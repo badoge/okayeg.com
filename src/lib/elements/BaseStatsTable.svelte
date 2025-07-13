@@ -20,7 +20,8 @@
 </table>
 
 <style>
-  tbody :global(tr:first-child) {
+  tbody {
     border-top-width: var(--bs-border-width);
+    border-bottom-width: var(--bs-border-width);
   }
 </style>

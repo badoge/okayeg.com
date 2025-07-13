@@ -3,7 +3,7 @@
   import game from "$lib/utils/state";
 </script>
 
-<p>
+<p class="mb-4">
   🥚 Your final score is:
   <b class="text-primary">{$game.score}</b>
 
@@ -11,7 +11,5 @@
     <span class="ms-2 badge bg-success">🎖️ New best score!</span>
   {/if}
 </p>
-
-<div class="my-2"></div>
 
 <Stats />

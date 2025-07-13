@@ -10,7 +10,7 @@
   Enough clicking around. The run has ended.
   <br />
   Your time is:
-  <IcBaselineTimer />
+  <IcBaselineTimer class="inline" />
   <b class="text-primary">{$timeStore}</b>
 </p>
 

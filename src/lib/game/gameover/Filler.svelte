@@ -7,9 +7,9 @@
 </script>
 
 <p>Stats for this run:</p>
-<ul>
+<ul class="my-2">
   <li>
-    <IcBaselineTimer />
+    <IcBaselineTimer class="inline" />
     Time elapsed:
     <b class="text-primary">{formatTimer($game.stats.lastTime, true)}</b>
     {#if $game.stats.lastTime > 0 && $game.stats.lastTime === $game.stats.bestTime}
@@ -17,8 +17,8 @@
     {/if}
   </li>
   <li>
-    <IcBaselineAdsClick />
-    <b class="text-primary">{$game.stats.lastClicks}</b> clicks
+    <IcBaselineAdsClick class="inline" />
+    Solved in <b class="text-primary">{$game.stats.lastClicks}</b> clicks
     {#if $game.stats.lastClicks > 0 && $game.stats.lastClicks === $game.stats.bestClicks}
       <span class="badge bg-success">🎖️ New best!</span>
     {/if}
@@ -28,13 +28,6 @@
 <Stats />
 
 <style>
-  p {
-    margin: 0 0 4px 0;
-  }
-  ul {
-    padding: 0;
-    margin-bottom: 16px;
-  }
   li {
     list-style-type: none;
     margin-bottom: 4px;

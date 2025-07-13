@@ -33,7 +33,7 @@
   getTimeToReset(); // immediate first run
 </script>
 
-<div>
+<div class="my-2">
   {#if timeDiff >= 0}
     <IcBaselineAlarm class="inline" />
     {caption}

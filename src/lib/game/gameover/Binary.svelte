@@ -8,11 +8,12 @@
 </script>
 
 {#if $game.result}
-  <h6>🥳 You did it! Well done!</h6>
-  <p>Stats for this run:</p>
-  <ul>
+  <h6 class="my-2">🥳 You did it! Well done!</h6>
+
+  <p>Stats for today's puzzle:</p>
+  <ul class="my-2">
     <li>
-      <IcBaselineTimer />
+      <IcBaselineTimer class="inline" />
       Time elapsed:
       <b class="text-primary">{formatTimer($game.stats.lastTime, true)}</b>
       {#if $game.stats.lastTime > 0 && $game.stats.lastTime === $game.stats.bestTime}
@@ -20,7 +21,8 @@
       {/if}
     </li>
     <li>
-      <IcBaselineAdsClick />
+      <IcBaselineAdsClick class="inline" />
+      Solved in
       <b class="text-primary">{$game.stats.lastClicks}</b> clicks
       {#if $game.stats.lastClicks > 0 && $game.stats.lastClicks === $game.stats.bestClicks}
         <span class="badge bg-success">🎖️ New best!</span>
@@ -34,9 +36,6 @@
 <DailyCountdown caption="New puzzle will be available in:" />
 
 <style>
-  p {
-    margin: 16px 0 0 0;
-  }
   :global(img) {
     vertical-align: text-bottom;
   }

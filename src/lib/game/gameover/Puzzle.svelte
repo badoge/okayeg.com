@@ -8,10 +8,10 @@
   let statRef = $derived($game.stats[$game.options.gridSizes[$game.settings.gridSizes]]);
 </script>
 
-<p>👍 Good job! You've solved the puzzle!</p>
-<ul>
+<p class="mb-4">👍 Good job! You've solved the puzzle!</p>
+<ul class="my-2">
   <li>
-    <IcBaselineTimer />
+    <IcBaselineTimer class="inline" />
     Time elapsed:
     <b class="text-primary">{formatTimer(statRef.lastTime, true)}</b>
     {#if statRef.lastTime > 0 && statRef.lastTime === statRef.bestTime}
@@ -19,8 +19,8 @@
     {/if}
   </li>
   <li>
-    <IcBaselineAdsClick />
-    <b class="text-primary">{statRef.lastClicks}</b> swaps
+    <IcBaselineAdsClick class="inline" />
+    Solved in <b class="text-primary">{statRef.lastClicks}</b> swaps
     {#if statRef.lastClicks > 0 && statRef.lastClicks === statRef.bestClicks}
       <span class="badge bg-success">🎖️ New best!</span>
     {/if}
@@ -30,13 +30,6 @@
 <Stats />
 
 <style>
-  p {
-    margin: 0 0 4px 0;
-  }
-  ul {
-    padding: 0;
-    margin-bottom: 16px;
-  }
   li {
     list-style-type: none;
     margin-bottom: 4px;

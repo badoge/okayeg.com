@@ -5,7 +5,7 @@
   const SvelteComponent = $derived($currentGame.gameOverComponent);
 </script>
 
-<div class="option-block">
+<div class="pt-4">
   <SvelteComponent />
   <div class="text-center mt-4">
     <ShareButton />

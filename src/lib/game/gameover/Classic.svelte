@@ -47,7 +47,7 @@
 
 <style>
   p {
-    margin: 16px 0;
+    margin: 0.5rem 0;
   }
   :global(img) {
     vertical-align: text-bottom;
