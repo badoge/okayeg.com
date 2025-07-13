@@ -1,4 +1,5 @@
 <script>
+  import { onMount, unmount } from "svelte";
   import { tweened } from "svelte/motion";
   import currentGame from "$lib/utils/state";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
@@ -36,9 +37,18 @@
       startNewRun();
     }, 500);
   }
+
+  let adviceFriendRef = null;
   function askForRestart() {
-    showConfirmAdviceFriend("Do you really want to restart?", "Yes, I do", doRestart);
+    if (adviceFriendRef) unmount(adviceFriendRef);
+    adviceFriendRef = showConfirmAdviceFriend("Do you really want to restart?", "Yes, I do", doRestart);
   }
+
+  onMount(() => {
+    return () => {
+      if (adviceFriendRef) unmount(adviceFriendRef);
+    };
+  });
 </script>
 
 <div class="timer-bar">

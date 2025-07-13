@@ -1,4 +1,5 @@
 <script>
+  import { onMount, unmount } from "svelte";
   import currentGame from "$lib/utils/state";
   import { forceUpdateDOM } from "$lib/utils/state";
   import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
@@ -12,6 +13,7 @@
   const displayTimerStore = $currentGame.displayTime;
 
   let countdown = $state(false);
+  let adviceFriendRef = null;
 
   function startNewRun() {
     $currentGame?.startNewRun();
@@ -28,8 +30,15 @@
   }
 
   function askForRestart() {
-    showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", doRestart);
+    if (adviceFriendRef) unmount(adviceFriendRef);
+    adviceFriendRef = showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", doRestart);
   }
+
+  onMount(() => {
+    return () => {
+      if (adviceFriendRef) unmount(adviceFriendRef);
+    };
+  });
 </script>
 
 <div class="bar">

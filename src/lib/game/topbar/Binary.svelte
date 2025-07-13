@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { scale } from "svelte/transition";
   import currentGame from "$lib/utils/state";
   import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
@@ -19,6 +20,11 @@
   function doStart() {
     countdown = true;
   }
+
+  onMount(() => {
+    // on unmount: nullify any existing advice friends
+    return () => $currentGame.showVerificationAdvice();
+  });
 </script>
 
 <div class="bar">

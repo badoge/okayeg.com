@@ -1,3 +1,4 @@
+import { unmount } from "svelte";
 import { writable } from "svelte/store";
 import { BaseGame } from "$lib/game/baseClasses";
 import { cellColors, emoji, binarySeeds } from "$lib/game/consts";
@@ -54,6 +55,7 @@ class Binary extends BaseGame {
     clearInterval(this._displayTimeInterval);
 
     this._endGameCheckTimeout = null;
+    this._verificationAdviceFriendRef = null;
 
     this.initRNG(0);
 
@@ -277,9 +279,24 @@ class Binary extends BaseGame {
         this.endGame(true);
       } else if (this.fieldError) {
         forceUpdateDOM();
-        if (this.settings.adviceFriendValidation) showAdviceFriend(this.fieldError);
+        if (this.settings.adviceFriendValidation) {
+          this.showVerificationAdvice(this.fieldError);
+        }
       }
     }, 1000);
+
+    return this;
+  }
+
+  showVerificationAdvice(text) {
+    if (this._verificationAdviceFriendRef) {
+      unmount(this._verificationAdviceFriendRef);
+      this._verificationAdviceFriendRef = null;
+    }
+
+    if (text) {
+      this._verificationAdviceFriendRef = showAdviceFriend(text);
+    }
 
     return this;
   }

@@ -9,7 +9,7 @@
 
   onMount(() => {
     animator = true;
-    //window.addEventListener("click", hideAdvice);
+    return hideAdvice;
   });
 
   const transitionInParams = {
@@ -32,9 +32,8 @@
     x: -300,
   };
 
-  export function hideAdvice() {
+  function hideAdvice() {
     animator = false;
-    // window.removeEventListener("click", hideAdvice);
   }
 </script>
 

@@ -1,4 +1,5 @@
 <script>
+  import { onMount, unmount } from "svelte";
   import currentGame from "$lib/utils/state";
   import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
   import { forceUpdateDOM } from "$lib/utils/state";
@@ -25,13 +26,21 @@
     countdown = true;
   }
 
+  let adviceFriendRef = null;
   function askForRestart() {
-    showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", doStart);
+    if (adviceFriendRef) unmount(adviceFriendRef);
+    adviceFriendRef = showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", doStart);
   }
 
   function setActiveColor(color) {
     $currentGame.doColorFill(color);
   }
+
+  onMount(() => {
+    return () => {
+      if (adviceFriendRef) unmount(adviceFriendRef);
+    };
+  });
 </script>
 
 <div class="bar min-h-14">

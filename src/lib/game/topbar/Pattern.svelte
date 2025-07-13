@@ -1,4 +1,5 @@
 <script>
+  import { onMount, unmount } from "svelte";
   import currentGame from "$lib/utils/state";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
@@ -10,9 +11,17 @@
     $currentGame.startNewRun();
   }
 
+  let adviceFriendRef = null;
   function askForRestart() {
-    showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", startNewRun);
+    if (adviceFriendRef) unmount(adviceFriendRef);
+    adviceFriendRef = showConfirmAdviceFriend("Do you really want to reset the run?", "Yes, I do", startNewRun);
   }
+
+  onMount(() => {
+    return () => {
+      if (adviceFriendRef) unmount(adviceFriendRef);
+    };
+  });
 </script>
 
 <div class="bar">

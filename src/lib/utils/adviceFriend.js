@@ -1,36 +1,40 @@
 import { browser } from "$app/environment"; // sveltekit environment
 import { nullFunction } from "$lib/game/consts";
-import AdviceFriend from "$lib/elements/AdviceFriend.svelte";
 import { mount } from "svelte";
+import AdviceFriend from "$lib/elements/AdviceFriend.svelte";
 
-/**
- * @param {string} content
- */
-export function showAdviceFriend(content, title = "") {
+function mountAdviceFriend(content, title, buttonText, actionCallback = nullFunction) {
   if (!browser) return;
 
   const adviceFriend = mount(AdviceFriend, {
     props: {
-      title: title,
-      content: content,
+      title,
+      content,
+      buttonText,
+      interactive: actionCallback && actionCallback !== nullFunction,
+      actionCallback,
     },
     target: document.body,
   });
+
+  return adviceFriend;
 }
 
 /**
  * @param {string} content
+ * @param {string} title
+ * @returns {AdviceFriend}
+ */
+export function showAdviceFriend(content, title = "") {
+  return mountAdviceFriend(content, title, null, null);
+}
+
+/**
+ * @param {string} content
+ * @param {string} buttonText
+ * @param {Function} actionCallback
+ * @returns {AdviceFriend}
  */
 export function showConfirmAdviceFriend(content, buttonText = "OK", actionCallback = nullFunction) {
-  if (!browser) return;
-
-  const adviceFriend = mount(AdviceFriend, {
-    props: {
-      interactive: true,
-      content: content,
-      buttonText: buttonText,
-      actionCallback: actionCallback,
-    },
-    target: document.body,
-  });
+  return mountAdviceFriend(content, null, buttonText, actionCallback);
 }
