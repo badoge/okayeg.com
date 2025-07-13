@@ -29,9 +29,11 @@
 
 <div class="bar">
   <div class="section left">
-    {$currentGame.emote}
-    {$currentGame.name}
-    <b>#{$currentGame.issue}</b>
+    <span class="m-auto">
+      {$currentGame.emote}
+      {$currentGame.name}
+      <b>#{$currentGame.issue}</b>
+    </span>
   </div>
   <div class="section mid">
     {#if !$currentGame.startTime}
@@ -86,6 +88,8 @@
     flex: 1 0 auto;
     text-align: center;
     font-size: 20px;
+    display: flex;
+    flex-flow: row wrap;
   }
   .btn {
     height: 2rem;
@@ -95,14 +99,11 @@
   }
 
   .mid {
-    display: flex;
-    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
     gap: 8px;
   }
   .right {
-    display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     gap: 1rem;

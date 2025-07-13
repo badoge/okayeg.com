@@ -23,6 +23,7 @@
 
 <svelte:head>
   <title>🥚 Egdle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Eg-related game. Eg mixes, news, big plays, tilts. Everything that is somewhat related to eg." />
   <meta name="keywords" content="egdle, okayeg, egg, eg, game, daily" />
   <meta property="og:title" content="🥚 Egdle" />
@@ -47,18 +48,14 @@
 {/if}
 
 <style>
-  :global(body) {
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
-  }
-
   .app {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-flow: column nowrap;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .loader {

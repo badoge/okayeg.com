@@ -57,7 +57,7 @@
                 {disabled ? lib.error : lib.desc}
               </p>
             </div>
-            <div class="flex gap-1">
+            <div class="flex gap-1 portrait:flex-col portrait:min-w-1/3 portrait:ms-2">
               {#each $game.settings[key] as color, colorIndex}
                 <select class="select border-2" style:border-color={color} value={color} onchange={(event) => doSetCellColor(event.currentTarget, colorIndex)}>
                   {#each Object.keys(cellColors) as colorOption}
