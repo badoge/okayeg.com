@@ -9,7 +9,8 @@
 
 <div class="bar">
   <div class="section left">
-    🥚 {$currentGame.name}
+    {$currentGame.emote}
+    {$currentGame.name}
     <b>#{$currentGame.issue}</b>
   </div>
   <div class="section right">

@@ -17,6 +17,7 @@
 
 <div class="bar">
   <div class="section left">
+    {$currentGame.emote}
     Level
     <b class="text-primary">{$currentGame.level}</b>
   </div>
@@ -53,6 +54,7 @@
     font-size: 24px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -81,6 +83,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
   }

@@ -34,7 +34,7 @@
   }
 </script>
 
-<div class="bar">
+<div class="bar min-h-14">
   <div class="section left">
     <div class="tooltip" data-tip="Time elapsed">
       <IcBaselineTimer class="inline align-text-bottom" />
@@ -97,6 +97,7 @@
     font-size: 20px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -156,6 +157,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
     .mid {

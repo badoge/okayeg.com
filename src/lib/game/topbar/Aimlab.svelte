@@ -37,7 +37,7 @@
     <div class="tooltip" data-tip="Time elapsed">
       <IcBaselineTimer class="inline align-text-bottom" />
     </div>
-    <b class="timer text-primary">
+    <b class="text-primary">
       {$displayTimerStore}
     </b>
   </div>
@@ -79,6 +79,7 @@
     font-size: 20px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -92,11 +93,6 @@
     gap: 8px;
   }
 
-  .timer {
-    color: inherit;
-    transition: color 1s ease-out;
-  }
-
   @media all and (max-width: 400px) {
     .bar {
       flex-flow: row wrap;
@@ -106,6 +102,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
     .mid {

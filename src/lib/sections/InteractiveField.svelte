@@ -36,7 +36,9 @@
 </script>
 
 <div in:fly={{ duration: 200, y: 20 }}>
-  <SvelteComponent />
+  <div class="min-h-14">
+    <SvelteComponent />
+  </div>
   <div class="field" style:grid-template-columns={`repeat(${$game.field.width}, min-content)`}>
     {#each $game.field.cells as cell (cell)}
       <div class="cell-container" in:fly={{ duration: cellAnimTiming.in, y: -150 }} animate:flip={{ delay: 0, duration: 300 }}>

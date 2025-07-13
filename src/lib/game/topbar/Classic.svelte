@@ -7,7 +7,8 @@
     {#if $currentGame.settings.hardMode}
       <div class="tooltip" data-tip="Hard mode!">♨️</div>
     {/if}
-    🥚 {$currentGame.name}
+    {$currentGame.emote}
+    {$currentGame.name}
     <b>#{$currentGame.issue}</b>
   </div>
   <div class="section right">

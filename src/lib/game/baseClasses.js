@@ -221,6 +221,10 @@ export class BaseGame {
     this._storedProperties = ["field", "settings", "stats", "gameOver", "result"];
   }
 
+  get emoji() {
+    return this.emote;
+  }
+
   refreshIssueNumber(newFirstDate) {
     this.firstIssueDate = new Date(newFirstDate);
     this.issue = Math.floor((today.getTime() - this.firstIssueDate.getTime()) / (1000 * 3600 * 24));

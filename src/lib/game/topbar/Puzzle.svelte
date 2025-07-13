@@ -67,7 +67,7 @@
   </div>
   <div class="section right">
     <div class="tooltip tooltip-bottom">
-      <div class="tooltip-content">
+      <div class="tooltip-content p-4">
         <img src="/example/puzzle-pic.png" alt="Puzzle" width="250" height="250" />
       </div>
       <button class="btn btn-secondary"> <IcBaselinePreview class="text-2xl" />Peek image </button>
@@ -88,6 +88,7 @@
     font-size: 20px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -115,6 +116,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
     .mid,

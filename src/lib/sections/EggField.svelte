@@ -27,7 +27,9 @@
 </script>
 
 <div in:fly={{ duration: 200, y: 20 }}>
-  <SvelteComponent />
+  <div class="min-h-14">
+    <SvelteComponent />
+  </div>
   <div class="field" style:grid-template-columns={`repeat(${$game.field.width}, min-content)`}>
     {#each $game.field.cells as cell, cellIndex}
       <FieldCell {cell} focused={$game.activeCell === cellIndex} />

@@ -53,9 +53,10 @@
   ></progress>
 </div>
 
-<div class="bar">
+<div class="bar min-h-14">
   <div class="section left">
-    💎 {$currentGame.name}
+    {$currentGame.emote}
+    {$currentGame.name}
   </div>
   <div class="section mid">
     {#if !$currentGame.result}
@@ -95,6 +96,7 @@
     font-size: 20px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -130,6 +132,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
     .mid {

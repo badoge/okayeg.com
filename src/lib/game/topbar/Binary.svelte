@@ -23,7 +23,8 @@
 
 <div class="bar">
   <div class="section left">
-    🥚 {$currentGame.name}
+    {$currentGame.emote}
+    {$currentGame.name}
     <b>#{$currentGame.issue}</b>
   </div>
   <div class="section mid">
@@ -54,14 +55,14 @@
       <div class="tooltip" data-tip="Click counter">
         <IcBaselineAdsClick />
       </div>
-      <b class={$currentGame.clicks ? "text-primary" : "text-muted"}>{$currentGame.clicks}</b>
+      <b class="text-primary">{$currentGame.clicks}</b>
     </div>
     <div class="right-flex">
       <div class="padder"></div>
       <div class="tooltip" data-tip="Time elapsed">
         <IcBaselineTimer />
       </div>
-      <b class={$currentGame.startTime ? "timer text-success" : "timer text-muted"}>
+      <b class="text-primary">
         {$displayTimerStore}
       </b>
     </div>
@@ -81,6 +82,7 @@
     font-size: 20px;
   }
   .btn {
+    height: 2rem;
     padding: 2px 8px;
     font-size: 16px;
     vertical-align: bottom;
@@ -108,10 +110,6 @@
     align-items: center;
   }
 
-  .timer {
-    transition: color 1s ease-out;
-  }
-
   @media all and (max-width: 400px) {
     .bar {
       flex-flow: row wrap;
@@ -121,6 +119,7 @@
       font-size: 12px;
     }
     .btn {
+      height: 1rem;
       font-size: 10px;
     }
     .mid {

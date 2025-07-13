@@ -57,6 +57,6 @@
   }
   a.link {
     text-decoration: none;
-    color: var(--color-success);
+    color: var(--color-primary);
   }
 </style>
