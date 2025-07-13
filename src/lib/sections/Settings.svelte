@@ -5,7 +5,7 @@
   import DevModeButtons from "$lib/elements/DevModeButtons.svelte";
 
   /**
-   * @param {{ currentTarget: { dataset: { optionkey: any; }; checked: any; }; }} event
+   * @param {Event} event
    */
   function updateExternalOption(event) {
     const key = event.currentTarget.dataset.optionkey;
@@ -15,7 +15,7 @@
   }
 
   /**
-   * @param {{ currentTarget: { dataset: { optionkey: any; }; value: string; }; }} event
+   * @param {Event} event
    */
   function updateExternalOptionSelector(event) {
     const key = event.currentTarget.dataset.optionkey;
@@ -40,68 +40,76 @@
   }
 </script>
 
-<div class="option-block">
+<div class="pt-4 pb-0">
   {#if $game}
-    {#each Object.keys($game.settings) as key}
-      {@const lib = settingsLibrary[$game.id][key]}
-      {@const disabled = $game.disabledSettings.has(key)}
+    {@const keys = Object.keys($game.settings)}
+    {#if keys && keys.length > 0}
+      {#each keys as key}
+        {@const lib = settingsLibrary[$game.id][key]}
+        {@const disabled = $game.disabledSettings.has(key)}
 
-      {#if lib.type === "color_multiselect"}
-        <hr />
-        <div class="flex my-2">
-          <div class="flex-grow-1">
-            <p class="text-lg font-bold">{lib.title}</p>
-            <p class="text-xs" class:disabled>
-              {disabled ? lib.error : lib.desc}
-            </p>
+        {#if lib.type === "color_multiselect"}
+          <div class="divider"></div>
+          <div class="flex my-2">
+            <div class="flex-grow-1">
+              <p class="text-lg font-bold">{lib.title}</p>
+              <p class="text-xs" class:disabled>
+                {disabled ? lib.error : lib.desc}
+              </p>
+            </div>
+            <div class="flex gap-1">
+              {#each $game.settings[key] as color, colorIndex}
+                <select class="select border-2" style:border-color={color} value={color} onchange={(event) => doSetCellColor(event.currentTarget, colorIndex)}>
+                  {#each Object.keys(cellColors) as colorOption}
+                    <option value={colorOption} style:background-color={cellColors[colorOption]}>
+                      {colorOption}
+                    </option>
+                  {/each}
+                </select>
+              {/each}
+            </div>
           </div>
-          <div class="flex gap-1">
-            {#each $game.settings[key] as color, colorIndex}
-              <select class="select" style:border-color={color} style:color value={color} onchange={(event) => doSetCellColor(event.currentTarget, colorIndex)}>
-                {#each Object.keys(cellColors) as colorOption}
-                  <option value={colorOption} style:background-color={cellColors[colorOption]}>
-                    {colorOption}
-                  </option>
+        {:else if lib.type === "dropdown"}
+          <div class="divider"></div>
+          <div class="mt-5">
+            <div class="flex flex-row align-items-center">
+              <label class="text-lg flex-grow-1" for={"opt_" + key}>{lib.title}</label>
+              <select class="select w-auto flex-grow-1" id={"opt_" + key} value={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOptionSelector}>
+                {#each $game.options[key] as optionText, optionIndex}
+                  <option value={optionIndex}>{optionText}</option>
                 {/each}
               </select>
-            {/each}
+            </div>
+            <div>
+              <p class="text-xs" class:disabled>
+                {disabled ? lib.error : lib.desc}
+              </p>
+            </div>
           </div>
-        </div>
-      {:else if lib.type === "dropdown"}
-        <hr />
-        <div class="mt-5">
-          <div class="flex flex-row align-items-center">
-            <label class="text-lg flex-grow-1" for={"opt_" + key}>{lib.title}</label>
-            <select class="select w-auto flex-grow-1" id={"opt_" + key} value={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOptionSelector}>
-              {#each $game.options[key] as optionText, optionIndex}
-                <option value={optionIndex}>{optionText}</option>
-              {/each}
-            </select>
-          </div>
-          <div>
-            <p class="text-xs" class:disabled>
-              {disabled ? lib.error : lib.desc}
-            </p>
-          </div>
-        </div>
-      {:else}
-        <label class="label text-base-content mt-3">
-          <input id={"opt_" + key} type="checkbox" class="checkbox" checked={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOption} />
-          {lib.title}
-        </label>
-        <p class="text-xs mb-3">{disabled ? lib.error : lib.desc}</p>
-      {/if}
-    {/each}
+        {:else}
+          <label class="label text-base-content mt-3">
+            <input id={"opt_" + key} type="checkbox" class="checkbox" checked={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOption} />
+            {lib.title}
+          </label>
+          <p class="text-xs mb-3">{disabled ? lib.error : lib.desc}</p>
+        {/if}
+      {/each}
+    {:else}
+      <div class="my-8 text-center">🤷 This game has no customizations.</div>
+    {/if}
   {:else}
-    <div class="mt-2 italic text-center text-primary">Options will be available after you choose a game</div>
-    <div class="opacity-50 text-xs mt-20 text-center">
-      <hr />
-      Build version:<strong>{version}</strong>
-    </div>
+    <div class="my-8 italic text-center">Options will be available once you choose a game</div>
   {/if}
 
+  <div class="divider text-xs mt-8 mb-0">
+    <span class="opacity-50">
+      Build version:
+      <strong>{version}</strong>
+    </span>
+  </div>
+
   {#if devMode}
-    <div class="divider text-xl">Developer mode options</div>
+    <div class="divider text-xl mt-8">Developer mode options</div>
     <DevModeButtons />
   {/if}
 </div>
