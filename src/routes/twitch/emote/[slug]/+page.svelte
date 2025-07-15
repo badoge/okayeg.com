@@ -253,7 +253,7 @@
       <div class="card w-180 h-fit bg-base-200 shadow-xl m-5">
         <div class="card-body">
           <h2 class="card-title">Modified emotes</h2>
-          <div id="modifiedEmotes" class="flex flex-row flex-wrap justify-center text-center gap-5 grid grid-cols-4">
+          <div id="modifiedEmotes" class="flex flex-row flex-wrap justify-center text-center gap-5 grid md:grid-cols-4 grid-cols-2">
             {#if emoteAnimated === 1}
               <h4 class="text-2xl opacity-50">Animated emotes don't have modified versions</h4>
             {:else}
