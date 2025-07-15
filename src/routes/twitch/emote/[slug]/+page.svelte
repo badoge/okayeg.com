@@ -18,7 +18,9 @@
   let emoteFormat = $derived("🤷");
   let emoteAnimated = $derived("🤷");
   let emoteDeleted = $derived("");
-
+  let emote1x = $state("");
+  let emote2x = $state("");
+  let emote4x = $state("");
   onMount(() => {
     if (emoteInput) {
       loadEmoteInfo();
@@ -30,6 +32,22 @@
    */
   function lookup(event) {
     event.preventDefault();
+
+    emoteID = "";
+    emoteName = "🤷";
+    emoteChannel = "🤷";
+    emoteSetID = "🤷";
+    emoteTier = "🤷";
+    emoteType = "🤷";
+    emoteDate = "🤷";
+    emoteFormat = "🤷";
+    emoteAnimated = "🤷";
+    emoteDeleted = "";
+
+    let modifiedEmotes = document.querySelectorAll("#modifiedEmotes > div");
+    for (let index = 0; index < modifiedEmotes.length; index++) {
+      modifiedEmotes[index].style.display = "";
+    }
 
     let regexV1 = /^\d+$/;
     let regexV2 = /emotesv2_[a-z0-9]{32}/;
@@ -162,10 +180,8 @@
   <p class="text-center text-2xl">No emote ID provided</p>
 {:else}
   <div class="flex">
-    <div class="w-100 shrink"></div>
-
-    <div class="flex flex-wrap w-650">
-      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
+    <div class="flex flex-wrap w-full justify-center">
+      <div class="card w-fit h-fit bg-base-200 shadow-xl m-5">
         <div class="card-body">
           <h2 class="card-title">Emote info</h2>
 
@@ -208,38 +224,38 @@
         </div>
       </div>
 
-      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
+      <div class="card w-fit h-fit bg-base-200 shadow-xl m-5">
         <div class="card-body">
           <h2 class="card-title">Emote sizes</h2>
-          <div class="flex flex-row justify-center text-center gap-5">
+          <div class="flex flex-col justify-center text-center gap-5">
             <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
               <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/3.0">
-                <img class="mx-auto" src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/3.0" alt="3.0 size" title="3.0 size" />
+                <img class="mx-auto" bind:this={emote4x} src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/3.0" alt="3.0 size" title="3.0 size" />
               </a>
-              <h2 class="text-xl">3.0</h2>
+              <h2 class="text-xl">4x <span class="opacity-50">{emote4x ? `(${emote4x.naturalWidth} x ${emote4x.naturalHeight}px)` : ""}</span></h2>
             </div>
             <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
               <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/2.0">
-                <img class="mx-auto" src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/2.0" alt="2.0 size" title="2.0 size" />
+                <img class="mx-auto" bind:this={emote2x} src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/2.0" alt="2.0 size" title="2.0 size" />
               </a>
-              <h2 class="text-xl">2.0</h2>
+              <h2 class="text-xl">2x <span class="opacity-50">{emote2x ? `(${emote2x.naturalWidth} x ${emote2x.naturalHeight}px)` : ""}</span></h2>
             </div>
             <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
               <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/1.0">
-                <img class="mx-auto" src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/1.0" alt="1.0 size" title="1.0 size" />
+                <img class="mx-auto" bind:this={emote1x} src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/1.0" alt="1.0 size" title="1.0 size" />
               </a>
-              <h2 class="text-xl">1.0</h2>
+              <h2 class="text-xl">1x <span class="opacity-50">{emote1x ? `(${emote1x.naturalWidth} x ${emote1x.naturalHeight}px)` : ""}</span></h2>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
+      <div class="card w-180 h-fit bg-base-200 shadow-xl m-5">
         <div class="card-body">
-          <h2 class="card-title">Modified emote</h2>
-          <div class="flex flex-row flex-wrap justify-center text-center gap-5">
+          <h2 class="card-title">Modified emotes</h2>
+          <div id="modifiedEmotes" class="flex flex-row flex-wrap justify-center text-center gap-5 grid grid-cols-4">
             {#if emoteAnimated === 1}
-              <h4 class="text-2xl opacity-50">Animated emotes don't have modifiers</h4>
+              <h4 class="text-2xl opacity-50">Animated emotes don't have modified versions</h4>
             {:else}
               {#each combinations as combination}
                 <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
@@ -260,7 +276,5 @@
         </div>
       </div>
     </div>
-
-    <div class="w-100 shrink"></div>
   </div>
 {/if}
