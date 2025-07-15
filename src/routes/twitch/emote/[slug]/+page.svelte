@@ -11,7 +11,13 @@
   let emoteID = $derived("");
   let emoteName = $derived("🤷");
   let emoteChannel = $derived("🤷");
+  let emoteSetID = $derived("🤷");
+  let emoteTier = $derived("🤷");
+  let emoteType = $derived("🤷");
   let emoteDate = $derived("🤷");
+  let emoteFormat = $derived("🤷");
+  let emoteAnimated = $derived("🤷");
+  let emoteDeleted = $derived("");
 
   onMount(() => {
     if (emoteInput) {
@@ -51,39 +57,42 @@
    */
   const combinations = [
     { suffix: "BE", name: "Beard" },
-    { suffix: "BN", name: "Bunny ears" },
     { suffix: "BT", name: "Bubble Tea" },
-    { suffix: "BW", name: "Greyscale" },
+    { suffix: "BN", name: "Bunny ears" },
     { suffix: "CL", name: "Clover" },
     { suffix: "EB", name: "Easter basket" },
     { suffix: "EG", name: "Easter eggs" },
-    { suffix: "FF", name: "Pride Fan" },
-    { suffix: "FC", name: "Flower crown" },
     { suffix: "FB", name: "Feather Boa" },
-    { suffix: "EV", name: "Red envelope" },
-    { suffix: "HF", name: "Horizontal flip" },
-    { suffix: "HE", name: "Heart Eyes" },
-    { suffix: "HB", name: "Heart Broken" },
+    { suffix: "FC", name: "Flower crown" },
+    { suffix: "BW", name: "Greyscale" },
     { suffix: "GR", name: "Guitar" },
+    { suffix: "HB", name: "Heart Broken" },
+    { suffix: "HE", name: "Heart Eyes" },
+    { suffix: "HF", name: "Horizontal flip" },
     { suffix: "KI", name: "Kiss Imprint" },
     { suffix: "LH", name: "Lucky Hat" },
+    { suffix: "RA", name: "Lunar Rat" },
     { suffix: "MC", name: "Maracas" },
+    { suffix: "FF", name: "Pride Fan" },
     { suffix: "PK", name: "Pumpkin" },
     { suffix: "PM", name: "Pumpkin" },
-    { suffix: "WD", name: "Women's day" },
-    { suffix: "WH", name: "Witch hat" },
-    { suffix: "SA", name: "Santa hat" },
-    { suffix: "RA", name: "Lunar Rat" },
-    { suffix: "RB", name: "Rosie's Bandana" },
+    { suffix: "EV", name: "Red envelope" },
     { suffix: "RD", name: "Reindeer" },
+    { suffix: "RB", name: "Rosie's Bandana" },
+    { suffix: "SA", name: "Santa hat" },
     { suffix: "SF", name: "Snowflakes" },
-    { suffix: "SG", name: "Sunglasses" },
-    { suffix: "TK", name: "Thinking" },
-    { suffix: "UN", name: "Unicorn" },
     { suffix: "SM", name: "Snowman" },
     { suffix: "SO", name: "Sombrero" },
     { suffix: "SQ", name: "Squished" },
+    { suffix: "SG", name: "Sunglasses" },
+    { suffix: "TK", name: "Thinking" },
+    { suffix: "UN", name: "Unicorn" },
+    { suffix: "WH", name: "Witch hat" },
+    { suffix: "WD", name: "Women's day" },
   ];
+
+  const emoteTiers = { "1000": "1", "2000": "2", "3000": "3" };
+  const emoteTypes = { bitstier: "Custom Bits tier emote", follower: "Custom follower emote", subscriptions: "Custom subscriber emote" };
 
   async function loadEmoteInfo() {
     let regexV1 = /^\d+$/;
@@ -100,6 +109,22 @@
       }
     } else {
       emoteID = "dank";
+    }
+
+    try {
+      let response = await fetch(`https://uploader.px.dog/emote?id=${emoteID}`);
+      if (response.status == 200) {
+        let result = await response.json();
+        emoteName = result.name || "🤷";
+        emoteChannel = `<a class="link" href="/twitch/emotes/${result.channel}">${result.channel}</a>` || "🤷";
+        emoteType = emoteTypes[result.type] || "🤷";
+        emoteTier = result.type !== "subscriptions" ? `<span class="opacity-50">Only subscriber emotes have tiers</span>` : emoteTiers[result.tier];
+        emoteSetID = result.set_id || "🤷";
+        emoteFormat = result.animated === 1 ? "Animated" : "Static";
+        emoteAnimated = result.animated;
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     try {
@@ -139,8 +164,8 @@
   <div class="flex">
     <div class="w-100 shrink"></div>
 
-    <div class="flex flex-wrap w-600">
-      <div class="card w-fit bg-base-200 shadow-xl m-10">
+    <div class="flex flex-wrap w-650">
+      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
         <div class="card-body">
           <h2 class="card-title">Emote info</h2>
 
@@ -156,18 +181,34 @@
               </tr>
               <tr>
                 <th>Channel</th>
-                <td>{emoteName}</td>
+                <td>{@html emoteChannel}</td>
               </tr>
               <tr>
                 <th>Creation date<span class="tooltip align-text-bottom" data-tip="Uses the Last-Modified http header which is not accurate"><IcBaselineInfo /></span></th>
                 <td>{emoteDate}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{emoteType}</td>
+              </tr>
+              <tr>
+                <th>Tier</th>
+                <td>{@html emoteTier}</td>
+              </tr>
+              <tr>
+                <th>Format</th>
+                <td>{emoteFormat}</td>
+              </tr>
+              <tr>
+                <th>Set ID</th>
+                <td>{emoteSetID}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="card w-fit bg-base-200 shadow-xl m-10">
+      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
         <div class="card-body">
           <h2 class="card-title">Emote sizes</h2>
           <div class="flex flex-row justify-center text-center gap-5">
@@ -193,24 +234,28 @@
         </div>
       </div>
 
-      <div class="card w-fit bg-base-200 shadow-xl m-10">
+      <div class="card w-fit h-fit bg-base-200 shadow-xl m-10">
         <div class="card-body">
           <h2 class="card-title">Modified emote</h2>
           <div class="flex flex-row flex-wrap justify-center text-center gap-5">
-            {#each combinations as combination}
-              <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
-                <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0">
-                  <img
-                    class="mx-auto"
-                    src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0"
-                    alt="{combination.name} modifier (_{combination.suffix})"
-                    title="{combination.name} modifier (_{combination.suffix})"
-                    onerror={(e) => (e.target.closest("div").style.display = "none")}
-                  />
-                </a>
-                <h2 class="text-xl">{combination.name} <span class="opacity-50">(_{combination.suffix})</span></h2>
-              </div>
-            {/each}
+            {#if emoteAnimated === 1}
+              <h4 class="text-2xl opacity-50">Animated emotes don't have modifiers</h4>
+            {:else}
+              {#each combinations as combination}
+                <div class="flex-none border border-accent rounded-b-xl p-1 h-fit">
+                  <a target="_blank" href="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0">
+                    <img
+                      class="mx-auto"
+                      src="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}_{combination.suffix}/default/dark/3.0"
+                      alt="{combination.name} modifier (_{combination.suffix})"
+                      title="{combination.name} modifier (_{combination.suffix})"
+                      onerror={(e) => (e.target.closest("div").style.display = "none")}
+                    />
+                  </a>
+                  <h2 class="text-xl">{combination.name} <span class="opacity-50">(_{combination.suffix})</span></h2>
+                </div>
+              {/each}
+            {/if}
           </div>
         </div>
       </div>
