@@ -11,7 +11,7 @@
   let { children } = $props();
 </script>
 
-<div class="navbar bg-neutral text-neutral-content shadow-sm flex w-full">
+<div class="navbar bg-neutral text-neutral-content shadow-md flex w-full py-0">
   <div class="navbar-start w-45 flex-none">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost xl:hidden">
@@ -39,10 +39,10 @@
     </ul>
   </div>
 
-  <div class="navbar-end flex-auto p-1">
-    <label class="swap swap-rotate">
+  <div class="navbar-end flex-auto">
+    <label class="swap swap-rotate m-1">
       <!-- this hidden checkbox controls the state -->
-      <input data-toggle-theme="forest,lemonade" checked type="checkbox" class="theme-controller" value="synthwave" />
+      <input data-toggle-theme="forest,lemonade" checked type="checkbox" class="theme-controller" value="synthwave" name="theme" />
 
       <!-- sun icon -->
       <svg class="swap-off h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
