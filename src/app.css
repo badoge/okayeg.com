@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: forest --default, lemonade;
+}
+
+.emotecontainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+}
+
+.emote {
+  margin: 5px;
+  width: fit-content;
+}
+
+.emote > img {
+  margin-inline: auto;
+}
+
+.emotetextwide {
+  max-width: 384px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.emotetext {
+  max-width: 112px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
