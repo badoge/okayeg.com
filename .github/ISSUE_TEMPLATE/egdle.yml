@@ -1,5 +1,8 @@
 name: Egdle Issue
-description: Open an Egdle-labeled issue
-title: ""
+description: Open an issue related to Egdle
+title: "Egdle issue"
 labels: [Egdle]
-body: []
+body:
+- type: textarea
+  attributes:
+    label: "Write a description"
