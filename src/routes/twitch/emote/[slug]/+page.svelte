@@ -158,7 +158,7 @@
   <title>Emote {emoteID} info | OkayegBOT</title>
   <meta name="description" content="Info about the Twitch emote {emoteID}" />
   <meta property="og:title" content="Emote {emoteID} info | OkayegBOT" />
-  <meta property="og:url" content="https://beta.okayeg.com/twitch/emote/{emoteID}" />
+  <meta property="og:url" content="https://okayeg.com/twitch/emote/{emoteID}" />
   <meta property="og:image" content="https://static-cdn.jtvnw.net/emoticons/v2/{emoteID}/default/dark/3.0" />
   <meta property="og:description" content="Info about the Twitch emote {emoteID}" />
 </svelte:head>

@@ -20,8 +20,8 @@
 
   <div class="flex flex-col justify-center w-250 mt-5">
     <h1 class="text-4xl text-center">Twitch related pages</h1>
-    <a class="text-2xl link mt-5" href="/twitch/stats"><IcBaselineQueryStats class="inline" /> Donk stats</a>
-    <p>A collection of various stats about Twitch and its streamers and viewers</p>
+    <!-- <a class="text-2xl link mt-5" href="/twitch/stats"><IcBaselineQueryStats class="inline" /> Donk stats</a>
+    <p>A collection of various stats about Twitch and its streamers and viewers</p> -->
 
     <a class="text-2xl link mt-5" href="/twitch/emotes"><IcBaselineEmojiEmotions class="inline" /> Channel emotes</a>
     <p>View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges</p>

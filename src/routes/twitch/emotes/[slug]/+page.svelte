@@ -161,7 +161,6 @@
     try {
       let response = await fetch(`https://api.frankerfacez.com/v1/room/id/${user.id}`);
       let result = await response.json();
-      console.log(result);
       if (response.status == 200) {
         if (result?.room?.set && result.sets[result?.room?.set]?.emoticons?.length > 0) {
           let setid = result.room.set;
@@ -210,7 +209,7 @@
   <title>{username}'s Twitch emotes | OkayegBOT</title>
   <meta name="description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
   <meta property="og:title" content="{username}'s Twitch emotes | OkayegBOT" />
-  <meta property="og:url" content="https://beta.okayeg.com/twitch/emotes/{username}" />
+  <meta property="og:url" content="https://okayeg.com/twitch/emotes/{username}" />
   <meta property="og:description" content="View a Twitch channel's Twitch/BTTV/FFZ/7TV emotes and badges" />
 </svelte:head>
 
