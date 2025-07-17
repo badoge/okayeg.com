@@ -130,7 +130,7 @@
     <p class="font-bold">Have an idea for a game? Want to share your feedback?</p>
     <p>
       Contact me at <span style="color: #5865f2;"><IcBaselineDiscord class="inline align-middle" /> @g7eternal</span> or
-      <a class="link text-primary" href="https://github.com/g7eternal/egdle2/issues" title="Go to Github" target="_blank"> create a ticket </a> with your ideas
+      <a class="link text-primary" href="https://github.com/badoge/okayeg.com/issues/new?template=egdle.yml" title="Go to Github" target="_blank"> create a ticket </a> with your ideas
     </p>
   </aside>
 </footer>
