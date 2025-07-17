@@ -12,6 +12,23 @@ export function addOrdinalSuffix(number) {
 } //addOrdinalSuffix
 
 /**
+ * @param {string} username
+ */
+export async function getTwitchUser(username) {
+  try {
+    let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`);
+    let result = await response.json();
+    if (!result?.data || !result?.data[0]?.id) {
+      return null;
+    }
+    return result.data[0];
+  } catch (error) {
+    console.log("getTwitchUser error", error);
+    return null;
+  }
+} //getTwitchUser
+
+/**
  * @param {number} seconds
  */
 export function secondsToTwitchStupidTime(seconds) {

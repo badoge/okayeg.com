@@ -2,11 +2,12 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { escapeString, months } from "$lib/functions.js";
+  import { escapeString, months, getTwitchUser } from "$lib/functions.js";
 
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
   import MdiTwitch from "~icons/mdi/twitch";
-  import IcBaselineQuestionMark from "~icons/ic/baseline-question-mark";
+  import IcBaselineInfo from "~icons/ic/baseline-info";
+  import IcBaselineSettings from "~icons/ic/baseline-settings";
 
   let { data } = $props();
   let username = $state(data.slug.toLowerCase().replace(/\s/g, ""));
@@ -17,158 +18,88 @@
     }
   });
 
+  let output = $state("");
+  let user = $state({});
+  let displayName = $state("");
+  let t1Emotes = $state([]);
+  let t2Emotes = $state([]);
+  let t3Emotes = $state([]);
+  let followerEmotes = $state([]);
+  let bitsEmotes = $state([]);
+  let t1Badges = $state([]);
+  let t2Badges = $state([]);
+  let t3Badges = $state([]);
+  let bitsBadges = $state([]);
+  let bttvResponse = $state({});
+  let ffzEmotes = $state([]);
+  let ffzModBadge = $state("");
+  let ffzVipBadge = $state("");
+  let seventvEmotes = $state([]);
+  let seventvID = $state("");
+
   /**
    * @param {SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }} event
    */
   function lookup(event) {
     event.preventDefault();
     goto(`/twitch/emotes/${username?.toLowerCase().replace(/\s/g, "")}`);
+    output = "";
+    user = {};
+    displayName = "";
+    t1Emotes = [];
+    t2Emotes = [];
+    t3Emotes = [];
+    followerEmotes = [];
+    bitsEmotes = [];
+    t1Badges = [];
+    t2Badges = [];
+    t3Badges = [];
+    bitsBadges = [];
+    bttvResponse = {};
+    ffzEmotes = [];
+    ffzModBadge = "";
+    ffzVipBadge = "";
+    seventvEmotes = [];
+    seventvID = "";
+
     loadChannelEmotes();
   }
 
-  /**
-   * @param {string} username
-   */
-  async function getTwitchUser(username) {
-    try {
-      let response = await fetch(`https://helper.donk.workers.dev/twitch/users?login=${username}`);
-      let result = await response.json();
-      if (!result?.data || !result?.data[0]?.id) {
-        return null;
-      }
-      return result.data[0];
-    } catch (error) {
-      console.log("getTwitchUser error", error);
-      return null;
-    }
-  } //getTwitchUser
-
   async function loadChannelEmotes() {
-    let displayName = "";
-    let channel = username.replace("#", "").toLowerCase().replace(/\s/g, "");
-
-    if (!channel) {
+    if (!username) {
       return;
     }
 
-    let user = await getTwitchUser(channel);
+    user = await getTwitchUser(username);
     if (!user) {
-      document.getElementById("output").style.display = "";
-      document.getElementById("output").innerHTML = `<h1 class="text-2xl text-center">Channel not found</h1>`;
-      document.getElementById("twitch").innerHTML = "";
-      document.getElementById("badges").innerHTML = "";
-      document.getElementById("bttv").innerHTML = "";
-      document.getElementById("ffz").innerHTML = "";
-      document.getElementById("seventv").innerHTML = "";
+      output = `<h1 class="text-2xl text-center">Channel not found</h1>`;
       return;
     } else {
-      document.getElementById("output").style.display = "none";
       displayName = user.display_name.toLowerCase() == user.login ? user.display_name : `${user.display_name} (${user.login})`;
     }
-
-    document.getElementById("twitch").innerHTML = "";
-    document.getElementById("badges").innerHTML = "";
-    document.getElementById("bttv").innerHTML = "";
-    document.getElementById("ffz").innerHTML = "";
-    document.getElementById("seventv").innerHTML = "";
 
     try {
       let response = await fetch(`https://helper.donk.workers.dev/twitch/chat/emotes?broadcaster_id=${user.id}`);
       let result = await response.json();
       if (result?.data?.length > 0) {
         result.data.sort((a, b) => a.name.localeCompare(b.name));
-        document.getElementById("twitch").innerHTML = `
-      <h1 class="text-2xl">
-        <a href="https://twitch.tv/${user.login}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s Subscriber Emotes:
-      </h1>`;
-        let tier1Count = 0;
-        let tier2Count = 0;
-        let tier3Count = 0;
-        let followerCount = 0;
-        let bitsCount = 0;
-        let t1 = "";
-        let t2 = "";
-        let t3 = "";
-        let follower = "";
-        let bits = "";
         for (let i = 0, j = result.data.length; i < j; i++) {
           if (result.data[i].tier == "1000") {
-            tier1Count++;
-            t1 += `
-          <div class="border border-accent emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" loading="lazy" title="${result.data[i].name}" alt="${result.data[i].name}">
-            <div class="emotetext text-center">${escapeString(result.data[i].name)}</div>
-          </div>`;
+            t1Emotes.push(result.data[i]);
           }
           if (result.data[i].tier == "2000") {
-            tier2Count++;
-            t2 += `
-          <div class="border border-accent emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
-            <div class="emotetext text-center">${escapeString(result.data[i].name)}</div>
-          </div>`;
+            t2Emotes.push(result.data[i]);
           }
           if (result.data[i].tier == "3000") {
-            tier3Count++;
-            t3 += `
-          <div class="border border-accent emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
-            <div class="emotetext text-center">${escapeString(result.data[i].name)}</div>
-          </div>`;
+            t3Emotes.push(result.data[i]);
           }
           if (result.data[i].emote_type == "follower") {
-            followerCount++;
-            follower += `
-          <div class="border border-accent emote">
-            <img  src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
-            <div class="emotetext text-center">${escapeString(result.data[i].name)}</div>
-          </div>`;
+            followerEmotes.push(result.data[i]);
           }
           if (result.data[i].emote_type == "bitstier") {
-            bitsCount++;
-            bits += `
-          <div class="border border-accent emote">
-            <img src="https://static-cdn.jtvnw.net/emoticons/v2/${result.data[i].id}/default/dark/3.0" title="${result.data[i].name}" loading="lazy" alt="${result.data[i].name}">
-            <div class="emotetext text-center">${escapeString(result.data[i].name)}</div>
-          </div>`;
+            bitsEmotes.push(result.data[i]);
           }
         }
-        if (t1) {
-          t1 = `
-        <h3>
-          Tier 1 Emotes <span class="text-body-secondary">(${tier1Count} ${tier1Count == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${t1}</div>`;
-        }
-        if (t2) {
-          t2 = `
-        <h3>
-          Tier 2 Emotes <span class="text-body-secondary">(${tier2Count} ${tier2Count == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${t2}</div>`;
-        }
-        if (t3) {
-          t3 = `
-        <h3>
-          Tier 3 Emotes <span class="text-body-secondary">(${tier3Count} ${tier3Count == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${t3}</div>`;
-        }
-        if (follower) {
-          follower = `
-        <h3>
-          Follower Emotes <span class="text-body-secondary">(${followerCount} ${followerCount == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${follower}</div>`;
-        }
-        if (bits) {
-          bits = `
-        <h3>
-          Bits Tier Emotes <span class="text-body-secondary">(${bitsCount} ${bitsCount == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${bits}</div>`;
-        }
-        document.getElementById("twitch").innerHTML += t1 + t2 + t3 + follower + bits;
       }
     } catch (error) {
       console.log("twitch emotes error", error);
@@ -179,13 +110,12 @@
       let result = await response.json();
       if (result?.data?.length > 0) {
         let subBadges = [];
-        let bitBadges = [];
         if (result?.data[0]?.versions?.length > 0) {
           if (result.data[0].set_id == "subscriber") {
             subBadges = result.data[0].versions;
           }
           if (result.data[0].set_id == "bits") {
-            bitBadges = result.data[0].versions;
+            bitsBadges = result.data[0].versions;
           }
         }
         if (result?.data[1]?.versions?.length > 0) {
@@ -193,62 +123,25 @@
             subBadges = result.data[1].versions;
           }
           if (result.data[1].set_id == "bits") {
-            bitBadges = result.data[1].versions;
+            bitsBadges = result.data[1].versions;
           }
         }
         subBadges.sort(function (a, b) {
           return parseInt(a.id, 10) - parseInt(b.id, 10);
         });
-        bitBadges.sort(function (a, b) {
+        bitsBadges.sort(function (a, b) {
           return parseInt(a.id, 10) - parseInt(b.id, 10);
         });
 
-        let subt1 = "";
-        let subt2 = "";
-        let subt3 = "";
-        let bits = "";
-
         for (let i = 0, j = subBadges.length; i < j; i++) {
           if (subBadges[i].id >= 3000) {
-            subt3 += `
-          <div class="border border-accent emote">
-            <img src="${subBadges[i].image_url_4x}" loading="lazy">
-            <div class="text-center">${months[subBadges[i].id]}</div>
-          </div>`;
+            t3Badges.push(subBadges[i]);
           } else if (subBadges[i].id >= 2000) {
-            subt2 += `
-          <div class="border border-accent emote">
-            <img src="${subBadges[i].image_url_4x}" loading="lazy">
-            <div class="text-center">${months[subBadges[i].id]}</div>
-          </div>`;
+            t2Badges.push(subBadges[i]);
           } else {
-            subt1 += `
-          <div class="border border-accent emote">
-            <img src="${subBadges[i].image_url_4x}" loading="lazy">
-            <div class="text-center">${months[subBadges[i].id]}</div>
-          </div>`;
+            t1Badges.push(subBadges[i]);
           }
         }
-        for (let i = 0, j = bitBadges.length; i < j; i++) {
-          bits += `
-        <div class="border border-accent emote">
-          <img src="${bitBadges[i].image_url_4x}" loading="lazy">
-          <div class="text-center">${escapeString(bitBadges[i].title)}</div>
-        </div>`;
-        }
-        if (subt1) {
-          subt1 = `<h3>Tier 1 Sub Badges:</h3><div class="emotecontainer">${subt1}</div>`;
-        }
-        if (subt2) {
-          subt2 = `<h3>Tier 2 Sub Badges:</h3><div class="emotecontainer">${subt2}</div>`;
-        }
-        if (subt3) {
-          subt3 = `<h3>Tier 3 Sub Badges:</h3><div class="emotecontainer">${subt3}</div>`;
-        }
-        if (bits) {
-          bits = `<h3>Bit badges:</h3><div class="emotecontainer">${bits}</div>`;
-        }
-        document.getElementById("badges").innerHTML = subt1 + subt2 + subt3 + bits;
       }
     } catch (error) {
       console.log("twitch badges error", error);
@@ -256,54 +149,10 @@
 
     try {
       let response = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${user.id}`);
-      let result = await response.json();
-      if (result?.channelEmotes?.length > 0 || result?.sharedEmotes?.length > 0) {
-        let bttvChannelEmotes = "";
-        let bttvSharedEmotes = "";
-        result.channelEmotes.sort((a, b) => a.code.localeCompare(b.code));
-        result.sharedEmotes.sort((a, b) => a.code.localeCompare(b.code));
-        document.getElementById("bttv").innerHTML = `
-      <h1 class="text-2xl">
-        <a href="https://betterttv.com/users/${result.id}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s BTTV Emotes:
-      </h1>`;
-
-        for (let i = 0, j = result.channelEmotes.length; i < j; i++) {
-          bttvChannelEmotes += `
-        <div class="border border-accent emote">
-          <a href="https://betterttv.com/emotes/${result.channelEmotes[i].id}" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn.betterttv.net/emote/${result.channelEmotes[i].id}/3x" loading="lazy" alt="${result.channelEmotes[i].code}" title="${result.channelEmotes[i].code}">
-          </a>
-          <div class="emotetextwide text-center">${escapeString(result.channelEmotes[i].code)}</div>
-        </div>`;
-        }
-        for (let i = 0, j = result.sharedEmotes.length; i < j; i++) {
-          bttvSharedEmotes += `
-        <div class="border border-accent emote">
-          <a href="https://betterttv.com/emotes/${result.sharedEmotes[i].id}" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn.betterttv.net/emote/${result.sharedEmotes[i].id}/3x" loading="lazy" alt="${result.sharedEmotes[i].code}" title="${result.sharedEmotes[i].code}">
-          </a>
-          <div class="emotetextwide text-center">${escapeString(result.sharedEmotes[i].code)}</div>
-        </div>`;
-        }
-        if (bttvChannelEmotes) {
-          bttvChannelEmotes = `
-        <h3>
-          BTTV channel emotes
-          <i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-title="Channel emotes are emotes that were uploaded to BTTV by ${user.login}.">info</i>
-          <span class="text-body-secondary">(${result.channelEmotes.length} ${result.channelEmotes.length == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${bttvChannelEmotes}</div>`;
-        }
-        if (bttvSharedEmotes) {
-          bttvSharedEmotes = `
-        <h3>
-          BTTV shared emotes
-          <i class="material-icons notranslate" data-bs-toggle="tooltip" data-bs-title="Shared emotes are emotes that were uploaded to BTTV by other users.">info</i>
-          <span class="text-body-secondary">(${result.sharedEmotes.length} ${result.channelEmotes.length == 1 ? "emote" : "emotes"})</span>:
-        </h3>
-        <div class="emotecontainer">${bttvSharedEmotes}</div>`;
-        }
-        document.getElementById("bttv").innerHTML += bttvChannelEmotes + bttvSharedEmotes;
+      bttvResponse = await response.json();
+      if (bttvResponse?.channelEmotes?.length > 0 || bttvResponse?.sharedEmotes?.length > 0) {
+        bttvResponse.channelEmotes.sort((a, b) => a.code.localeCompare(b.code));
+        bttvResponse.sharedEmotes.sort((a, b) => a.code.localeCompare(b.code));
       }
     } catch (error) {
       console.log("bttv error", error);
@@ -312,56 +161,28 @@
     try {
       let response = await fetch(`https://api.frankerfacez.com/v1/room/id/${user.id}`);
       let result = await response.json();
-      if (response.status == 200 && result?.room?.set && result.sets[result?.room?.set]?.emoticons?.length > 0) {
-        let ffz = "";
-        let setid = result.room.set;
-        let sets = result.sets[setid];
-        sets.emoticons.sort((a, b) => a.name.localeCompare(b.name));
+      console.log(result);
+      if (response.status == 200) {
+        if (result?.room?.set && result.sets[result?.room?.set]?.emoticons?.length > 0) {
+          let setid = result.room.set;
+          let sets = result.sets[setid];
+          sets.emoticons.sort((a, b) => a.name.localeCompare(b.name));
 
-        document.getElementById("ffz").innerHTML = `
-      <h1 class="text-2xl">
-        <a href="https://www.frankerfacez.com/channel/${user.login}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s FFZ Emotes 
-        <span class="text-body-secondary">(${sets.emoticons.length} ${sets.emoticons.length == 1 ? "emote" : "emotes"})</span>:
-      </h1>`;
-
-        for (let i = 0, j = sets.emoticons.length; i < j; i++) {
-          let url = sets.emoticons[i].urls["4"];
-          if (sets.emoticons[i].animated) {
-            url = sets.emoticons[i].animated["4"];
-          }
-          ffz += `
-        <div class="border border-accent emote">
-          <a href="https://www.frankerfacez.com/emoticon/${sets.emoticons[i].id}" target="_blank" rel="noopener noreferrer">
-            <img src="${url}" loading="lazy" alt="${sets.emoticons[i].name}" title="${sets.emoticons[i].name}">
-          </a>
-          <div class="emotetextwide text-center">${escapeString(sets.emoticons[i].name)}</div>
-        </div>`;
-        } //ffz emotes
-
-        if (ffz) {
-          ffz = `<div class="emotecontainer">${ffz}</div>`;
+          for (let i = 0, j = sets.emoticons.length; i < j; i++) {
+            let url = sets.emoticons[i].urls["4"];
+            if (sets.emoticons[i].animated) {
+              url = sets.emoticons[i].animated["4"];
+            }
+            ffzEmotes.push({ id: sets.emoticons[i].id, url: url, name: sets.emoticons[i].name });
+          } //ffz emotes
         }
-        document.getElementById("ffz").innerHTML += ffz;
 
-        if (result.room.mod_urls) {
-          document.getElementById("badges").innerHTML += `
-        <h3>Mod badge:</h3>
-        <div class="emotecontainer">
-          <div class="border border-accent emote">
-            <img src="${result.room.mod_urls["4"]}" loading="lazy" alt="Mod badge" title="Mod badge">
-            <div class="text-center">Mod badge</div>
-          </div>
-        </div>`;
+        if (result?.room?.mod_urls?.["4"]) {
+          ffzModBadge = result.room.mod_urls["4"];
         } //ffz mod badge
-        if (result.room.vip_badge) {
-          document.getElementById("badges").innerHTML += `
-        <h3>VIP badge:</h3>
-        <div class="emotecontainer">
-          <div class="border border-accent emote">
-            <img src="${result.room.vip_badge["4"]}" loading="lazy" alt="VIP badge" title="VIP badge">
-            <div class="text-center">VIP badge</div>
-          </div>
-        </div>`;
+
+        if (result?.room?.vip_badge?.["4"]) {
+          ffzVipBadge = result.room.vip_badge["4"];
         } //ffz vip badge
       }
     } catch (error) {
@@ -372,41 +193,15 @@
       let response = await fetch(`https://7tv.io/v3/users/twitch/${user.id}`);
       let result = await response.json();
       if (response.status == 200 && result?.emote_set?.emotes?.length > 0) {
+        seventvID = result.user.id;
         result.emote_set.emotes.sort((a, b) => a.name.localeCompare(b.name));
-        let seventv = "";
-        document.getElementById("seventv").innerHTML = `
-      <h1 class="text-2xl">
-        <a href="https://7tv.app/users/${result.user.id}" target="_blank" rel="noopener noreferrer">${displayName}</a>'s 7TV Emotes 
-        <span class="text-body-secondary">(${result.emote_set.emotes.length} ${result.emote_set.emotes.length == 1 ? "emote" : "emotes"})</span>:
-      </h1>`;
         for (let i = 0, j = result.emote_set.emotes.length; i < j; i++) {
           let files = result.emote_set.emotes[i].data.host.files.filter((e) => e.format == "AVIF");
-          seventv += `
-        <div class="border border-accent emote">
-          <a href="https://7tv.app/emotes/${result.emote_set.emotes[i].id}" target="_blank" rel="noopener noreferrer">
-            <img src="${result.emote_set.emotes[i].data.host.url}/${files[3].name}" loading="lazy" alt="${result.emote_set.emotes[i].name}" title="${result.emote_set.emotes[i].name}">
-          </a>
-          <div class="emotetextwide text-center">${escapeString(result.emote_set.emotes[i].name)}</div>
-        </div>`;
+          seventvEmotes.push({ id: result.emote_set.emotes[i].id, name: result.emote_set.emotes[i].name, url: `${result.emote_set.emotes[i].data.host.url}/${files[3].name}` });
         }
-        if (seventv) {
-          seventv = `<div class="emotecontainer">${seventv}</div>`;
-        }
-        document.getElementById("seventv").innerHTML += seventv;
       } //7tv
     } catch (error) {
       console.log("7tv error", error);
-    }
-
-    if (
-      document.getElementById("twitch").innerHTML == "" &&
-      document.getElementById("badges").innerHTML == "" &&
-      document.getElementById("bttv").innerHTML == "" &&
-      document.getElementById("ffz").innerHTML == "" &&
-      document.getElementById("seventv").innerHTML == ""
-    ) {
-      document.getElementById("output").style.display = "";
-      document.getElementById("output").innerHTML = `<h1 class="text-2xl text-center">Channel Has no emotes</h1>`;
     }
   } //loadChannelEmotes
 </script>
@@ -426,55 +221,419 @@
       <input type="text" class="input join-item validator" placeholder="Username" bind:value={username} required />
       <button class="btn join-item btn-primary" type="submit" disabled={`/twitch/emotes/${username}` === page.url.pathname}><IcBaselinePersonSearch />Lookup</button>
     </form>
-    <p class="label">View any Twitch channel's sub, BTTV, FFZ and 7TV emotes</p>
+    <p class="label">
+      View any Twitch channel's sub, <a class="link" href="https://betterttv.com/" target="_blank" rel="noopener noreferrer">BTTV,</a>
+      <a class="link" href="https://www.frankerfacez.com/" target="_blank" rel="noopener noreferrer">FFZ</a>
+      and <a class="link" href="https://7tv.app/" target="_blank" rel="noopener noreferrer">7TV</a> emotes and badges
+    </p>
   </fieldset>
 </div>
 <div class="flex flex-row">
-  <aside class="sticky top-0 h-fit w-50 m-5">
-    <ul class="menu bg-base-200 rounded-box w-56">
+  <aside class="sticky top-0 h-fit m-5 pt-5">
+    <ul class="menu bg-base-200 w-50 rounded-box">
       <li>
-        <a href="#twitch">
-          <MdiTwitch />
-          dank
-        </a>
+        <details open>
+          <summary>
+            <MdiTwitch class="inline" />
+            Twitch emotes
+          </summary>
+          <ul>
+            <li>
+              <a href="#tier1Emotes">
+                <MdiTwitch />
+                Tier 1 sub emotes
+              </a>
+            </li>
+            <li>
+              <a href="#tier2Emotes">
+                <MdiTwitch />
+                Tier 2 sub emotes
+              </a>
+            </li>
+            <li>
+              <a href="#tier3Emotes">
+                <MdiTwitch />
+                Tier 3 sub emotes
+              </a>
+            </li>
+            <li>
+              <a href="#followerEmotes">
+                <MdiTwitch />
+                Follower emotes
+              </a>
+            </li>
+            <li>
+              <a href="#bitsEmotes">
+                <MdiTwitch />
+                Bits tier emotes
+              </a>
+            </li>
+          </ul>
+        </details>
+      </li>
+
+      <li>
+        <details open>
+          <summary>
+            <MdiTwitch class="inline" />
+            Twitch badges
+          </summary>
+          <ul>
+            <li>
+              <a href="#tier1Badges">
+                <MdiTwitch />
+                Tier 1 sub badges
+              </a>
+            </li>
+            <li>
+              <a href="#tier2Badges">
+                <MdiTwitch />
+                Tier 2 sub badges
+              </a>
+            </li>
+            <li>
+              <a href="#tier3Badges">
+                <MdiTwitch />
+                Tier 3 sub badges
+              </a>
+            </li>
+            <li>
+              <a href="#bitsBadges">
+                <MdiTwitch />
+                Bits badges
+              </a>
+            </li>
+            <li>
+              <details>
+                <summary>FFZ custom badges</summary>
+                <ul>
+                  <li>
+                    <a href="#modBadge">Mod badge</a>
+                  </li>
+                  <li>
+                    <a href="#vipBadge">VIP badge</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </details>
       </li>
       <li>
-        <a href="#badges">
-          <MdiTwitch />
-          dank
-        </a>
+        <a href="#bttv">BTTV emotes</a>
       </li>
       <li>
-        <a href="#bttv">
-          <IcBaselineQuestionMark />
-          dank
-        </a>
+        <a href="#ffz">FFZ emotes</a>
       </li>
       <li>
-        <a href="#ffz">
-          <IcBaselineQuestionMark />
-          dank
-        </a>
-      </li>
-      <li>
-        <a href="#seventv">
-          <IcBaselineQuestionMark />
-          dank
-        </a>
+        <a href="#seventv">7TV emotes</a>
       </li>
     </ul>
 
-    <input type="checkbox" checked="checked" class="toggle" />something<br />
-    <input type="checkbox" checked="checked" class="toggle" />something<br />
-    <input type="checkbox" checked="checked" class="toggle" />something<br />
-    <input type="checkbox" checked="checked" class="toggle" />something
+    <div class="card bg-base-200 w-50 shadow-lg mt-3">
+      <div class="card-body">
+        <h2 class="card-title"><IcBaselineSettings />Settings</h2>
+        soon™
+      </div>
+    </div>
   </aside>
-  <main class="m-5">
-    <section id="output"></section>
-    <section id="twitch"></section>
-    <section id="badges"></section>
-    <section id="bttv"></section>
-    <section id="ffz"></section>
-    <section id="seventv"></section>
+
+  <main class="m-5 pt-5">
+    <section>
+      {#if output}
+        {@html output}
+      {/if}
+    </section>
+
+    <section class="mb-5">
+      {#if user?.login}
+        <h1 class="text-3xl mb-3">
+          <a class="link" href="https://twitch.tv/{user.login}" target="_blank" rel="noopener noreferrer">{displayName}</a>'s Subscriber Emotes
+        </h1>
+      {/if}
+
+      <section id="tier1Emotes">
+        {#if t1Emotes.length}
+          <h3 class="text-xl">
+            Tier 1 emotes <span class="opacity-50">({t1Emotes.length} {t1Emotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each t1Emotes as emote}
+              <div class="border border-accent emote">
+                <img src="https://static-cdn.jtvnw.net/emoticons/v2/{emote.id}/default/dark/3.0" loading="lazy" title={emote.name} alt={emote.name} />
+                <div class="emotetext text-center">{escapeString(emote.name)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 1 sub emotes</div>
+        {/if}
+      </section>
+
+      <section id="tier2Emotes">
+        {#if t2Emotes.length}
+          <h3 class="text-xl">
+            Tier 2 emotes <span class="opacity-50">({t2Emotes.length} {t2Emotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each t2Emotes as emote}
+              <div class="border border-accent emote">
+                <img src="https://static-cdn.jtvnw.net/emoticons/v2/{emote.id}/default/dark/3.0" loading="lazy" title={emote.name} alt={emote.name} />
+                <div class="emotetext text-center">{escapeString(emote.name)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 2 sub emotes</div>
+        {/if}
+      </section>
+
+      <section id="tier3Emotes">
+        {#if t3Emotes.length}
+          <h3 class="text-xl">
+            Tier 3 emotes <span class="opacity-50">({t3Emotes.length} {t3Emotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each t3Emotes as emote}
+              <div class="border border-accent emote">
+                <img src="https://static-cdn.jtvnw.net/emoticons/v2/{emote.id}/default/dark/3.0" loading="lazy" title={emote.name} alt={emote.name} />
+                <div class="emotetext text-center">{escapeString(emote.name)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 3 sub emotes</div>
+        {/if}
+      </section>
+
+      <section id="followerEmotes">
+        {#if followerEmotes.length}
+          <h3 class="text-xl">
+            Follower emotes <span class="opacity-50">({followerEmotes.length} {followerEmotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each followerEmotes as emote}
+              <div class="border border-accent emote">
+                <img src="https://static-cdn.jtvnw.net/emoticons/v2/{emote.id}/default/dark/3.0" loading="lazy" title={emote.name} alt={emote.name} />
+                <div class="emotetext text-center">{escapeString(emote.name)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any follower emotes</div>
+        {/if}
+      </section>
+
+      <section id="bitsEmotes">
+        {#if bitsEmotes.length}
+          <h3 class="text-xl">
+            Bits tier emotes <span class="opacity-50">({bitsEmotes.length} {bitsEmotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each bitsEmotes as emote}
+              <div class="border border-accent emote">
+                <img src="https://static-cdn.jtvnw.net/emoticons/v2/{emote.id}/default/dark/3.0" loading="lazy" title={emote.name} alt={emote.name} />
+                <div class="emotetext text-center">{escapeString(emote.name)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any bits tier emotes</div>
+        {/if}
+      </section>
+    </section>
+
+    <section class="mb-5">
+      <section id="tier1Badges">
+        {#if t1Badges.length}
+          <h3 class="text-xl">Tier 1 Sub badges <span class="opacity-50">({t1Badges.length} {t1Badges.length == 1 ? "badge" : "badges"})</span></h3>
+          <div class="emotecontainer mb-3">
+            {#each t1Badges as badge}
+              <div class="border border-accent emote">
+                <img src={badge.image_url_4x} alt="{months[badge.id]} badge" title="{months[badge.id]} badge" loading="lazy" />
+                <div class="text-center">{months[badge.id]}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 1 sub badges</div>
+        {/if}
+      </section>
+
+      <section id="tier2Badges">
+        {#if t2Badges.length}
+          <h3 class="text-xl">Tier 2 Sub badges <span class="opacity-50">({t2Badges.length} {t2Badges.length == 1 ? "badge" : "badges"})</span></h3>
+          <div class="emotecontainer mb-3">
+            {#each t2Badges as badge}
+              <div class="border border-accent emote">
+                <img src={badge.image_url_4x} alt="{months[badge.id]} badge" title="{months[badge.id]} badge" loading="lazy" />
+                <div class="text-center">{months[badge.id]}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 2 sub badges</div>
+        {/if}
+      </section>
+
+      <section id="tier3Badges">
+        {#if t3Badges.length}
+          <h3 class="text-xl">Tier 3 Sub badges <span class="opacity-50">({t3Badges.length} {t3Badges.length == 1 ? "badge" : "badges"})</span></h3>
+          <div class="emotecontainer mb-3">
+            {#each t3Badges as badge}
+              <div class="border border-accent emote">
+                <img src={badge.image_url_4x} alt="{months[badge.id]} badge" title="{months[badge.id]} badge" loading="lazy" />
+                <div class="text-center">{months[badge.id]}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any tier 3 sub badges</div>
+        {/if}
+      </section>
+
+      <section id="bitsBadges">
+        {#if bitsBadges.length}
+          <h3 class="text-xl">Bit badges <span class="opacity-50">({bitsBadges.length} {bitsBadges.length == 1 ? "badge" : "badges"})</span></h3>
+          <div class="emotecontainer mb-3">
+            {#each bitsBadges as badge}
+              <div class="border border-accent emote">
+                <img src={badge.image_url_4x} alt="{months[badge.id]} badge" title="{months[badge.id]} badge" loading="lazy" />
+                <div class="text-center">{months[badge.id]}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any bit badges</div>
+        {/if}
+      </section>
+
+      <section id="modBadge">
+        {#if ffzModBadge}
+          <h3 class="text-xl">
+            Custom mod badge<span class="tooltip align-text-bottom" data-tip="Custom badge for channel mods. Unlocked by subscribing to FFZ"><IcBaselineInfo /></span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            <div class="border border-accent emote">
+              <img src={ffzModBadge} loading="lazy" alt="Mod badge" title="Mod badge" />
+              <div class="text-center">Mod badge</div>
+            </div>
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">
+            {displayName} doesn't have a custom mod badge
+            <span class="tooltip tooltip-right align-text-bottom" data-tip="Custom badge for channel mods. Unlocked by subscribing to FFZ"><IcBaselineInfo /></span>
+          </div>
+        {/if}
+      </section>
+
+      <section id="vipBadge">
+        {#if ffzVipBadge}
+          <h3 class="text-xl">
+            Custom VIP badge<span class="tooltip align-text-bottom" data-tip="Custom badge for channel VIPs. Unlocked by subscribing to FFZ"><IcBaselineInfo /></span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            <div class="border border-accent emote">
+              <img src={ffzVipBadge} loading="lazy" alt="VIP badge" title="VIP badge" />
+              <div class="text-center">VIP badge</div>
+            </div>
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">
+            {displayName} doesn't have a custom VIP badge
+            <span class="tooltip tooltip-right align-text-bottom" data-tip="Custom badge for channel VIPs. Unlocked by subscribing to FFZ"><IcBaselineInfo /></span>
+          </div>
+        {/if}
+      </section>
+    </section>
+
+    <section id="bttv" class="mb-5">
+      {#if bttvResponse?.id}
+        <h1 class="text-3xl mb-3">
+          <a class="link" href="https://betterttv.com/users/{bttvResponse.id}" target="_blank" rel="noopener noreferrer">{displayName}</a>'s BTTV Emotes
+        </h1>
+        {#if bttvResponse?.channelEmotes?.length}
+          <h3 class="text-xl">
+            BTTV channel emotes <span class="tooltip align-text-bottom" data-tip="Channel emotes are emotes that were uploaded to BTTV by {user.login}"><IcBaselineInfo /></span>
+            <span class="opacity-50">({bttvResponse.channelEmotes.length} {bttvResponse.channelEmotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each bttvResponse.channelEmotes as emote}
+              <div class="border border-accent emote">
+                <a href="https://betterttv.com/emotes/{emote.id}" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.betterttv.net/emote/{emote.id}/3x" loading="lazy" alt={emote.code} title={emote.code} />
+                </a>
+                <div class="emotetextwide text-center">{escapeString(emote.code)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any <a class="link" href="https://betterttv.com/" target="_blank" rel="noopener noreferrer">BTTV</a> channel emotes</div>
+        {/if}
+
+        {#if bttvResponse?.sharedEmotes?.length}
+          <h3 class="text-xl">
+            BTTV shared emotes <span class="tooltip align-text-bottom" data-tip="Shared emotes are emotes that were uploaded to BTTV by other users"><IcBaselineInfo /></span>
+            <span class="opacity-50">({bttvResponse.sharedEmotes.length} {bttvResponse.sharedEmotes.length == 1 ? "emote" : "emotes"})</span>
+          </h3>
+          <div class="emotecontainer mb-3">
+            {#each bttvResponse.sharedEmotes as emote}
+              <div class="border border-accent emote">
+                <a href="https://betterttv.com/emotes/{emote.id}" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.betterttv.net/emote/{emote.id}/3x" loading="lazy" alt={emote.code} title={emote.code} />
+                </a>
+                <div class="emotetextwide text-center">{escapeString(emote.code)}</div>
+              </div>
+            {/each}
+          </div>
+        {:else if displayName}
+          <div class="text-xl opacity-50">{displayName} doesn't have any <a class="link" href="https://betterttv.com/" target="_blank" rel="noopener noreferrer">BTTV</a> shared emotes</div>
+        {/if}
+      {:else if displayName}
+        <div class="text-xl opacity-50">{displayName} doesn't have any <a class="link" href="https://betterttv.com/" target="_blank" rel="noopener noreferrer">BTTV</a> emotes</div>
+      {/if}
+    </section>
+
+    <section id="ffz" class="mb-5">
+      {#if ffzEmotes?.length}
+        <h3 class="text-3xl">
+          <a class="link" href="https://www.frankerfacez.com/channel/${user.login}" target="_blank" rel="noopener noreferrer">{displayName}</a>'s FFZ Emotes
+          <span class="opacity-50">({ffzEmotes.length} {ffzEmotes.length == 1 ? "emote" : "emotes"})</span>
+        </h3>
+        <div class="emotecontainer mb-3">
+          {#each ffzEmotes as emote}
+            <div class="border border-accent emote">
+              <a href="https://www.frankerfacez.com/emoticon/{emote.id}" target="_blank" rel="noopener noreferrer">
+                <img src={emote.url} loading="lazy" alt={emote.name} title={emote.name} />
+              </a>
+              <div class="emotetextwide text-center">{escapeString(emote.name)}</div>
+            </div>
+          {/each}
+        </div>
+      {:else if displayName}
+        <div class="text-xl opacity-50">{displayName} doesn't have any <a class="link" href="https://www.frankerfacez.com/" target="_blank" rel="noopener noreferrer">FFZ</a> emotes</div>
+      {/if}
+    </section>
+
+    <section id="seventv" class="mb-5">
+      {#if seventvID}
+        <h3 class="text-3xl">
+          <a class="link" href="https://7tv.app/users/{seventvID}" target="_blank" rel="noopener noreferrer">{displayName}</a>'s 7TV Emotes
+          <span class="opacity-50">({seventvEmotes.length} {seventvEmotes.length == 1 ? "emote" : "emotes"})</span>
+        </h3>
+        <div class="emotecontainer mb-3">
+          {#each seventvEmotes as emote}
+            <div class="border border-accent emote">
+              <a href="https://7tv.app/emotes/${emote.id}" target="_blank" rel="noopener noreferrer">
+                <img src={emote.url} loading="lazy" alt={emote.name} title={emote.name} />
+              </a>
+              <div class="emotetextwide text-center">{escapeString(emote.name)}</div>
+            </div>
+          {/each}
+        </div>
+      {:else if displayName}
+        <div class="text-xl opacity-50">{displayName} doesn't have any <a class="link" href="https://7tv.app/" target="_blank" rel="noopener noreferrer">7TV</a> emotes</div>
+      {/if}
+    </section>
   </main>
 </div>
