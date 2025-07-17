@@ -81,7 +81,8 @@
           </div>`,
         );
       } //for globalBTTV
-      document.getElementById("bttvCount").innerHTML = ` (${globalBTTV.length} emotes)`;
+      document.getElementById("bttvCount").innerHTML =
+        `(${globalBTTV.filter((emote) => !emote.modifier).length} emotes + ${globalBTTV.filter((emote) => emote.modifier).length} emote modifiers)`;
 
       let response3 = await fetch(`https://api.frankerfacez.com/v1/set/global`);
       let globalFFZ = await response3.json();
@@ -105,7 +106,7 @@
           );
         }
       } //for globalFFZ
-      document.getElementById("ffzCount").innerHTML = ` (${globalFFZ.sets["3"].emoticons.length} emotes)`;
+      document.getElementById("ffzCount").innerHTML = ` (${globalFFZ.sets["3"].emoticons.length} emotes + ${globalFFZ.sets["1539687"].emoticons.length} emote effects)`;
 
       let response4 = await fetch(`https://7tv.io/v3/emote-sets/global`);
       let global7TV = await response4.json();
