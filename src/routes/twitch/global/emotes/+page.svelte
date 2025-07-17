@@ -122,7 +122,7 @@
           </div>`,
         );
       } //for 7tv
-      document.getElementById("7tvCount").innerHTML = ` (${global7TV.length} emotes)`;
+      document.getElementById("7tvCount").innerHTML = ` (${global7TV.emotes.length} emotes)`;
     } catch (error) {
       console.log("loadGlobalEmotes error", error);
     }

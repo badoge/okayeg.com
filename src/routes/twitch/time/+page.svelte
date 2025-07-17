@@ -158,7 +158,7 @@
 
 <div class="card card-dash bg-base-300 w-fit m-5 mx-auto">
   <div class="card-body">
-    <h2 class="card-title">Find VOD timestamp from real time</h2>
+    <h2 class="card-title">Find VOD timestamp from real world time or a Twitch clip</h2>
     <div class="flex flex-col">
       <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mb-5 mx-auto">
         <legend class="fieldset-legend">Channel</legend>

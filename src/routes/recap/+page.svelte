@@ -458,7 +458,7 @@
           <input type="text" class="input join-item" placeholder="Username" />
           <button class="btn join-item btn-primary"><IcBaselinePersonSearch />Lookup</button>
         </div>
-        <p class="label">View any player's OkayegBOT recap for 2023</p>
+        <p class="label">not updated for the new site yet :) - View any player's OkayegBOT recap for 2023</p>
       </fieldset>
 
       <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 justify-self-end">
