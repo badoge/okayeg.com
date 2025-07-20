@@ -48,7 +48,7 @@
   <div class="navbar-end flex-auto">
     <label class="swap swap-rotate m-1">
       <!-- this hidden checkbox controls the state -->
-      <input data-toggle-theme="forest,lemonade" checked type="checkbox" class="theme-controller" value="synthwave" name="theme" />
+      <input data-toggle-theme="lemonade,forest" type="checkbox" class="theme-controller" name="theme" />
 
       <!-- sun icon -->
       <svg class="swap-off h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
