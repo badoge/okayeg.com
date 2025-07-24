@@ -12,7 +12,7 @@
 </script>
 
 <div class="navbar bg-neutral text-neutral-content shadow-md flex w-full py-0">
-  <div class="navbar-start w-60 flex-none">
+  <div class="navbar-start w-45 flex-none">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost xl:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,12 +31,6 @@
       </div>
       OkayegBOT
     </a>
-    <div
-      class="badge badge-primary cursor-default tooltip tooltip-bottom tooltip-secondary"
-      data-tip="The site has been completely rebuilt :) If you find any issues please contact me using the info on the About page"
-    >
-      New!
-    </div>
   </div>
 
   <div class="navbar-center hidden xl:flex">
