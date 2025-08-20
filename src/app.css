@@ -1,7 +1,14 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  themes: forest --default, lemonade;
+  themes:
+    forest --default,
+    lemonade;
+}
+@import "highlight.js/styles/github-dark-dimmed.min.css";
+
+.hljs {
+  border-radius: 0.5rem;
 }
 
 .emotecontainer {
