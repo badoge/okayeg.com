@@ -71,6 +71,7 @@
       zoomScaleSensitivity: 0.3,
       colorMin: colorMin,
       colorMax: colorMax,
+      ratioType: "log",
       colorNoData: "#909090",
       data: {
         data: {
