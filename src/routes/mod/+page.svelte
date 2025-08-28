@@ -1,3 +1,15 @@
+<script>
+  import { onMount, tick } from "svelte";
+  import { replaceState } from "$app/navigation";
+  onMount(() => {
+    if (window.location.hash) {
+      tick().then(() => {
+        replaceState(window.location.href.split("#")[0]);
+      });
+    }
+  });
+</script>
+
 <svelte:head>
   <title>OkayegBOT</title>
   <meta name="description" content="Important info about a new Twitch update that affects the bot :)" />
@@ -26,8 +38,9 @@
     <br />
 
     <h4>
-      test :) <a class="link" href="https://id.twitch.tv/oauth2/authorize?client_id=9ot8nj44bx2vt3y6pvqowknvljqjxg&redirect_uri=https://okayeg.com/mod&response_type=token&scope=channel:bot">
-        dank
+      Bot badge test:<br />
+      <a class="link" href="https://id.twitch.tv/oauth2/authorize?client_id=9ot8nj44bx2vt3y6pvqowknvljqjxg&redirect_uri=https://okayeg.com/mod&response_type=token&scope=channel:bot">
+        Login to give the bot the badge in your channel
       </a>
       <span class="text-error">Address bar will show sensitive data</span>
     </h4>
