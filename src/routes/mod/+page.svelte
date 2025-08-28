@@ -22,5 +22,14 @@
       </a>
       for more info.
     </h4>
+
+    <br />
+
+    <h4>
+      test :) <a class="link" href="https://id.twitch.tv/oauth2/authorize?client_id=9ot8nj44bx2vt3y6pvqowknvljqjxg&redirect_uri=https://okayeg.com/mod&response_type=token&scope=channel:bot">
+        dank
+      </a>
+      <span class="text-error">Address bar will show sensitive data</span>
+    </h4>
   </div>
 </div>
