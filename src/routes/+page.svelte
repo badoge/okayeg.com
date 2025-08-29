@@ -1,9 +1,24 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { relativeTime } from "$lib/functions";
+  import { page } from "$app/state";
+  import { replaceState } from "$app/navigation";
   import IcBaselineAccountCircle from "~icons/ic/baseline-account-circle";
+  import MdiTwitch from "~icons/mdi/twitch";
 
   onMount(async () => {
+    if (window.location.hash) {
+      tick().then(() => {
+        replaceState(window.location.href.split("#")[0]);
+        document.getElementById("loginSuccess").style.display = "";
+        document.getElementById("login").disabled = true;
+      });
+    }
+
+    if (page.url.searchParams.get("error")) {
+      document.getElementById("loginError").style.display = "";
+    }
+
     let botStats = document.getElementById("botStats");
 
     if (!botStats) {
@@ -25,6 +40,10 @@
       console.log("loadBotStats error", error);
     }
   });
+
+  function login() {
+    window.location.href = "https://id.twitch.tv/oauth2/authorize?client_id=9ot8nj44bx2vt3y6pvqowknvljqjxg&redirect_uri=https://okayeg.com&response_type=token&scope=channel:bot";
+  }
 </script>
 
 <svelte:head>
@@ -51,17 +70,20 @@
 
   <div class="card card-border bg-base-200 border-accent w-70 h-80 bg-base-100 shadow-md">
     <div class="card-body">
-      <h2 class="card-title">How to add the bot to your channel</h2>
-      <div class="prose">
-        <ul>
-          <li>
-            Mod the bot by typing<br />
-            <kbd class="kbd kbd-lg">/mod okayegbot</kbd> in your chat. <a class="link" style="font-size: 10px" target="_blank" rel="noopener noreferrer" href="/mod">why?</a>
-          </li>
-          <li>Type <kbd class="kbd kbd-lg">=join</kbd> in the <a class="link" href="https://www.twitch.tv/popout/okayegbot/chat">bot's chat.</a></li>
-          <li>Done :)</li>
-        </ul>
+      <h2 class="card-title">Login to add the bot to your channel</h2>
+
+      <div class="tooltip text-center">
+        <div class="tooltip-content">
+          <div class="animate-pulse text-red-400 text-xl font-black">Don't show this on stream</div>
+        </div>
+        <button id="login" class="btn bg-[#9146FF] text-white border-[##9146FF]" onclick={login}>
+          <MdiTwitch />
+          Login with Twitch
+        </button>
       </div>
+
+      <div id="loginSuccess" class="text-success text-xl" style="display: none;">Login successful, Bot will join your channel now</div>
+      <div id="loginError" class="text-error text-xl" style="display: none;">Something went wrong, Bot could not join your channel</div>
     </div>
   </div>
 

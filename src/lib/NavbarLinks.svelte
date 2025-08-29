@@ -18,14 +18,13 @@
   import IcBaselineCategory from "~icons/ic/baseline-category";
   import IcBaselineDiamond from "~icons/ic/baseline-diamond";
   import IcBaselineMovie from "~icons/ic/baseline-movie";
-  import MingcuteSwordFill from "~icons/mingcute/sword-fill";
   import IcBaselineLiveTv from "~icons/ic/baseline-live-tv";
   import IcBaselineQuiz from "~icons/ic/baseline-quiz";
   import { page } from "$app/state";
 
   const route = $derived(page.route.id);
 
-  const miscPages = ["/api", "/bounty", "/clips", "/mod", "/recap", "/stream", "/trivia"];
+  const miscPages = ["/api", "/bounty", "/clips", "/recap", "/stream", "/trivia"];
 
   let openDropdown1 = $state(false);
   let openDropdown2 = $state(false);
@@ -251,17 +250,6 @@
           }}
         >
           <IcBaselineMovie />Clips
-        </a>
-      </li>
-      <li>
-        <a
-          class={route === "/mod" ? "bg-neutral text-neutral-content" : ""}
-          href="/mod"
-          onclick={() => {
-            openDropdown2 = false;
-          }}
-        >
-          <MingcuteSwordFill />Mod
         </a>
       </li>
       <li>
