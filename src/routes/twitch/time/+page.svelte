@@ -177,15 +177,15 @@
           <p>Find point in VOD that happened</p>
           <div class="join w-150">
             <label class="input join-item">
-              <input type="number" id="daysString" placeholder="0" min="0" bind:value={daysString} oninput={() => updateExactTime()} />
+              <input type="number" id="daysString" placeholder="0" min="0" bind:value={daysString} oninput={updateExactTime} />
               <span class="label">days</span>
             </label>
             <label class="input join-item">
-              <input type="number" id="hoursString" placeholder="0" min="0" bind:value={hoursString} oninput={() => updateExactTime()} />
+              <input type="number" id="hoursString" placeholder="0" min="0" bind:value={hoursString} oninput={updateExactTime} />
               <span class="label">hours</span>
             </label>
             <label class="input join-item">
-              <input type="number" id="minutesString" placeholder="0" min="0" bind:value={minutesString} oninput={() => updateExactTime()} />
+              <input type="number" id="minutesString" placeholder="0" min="0" bind:value={minutesString} oninput={updateExactTime} />
               <span class="label">minutes ago</span>
             </label>
           </div>
@@ -194,7 +194,7 @@
         <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend class="fieldset-legend">Exact time</legend>
           <p>Find point in VOD that happened at</p>
-          <input type="datetime-local" class="input" id="exactTimeString" bind:value={exactTimeString} oninput={() => updateRelativeTime()} />
+          <input type="datetime-local" class="input" id="exactTimeString" bind:value={exactTimeString} oninput={updateRelativeTime} />
         </fieldset>
       </div>
       <span class="text-xs text-center opacity-50 -mt-5">Relative time and Exact time will update each other when you change one of them</span>
@@ -217,7 +217,7 @@
     <div class="divider divider-neutral"></div>
 
     <div class="card-actions justify-end">
-      <button type="button" class="btn btn-success" onclick={() => findTimestamp()}><IcBaselineSearch />Find timestamp</button>
+      <button type="button" class="btn btn-success" onclick={findTimestamp}><IcBaselineSearch />Find timestamp</button>
     </div>
   </div>
 </div>

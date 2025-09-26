@@ -816,7 +816,7 @@
             </div>
           </div>
           <div style="text-align: center" id="load100Langs">
-            <a onclick={load100Langs()} class="link-info" style="cursor: pointer"> Load all languages<IcBaselineArrowDropDown /> </a>
+            <a onclick={load100Langs} class="link-info" style="cursor: pointer"> Load all languages<IcBaselineArrowDropDown /> </a>
           </div>
         </div>
       </div>
@@ -1069,7 +1069,7 @@
           <span class="placeholder-wave"> <span class="placeholder col-2"></span> </span>
         </span>
         <div style="text-align: center" id="load100Tags">
-          <a onclick={load100Tags()} class="link-info" style="cursor: pointer"> Load top 100 tags<IcBaselineArrowDropDown /> </a>
+          <a onclick={load100Tags} class="link-info" style="cursor: pointer"> Load top 100 tags<IcBaselineArrowDropDown /> </a>
         </div>
       </div>
     </div>

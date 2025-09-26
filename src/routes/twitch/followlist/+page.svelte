@@ -18,7 +18,7 @@
       document.getElementById("listcontainer").style.display = "block";
 
       document.getElementById("title1").innerHTML = "";
-      document.getElementById("list").innerHTML = spinner;
+      document.getElementById("list").innerHTML = "Loading...";
 
       try {
         let response = await fetch(`https://api.okayeg.com/followlist?username=${username}`);
@@ -106,7 +106,7 @@
             <div id="desc" class="form-text">View All Twitch channels a user is following.</div>
           </div>
 
-          <button type="button" class="btn btn-success float-end" onclick={loadFollowList()}><IcBaselineSearch />Lookup</button>
+          <button type="button" class="btn btn-success float-end" onclick={loadFollowList}><IcBaselineSearch />Lookup</button>
         </div>
       </div>
     </div>
