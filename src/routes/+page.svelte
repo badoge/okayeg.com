@@ -180,6 +180,6 @@
     </p>
 
     <h3>More questions?</h3>
-    <p>Use one of the contact methods listed above or use the <kbd class="kbd kbd-lg">=suggest</kbd> command to ask me anything.</p>
+    <p>Use one of the contact methods listed above to ask me anything.</p>
   </div>
 </div>
