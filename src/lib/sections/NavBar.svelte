@@ -111,7 +111,6 @@
     border-bottom: 1px solid rgba(192, 192, 192, 0.5);
     margin: 8px 0;
     overflow: visible;
-    z-index: 1000;
   }
   .header-side {
     display: flex;
