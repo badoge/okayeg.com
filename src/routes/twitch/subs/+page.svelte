@@ -97,28 +97,41 @@
   <span class="label"><IcBaselineCurrencyExchange />Currency</span>
   <select id="currencySelect" bind:value={mapCurrency} onchange={() => loadSubPrices(mapType, mapCurrency)}>
     <option value="AED">AED</option>
+    <option value="ARS">ARS</option>
     <option value="AUD">AUD</option>
     <option value="BRL">BRL</option>
     <option value="BYN">BYN</option>
     <option value="CAD">CAD</option>
+    <option value="CHF">CHF</option>
     <option value="CLP">CLP</option>
+    <option value="CNY">CNY</option>
+    <option value="COP">COP</option>
     <option value="CRC">CRC</option>
+    <option value="CZK">CZK</option>
     <option value="DKK">DKK</option>
+    <option value="EGP">EGP</option>
     <option value="EUR">EUR</option>
     <option value="GBP">GBP</option>
     <option value="HKD">HKD</option>
+    <option value="HUF">HUF</option>
+    <option value="IDR">IDR</option>
+    <option value="ILS">ILS</option>
     <option value="INR">INR</option>
     <option value="ISK">ISK</option>
+    <option value="JPY">JPY</option>
     <option value="KRW">KRW</option>
     <option value="KWD">KWD</option>
     <option value="MXN">MXN</option>
     <option value="MYR">MYR</option>
+    <option value="NGN">NGN</option>
     <option value="NOK">NOK</option>
     <option value="NZD">NZD</option>
     <option value="PEN">PEN</option>
     <option value="PHP">PHP</option>
+    <option value="PKR">PKR</option>
     <option value="PLN">PLN</option>
     <option value="QAR">QAR</option>
+    <option value="RON">RON</option>
     <option value="RUB">RUB</option>
     <option value="SAR">SAR</option>
     <option value="SEK">SEK</option>
@@ -128,6 +141,7 @@
     <option value="TWD">TWD</option>
     <option value="UAH">UAH</option>
     <option value="USD" selected>USD</option>
+    <option value="VND">VND</option>
     <option value="ZAR">ZAR</option>
   </select>
 </label>
@@ -173,7 +187,7 @@
     position: fixed;
     z-index: 100;
     width: 240px;
-    left: 20px;
+    right: 20px;
     top: 90px;
   }
 
@@ -181,7 +195,7 @@
     position: fixed;
     z-index: 100;
     width: 240px;
-    left: 20px;
+    right: 20px;
     top: 140px;
   }
 </style>
