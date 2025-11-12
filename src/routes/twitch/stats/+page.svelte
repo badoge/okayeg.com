@@ -562,7 +562,7 @@
             <div class="col align-self-center">Viewer segment</div>
             <div class="col align-self-start">Number of channels</div>
           </div>
-          <hr />
+          <div class="divider"></div>
 
           <div class="row">
             <div class="col align-self-center">>10,000 viewers:</div>
@@ -665,7 +665,7 @@
             <div class="col align-self-start">Average view count</div>
             <div class="col align-self-start">Highest view count</div>
           </div>
-          <hr />
+          <div class="divider"></div>
 
           <div class="row">
             <div class="col align-self-center" id="lang0">
@@ -937,7 +937,7 @@
             <div class="col align-self-start">Number of channels</div>
             <div class="col align-self-start">Average view count</div>
           </div>
-          <hr />
+          <div class="divider"></div>
           <div class="row">
             <div class="col align-self-center" id="tag0">
               <span class="placeholder-wave"> <span class="placeholder col-4"></span> </span>

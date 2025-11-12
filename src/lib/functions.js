@@ -100,10 +100,10 @@ export function getLanguage(code) {
 } //getLanguage
 
 /**
- * @param {number} miliseconds
+ * @param {number} milliseconds
  */
-export function relativeTime(miliseconds) {
-  let finalRealtiveTime = "";
+export function relativeTime(milliseconds) {
+  let finalRelativeTime = "";
   const secondsToString = Intl.NumberFormat("en", {
     style: "unit",
     unit: "second",
@@ -143,42 +143,42 @@ export function relativeTime(miliseconds) {
     minute: 60 * 1000,
     second: 1000,
   };
-  if (miliseconds >= units.year) {
-    let years = Math.floor(miliseconds / units.year);
-    finalRealtiveTime += `${yearsToString(years)} `;
-    miliseconds -= years * units.year;
+  if (milliseconds >= units.year) {
+    let years = Math.floor(milliseconds / units.year);
+    finalRelativeTime += `${yearsToString(years)} `;
+    milliseconds -= years * units.year;
   }
 
-  if (miliseconds >= units.month) {
-    let months = Math.floor(miliseconds / units.month);
-    finalRealtiveTime += `${monthsToString(months)} `;
-    miliseconds -= months * units.month;
+  if (milliseconds >= units.month) {
+    let months = Math.floor(milliseconds / units.month);
+    finalRelativeTime += `${monthsToString(months)} `;
+    milliseconds -= months * units.month;
   }
 
-  if (miliseconds >= units.day) {
-    let days = Math.floor(miliseconds / units.day);
-    finalRealtiveTime += `${daysToString(days)} `;
-    miliseconds -= days * units.day;
+  if (milliseconds >= units.day) {
+    let days = Math.floor(milliseconds / units.day);
+    finalRelativeTime += `${daysToString(days)} `;
+    milliseconds -= days * units.day;
   }
 
-  if (miliseconds >= units.hour) {
-    let hours = Math.floor(miliseconds / units.hour);
-    finalRealtiveTime += `${hoursToString(hours)} `;
-    miliseconds -= hours * units.hour;
+  if (milliseconds >= units.hour) {
+    let hours = Math.floor(milliseconds / units.hour);
+    finalRelativeTime += `${hoursToString(hours)} `;
+    milliseconds -= hours * units.hour;
   }
 
-  if (miliseconds >= units.minute) {
-    let minutes = Math.floor(miliseconds / units.minute);
-    finalRealtiveTime += `${minutesToString(minutes)} `;
-    miliseconds -= minutes * units.minute;
+  if (milliseconds >= units.minute) {
+    let minutes = Math.floor(milliseconds / units.minute);
+    finalRelativeTime += `${minutesToString(minutes)} `;
+    milliseconds -= minutes * units.minute;
   }
 
-  if (miliseconds >= units.second) {
-    let seconds = Math.floor(miliseconds / units.second);
-    finalRealtiveTime += `${secondsToString(seconds)} `;
-    miliseconds -= seconds * units.second;
+  if (milliseconds >= units.second) {
+    let seconds = Math.floor(milliseconds / units.second);
+    finalRelativeTime += `${secondsToString(seconds)} `;
+    milliseconds -= seconds * units.second;
   }
-  return finalRealtiveTime;
+  return finalRelativeTime;
 } //relativeTime
 
 /**

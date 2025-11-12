@@ -1,8 +1,8 @@
 <p>This game is a variation of a "15" puzzle. Your goal is to assemble the picture by moving pieces around using an empty space.</p>
 
-<hr />
+<div class="divider"></div>
 <img src="/example/puzzle.webp" alt="Example - Puzzle" />
-<hr />
+<div class="divider"></div>
 
 <p>
   Click on a cell to slide it into the free space. Or flick it with a swipe, if you're using a touch screen.
@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  Each run is evaluated by two criterias: how fast and how efficient you managed to solve the puzzle. You can try to speedrun the game by using less time and clicking faster, or take more
+  Each run is evaluated by two criteria: how fast and how efficient you managed to solve the puzzle. You can try to speedrun the game by using less time and clicking faster, or take more
   time - but solve the game in less actions (swaps).
 </p>
 

@@ -1,8 +1,8 @@
 <p>Your goal in this game is to click all the eggs as quickly as possible.</p>
 
-<hr />
+<div class="divider"></div>
 <img src="/example/aimlab.webp" alt="Example - Reflex" />
-<hr />
+<div class="divider"></div>
 
 <p>
   The game will require you to click through all the cells, which will be randomly filled with eggs. Each click will reveal your next cell, and the game will end once you've clicked them
@@ -14,7 +14,7 @@
   <img src="/emotes/4head.webp" alt="loool 4Head" class="emote inline" />
 </p>
 
-<p>This game may seem to be slighly easier for mobile devices. As such, your shareable data might contain a notice about that.</p>
+<p>This game may seem to be slightly easier for mobile devices. As such, your shareable data might contain a notice about that.</p>
 
 <style>
   img {

@@ -55,7 +55,7 @@
     display: flex;
     flex-flow: column nowrap;
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   .loader {

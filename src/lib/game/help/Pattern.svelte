@@ -1,8 +1,8 @@
 <p>Memorize the shown pattern, then click all the eggs.</p>
 
-<hr />
+<div class="divider"></div>
 <img src="/example/pattern.webp" alt="Example - Pattern" />
-<hr />
+<div class="divider"></div>
 
 <p>
   You start with three 💚 hearts. If you make a mistake, the round is restarted - and you lose a heart.

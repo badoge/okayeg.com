@@ -1,8 +1,8 @@
 <p>A twist of a popular casual matching game: combine three or more elements to remove them from the grid.</p>
 
-<hr />
+<div class="divider"></div>
 <img src="/example/jewels.webp" alt="Example - Egdle Crush" />
-<hr />
+<div class="divider"></div>
 
 <p>
   Click two adjacent cells to swap the elements. Or move the cell with a single swipe, if you're using a touch screen.

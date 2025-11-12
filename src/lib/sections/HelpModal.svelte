@@ -38,7 +38,7 @@
     </p>
   {/if}
 
-  <hr />
+  <div class="divider"></div>
   <p class="text-sm opacity-80">
     <a class="link" href="https://github.com/g7eternal/egdle2" rel="noreferrer" target="_blank">Egdle Game Hub</a>
     created with <IcBaselineFavorite class="inline align-text-bottom text-error" /> by
@@ -50,10 +50,6 @@
   p,
   .inner :global(p) {
     padding-block: 0.25rem;
-  }
-  hr,
-  .inner :global(hr) {
-    margin: 0.5rem 0;
   }
   a.link {
     text-decoration: none;
