@@ -24,7 +24,7 @@
   async function loadSubPrices(type, currency) {
     console.log(type, currency);
     let res = await fetch(`/data/subs.json`);
-    let res2 = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency.toLowerCase()}.min.json`);
+    let res2 = await fetch(`https://api.fxratesapi.com/latest?base=${currency}`);
     let data = await res.json();
     let data2 = await res2.json();
     let min = 1000000;
@@ -34,16 +34,12 @@
     let name = "Local Subscription Price";
     let values = {};
     for (let index = 0; index < data[type].length; index++) {
-      let price = data[type][index].price / data2[currency.toLowerCase()][data[type][index].currency.toLowerCase()];
+      let price = data[type][index].price / data2.rates[data[type][index].currency];
       values[data[type][index].code] = {
-        price: data[type][index].currency == currency ? data[type][index].price : roundToTwo(price) || 1,
+        price: data[type][index].currency == currency ? data[type][index].price : roundToTwo(price) || 0,
       };
-      if (max < price) {
-        max = price;
-      }
-      if (min > price) {
-        min = price;
-      }
+      max = Math.max(max, price);
+      min = Math.min(min, price);
       if (!countries.some((e) => e.code === data[type][index].code)) {
         countries.push(data[type][index]);
       }
@@ -53,7 +49,7 @@
       for (let index = 0; index < countries.length; index++) {
         if (!(countries[index].code in values)) {
           values[countries[index].code] = {
-            price: roundToTwo(11.99 / data2[currency.toLowerCase()].usd),
+            price: roundToTwo(11.99 / data2.rates["USD"]),
           };
         }
       }
