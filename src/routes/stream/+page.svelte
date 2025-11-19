@@ -1,44 +1,31 @@
 <script>
   import { onMount } from "svelte";
+  import CommandsTable from "$lib/CommandsTable.svelte";
+  import IcBaselineLiveTv from "~icons/ic/baseline-live-tv";
+
+  let commands = $state({
+    stream: [],
+  });
 
   onMount(async () => {
-    let placeholder = document.getElementById("placeholder");
-    let table = document.getElementById("table");
-
-    if (!placeholder || !table) {
-      return;
-    }
-
     try {
       let response = await fetch(`https://api.okayeg.com/commands`);
-      let commands = await response.json();
-      for (let i = 0; i < commands.length; i++) {
-        let aliases = commands[i].aliases
-          .map((/** @type {string} */ el) => "=" + el)
-          .join(", ")
-          .replaceAll("=+", "+");
-        let desc = `${commands[i].desc}
-      ${commands[i].enabled == 0 ? "<br><span class='text-warning'>Currently disabled</span>" : ""}`;
-        let name = `=${commands[i]._id}
-      ${aliases ? "<br><small class='neutral-content'>Alias: " + aliases + "</small>" : ""}`;
-        if (commands[i].cat == 5) {
-          document.getElementById("tableBody")?.insertAdjacentHTML(
-            "afterbegin",
-            `
-            <tr>
-              <td>${name}</td>
-              <td>${desc}</td>
-            </tr>`,
-          );
+      let result = await response.json();
+      result.sort((/** @type {{ _id: string; }} */ a, /** @type {{ _id: string; }} */ b) => (a._id > b._id ? 1 : b._id > a._id ? -1 : 0));
+
+      for (let i = 0; i < result.length; i++) {
+        switch (result[i].cat) {
+          case 5:
+            commands.stream.push(result[i]);
+            break;
+          default:
+            break;
         }
       }
-
-      placeholder.style.display = "none";
-      table.style.display = "";
     } catch (error) {
-      placeholder.style.display = "none";
-      table.style.display = "";
-      table.innerHTML = "Could not load commands :(";
+      for (const key in commands) {
+        commands[key] = null;
+      }
       console.log(error);
     }
 
@@ -67,18 +54,16 @@
   <div class="grid border-t border-base-300 h-150"><div id="twitch-embed"></div></div>
 </div>
 
-<div class="prose mx-10"><h3>Stream commands:</h3></div>
+<div class="mx-10">
+  <div class="text-2xl font-extrabold"><IcBaselineLiveTv class="inline align-text-bottom" /> Stream commands</div>
 
-<div id="placeholder" class="skeleton h-50 overflow-x-auto mx-10"></div>
-
-<div id="table" class="overflow-x-auto border rounded-box bg-base-100 mx-10" style="display: none;">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Command</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-  </table>
+  {#if commands.stream?.length == 0}
+    <div class="skeleton h-50 overflow-x-auto"></div>
+  {:else if commands.stream === null}
+    <span class="text-error text-xl">Could not load commands :(</span>
+  {:else}
+    <div class="overflow-x-auto border rounded-box bg-base-100">
+      <CommandsTable commands={commands.stream} />
+    </div>
+  {/if}
 </div>
