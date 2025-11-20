@@ -7,7 +7,7 @@
   import IcBaselineInfo from "~icons/ic/baseline-info";
 
   let { data } = $props();
-  let emoteInput = $state(data.slug.toLowerCase().replace(/\s/g, ""));
+  let emoteInput = $state(page.params.emoteID.toLowerCase().replace(/\s/g, ""));
   let emoteID = $derived("");
   let emoteName = $derived("🤷");
   let emoteChannel = $derived("🤷");
