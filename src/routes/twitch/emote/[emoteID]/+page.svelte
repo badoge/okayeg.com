@@ -8,7 +8,7 @@
 
   let { data } = $props();
   let emoteInput = $state(page.params.emoteID.toLowerCase().replace(/\s/g, ""));
-  let emoteID = $derived("");
+  let emoteID = $derived(page.params.emoteID.toLowerCase().replace(/\s/g, ""));
   let emoteName = $derived("🤷");
   let emoteChannel = $derived("🤷");
   let emoteSetID = $derived("🤷");
