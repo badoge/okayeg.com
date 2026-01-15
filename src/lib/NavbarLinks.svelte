@@ -249,7 +249,7 @@
             openDropdown2 = false;
           }}
         >
-          <IcBaselineHistory />Yearly Recap
+          <IcBaselineHistory />Yearly Recaps
         </a>
       </li>
       <li>
