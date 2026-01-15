@@ -1,20 +1,25 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { roundToTwo } from "$lib/functions";
-  import "svgmap/dist/svgMap.min.css";
+  import svgMap from "svgmap";
   import IcBaselineCurrencyExchange from "~icons/ic/baseline-currency-exchange";
   import IcOutlineInfo from "~icons/ic/outline-info";
 
   let mapCurrency = "USD";
   let mapType = "subs";
   let countries = [];
-  let svgMap;
 
   onMount(async () => {
-    const obj = await import("svgmap");
-    svgMap = obj.default;
+    const svgPanZoomImport = await import("svg-pan-zoom");
+    const svgPanZoom = svgPanZoomImport.default;
+    window.svgPanZoom = svgPanZoom;
 
     loadSubPrices("subs", "USD");
+  });
+
+  onDestroy(async () => {
+    const tooltip = document.querySelector(".svgMap-tooltip");
+    tooltip?.remove();
   });
 
   /**
@@ -91,6 +96,7 @@
   <meta property="og:title" content="Twitch local subscription prices | OkayegBOT" />
   <meta property="og:url" content="https://okayeg.com/twitch/subs" />
   <meta property="og:description" content="View the local Twitch subscription prices with currency conversion" />
+  <link rel="stylesheet" href="/svg-map.min.css" />
 </svelte:head>
 
 <label class="select" id="currencySelectGroup">

@@ -221,17 +221,6 @@
       <div class="divider divider-neutral m-0"></div>
       <li>
         <a
-          class={route === "/api" ? "bg-neutral text-neutral-content" : ""}
-          href="/api"
-          onclick={() => {
-            openDropdown2 = false;
-          }}
-        >
-          <IcBaselineApi />API
-        </a>
-      </li>
-      <li>
-        <a
           class={route === "/bounty" ? "bg-neutral text-neutral-content" : ""}
           href="/bounty"
           onclick={() => {
@@ -260,7 +249,7 @@
             openDropdown2 = false;
           }}
         >
-          <IcBaselineHistory />2023 Recap
+          <IcBaselineHistory />Yearly Recap
         </a>
       </li>
       <li>

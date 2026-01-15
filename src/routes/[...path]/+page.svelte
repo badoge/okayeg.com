@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   /** @type {{ [key: string]: any }} */
   let aliases = {
-    api: ["api"],
     bounty: ["bounty"],
     egdle: ["egdle"],
     clips: ["clips", "clip", "topclips"],
