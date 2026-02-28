@@ -29,7 +29,7 @@
     "marked-highlight": "^2.2.3",
     "prettier-plugin-svelte": "^3.4.1",
     "seedrandom": "^3.0.5",
-    "svelte": "^5.46.4",
+    "svelte": "^5.53.6",
     "svelte-check": "^4.3.5",
     "svelte-confetti": "^2.3.2",
     "svg-pan-zoom": "^3.6.2",
