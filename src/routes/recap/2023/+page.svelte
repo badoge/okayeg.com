@@ -321,11 +321,11 @@
 </script>
 
 <svelte:head>
-  <title>OkayegBOT Yearly Recaps</title>
-  <meta name="description" content="OkayegBOT Yearly Recaps" />
-  <meta property="og:title" content="OkayegBOT Yearly Recaps" />
-  <meta property="og:url" content="https://okayeg.com/recap" />
-  <meta property="og:description" content="OkayegBOT Yearly Recaps" />
+  <title>OkayegBOT 2023 Recap</title>
+  <meta name="description" content="OkayegBOT 2023 Recap" />
+  <meta property="og:title" content="OkayegBOT 2023 Recap" />
+  <meta property="og:url" content="https://okayeg.com/recap/2023" />
+  <meta property="og:description" content="OkayegBOT 2023 Recap" />
 </svelte:head>
 
 <div class="flex text-center justify-center">
