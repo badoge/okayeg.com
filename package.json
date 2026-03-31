@@ -12,7 +12,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.455",
+    "@iconify/json": "^2.2.458",
     "@sveltejs/adapter-cloudflare": "^7.2.8",
     "@sveltejs/kit": "^2.55.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
@@ -29,8 +29,8 @@
     "marked-highlight": "^2.2.3",
     "prettier-plugin-svelte": "^3.5.1",
     "seedrandom": "^3.0.5",
-    "svelte": "^5.55.0",
-    "svelte-check": "^4.4.5",
+    "svelte": "^5.55.1",
+    "svelte-check": "^4.4.6",
     "svelte-confetti": "^2.3.2",
     "svg-pan-zoom": "^3.6.2",
     "svgmap": "^2.19.2",
