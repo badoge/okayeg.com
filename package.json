@@ -12,9 +12,9 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.460",
+    "@iconify/json": "^2.2.463",
     "@sveltejs/adapter-cloudflare": "^7.2.8",
-    "@sveltejs/kit": "^2.56.1",
+    "@sveltejs/kit": "^2.57.1",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
@@ -23,13 +23,13 @@
     "chartjs-plugin-zoom": "^2.2.0",
     "daisyui": "^5.5.19",
     "dateformat": "^5.0.3",
-    "dompurify": "^3.3.3",
+    "dompurify": "^3.4.0",
     "highlight.js": "^11.11.1",
     "marked": "^18.0.0",
     "marked-highlight": "^2.2.4",
     "prettier-plugin-svelte": "^3.5.1",
     "seedrandom": "^3.0.5",
-    "svelte": "^5.55.1",
+    "svelte": "^5.55.4",
     "svelte-check": "^4.4.6",
     "svelte-confetti": "^2.3.2",
     "svg-pan-zoom": "^3.6.2",
@@ -37,6 +37,6 @@
     "tailwindcss": "^4.2.2",
     "theme-change": "^2.5.0",
     "unplugin-icons": "^23.0.1",
-    "vite": "^8.0.6"
+    "vite": "^8.0.8"
   }
 }
