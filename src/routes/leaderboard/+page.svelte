@@ -45,7 +45,7 @@
       seasonSelect.addEventListener("change", async function () {
         season.innerHTML = `Season ${seasonSelect.value} Leaderboard`;
         endTime.innerHTML = parseInt(seasonSelect.value, 10) === parseInt(leaderboard.season, 10) ? `Ends in ${relativeTime(leaderboard.timeLeft * 1000)}` : "";
-        let selectedLeaderboard = leaderboard.allTime[0].leaderboard[seasonSelect.value].users;
+        let selectedLeaderboard = leaderboard.allTime[0].leaderboard[parseInt(seasonSelect.value, 10) - 1].users;
         if (parseInt(seasonSelect.value, 10) === parseInt(leaderboard.season, 10)) {
           selectedLeaderboard = leaderboard.current;
         }
@@ -62,7 +62,7 @@
 
       document.getElementById("loadTop100").addEventListener("click", function () {
         document.getElementById("loadTop100").style.display = "none";
-        let selectedLeaderboard = leaderboard.allTime[0].leaderboard[seasonSelect.value].users;
+        let selectedLeaderboard = leaderboard.allTime[0].leaderboard[parseInt(seasonSelect.value, 10) - 1].users;
         if (seasonSelect.value == leaderboard.season) {
           selectedLeaderboard = leaderboard.current;
         }

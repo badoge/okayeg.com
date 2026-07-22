@@ -26,7 +26,7 @@
         <NavbarLinks />
       </ul>
     </div>
-    <a href="/" class="btn btn-ghost text-xl">
+    <a href="/" class="btn btn-ghost btn-success text-xl">
       <div class="avatar">
         <div class="w-10">
           <img src="/okayeg.png" alt="okayeg" />

@@ -75,7 +75,7 @@
       <option value="rarityLowest">Rarity lowest to highest</option>
     </select>
     <div id="listings">
-      {#if nfes}
+      {#if nfes?.length}
         <div class="flex flex-wrap gap-4" id="listingsRow">
           {#each nfes as nfe}
             <div class="card bg-base-200 w-60 shadow-md nfe-card" data-price={nfe.price} data-rarity={rarities[nfe.rarity] || 5}>
@@ -99,7 +99,7 @@
           {/each}
         </div>
       {:else if nfes?.length == 0}
-        <span class="text-2xl">There are't any NFEs for sale :(</span>
+        <span class="text-2xl">There aren't any NFEs for sale :(</span>
       {:else if nfes === null}
         <span class="text-2xl">Could not load the market :(</span>
       {:else}
