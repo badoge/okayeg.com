@@ -346,7 +346,7 @@
       "country": "Chile",
       "code": "CL",
       "currency": "CLP",
-      "price": 3000
+      "price": 3570
     },
     {
       "country": "Colombia",
@@ -526,7 +526,7 @@
       "country": "Bahrain",
       "code": "BH",
       "currency": "USD",
-      "price": 2.49
+      "price": 2.74
     },
     {
       "country": "Benin",
@@ -610,7 +610,7 @@
       "country": "Egypt",
       "code": "EG",
       "currency": "USD",
-      "price": 1.49
+      "price": 1.7
     },
     {
       "country": "Equatorial Guinea",
@@ -1181,12 +1181,6 @@
       "code": "GB",
       "currency": "GBP",
       "price": 4.99
-    },
-    {
-      "country": "Israel",
-      "code": "IL",
-      "currency": "USD",
-      "price": 4.99
     }
   ],
   "turbo": [
@@ -1196,7 +1190,6 @@
       "currency": "CAD",
       "price": 13.99
     },
-
     {
       "country": "United States",
       "code": "US",
@@ -1385,7 +1378,7 @@
     },
     {
       "country": "United Kingdom",
-      "code": "UK",
+      "code": "GB",
       "currency": "GBP",
       "price": 11.99
     }
@@ -1416,7 +1409,7 @@
       "price": 0.65
     },
     {
-      "country": "Brunei Darussalam",
+      "country": "Brunei",
       "code": "BN",
       "currency": "USD",
       "price": 1.05
@@ -1500,7 +1493,7 @@
       "price": 0.55
     },
     {
-      "country": "Myanmar",
+      "country": "Myanmar (Burma)",
       "code": "MM",
       "currency": "USD",
       "price": 0.55
@@ -1686,7 +1679,7 @@
       "price": 1.2
     },
     {
-      "country": "Curacao",
+      "country": "Curaçao",
       "code": "CW",
       "currency": "USD",
       "price": 1.4
@@ -1806,13 +1799,13 @@
       "price": 1.4
     },
     {
-      "country": "St. Kitts and Nevis",
+      "country": "Saint Kitts and Nevis",
       "code": "KN",
       "currency": "USD",
       "price": 1.45
     },
     {
-      "country": "St. Lucia",
+      "country": "Saint Lucia",
       "code": "LC",
       "currency": "USD",
       "price": 1.4
@@ -1830,7 +1823,7 @@
       "price": 1.1
     },
     {
-      "country": "St. Vincent and the Grenadines",
+      "country": "Saint Vincent and the Grenadines",
       "code": "VC",
       "currency": "USD",
       "price": 1.2
@@ -1914,19 +1907,19 @@
       "price": 0.9
     },
     {
-      "country": "Congo, Dem. Rep.",
+      "country": "Congo, Democratic Republic of the",
       "code": "CD",
       "currency": "USD",
       "price": 1.15
     },
     {
-      "country": "Congo, Rep.",
+      "country": "Congo, Republic of the",
       "code": "CG",
       "currency": "USD",
       "price": 1
     },
     {
-      "country": "Cote d'Ivoire",
+      "country": "Côte d'Ivoire",
       "code": "CI",
       "currency": "USD",
       "price": 0.95
@@ -2445,7 +2438,7 @@
       "country": "Poland",
       "code": "PL",
       "currency": "USD",
-      "price": 1.45
+      "price": 1.67
     },
     {
       "country": "Portugal",
@@ -2458,6 +2451,12 @@
       "code": "RO",
       "currency": "USD",
       "price": 1.45
+    },
+    {
+      "country": "Russia",
+      "code": "RU",
+      "currency": "USD",
+      "price": 0.4
     },
     {
       "country": "San Marino",
