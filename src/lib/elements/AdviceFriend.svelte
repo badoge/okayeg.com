@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { nullFunction } from "$lib/game/consts";
+  import { nullFunction } from "#lib/game/consts.js";
   import { fly } from "svelte/transition";
   import { backOut } from "svelte/easing";
   let { title = null, content, interactive = false, actionCallback = nullFunction, buttonText = "OK" } = $props();

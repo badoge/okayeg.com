@@ -1,13 +1,13 @@
 import { writable } from "svelte/store";
-import { BaseGame } from "$lib/game/baseClasses";
-import { formatTimer, shuffle, sampleValue, isMobileClient } from "$lib/utils/common";
-import { cellColors, emoji } from "$lib/game/consts";
-import { forceUpdateDOM } from "$lib/utils/state";
+import { BaseGame } from "#lib/game/baseClasses.js";
+import { formatTimer, shuffle, sampleValue, isMobileClient } from "#lib/utils/common.js";
+import { cellColors, emoji } from "#lib/game/consts.js";
+import { forceUpdateDOM } from "#lib/utils/state.js";
 
-import Helper from "$lib/game/help/Aimlab.svelte";
-import TopBar from "$lib/game/topbar/Aimlab.svelte";
-import Stats from "$lib/game/stats/Aimlab.svelte";
-import GameOver from "$lib/game/gameover/Aimlab.svelte";
+import Helper from "#lib/game/help/Aimlab.svelte";
+import TopBar from "#lib/game/topbar/Aimlab.svelte";
+import Stats from "#lib/game/stats/Aimlab.svelte";
+import GameOver from "#lib/game/gameover/Aimlab.svelte";
 
 class Aimlab extends BaseGame {
   constructor() {

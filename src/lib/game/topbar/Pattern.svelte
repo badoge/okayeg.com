@@ -1,11 +1,11 @@
 <script>
   import { onMount, unmount } from "svelte";
-  import currentGame from "$lib/utils/state";
+  import currentGame from "#lib/utils/state.js";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
-  import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
-  import { emoji } from "$lib/game/consts";
-  import { STARTING_LIVES } from "$lib/game/pattern";
+  import { showConfirmAdviceFriend } from "#lib/utils/adviceFriend.js";
+  import { emoji } from "#lib/game/consts.js";
+  import { STARTING_LIVES } from "#lib/game/pattern.js";
 
   function startNewRun() {
     $currentGame.startNewRun();

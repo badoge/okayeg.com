@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import IcBaselineContentCopy from "~icons/ic/baseline-content-copy";
-  import { copyCommand } from "$lib/functions.js";
+  import { copyCommand } from "#lib/functions.js";
 
   let nfes = $state();
 

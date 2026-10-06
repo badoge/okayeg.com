@@ -1,8 +1,8 @@
 <script>
-  import { dev as devMode, version } from "$app/environment";
-  import game, { forceUpdateDOM } from "$lib/utils/state";
-  import { settingsLibrary, cellColors } from "$lib/game/consts";
-  import DevModeButtons from "$lib/elements/DevModeButtons.svelte";
+  import { dev as devMode, version } from "$app/env";
+  import game, { forceUpdateDOM } from "#lib/utils/state.js";
+  import { settingsLibrary, cellColors } from "#lib/game/consts.js";
+  import DevModeButtons from "#lib/elements/DevModeButtons.svelte";
 
   /**
    * @param {Event} event
@@ -74,6 +74,7 @@
           <div class="mt-5">
             <div class="flex flex-row align-items-center">
               <label class="text-lg flex-grow-1" for={"opt_" + key}>{lib.title}</label>
+
               <select class="select w-auto flex-grow-1" id={"opt_" + key} value={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOptionSelector}>
                 {#each $game.options[key] as optionText, optionIndex}
                   <option value={optionIndex}>{optionText}</option>
@@ -89,6 +90,7 @@
         {:else}
           <label class="label text-base-content mt-3">
             <input id={"opt_" + key} type="checkbox" class="checkbox" checked={$game.settings[key]} {disabled} data-optionkey={key} onchange={updateExternalOption} />
+
             {lib.title}
           </label>
           <p class="text-xs mb-3">{disabled ? lib.error : lib.desc}</p>

@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { getLanguage } from "$lib/functions";
+  import { getLanguage } from "#lib/functions.js";
 
   onMount(async () => {
     let clipsDiv = document.getElementById("clipsDiv");

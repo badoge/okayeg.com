@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { relativeTime } from "$lib/functions.js";
+  import { relativeTime } from "#lib/functions.js";
   import { Marked } from "marked";
   import { markedHighlight } from "marked-highlight";
   import hljs from "highlight.js";

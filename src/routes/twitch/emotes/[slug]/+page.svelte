@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { escapeString, months, getTwitchUser } from "$lib/functions.js";
+  import { escapeString, months, getTwitchUser } from "#lib/functions.js";
 
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
   import MdiTwitch from "~icons/mdi/twitch";

@@ -1,8 +1,8 @@
 <script>
-  import Stats from "$lib/game/stats/Matcher.svelte";
-  import game from "$lib/utils/state";
-  import { resultFlavorTexts as flavors } from "$lib/game/consts";
-  import DailyCountdown from "$lib/elements/DailyCountdown.svelte";
+  import Stats from "#lib/game/stats/Matcher.svelte";
+  import game from "#lib/utils/state.js";
+  import { resultFlavorTexts as flavors } from "#lib/game/consts.js";
+  import DailyCountdown from "#lib/elements/DailyCountdown.svelte";
 </script>
 
 <h6>🥳 Matching finished! 🥚</h6>

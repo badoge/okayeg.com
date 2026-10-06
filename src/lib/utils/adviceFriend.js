@@ -1,7 +1,7 @@
-import { browser } from "$app/environment"; // sveltekit environment
-import { nullFunction } from "$lib/game/consts";
+import { browser } from "$app/env"; // sveltekit environment
+import { nullFunction } from "#lib/game/consts.js";
 import { mount } from "svelte";
-import AdviceFriend from "$lib/elements/AdviceFriend.svelte";
+import AdviceFriend from "#lib/elements/AdviceFriend.svelte";
 
 function mountAdviceFriend(content, title, buttonText, actionCallback = nullFunction) {
   if (!browser) return;

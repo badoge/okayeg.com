@@ -1,5 +1,5 @@
 <script>
-  import currentGame from "$lib/utils/state";
+  import currentGame from "#lib/utils/state.js";
 
   let overflow = $state(0);
   $effect(() => {

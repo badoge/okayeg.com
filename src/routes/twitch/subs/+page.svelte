@@ -1,6 +1,6 @@
 <script>
   import { onMount, onDestroy } from "svelte";
-  import { roundToTwo } from "$lib/functions";
+  import { roundToTwo } from "#lib/functions.js";
   import svgMap from "svgmap";
   import IcBaselineCurrencyExchange from "~icons/ic/baseline-currency-exchange";
   import IcOutlineInfo from "~icons/ic/outline-info";

@@ -2,8 +2,8 @@
   import IcBaselineErrorOutline from "~icons/ic/baseline-error-outline";
   import IcBaselineCheckCircleOutline from "~icons/ic/baseline-check-circle-outline";
   import IcBaselineShare from "~icons/ic/baseline-share";
-  import { isMobileClient } from "$lib/utils/common";
-  import game from "$lib/utils/state";
+  import { isMobileClient } from "#lib/utils/common.js";
+  import game from "#lib/utils/state.js";
 
   const share = $state({
     error: false,

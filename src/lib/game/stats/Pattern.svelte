@@ -1,6 +1,6 @@
 <script>
-  import BaseStatsTable from "$lib/elements/BaseStatsTable.svelte";
-  import game from "$lib/utils/state";
+  import BaseStatsTable from "#lib/elements/BaseStatsTable.svelte";
+  import game from "#lib/utils/state.js";
 </script>
 
 <BaseStatsTable>

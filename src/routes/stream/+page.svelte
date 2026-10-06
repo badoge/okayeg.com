@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import CommandsTable from "$lib/CommandsTable.svelte";
+  import CommandsTable from "#lib/CommandsTable.svelte";
   import IcBaselineLiveTv from "~icons/ic/baseline-live-tv";
 
   let commands = $state({

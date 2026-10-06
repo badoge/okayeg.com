@@ -2,9 +2,9 @@
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { onMount } from "svelte";
-  import game from "$lib/utils/state";
-  import GameOverInfo from "$lib/sections/GameOverInfo.svelte";
-  import FieldCell from "$lib/elements/FieldCell.svelte";
+  import game from "#lib/utils/state.js";
+  import GameOverInfo from "#lib/sections/GameOverInfo.svelte";
+  import FieldCell from "#lib/elements/FieldCell.svelte";
 
   let gameOverModalTimer = $state();
   let mdlGameOver = $state();

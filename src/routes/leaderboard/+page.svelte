@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { addOrdinalSuffix, relativeTime } from "$lib/functions";
+  import { addOrdinalSuffix, relativeTime } from "#lib/functions.js";
 
   onMount(async () => {
     let seasonSelect = document.getElementById("seasonSelect");

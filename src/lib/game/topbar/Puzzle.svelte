@@ -1,14 +1,14 @@
 <script>
   import { onMount, unmount } from "svelte";
-  import currentGame from "$lib/utils/state";
-  import { forceUpdateDOM } from "$lib/utils/state";
-  import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
+  import currentGame from "#lib/utils/state.js";
+  import { forceUpdateDOM } from "#lib/utils/state.js";
+  import { showConfirmAdviceFriend } from "#lib/utils/adviceFriend.js";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
   import IcBaselineFrontHand from "~icons/ic/baseline-front-hand";
   import IcBaselinePreview from "~icons/ic/baseline-preview";
-  import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
+  import GameStartCountdown from "#lib/elements/GameStartCountdown.svelte";
 
   // cannot do double subscription, have to resolve this reference:
   const displayTimerStore = $currentGame.displayTime;

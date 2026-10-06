@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import { appReady } from "$lib/utils/settings";
-  import game from "$lib/utils/state";
+  import { appReady } from "#lib/utils/settings.js";
+  import game from "#lib/utils/state.js";
 
-  import MainMenu from "$lib/sections/MainMenu.svelte";
-  import NavBar from "$lib/sections/NavBar.svelte";
-  import EggField from "$lib/sections/EggField.svelte";
-  import InteractiveField from "$lib/sections/InteractiveField.svelte";
+  import MainMenu from "#lib/sections/MainMenu.svelte";
+  import NavBar from "#lib/sections/NavBar.svelte";
+  import EggField from "#lib/sections/EggField.svelte";
+  import InteractiveField from "#lib/sections/InteractiveField.svelte";
 
   /**
    * @param {{ detail: null; }} event

@@ -1,6 +1,6 @@
-import { browser } from "$app/environment";
+import { browser } from "$app/env";
 import { writable } from "svelte/store";
-import { formatDate } from "$lib/utils/common";
+import { formatDate } from "#lib/utils/common.js";
 
 const lsKey = "egdle2-dtracker";
 

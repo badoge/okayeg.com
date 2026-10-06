@@ -3,11 +3,11 @@
   import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
   import IcBaselineLeaderboard from "~icons/ic/baseline-leaderboard";
   import IcBaselineSettings from "~icons/ic/baseline-settings";
-  import { settings, recordSeenGame } from "$lib/utils/settings";
-  import game from "$lib/utils/state";
-  import Settings from "$lib/sections/Settings.svelte";
-  import HelpModal from "$lib/sections/HelpModal.svelte";
-  import StatsModal from "$lib/sections/StatsModal.svelte";
+  import { settings, recordSeenGame } from "#lib/utils/settings.js";
+  import game from "#lib/utils/state.js";
+  import Settings from "#lib/sections/Settings.svelte";
+  import HelpModal from "#lib/sections/HelpModal.svelte";
+  import StatsModal from "#lib/sections/StatsModal.svelte";
 
   function returnToMenu() {
     $game.pause();

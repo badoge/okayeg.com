@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { relativeTime, getLanguage } from "$lib/functions.js";
+  import { relativeTime, getLanguage } from "#lib/functions.js";
 
   import IcBaselinePersonSearch from "~icons/ic/baseline-person-search";
   import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
@@ -184,7 +184,7 @@
     <div class="text-xl">
       <strong>
         Display name
-        <div class="tooltip align-text-bottom" data-tip="The user's display name. May contain uppercase letters or spaces and Chinese, Japanese, or Korean characters">
+        <div class="tooltip align-text-bottom" data-tip="The user's display name. May contain uppercase letters or spaces and Arabic, Chinese, Japanese, or Korean characters">
           <IcBaselineHelpOutline />
         </div>
         :

@@ -3,8 +3,8 @@
   import IcBaselineGradient from "~icons/ic/baseline-gradient";
   import IcBaselinePreview from "~icons/ic/baseline-preview";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
-  import currentGame, { forceUpdateDOM } from "$lib/utils/state";
-  import { tryShowDailyEggFact } from "$lib/utils/dailyFact";
+  import currentGame, { forceUpdateDOM } from "#lib/utils/state.js";
+  import { tryShowDailyEggFact } from "#lib/utils/dailyFact.js";
   import { Confetti } from "svelte-confetti";
 
   function doFullAppReset() {

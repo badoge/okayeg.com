@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { copyCommand } from "$lib/functions.js";
+  import { copyCommand } from "#lib/functions.js";
   import IcBaselineContentCopy from "~icons/ic/baseline-content-copy";
 
   let { data } = $props();

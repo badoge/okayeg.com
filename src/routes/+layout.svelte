@@ -2,7 +2,7 @@
   import "../app.css";
   import { onMount } from "svelte";
   import { themeChange } from "theme-change";
-  import NavbarLinks from "$lib/NavbarLinks.svelte";
+  import NavbarLinks from "#lib/NavbarLinks.svelte";
 
   let darkTheme = $state(true);
 

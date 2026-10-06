@@ -1,19 +1,19 @@
 <script>
   import { fade } from "svelte/transition";
-  import { appReady, settings } from "$lib/utils/settings";
-  import { nullFunction } from "$lib/game/consts";
-  import { tracker } from "$lib/utils/dailyTracker";
+  import { appReady, settings } from "#lib/utils/settings.js";
+  import { nullFunction } from "#lib/game/consts.js";
+  import { tracker } from "#lib/utils/dailyTracker.js";
 
-  import { getInstance as egdle } from "$lib/game/classic";
-  import { getInstance as binary } from "$lib/game/binary";
-  import { getInstance as matcher } from "$lib/game/matcher";
-  import { getInstance as jewels } from "$lib/game/jewels";
-  import { getInstance as pattern } from "$lib/game/pattern";
-  import { getInstance as filler } from "$lib/game/filler";
-  import { getInstance as puzzle } from "$lib/game/puzzle";
-  import { getInstance as aimlab } from "$lib/game/aimlab";
+  import { getInstance as egdle } from "#lib/game/classic.js";
+  import { getInstance as binary } from "#lib/game/binary.js";
+  import { getInstance as matcher } from "#lib/game/matcher.js";
+  import { getInstance as jewels } from "#lib/game/jewels.js";
+  import { getInstance as pattern } from "#lib/game/pattern.js";
+  import { getInstance as filler } from "#lib/game/filler.js";
+  import { getInstance as puzzle } from "#lib/game/puzzle.js";
+  import { getInstance as aimlab } from "#lib/game/aimlab.js";
 
-  import game from "$lib/utils/state";
+  import game from "#lib/utils/state.js";
 
   import IcBaselineDiscord from "~icons/ic/baseline-discord";
 

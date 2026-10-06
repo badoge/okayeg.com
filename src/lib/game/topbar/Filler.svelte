@@ -1,9 +1,9 @@
 <script>
   import { onMount, unmount } from "svelte";
-  import currentGame from "$lib/utils/state";
-  import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
-  import { forceUpdateDOM } from "$lib/utils/state";
-  import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
+  import currentGame from "#lib/utils/state.js";
+  import { showConfirmAdviceFriend } from "#lib/utils/adviceFriend.js";
+  import { forceUpdateDOM } from "#lib/utils/state.js";
+  import GameStartCountdown from "#lib/elements/GameStartCountdown.svelte";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";

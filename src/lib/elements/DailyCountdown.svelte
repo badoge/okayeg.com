@@ -1,5 +1,5 @@
 <script>
-  import { today } from "$lib/game/consts";
+  import { today } from "#lib/game/consts.js";
   import IcBaselineAlarm from "~icons/ic/baseline-alarm";
   import IcBaselineAlarmOn from "~icons/ic/baseline-alarm-on";
 

@@ -1,12 +1,12 @@
-import { BaseGame } from "$lib/game/baseClasses";
-import { cellColors, emoji, today } from "$lib/game/consts";
-import { sample, sfc32 } from "$lib/utils/common";
+import { BaseGame } from "#lib/game/baseClasses.js";
+import { cellColors, emoji, today } from "#lib/game/consts.js";
+import { sample, sfc32 } from "#lib/utils/common.js";
 
-import Helper from "$lib/game/help/Classic.svelte";
-import Stats from "$lib/game/stats/Classic.svelte";
-import GameOver from "$lib/game/gameover/Classic.svelte";
-import TopBar from "$lib/game/topbar/Classic.svelte";
-import { showAdviceFriend } from "$lib/utils/adviceFriend";
+import Helper from "#lib/game/help/Classic.svelte";
+import Stats from "#lib/game/stats/Classic.svelte";
+import GameOver from "#lib/game/gameover/Classic.svelte";
+import TopBar from "#lib/game/topbar/Classic.svelte";
+import { showAdviceFriend } from "#lib/utils/adviceFriend.js";
 
 class Egdle extends BaseGame {
   constructor() {

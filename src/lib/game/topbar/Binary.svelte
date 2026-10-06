@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { scale } from "svelte/transition";
-  import currentGame from "$lib/utils/state";
-  import GameStartCountdown from "$lib/elements/GameStartCountdown.svelte";
+  import currentGame from "#lib/utils/state.js";
+  import GameStartCountdown from "#lib/elements/GameStartCountdown.svelte";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineCheck from "~icons/ic/baseline-check";
   import IcBaselineError from "~icons/ic/baseline-error";

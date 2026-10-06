@@ -4,7 +4,7 @@
   import IcBaselineVideocam from "~icons/ic/baseline-videocam";
   import IcOutlineCasino from "~icons/ic/outline-casino";
   import IcBaselineEquals from "~icons/ic/baseline-equals";
-  import CommandsTable from "$lib/CommandsTable.svelte";
+  import CommandsTable from "#lib/CommandsTable.svelte";
 
   let commands = $state({
     general: [],

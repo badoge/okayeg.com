@@ -1,6 +1,6 @@
 <script>
   import { Confetti } from "svelte-confetti";
-  import game, { forceUpdateDOM } from "$lib/utils/state";
+  import game, { forceUpdateDOM } from "#lib/utils/state.js";
 
   /**
    * @typedef {Object} Props

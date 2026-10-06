@@ -2,7 +2,7 @@
   import IcBaselineSearch from "~icons/ic/baseline-search";
   import IcBaselineLink from "~icons/ic/baseline-link";
   import MdiTwitch from "~icons/mdi/twitch";
-  import { convertDuration, secondsToTwitchStupidTime } from "$lib/functions";
+  import { convertDuration, secondsToTwitchStupidTime } from "#lib/functions.js";
 
   let channel = $state();
   let minutesString = $state("0");

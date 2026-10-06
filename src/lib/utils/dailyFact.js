@@ -1,7 +1,7 @@
-import { browser } from "$app/environment";
-import { today } from "$lib/game/consts";
-import { showAdviceFriend } from "$lib/utils/adviceFriend";
-import { sample } from "$lib/utils/common";
+import { browser } from "$app/env";
+import { today } from "#lib/game/consts.js";
+import { showAdviceFriend } from "#lib/utils/adviceFriend.js";
+import { sample } from "#lib/utils/common.js";
 
 /**
  * @type {string[]}

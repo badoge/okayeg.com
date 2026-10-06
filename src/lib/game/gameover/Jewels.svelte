@@ -1,6 +1,6 @@
 <script>
-  import Stats from "$lib/game/stats/Jewels.svelte";
-  import game from "$lib/utils/state";
+  import Stats from "#lib/game/stats/Jewels.svelte";
+  import game from "#lib/utils/state.js";
 </script>
 
 <p class="mb-4">

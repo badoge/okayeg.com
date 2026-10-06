@@ -1,7 +1,7 @@
 <script>
-  import game from "$lib/utils/state";
-  import { formatTimer } from "$lib/utils/common";
-  import BaseStatsTable from "$lib/elements/BaseStatsTable.svelte";
+  import game from "#lib/utils/state.js";
+  import { formatTimer } from "#lib/utils/common.js";
+  import BaseStatsTable from "#lib/elements/BaseStatsTable.svelte";
 </script>
 
 <BaseStatsTable header="Run stats">

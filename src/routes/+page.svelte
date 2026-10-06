@@ -1,15 +1,15 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { relativeTime } from "$lib/functions";
+  import { relativeTime } from "#lib/functions.js";
   import { page } from "$app/state";
-  import { replaceState } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import IcBaselineAccountCircle from "~icons/ic/baseline-account-circle";
   import MdiTwitch from "~icons/mdi/twitch";
 
   onMount(async () => {
     if (window.location.hash) {
       tick().then(() => {
-        replaceState(window.location.href.split("#")[0]);
+        goto(window.location.href.split("#")[0], { shallow: true, replace: true });
         document.getElementById("loginSuccess").style.display = "";
         document.getElementById("login").disabled = true;
       });

@@ -1,6 +1,6 @@
 <script>
-  import ShareButton from "$lib/elements/ShareButton.svelte";
-  import game from "$lib/utils/state";
+  import ShareButton from "#lib/elements/ShareButton.svelte";
+  import game from "#lib/utils/state.js";
 </script>
 
 <div class="pt-2">

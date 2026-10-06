@@ -1,10 +1,10 @@
 <script>
-  import Stats from "$lib/game/stats/Binary.svelte";
-  import game from "$lib/utils/state";
-  import { formatTimer } from "$lib/utils/common";
+  import Stats from "#lib/game/stats/Binary.svelte";
+  import game from "#lib/utils/state.js";
+  import { formatTimer } from "#lib/utils/common.js";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
-  import DailyCountdown from "$lib/elements/DailyCountdown.svelte";
+  import DailyCountdown from "#lib/elements/DailyCountdown.svelte";
 </script>
 
 {#if $game.result}

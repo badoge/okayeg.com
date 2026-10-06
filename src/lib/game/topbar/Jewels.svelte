@@ -1,12 +1,12 @@
 <script>
   import { onMount, unmount } from "svelte";
   import { tweened } from "svelte/motion";
-  import currentGame from "$lib/utils/state";
+  import currentGame from "#lib/utils/state.js";
   import IcBaselineFlag from "~icons/ic/baseline-flag";
   import IcBaselineRestartAlt from "~icons/ic/baseline-restart-alt";
   import IcBaselinePin from "~icons/ic/baseline-pin";
-  import { showConfirmAdviceFriend } from "$lib/utils/adviceFriend";
-  import { forceUpdateDOM } from "$lib/utils/state";
+  import { showConfirmAdviceFriend } from "#lib/utils/adviceFriend.js";
+  import { forceUpdateDOM } from "#lib/utils/state.js";
 
   const timer = $currentGame.time;
   let progress = $state(100);

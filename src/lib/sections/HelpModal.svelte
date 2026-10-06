@@ -2,7 +2,7 @@
   import IcBaselineSettings from "~icons/ic/baseline-settings";
   import IcBaselineHelpOutline from "~icons/ic/baseline-help-outline";
   import IcBaselineFavorite from "~icons/ic/baseline-favorite";
-  import game from "$lib/utils/state";
+  import game from "#lib/utils/state.js";
 </script>
 
 <div>

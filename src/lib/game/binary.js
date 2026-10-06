@@ -1,16 +1,16 @@
 import { unmount } from "svelte";
 import { writable } from "svelte/store";
-import { BaseGame } from "$lib/game/baseClasses";
-import { cellColors, emoji, binarySeeds } from "$lib/game/consts";
-import { formatTimer } from "$lib/utils/common";
-import { forceUpdateDOM } from "$lib/utils/state";
+import { BaseGame } from "#lib/game/baseClasses.js";
+import { cellColors, emoji, binarySeeds } from "#lib/game/consts.js";
+import { formatTimer } from "#lib/utils/common.js";
+import { forceUpdateDOM } from "#lib/utils/state.js";
 
-import { showAdviceFriend } from "$lib/utils/adviceFriend";
+import { showAdviceFriend } from "#lib/utils/adviceFriend.js";
 
-import Helper from "$lib/game/help/Binary.svelte";
-import Stats from "$lib/game/stats/Binary.svelte";
-import GameOver from "$lib/game/gameover/Binary.svelte";
-import TopBar from "$lib/game/topbar/Binary.svelte";
+import Helper from "#lib/game/help/Binary.svelte";
+import Stats from "#lib/game/stats/Binary.svelte";
+import GameOver from "#lib/game/gameover/Binary.svelte";
+import TopBar from "#lib/game/topbar/Binary.svelte";
 
 class Binary extends BaseGame {
   constructor() {

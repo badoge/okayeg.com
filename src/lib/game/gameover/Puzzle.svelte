@@ -1,9 +1,9 @@
 <script>
   import IcBaselineTimer from "~icons/ic/baseline-timer";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
-  import game from "$lib/utils/state";
-  import { formatTimer } from "$lib/utils/common";
-  import Stats from "$lib/game/stats/Puzzle.svelte";
+  import game from "#lib/utils/state.js";
+  import { formatTimer } from "#lib/utils/common.js";
+  import Stats from "#lib/game/stats/Puzzle.svelte";
 
   let statRef = $derived($game.stats[$game.options.gridSizes[$game.settings.gridSizes]]);
 </script>

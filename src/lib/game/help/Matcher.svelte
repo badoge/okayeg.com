@@ -1,5 +1,5 @@
 <script>
-  import currentGame from "$lib/utils/state";
+  import currentGame from "#lib/utils/state.js";
 </script>
 
 <p>This is a memory game where you need to match the eggs.</p>

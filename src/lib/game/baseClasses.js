@@ -1,8 +1,8 @@
-import { nullFunction, emoji, today } from "$lib/game/consts";
-import { forceUpdateDOM } from "$lib/utils/state";
-import { sample } from "$lib/utils/common";
+import { nullFunction, emoji, today } from "#lib/game/consts.js";
+import { forceUpdateDOM } from "#lib/utils/state.js";
+import { sample } from "#lib/utils/common.js";
 import seedrandom from "seedrandom";
-import { recordSolved } from "$lib/utils/dailyTracker";
+import { recordSolved } from "#lib/utils/dailyTracker.js";
 
 const CELL_ACTIVATION_DELAY = 300; // should roughly equal to css transition time in FieldCell.svelte
 

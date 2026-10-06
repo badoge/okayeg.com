@@ -1,9 +1,9 @@
 <script>
-  import BaseStatsTable from "$lib/elements/BaseStatsTable.svelte";
+  import BaseStatsTable from "#lib/elements/BaseStatsTable.svelte";
   import IcBaselineTimer from "~icons/ic/baseline-timer";
   import IcBaselineAdsClick from "~icons/ic/baseline-ads-click";
-  import game from "$lib/utils/state";
-  import { formatTimer } from "$lib/utils/common";
+  import game from "#lib/utils/state.js";
+  import { formatTimer } from "#lib/utils/common.js";
 </script>
 
 <BaseStatsTable>
